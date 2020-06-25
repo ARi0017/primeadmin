@@ -1,0 +1,128 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <form #customerForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <div class="card-header">
+                        <strong>Add Customer</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="inline-radios">Individual</label>
+                            <div class="col-md-1 col-form-label">
+                                <div class="form-check form-check-inline mr-1" id="inline-radios">
+                                    <input class="form-check-input" type="radio" name="CustomerType" value="1"
+                                        [(ngModel)]="Customer.CustomerType" checked="checked">
+                                </div>
+                            </div>
+                            <label class="col-md-2 col-form-label" for="inline-radios">Corporate</label>
+                            <div class="col-md-1 col-form-label">
+                                <div class="form-check form-check-inline mr-1" id="inline-radios">
+                                    <input class="form-check-input" type="radio" name="CustomerType" value="2"
+                                        [(ngModel)]="Customer.CustomerType">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Name <span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="name" [(ngModel)]="Customer.Name"
+                                        #nameRef="ngModel" [class.is-invalid]="nameRef.invalid && nameRef.touched"
+                                        placeholder="Enter Name" required>
+                                    <small class="text-danger" [class.d-none]="nameRef.valid || nameRef.untouched">Name
+                                        is
+                                        required
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Phone <span class="required">*</span></label>
+                                    <input type="text" class="form-control" autocomplete="off" placeholder="Enter Phone"
+                                        name="Phone" [(ngModel)]="Customer.Phone" #phoneRef="ngModel"
+                                        [class.is-invalid]="phoneRef.invalid && phoneRef.touched" pattern="^.{10,}$"
+                                        required />
+                                    <div *ngIf="phoneRef.errors && (phoneRef.invalid && phoneRef.touched)">
+                                        <small class="text-danger" *ngIf="phoneRef.errors.required">Phone is
+                                            required</small>
+                                        <small class="text-danger" *ngIf="phoneRef.errors.pattern">Phone Number should
+                                            be of
+                                            minimum 10
+                                            digits</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ccnumber">Email <span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="email" placeholder="Enter Email"
+                                        [(ngModel)]="Customer.Email" #emailRef="ngModel"
+                                        [class.is-invalid]="emailRef.invalid && emailRef.touched" required>
+                                    <small class="text-danger"
+                                        [class.d-none]="emailRef.valid || emailRef.untouched">Email
+                                        is
+                                        required
+                                    </small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ccnumber">Default Landmark</label>
+                                    <input type="text" class="form-control" name="DefaultLandmark"
+                                        placeholder="Enter Default Landmark" [(ngModel)]="Customer.DefaultLandmark">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ccnumber">Default Address</label>
+                                    <textarea id="textarea-input" name="DefaultAddress" rows="5" class="form-control"
+                                        [(ngModel)]="Customer.DefaultAddress"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ccnumber">Default Pincode</label>
+                                    <input type="text" class="form-control" placeholder="Enter Pincode"
+                                        name="DefaultPincode" [(ngModel)]="Customer.DefaultPincode">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ccnumber">Profile Image</label>
+                                    <input type="file" name="image" (change)="getFileInfo($event)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ccnumber">Ref Code</label>
+                                    <input type="text" class="form-control" placeholder="Enter Ref Code" name="RefCode"
+                                        [(ngModel)]="Customer.RefCode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary" [disabled]="customerForm.invalid"><i
+                                class="fa fa-dot-circle-o"></i>
+                            Submit</button>
+                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!--/.col-->
+
+    </div>
+    <!--/.row-->
+</div>

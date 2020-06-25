@@ -1,0 +1,44 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles with default layout.
+// If you are going to use dark layout please comment next line
+@import "~@coreui/coreui-pro/scss/coreui";
+
+// Import styles with dark layout
+// If you want to use dark layout uncomment next line
+//@import "~@coreui/coreui-pro/scss/themes/dark/coreui-dark";
+
+// If you want to add something do it here
+@import "custom";
+
+// Spinkit
+$spinkit-spinner-color: $body-color;
+@import '~spinkit/scss/spinkit.scss';
+
+.required {
+    color: #f1180c;
+    font-weight: bold;
+  }
+  
+  toast {
+    background-color: #030303;
+  }
+  .toast-info {
+    background-color: #3276b1;
+  }
+  .toast-info2 {
+    background-color: #2f96b4;
+  }
+  .toast-error {
+    background-color: #bd362f;
+  }
+  .toast-success {
+    background-color: #51a351;
+  }
+  .toast-warning {
+    background-color: #f89406;
+  }
+  .pointer {
+    cursor: pointer;
+  }

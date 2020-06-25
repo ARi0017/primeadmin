@@ -1,0 +1,104 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <form #bannermasterForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="card-header">
+            <strong>Add Banner</strong>
+          </div>
+          <div class="card-body">
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Banner Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Banner Name" name="BannerName"
+                      [(ngModel)]="Bannermaster.BannerName" #BannerNameRef="ngModel"
+                      />
+                    <!-- <small class="text-danger" [class.d-none]="nameRef.valid || nameRef.untouched">Name is required
+                    </small> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Link With</label>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="1" (click)="showdiv('Category')">Category
+                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="2" (click)="showdiv('Product')">Product
+                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="3" (click)="showdiv('Combo')">Combo                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="col-sm-12">
+                  <div *ngIf="Category">
+                    <div class="row form-group">
+                      <label class="col-md-3 col-form-label text-right">Parent Category</label>
+                      <div class="col-md-9">
+                        <select name="ParentCategory" class="form-control" [(ngModel)]="Bannermaster.LinkId">
+                          <option value="">Select Parent Category</option>
+                          <option *ngFor="let val of parentcategory" [value]="val.CategoryId">
+                            {{val.Category}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div *ngIf="Product">
+                    <div class="row form-group">
+                      <label class="col-md-3 col-form-label text-right">Product</label>
+                      <div class="col-md-9">
+                        <select name="Product" class="form-control" [(ngModel)]="Bannermaster.LinkId">
+                          <option value="">Select Product</option>
+                          <option *ngFor="let val of productdetails" [value]="val.ProductId">
+                            {{val.Name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>                                                    
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Remarks</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Remarks" name="Remarks"
+                      [(ngModel)]="Bannermaster.Remarks" #RemarksRef="ngModel"
+                      />
+                    <!-- <small class="text-danger" [class.d-none]="nameRef.valid || nameRef.untouched">Name is required
+                    </small> -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Banner Image</label>
+                  <div class="col-md-9">
+                    <input name="file" type="file" class="form-control" id="name" placeholder="CoverImage"
+                      (change)="uploadFile($event)">
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" [disabled]="bannermasterForm.invalid" class="btn btn-sm btn-primary">
+              <i class="fa fa-dot-circle-o"></i>
+              Submit
+            </button>
+            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/bannermaster-list']"><i class="fa fa-ban"></i>
+              Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>

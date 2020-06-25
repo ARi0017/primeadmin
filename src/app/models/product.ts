@@ -1,0 +1,37 @@
+export class Product {
+  constructor(
+  public ProductId: number,
+  public IsCombo: number,
+  public CategoryId: number,
+  public Name: string,
+  public ShortDescription: string,
+  public FullDescription: string,  
+  public Pcs: number,
+  public StandardPrice: number,
+  public OldPrice: number,
+  public Cost: number,
+  public CoverImage: string,
+  public CoverVideo: string,
+  public IsFeatured: number,
+  public IsShowOnHomePage: number,
+  public DisplayOrder: number,
+  public MetaKeyWords: string,
+  public MetaDescription: string,
+  public MetaTitle: string,
+  public Sku: string,
+  public IsFreeShipping: number,
+  public IsTaxExempt: number,
+  public TaxCategoryId: number,
+  public DisplayStockAvailability: number,
+  public DisplayStockQuantity: number,
+  public NotReturnable: number,
+  public Weight: number,
+  public Length: number,
+  public Width: number,
+  public Height: number,
+  public ProductTags: string,
+  public Manufacturer: string,
+  public CreatedBy:number)
+    {}
+}
+

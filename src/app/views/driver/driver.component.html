@@ -1,0 +1,110 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <form #driverForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="card-header">
+            <strong>Details</strong>
+          </div>
+          <div class="card-body">
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Driver Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Name" name="name"
+                      [(ngModel)]="Driver.Name" #nameRef="ngModel"
+                      [class.is-invalid]="nameRef.invalid && nameRef.touched" required />
+                    <small class="text-danger" [class.d-none]="nameRef.valid || nameRef.untouched">Name is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Phone</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Phone" name="Phone"
+                      [(ngModel)]="Driver.Phone" #phoneRef="ngModel"
+                      [class.is-invalid]="phoneRef.invalid && phoneRef.touched" required />
+                    <small class="text-danger" [class.d-none]="phoneRef.valid || phoneRef.untouched">Phone is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Email</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Email" name="Email"
+                      [(ngModel)]="Driver.Email" #emailRef="ngModel"
+                      [class.is-invalid]="emailRef.invalid && emailRef.touched" required />
+                    <small class="text-danger" [class.d-none]="emailRef.valid || emailRef.untouched">Email is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Address</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Address" name="Address"
+                      [(ngModel)]="Driver.Address" #addrRef="ngModel"
+                      [class.is-invalid]="addrRef.invalid && addrRef.touched" required />
+                    <small class="text-danger" [class.d-none]="addrRef.valid || addrRef.untouched">Address is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Landmark</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Landmark" name="Landmark"
+                      [(ngModel)]="Driver.Landmark" #landmarkRef="ngModel"
+                      [class.is-invalid]="landmarkRef.invalid && landmarkRef.touched" required />
+                    <small class="text-danger" [class.d-none]="landmarkRef.valid || landmarkRef.untouched">Landmark is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Pincode</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Pincode" name="Pincode"
+                      [(ngModel)]="Driver.Pincode" #pincodeRef="ngModel"
+                      [class.is-invalid]="pincodeRef.invalid && pincodeRef.touched" required />
+                    <small class="text-danger" [class.d-none]="pincodeRef.valid || pincodeRef.untouched">Pincode is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">ProfileImage</label>
+                  <div class="col-md-9">
+                    <input name="file" type="file" class="form-control" id="name" placeholder="ProfileImage"
+                      (change)="uploadFile($event)">
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" [disabled]="driverForm.invalid" class="btn btn-sm btn-primary">
+              <i class="fa fa-dot-circle-o"></i>
+              Submit
+            </button>
+            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/driver-list']"><i class="fa fa-ban"></i>
+              Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>

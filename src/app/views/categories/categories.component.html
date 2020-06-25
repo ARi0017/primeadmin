@@ -1,0 +1,85 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <form #categoryForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="card-header">
+            <strong>Details</strong>
+          </div>
+          <div class="card-body">
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Category Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Name" name="name"
+                      [(ngModel)]="Category.Category" #nameRef="ngModel"
+                      [class.is-invalid]="nameRef.invalid && nameRef.touched" required />
+                    <small class="text-danger" [class.d-none]="nameRef.valid || nameRef.untouched">Name is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Description</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Description" name="Description"
+                      [(ngModel)]="Category.Description" #descriptionRef="ngModel"
+                      [class.is-invalid]="descriptionRef.invalid && descriptionRef.touched" required />
+                    <small class="text-danger" [class.d-none]="descriptionRef.valid || descriptionRef.untouched">Description is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">Parent Category</label>
+                  <div class="col-md-9">
+                    <select name="ParentCategoryId" class="form-control" [(ngModel)]="Category.ParentCategoryId">
+                      <option value="">Select Parent Category</option>
+                      <option *ngFor="let val of parentcategory" [value]="val.CategoryId">
+                        {{val.Category}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">CoverImage</label>
+                  <div class="col-md-9">
+                    <input name="file" type="file" class="form-control" id="name" placeholder="CoverImage"
+                      (change)="uploadFile($event)">
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 col-form-label text-right">IsSpecial</label>
+                  <div class="col-md-9">
+                    <input name="IsSpecial" type="checkbox" class="form-control" [(ngModel)]="Category.IsSpecial"
+                    value="">
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" [disabled]="categoryForm.invalid" class="btn btn-sm btn-primary">
+              <i class="fa fa-dot-circle-o"></i>
+              Submit
+            </button>
+            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/categories-list']"><i class="fa fa-ban"></i>
+              Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>

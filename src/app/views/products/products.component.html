@@ -1,0 +1,483 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-sm-12">
+        
+        <div class="card">
+          <form #productsForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="card-header">
+            <strong>Product Add</strong>
+            <!-- <small>Form</small> -->
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                  <label for="parentcat">Is Combo</label>
+                  </div>
+                  <div class="col-md-9">
+                    <select name="IsCombo" class="form-control" [(ngModel)]="Product.IsCombo">                      
+                      <option value="1">Combo</option>
+                      <option value="0">Not Combo</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-12">
+              <div class="row form-group">
+                <div class="col-md-3">
+                <label for="parentcat">Parent Category</label>
+                </div>
+                <div class="col-md-9">
+                  <select name="CategoryId" class="form-control" [(ngModel)]="Product.CategoryId">
+                    <option value="">Select Parent Category</option>
+                    <option *ngFor="let val of parentcategory" [value]="val.CategoryId">
+                      {{val.Category}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                  <label for="productname">Product Name</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Product Name" name="Name" 
+                    [(ngModel)]="Product.Name" #NameRef="ngModel"
+                    >
+                    <!-- <small class="text-danger" [class.d-none]="productnameRef.valid || productnameRef.untouched">Product Name is required
+                    </small> -->
+                  </div>
+                </div>
+              </div>
+            </div><!--/.row-->
+            
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Short Description</label>
+                  </div>
+                  <div class="col-md-9">
+                    <textarea class="form-control" id="" placeholder="Enter Short Description" 
+                    name="ShortDescription" [(ngModel)]="Product.ShortDescription" #ShortDescriptionRef="ngModel"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Full Description</label>
+                  </div>
+                  <div class="col-md-9">
+                    <textarea class="form-control" id="" rows="10" placeholder="Enter Full Description" 
+                    name="FullDescription" [(ngModel)]="Product.FullDescription" #FullDescriptionRef="ngModel"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">SKU</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Product SKU" name="Sku" 
+                    [(ngModel)]="Product.Sku" #SkuRef="ngModel"
+                    >
+                    <!-- <small class="text-danger" [class.d-none]="skuRef.valid || skuRef.untouched">SKU is required
+                    </small>                   -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">            
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Meta Title</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Meta Title" name="MetaTitle" 
+                    [(ngModel)]="Product.MetaTitle" #MetaTitleRef="ngModel" >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">            
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Meta Key Words</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Meta Key Words" name="MetaKeyWords" 
+                    [(ngModel)]="Product.MetaKeyWords" #MetaKeyWordsRef="ngModel"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">            
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Meta Description</label>
+                  </div>
+                  <div class="col-md-9">
+                    <textarea class="form-control" placeholder="Enter Meta Description" name="MetaDescription" 
+                    [(ngModel)]="Product.MetaDescription" #MetaDescriptionRef="ngModel" rows="10"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Featured</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Product.IsFeatured" name="IsFeatured" value="1" >Yes
+                    <input type="radio" [(ngModel)]="Product.IsFeatured" name="IsFeatured" value="0" >No
+                    
+                    <!-- <input type="checkbox"  name="IsFeatured" value="1" [(ngModel)]="Product.IsFeatured" #IsFeaturedRef="ngModel"/>                    -->
+                  </div>
+                </div>
+              </div>          
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Is Show On Home Page</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Product.IsShowOnHomePage" name="IsShowOnHomePage" value="1" >Yes
+                    <input type="radio" [(ngModel)]="Product.IsShowOnHomePage" name="IsShowOnHomePage" value="0" >No
+
+                    <!-- <input type="checkbox"  name="IsShowOnHomePage" value="1" [(ngModel)]="Product.IsShowOnHomePage" 
+                    #IsShowOnHomePageRef="ngModel"/>                    -->
+                    
+                  </div>
+                </div>
+              </div>          
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Is Free Shipping</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Product.IsFreeShipping" name="IsFreeShipping" value="1" >Yes
+                    <input type="radio" [(ngModel)]="Product.IsFreeShipping" name="IsFreeShipping" value="0" >No
+                    <!-- <input type="checkbox"  name="IsFreeShipping" value="1" [(ngModel)]="Product.IsFreeShipping" #IsFreeShippingRef="ngModel"/>                    -->
+                  </div>
+                </div>
+              </div>          
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Display Stock Availability</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Product.DisplayStockAvailability" name="DisplayStockAvailability" value="1" >Yes
+                    <input type="radio" [(ngModel)]="Product.DisplayStockAvailability" name="DisplayStockAvailability" value="0" >No
+                    <!-- <input type="checkbox"  name="DisplayStockAvailability" value="1" [(ngModel)]="Product.DisplayStockAvailability" 
+                    #DisplayStockAvailabilityRef="ngModel"/> -->
+                  </div>
+                </div>
+              </div>          
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Display Stock Quantity</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Product.DisplayStockQuantity" name="DisplayStockQuantity" value="1" >Yes
+                    <input type="radio" [(ngModel)]="Product.DisplayStockQuantity" name="DisplayStockQuantity" value="0" >No
+                    <!-- <input type="checkbox"  name="DisplayStockQuantity" value="1" [(ngModel)]="Product.DisplayStockQuantity" 
+                    #DisplayStockQuantityRef="ngModel"/>                    -->
+                  </div>
+                </div>
+              </div>          
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Not Returnable</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Product.NotReturnable" name="NotReturnable" value="1" >Yes
+                    <input type="radio" [(ngModel)]="Product.NotReturnable" name="NotReturnable" value="0" >No
+
+                    <!-- <input type="checkbox"  name="NotReturnable" value="1" [(ngModel)]="Product.NotReturnable" 
+                    #NotReturnableRef="ngModel"/>                    -->
+                  </div>
+                </div>
+              </div>          
+            </div>
+            
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Is Tax Exempted</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Product.IsTaxExempt" name="IsTaxExempt" value="1" >Yes
+                    <input type="radio" [(ngModel)]="Product.IsTaxExempt" name="IsTaxExempt" value="0" >No
+                    <!-- <input type="checkbox"  name="IsTaxExempt" value="1" [(ngModel)]="Product.IsTaxExempt" 
+                    #IsTaxExemptRef="ngModel"/>                    -->
+                  </div>
+                </div>
+              </div>          
+            </div>
+            <div class="row">            
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Tax Category Id</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Tax Category Id" name="TaxCategoryId" 
+                    [(ngModel)]="Product.TaxCategoryId" #TaxCategoryIdRef="ngModel"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">            
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Product Tags</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Product Tags" name="ProductTags" 
+                    [(ngModel)]="Product.ProductTags" #ProductTagsRef="ngModel"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">            
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Manufacturer</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter Manufacturer" name="Manufacturer" 
+                    [(ngModel)]="Product.Manufacturer" #ManufacturerRef="ngModel"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Price</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Price" name="Cost" 
+                    [(ngModel)]="Product.Cost" #CostRef="ngModel"
+                    [class.is-invalid]="CostRef.invalid && CostRef.touched" required>
+                    <small class="text-danger" [class.d-none]="CostRef.valid || CostRef.untouched">Price is required
+                    </small>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Weight</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Weight" name="Weight" 
+                    [(ngModel)]="Product.Weight" #WeightRef="ngModel"
+                    [class.is-invalid]="WeightRef.invalid && WeightRef.touched" required>
+                    <small class="text-danger" [class.d-none]="WeightRef.valid || WeightRef.untouched">Weight Can Not Be Blank
+                    </small>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Length</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Length" name="Length" 
+                    [(ngModel)]="Product.Length" #LengthRef="ngModel"
+                    [class.is-invalid]="LengthRef.invalid && LengthRef.touched" required>
+                    <small class="text-danger" [class.d-none]="LengthRef.valid || LengthRef.untouched">Length Can Not Be Blank
+                    </small>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Width</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Width" name="Width" 
+                    [(ngModel)]="Product.Width" #WidthRef="ngModel"
+                    [class.is-invalid]="WidthRef.invalid && WidthRef.touched" required>
+                    <small class="text-danger" [class.d-none]="WidthRef.valid || WidthRef.untouched">Width Can Not Be Blank
+                    </small>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Height</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Width" name="Height" 
+                    [(ngModel)]="Product.Height" #HeightRef="ngModel"
+                    [class.is-invalid]="HeightRef.invalid && HeightRef.touched" required>
+                    <small class="text-danger" [class.d-none]="HeightRef.valid || HeightRef.untouched">Height Can Not Be Blank
+                    </small>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Old Price</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Old Price" name="OldPrice" 
+                    [(ngModel)]="Product.OldPrice" #OldPriceRef="ngModel"
+                    [class.is-invalid]="OldPriceRef.invalid && OldPriceRef.touched" required>
+                    <small class="text-danger" [class.d-none]="OldPriceRef.valid || OldPriceRef.untouched">Old Price is required
+                    </small>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Standard Price</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Standard Price" name="StandardPrice" 
+                    [(ngModel)]="Product.StandardPrice" #StandardPriceRef="ngModel"
+                    [class.is-invalid]="StandardPriceRef.invalid && StandardPriceRef.touched" required>
+                    <small class="text-danger" [class.d-none]="StandardPriceRef.valid || StandardPriceRef.untouched">Standard Price is required
+                    </small>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Pcs</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Standard Price" name="Pcs" 
+                    [(ngModel)]="Product.Pcs" #PcsRef="ngModel"
+                    [class.is-invalid]="PcsRef.invalid && PcsRef.touched" required>
+                    <small class="text-danger" [class.d-none]="PcsRef.valid || PcsRef.untouched">Pcs is required
+                    </small>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                    <label for="ccnumber">Display Order</label>
+                  </div>
+                  <div class="col-md-9">
+                    <input type="number" class="form-control" placeholder="Enter Display Order" name="DisplayOrder" 
+                    [(ngModel)]="Product.DisplayOrder" #DisplayOrderRef="ngModel"
+                    >
+                                     
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <div class="col-md-3">
+                  <label for="ccnumber">Cover Image</label>
+                  </div>
+                  <div class="col-md-9">
+                    <!-- <input type="text" class="form-control" placeholder="Enter CoverImage" name="CoverImage" 
+                    [(ngModel)]="Product.CoverImage" #CoverImageRef="ngModel"
+                    > -->
+                    <input name="file" type="file" class="form-control" id="name" placeholder="CoverImage"
+                      (change)="uploadFile($event)">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <div class="col-md-2">
+                  <label for="ccnumber">Cover Video</label>
+                  </div>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" placeholder="Enter Cover Video" name="CoverVideo" 
+                    [(ngModel)]="Product.CoverVideo" #CoverVideoRef="ngModel"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">Multiple Image</label>
+                  <input type="file" multiple>
+                </div>
+              </div>
+            </div> -->
+          </div>
+          <div class="card-footer">
+            <button type="submit" [disabled]="productsForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+          </div>
+        </form>
+        </div>
+      </div><!--/.col-->
+      
+    </div><!--/.row-->
+  </div>
