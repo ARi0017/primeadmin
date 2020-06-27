@@ -71,21 +71,6 @@ export const navItems: NavData[] = [
         name: 'Order',
         url: '/orders-list',
         icon: 'icon-star'
-      },
-       {
-        name: 'Retailer',
-        url: '/retailer-list',
-        icon: 'icon-star'
-      },
-      {
-        name: 'Retailer Product',
-        url: '/retailerproduct-list',
-        icon: 'icon-star'
-      },
-      {
-        name: 'Drivers',
-        url: '/driver-list',
-        icon: 'icon-star'
       }
     ]
   },
@@ -100,5 +85,46 @@ export const navItems: NavData[] = [
         icon: 'icon-star'
       }
     ]
-  }
+  },
+  {
+    name: 'Corporates',
+    url: '/pages',
+    icon: 'icon-people',
+    children: [
+      {
+        name: 'Retailer',
+        url: '/retailer-list',
+        icon: 'icon-star'
+      },
+      {
+        name: 'Retailer Product Map',
+        url: '/retailerproduct-list',
+        icon: 'icon-star'
+      }
+    ]
+  },
+  {
+    name: 'Transport',
+    url: '/pages',
+    icon: 'icon-people',
+    children: [
+      {
+        name: 'Drivers',
+        url: '/driver-list',
+        icon: 'icon-star'
+      }
+    ]
+  },
+  {
+    name: 'Settings',
+    url: '/pages',
+    icon: 'icon-people',
+    children: [
+      {
+        name: 'Change Password',
+        url: '/customer-list1',
+        icon: 'icon-star'
+      }
+    ]
+  },
 ];

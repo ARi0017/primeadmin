@@ -10,12 +10,14 @@ import { Category } from '../../models/category';
 })
 export class OrdersListComponent implements OnInit {
   data: any;
+  driverdata: any;
   constructor(private orderService: OrderService,
     private router: Router) {
   }
 
   ngOnInit() {
     this.getOrders();
+    this.getactivedriver();
   }
 
 //   search(name: string) {
@@ -29,20 +31,41 @@ export class OrdersListComponent implements OnInit {
 // //console.log(data);
 //     });
 //   }
-  
-getOrders() {
-//     const category = {
-//       'category': '',
-//       'page': '1',
-//       'size': '10'
-//      };
-//     this.orderService.getOrders(category).subscribe(data => {
-//       this.data = data.data[0];
-// //console.log(this.data);
-//     });
-  }
 
- 
+getOrders() {
+    const order = {
+      "OrderNo": "",
+      "CustomerId": "",
+      "CustomerName": "",
+      "FromDate": "",
+      "ToDate": "",
+      "DriverName": "",
+      "DeliveryFromDate": "",
+      "DeliveryToDate": "",
+      "OrderStatusId": "",
+      "PaymentModeId": "",
+      "Page": "1",
+      "Size": "10"
+    }
+    this.orderService.getOrders(order).subscribe(data => {
+      this.data = data.data[0];
+    });
+  }
+  mapdriver(orderid:string){
+    const order = {
+      "OrderId": orderid,
+      "DriverId": "1",
+      "ModifiedBy": "1"
+    }
+    this.orderService.oderdrivermap(order).subscribe(data => {
+     // this.data = data.data[0];
+    });
+  }
+getactivedriver(){
+  this.orderService.getActiveDriver().subscribe(data => {
+    this.driverdata = data.data[0];
+  });
+}
 
   onDelete(id: any) {
     if (!confirm("Are You Sure ?")) {

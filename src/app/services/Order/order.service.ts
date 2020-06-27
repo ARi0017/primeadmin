@@ -12,17 +12,16 @@ export class OrderService {
   url = localStorage.getItem('ServerUrl');
   constructor(private http: HttpClient) { }
 
-  getCategories(category: object): Observable<Iorder> {
-    return this.http.post<Iorder>(`${this.url}/category`, category);
+  getOrders(order: object): Observable<Iorder> {
+    return this.http.post<Iorder>(`${this.url}/orderlist`, order);
   }
-  getOrders(): Observable<Iorder> {
-    return this.http.post<Iorder>(`${this.url}/parentcategorylist`, '');
+  getActiveDriver(): Observable<Iorder> {
+    return this.http.post<Iorder>(`${this.url}/activedriverlist`, {});
   }
-  addCategories(adddata: object): Observable<Iorder> {
-    return this.http.post<Iorder>(`${this.url}/addcategory`, adddata);
+
+  oderdrivermap(adddata: object): Observable<Iorder> {
+    return this.http.post<Iorder>(`${this.url}/ordermastermapping`, adddata);
   }
-   fileupload(adddata: object): Observable<Iorder> {
-    return this.http.post<Iorder>(`http://localhost:3000/uploadcategory`, adddata);
-  }
+
 }
 
