@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     private toaster: ToasterService,
   ) {
     // const serverURL = 'http://localhost:3000/webservice';
-    const serverURL = 'http://18.224.6.146:3000/webservice';
+   // const serverURL = 'http://18.224.6.146:3000/webservice';
+   const serverURL = 'http://service.onlyalibaba.in:3000/webservice';
     localStorage.setItem('ServerUrl', serverURL);
   }
 
