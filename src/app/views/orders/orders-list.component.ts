@@ -3,16 +3,20 @@ import { Product } from '../../models/product';
 import { Router } from '@angular/router';
 import { OrderService } from '../../services/Order/order.service';
 import { Category } from '../../models/category';
+import { ToasterService } from '../../services/toaster.service';
 
 @Component({
   selector: 'app-orders-list',
+ /* styleUrls: ['/orders.component.scss'],*/
   templateUrl: './orders-list.component.html'
 })
 export class OrdersListComponent implements OnInit {
   data: any;
   driverdata: any;
+  driverid: string;
   constructor(private orderService: OrderService,
-    private router: Router) {
+    private router: Router,
+    private toaster: ToasterService) {
   }
 
   ngOnInit() {
@@ -20,17 +24,25 @@ export class OrdersListComponent implements OnInit {
     this.getactivedriver();
   }
 
-//   search(name: string) {
-//     const category1 = {
-//       'category': name,
-//       'page': '1',
-//       'size': '10'
-//      };
-//     this.categoryService.getCategories(category1).subscribe(data => {
-//       this.data = data.data[0];
-// //console.log(data);
-//     });
-//   }
+  search(name: string,drivername: string) {
+    const order = {
+      "OrderNo": name,
+      "CustomerId":"",
+      "CustomerName": "",
+      "FromDate": "",
+      "ToDate": "",
+      "DriverName": drivername,
+      "DeliveryFromDate": "",
+      "DeliveryToDate": "",
+      "OrderStatusId": "",
+      "PaymentModeId": "",
+      "Page": "1",
+      "Size": "10"
+    }
+    this.orderService.getOrders(order).subscribe(data => {
+      this.data = data.data;
+    });
+  }
 
 getOrders() {
     const order = {
@@ -54,16 +66,19 @@ getOrders() {
   mapdriver(orderid:string){
     const order = {
       "OrderId": orderid,
-      "DriverId": "1",
+      "DriverId": this.driverid,
       "ModifiedBy": "1"
     }
     this.orderService.oderdrivermap(order).subscribe(data => {
-     // this.data = data.data[0];
+      if (data.status == 200) {
+        this.toaster.Success("Driver Mapped Successfully");
+        this.router.navigate(["/order-list"]);
+      }
     });
   }
 getactivedriver(){
   this.orderService.getActiveDriver().subscribe(data => {
-    this.driverdata = data.data[0];
+    this.driverdata = data.data;
   });
 }
 

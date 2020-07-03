@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
 import { ToasterService } from '../../services/toaster.service';
 import { DriverService } from '../../services/Driver/driver.service';
+import { ModalDirective } from "ngx-bootstrap/modal";
 
 @Component({
   selector: 'app-driver-list',
@@ -10,6 +11,9 @@ import { DriverService } from '../../services/Driver/driver.service';
   styleUrls: ['./driver.component.scss']
 })
 export class DriverListComponent implements OnInit {
+@ViewChild("myModal", { static: true }) myModal: ModalDirective;
+@ViewChild("myModal1", { static: true }) myModal1: ModalDirective;
+
   data: any;
   url: string;
   constructor(private driverService: DriverService,
@@ -21,7 +25,7 @@ export class DriverListComponent implements OnInit {
     this.getDriver();
   }
 
-  search(name: string) {
+  search(name: string) { 
     const driver1 = {
       "Name":name,
       "Phone":"",
@@ -37,7 +41,8 @@ export class DriverListComponent implements OnInit {
 //console.log(data);
     });
   }
-
+  GetPendingorder(DriverId: string){}
+  GetCompleteorder(DriverId: string){}
   getDriver() {
     const driver = {
       "Name":"",

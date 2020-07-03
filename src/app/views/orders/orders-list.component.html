@@ -11,7 +11,15 @@
             <div class="row form-group">
               <label class="col-md-3 col-form-label text-right">Order</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" placeholder="Enter Order No" #categoryname />
+                <input type="text" class="form-control" placeholder="Enter Order No" #orderid />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row form-group">
+              <label class="col-md-3 col-form-label text-right">Driver</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" placeholder="Enter Driver" #drivername />
               </div>
             </div>
           </div>
@@ -20,7 +28,7 @@
       </div>
 
       <div class="card-footer">
-        <button type="button"  class="btn btn-sm btn-primary">
+        <button type="button" (click)="search(orderid.value,drivername.value)" class="btn btn-sm btn-primary">
           <i class="fa fa-dot-circle-o"></i>
           Search
         </button>
@@ -38,37 +46,54 @@
         <thead>
           <tr>
             <th>OrderNo</th>
-            <th>OrderedOn</th>
             <th>Customer</th>
-            <th>Address</th>
-             <th>OrderStatus</th>
-            <th>PaymentMode</th>
-            <th>SubTotal</th>
-            <th>TaxRate</th>
-            <th>TaxAmt</th>
-            <th>Driver</th>
-            <th>Action</th>
+            <th>Order Details</th>
+            <th>Payment</th>
+            <th>Delivery</th>
+            <th>Mapping</th>
 
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let dataval of data">
-            <td>{{dataval.OrderNo}}</td>
-            <td>{{dataval.OrderedOn}}</td>
-            <td>{{dataval.CustomerId}}</td>
-            <td>{{dataval.AddressId}}</td>
-            <td>{{dataval.OrderStatusId}}</td>
-            <td>{{dataval.PaymentModeId}}</td>
-            <td>{{dataval.SubTotal}}</td>
-            <td>{{dataval.TaxRate}}</td>
-            <td>{{dataval.TaxAmt}}</td>
-            <td>{{dataval.DriverId}}</td>
+            <td>{{dataval.OrderNo}}
+              {{dataval.OrderedOn}}
+             <span class="orderstatus">{{dataval.OrderStatus}}</span> 
+            </td>
+            <td>{{dataval.CustomerName}}
+            Phone:  {{dataval.CustomerPhone}}
+            </td>
+            <td>{{dataval.OrderDetail}} </td>
+          
+            <td>{{dataval.PaymentMode}}
+              Discount: {{dataval.Discount}}
+              TaxAmt: {{dataval.TaxAmt}}
+              TaxRate: {{dataval.TaxRate}}
+              DeliveryAmt: {{dataval.DeliveryAmt}}
+              TotalAmt: {{dataval.TotalAmt}}
+            </td>
+           
             <td>
-              <span class="text-danger pointer" (click)="mapdriver(dataval.OrderId)">Save</span>
-             </td>
+               <select *ngIf="dataval.DriverName == 'Driver not yet selected';else isdriverselected"  class="form-control" [(ngModel)] = "driverid">
+                <option [value]="undefined" disabled  selected>Select</option>
+   
+                <option *ngFor="let val of driverdata" [value]="val.DriverId">
+                {{val.Name}}
+              </option>
+            </select>
+            <ng-template #isdriverselected>
+              {{dataval.DriverName}}
+            </ng-template></td>
+            <td>
+              <span *ngIf="dataval.DriverName == 'Driver not yet selected';else allreadymapped" class="text-danger pointer" (click)="mapdriver(dataval.OrderId)">Save</span>
+              <ng-template #allreadymapped>
+              <b>Driver Mapped Allready</b> 
+              </ng-template>
+            </td>
+          
           </tr>
 
-
+        
 
 
         </tbody>

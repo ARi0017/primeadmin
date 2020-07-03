@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+// Modal Component
+import { ModalModule } from "ngx-bootstrap/modal";
 
 import { DriverRoutingModule } from './driver-routing.module';
 import { DriverComponent } from './driver.component';
@@ -18,7 +20,8 @@ import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.s
     DriverRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [DriverComponent],
   declarations: [ DriverComponent , DriverListComponent],

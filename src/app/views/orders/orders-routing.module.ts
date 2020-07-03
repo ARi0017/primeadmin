@@ -10,21 +10,21 @@ const routes: Routes = [
     component: OrdersComponent,
     canDeactivate: [CanDeactivateGuardService],
     data: {
-      title: 'Add Categories'
+      title: 'Add Order'
     }
   },
   {
     path: '',
     component: OrdersListComponent,
     data: {
-      title: 'Categories List'
+      title: 'Order List'
     }
   },
   {
     path: 'edit/:id',
     component: OrdersComponent,
     data: {
-      title: 'Edit Categories'
+      title: 'Edit Order'
     }
   }
 ];

@@ -140,23 +140,20 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>OrderNo</th>
-                     <th>AddressId</th>
-                    <th>DeliveredOn</th>
-                    <th>TaxRate</th>
-                    <th>TaxAmt</th>
-                    <th>TotalAmt</th>
+                    <th>OrderDetail</th>
+                     <th>OrderNo</th>
+                    <th>OrderStatus</th>
+                    <th>OrderTotal</th>
+                    <th>OrderedOn</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let val of orderdata">
+                    <td>{{val.OrderDetail}}</td>
                     <td>{{val.OrderNo}}</td>
-                    <td>{{val.AddressId}}</td>
-                    <td>{{val.DeliveredOn}}</td>
-                    <td>{{val.TaxRate}}</td>
-                    <td>{{val.TaxAmt}}</td>
-                    <td>{{val.TotalAmt}}</td>
-
+                    <td>{{val.OrderStatus}}</td>
+                    <td>{{val.OrderTotal}}</td>
+                    <td>{{val.OrderedOn}}</td>
                   </tr>
                 </tbody>
               </table>

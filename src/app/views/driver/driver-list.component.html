@@ -45,6 +45,8 @@
             <th>Phone</th>
             <th>email</th>
             <th>ProfileImage</th>
+            <th>Pending</th>
+            <th>Complete</th>
             <th>Action</th>
 
           </tr>
@@ -55,7 +57,8 @@
             <td>{{dataval.Phone}}</td>
             <td>{{dataval.Email}}</td>
             <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td>
-
+            <td><i class="fa fa-shopping-cart" aria-hidden="true" (click)="myModal.show()" (click)="GetPendingorder(dataval.DriverId)"></i></td>
+            <td><i class="fa fa-first-order" aria-hidden="true" (click)="myModal1.show()" (click)="GetCompleteorder(dataval.DriverId)"></i></td>
             <td>
               <a [routerLink]="['edit', dataval.DriverId]">Edit</a>
               &nbsp;&nbsp;
@@ -69,7 +72,78 @@
         </tbody>
 
       </table>
+      <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Order Pending</h4>
+            <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="animated fadeIn">
+              <div class="card">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                       <th>ShortDescription</th>
+                      <th>CoverImage</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>IsSpecial</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
 
+    <div bsModal #myModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Order Complete</h4>
+          <button type="button" class="close" (click)="myModal1.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="animated fadeIn">
+            <div class="card">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>OrderDetail</th>
+                     <th>OrderNo</th>
+                    <th>OrderStatus</th>
+                    <th>OrderTotal</th>
+                    <th>OrderedOn</th>
+                  </tr>
+                </thead>
+                <tbody>
+               
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
     </div>
   </div>
 </div>
