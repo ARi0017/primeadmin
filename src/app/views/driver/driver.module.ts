@@ -10,6 +10,7 @@ import { DriverRoutingModule } from './driver-routing.module';
 import { DriverComponent } from './driver.component';
 import { CommonModule } from '@angular/common';
 import { DriverListComponent } from './driver-list.component';
+import { DataTableModule } from "angular2-datatable";
 
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
 
@@ -21,7 +22,8 @@ import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.s
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    DataTableModule
   ],
   exports: [DriverComponent],
   declarations: [ DriverComponent , DriverListComponent],

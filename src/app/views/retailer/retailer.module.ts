@@ -9,6 +9,7 @@ import { RetailerComponent } from './retailer.component';
 import { CommonModule } from '@angular/common';
 import { RetailerListComponent } from './retailer-list.component';
 
+import { DataTableModule } from "angular2-datatable";
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.s
     RetailerRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    DataTableModule
   ],
   exports: [RetailerComponent],
   declarations: [ RetailerComponent , RetailerListComponent],

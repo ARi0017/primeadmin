@@ -8,6 +8,7 @@ import { BannermasterRoutingModule } from './bannermaster-routing.module';
 import { BannermasterComponent } from './bannermaster.component';
 import { CommonModule } from '@angular/common';
 import { BannermasterListComponent } from './bannermaster-list.component';
+import { DataTableModule } from "angular2-datatable";
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { BannermasterListComponent } from './bannermaster-list.component';
     BannermasterRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    DataTableModule
   ],
   exports: [BannermasterComponent],
   declarations: [ BannermasterComponent , BannermasterListComponent]

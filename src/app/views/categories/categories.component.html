@@ -49,9 +49,9 @@
 
               <div class="col-sm-6">
                 <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">CoverImage</label>
+                  <label class="col-md-3 text-right">Cover Image</label>
                   <div class="col-md-9">
-                    <input name="file" type="file" class="form-control" id="name" placeholder="CoverImage"
+                    <input name="file" type="file" id="name" placeholder="CoverImage"
                       (change)="uploadFile($event)">
 
                   </div>
@@ -59,11 +59,10 @@
               </div>
               <div class="col-sm-6">
                 <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">IsSpecial</label>
+                  <label class="col-md-3 text-right">IsSpecial</label>
                   <div class="col-md-9">
-                    <input name="IsSpecial" type="checkbox" class="form-control" [(ngModel)]="Category.IsSpecial"
+                    <input name="IsSpecial" type="checkbox" [(ngModel)]="Category.IsSpecial"
                     value="">
-
                   </div>
                 </div>
               </div>

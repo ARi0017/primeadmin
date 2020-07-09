@@ -12,7 +12,7 @@ import { ToasterService } from '../../services/toaster.service';
 })
 export class CategoriesListComponent implements OnInit {
   data: any;
-  url: string;
+  url: any;
   constructor(private categoryService: CategoryService,
     private router: Router,
     private toaster: ToasterService) {

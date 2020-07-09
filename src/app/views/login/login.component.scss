@@ -6,13 +6,8 @@
   align-items: center;
   padding: 15px;
   background-size: cover;
-  background-image: url("assets/img/brand/home1.jpg");
+  background-image: url("assets/img/login.jpg");
 }
-
-* {
-  box-sizing: border-box;
-}
-
 a {
   text-decoration: none;
   transition: all 0.3s ease-in-out;
@@ -27,21 +22,15 @@ a {
   align-items: center;
 }
 
-.login {
-  display: flex;
-  justify-content: center;
-}
+.login { }
 
 .lgn {
   width: 469px;
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 30px;
-  align-items: center;
+  padding:0 30px 30px 30px;
+  float: right;
 }
 
 .lgn .img {
@@ -86,19 +75,6 @@ a {
   color: #777;
   text-align: center;
   transition: all 0.2s ease;
-}
-
-.btn {
-  display: block;
-  border-radius: 50px;
-  padding: 9px;
-  margin-top: 35px;
-  background-color: black;
-  border-color: #57b846;
-  text-transform: uppercase;
-  font-size: 17px;
-  outline: none !important;
-  color: #fff !important;
 }
 
 .forget {

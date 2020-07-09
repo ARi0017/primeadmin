@@ -7,9 +7,10 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoriesComponent } from './categories.component';
 import { CommonModule } from '@angular/common';
-import { CategoriesListComponent } from './categories-list.component';
+import { CategoriesListComponent } from './categories-list.component'; 
 
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
+import { DataTableModule } from "angular2-datatable";
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.s
     CategoriesRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    DataTableModule
   ],
   exports: [CategoriesComponent],
   declarations: [ CategoriesComponent , CategoriesListComponent],

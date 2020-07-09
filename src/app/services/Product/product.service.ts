@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 interface Iproduct {
   data: object;
   status: number;
+  imgurl: string;
 }
 @Injectable({
   providedIn: 'root'

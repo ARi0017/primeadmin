@@ -1,9 +1,6 @@
 <div class="col-lg-12">
   <div class="card">
 
-    <div class="card-header">
-      <strong>Customer </strong>
-    </div>
     <div class="card-body">
       <!--/.row-->
       <div class="row">
@@ -15,46 +12,43 @@
             </div>
           </div>
         </div>
-
+        <div class="col-sm-2">
+          <button type="button" (click)="search(customername.value)" class="btn btn-sm btn-primary">
+            <i class="fa fa-dot-circle-o"></i>
+            Search
+          </button>
+        </div>
       </div>
     </div>
-
-    <div class="card-footer">
-      <button type="button" (click)="search(customername.value)" class="btn btn-sm btn-primary">
-        <i class="fa fa-dot-circle-o"></i>
-        Search
-      </button>
-
-    </div>
-
   </div>
 
   <div class="card">
 
     <div class="card-body">
-      <div class="pull-right text-right" style="padding: 10px; margin-bottom: 0;"><button type="button"
-          class="btn btn-info" (click)="addCustomer()">
+      <div class="pull-right" style="margin-bottom: 10px;">
+        <button type="button" class="btn btn-success btn-sm" (click)="addCustomer()">
           <i class="fa fa-plus"></i>
           Add
-        </button></div>
-
-      <table class="table table-striped table-hover">
-        <thead>
+        </button>
+      </div>
+      <table class="table table-striped table-hover" mfDefaultSorter [mfData]="data" #mf="mfDataTable"
+      [mfRowsOnPage]="10">
+       <thead>
           <tr>
-            <th>Customer Name</th>
-            <th>Phone No</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Status</th>
-            <th>Profile Image</th>
-            <th>Cart</th>
-            <th>Order</th>
-            <th>Action</th>
-
+            <th><mfDefaultSorter by="Name">Profile Image</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Name">Customer Name</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Phone">Phone No</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Email">Email</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Name">Address</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="IsActive">Status</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Name">Cart</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Name">Order</mfDefaultSorter></th>
+            <th width="12%">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let dataval of data">
+          <tr *ngFor="let dataval of mf.data">
+            <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td>
             <td>{{dataval.Name}}</td>
             <td>{{dataval.Phone}}</td>
             <td>{{dataval.Email}}</td>
@@ -66,18 +60,22 @@
                 <span class="text-danger pointer" (click)="onStatus(dataval.CustomerId, 1)">Inactive</span>
               </ng-template>
             </td>
-            <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td>
-
             <td><i class="fa fa-shopping-cart" aria-hidden="true" (click)="myModal.show()" (click)="GetCustomerCart(dataval.CustomerId)"></i></td>
             <td><i class="fa fa-first-order" aria-hidden="true" (click)="myModal1.show()" (click)="GetCustomerOrder(dataval.CustomerId)"></i></td>
             <td>
-              <a [routerLink]="['edit', dataval.CustomerId]">Edit</a>
+              <a class="btn btn-info btn-sm" [routerLink]="['edit', dataval.CustomerId]">Edit</a>
               &nbsp;&nbsp;
-              <span class="text-danger pointer" (click)="onDelete(dataval.CustomerId)">Delete</span>
+              <a class="btn btn-danger btn-sm" (click)="onDelete(dataval.CustomerId)">Delete</a>
             </td>
           </tr>
         </tbody>
-
+        <tfoot>
+          <tr>
+            <td colspan="9">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
       </table>
       <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
       aria-labelledby="myModalLabel" aria-hidden="true">

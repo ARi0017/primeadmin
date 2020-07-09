@@ -10,6 +10,7 @@ import { CustomerComponent } from './customer.component';
 import { CommonModule } from '@angular/common';
 import { CustomerListComponent } from './customer-list.component';
 import { CustomerAddressComponent } from './customer-address.component';
+import { DataTableModule } from "angular2-datatable";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { CustomerAddressComponent } from './customer-address.component';
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    DataTableModule
   ],
   exports: [CustomerComponent],
   declarations: [ CustomerComponent , CustomerListComponent , CustomerAddressComponent]

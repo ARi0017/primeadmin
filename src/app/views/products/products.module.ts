@@ -8,6 +8,8 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
 import { CommonModule } from "@angular/common";
 import { ProductListComponent } from './product-list.component';
+import { DataTableModule } from "angular2-datatable";
+import { SelectModule } from 'ng-select';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { ProductListComponent } from './product-list.component';
     ProductsRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    SelectModule,
+    DataTableModule
   ],
   exports: [ProductsComponent],
   declarations: [ ProductsComponent , ProductListComponent]

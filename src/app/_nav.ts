@@ -71,14 +71,7 @@ export const navItems: NavData[] = [
         name: 'Order',
         url: '/orders-list',
         icon: 'icon-star'
-      }
-    ]
-  },
-  {
-    name: 'Customers',
-    url: '/pages',
-    icon: 'icon-people',
-    children: [
+      },
       {
         name: 'Customers',
         url: '/customer-list',
@@ -87,17 +80,17 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Corporates',
+    name: 'Retailers',
     url: '/pages',
     icon: 'icon-people',
     children: [
       {
-        name: 'Retailer',
+        name: 'Retailer Listing',
         url: '/retailer-list',
         icon: 'icon-star'
       },
       {
-        name: 'Retailer Product Map',
+        name: 'Product Mapping',
         url: '/retailerproduct-list',
         icon: 'icon-star'
       }
@@ -115,16 +108,5 @@ export const navItems: NavData[] = [
       }
     ]
   },
-  {
-    name: 'Settings',
-    url: '/pages',
-    icon: 'icon-people',
-    children: [
-      {
-        name: 'Change Password',
-        url: '/customer-list1',
-        icon: 'icon-star'
-      }
-    ]
-  },
+
 ];

@@ -3,55 +3,63 @@ import { ProductService } from '../../services/Product/product.service';
 import { Router } from '@angular/router';
 import { ExcelService } from '../../services/Excel/excel.service';
 import * as XLSX from 'ts-xlsx';
+import { CategoryService } from '../../services/Category/category.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
+    selectedproductname: any;
+    selectedcategoryname:any;
   data: any;
   formdata;
   uploadFile: File;
   loginchk;
 
 
+  url: string;
   sampleExcelLink: any;
   boolValid: boolean;
   file: any;
   arrayBuffer: any;
   exceljsondata: any;
-  constructor(private productService: ProductService,
+  catdata: any;
+  categoryid: any;
+  constructor(private categoryService: CategoryService,private productService: ProductService,
     private excelService: ExcelService,
     private router: Router) {
   }
 
   ngOnInit() {
     this.getProducts();
+    this.getCategories();
   }
 
-  search(productname: string , categoryname: string) {
-    const product = {
-      'category': categoryname,
-      'name': productname,
-      'page': '1',
-      'size': '10'
-     };
+  search(productname: string) {
+    const product = {"categoryid":this.categoryid,"name":productname,"Page":"","Size":""};
     this.productService.getProductList(product).subscribe(data => {
       this.data = data.data[0];
+        this.url = data.imgurl;
     });
   }
 
   getProducts() {
-    const product = {
-      'category': '',
-      'name': '',
-      'page': '1',
-      'size': '10'
-     };
+    const product =  {"categoryid":"","name":"","Page":"","Size":""};
     this.productService.getProductList(product).subscribe(data => {
       this.data = data.data[0];
+      this.url = data.imgurl;
     });
   }
-
+  getCategories() {
+    const category = {
+      'category': '',
+      'page': '',
+      'size': ''
+     };
+    this.categoryService.getCategories(category).subscribe(data => {
+      this.catdata = data.data[0];
+    });
+  }
   addProduct() {
     this.router.navigate(['/products-list/add']);
   }
