@@ -3,9 +3,6 @@
         <div class="col-sm-12">
             <div class="card">
                 <form #customerForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
-                    <div class="card-header">
-                        <strong>Add Customer</strong>
-                    </div>
                     <div class="card-body">
                         <div class="row">
                         <div class="col-sm-6">
@@ -13,7 +10,8 @@
                                 <label class="col-md-3 text-right" for="inline-radios">Individual</label>
                                 <div class="col-md-1">
                                     <div class="form-check form-check-inline mr-1" id="inline-radios">
-                                        <input class="form-check-input" type="radio" name="CustomerType" value="1" [(ngModel)]="Customer.CustomerType" checked="checked">
+                                        <input class="form-check-input" type="radio" name="CustomerType" value="1" [(ngModel)]="Customer.CustomerType" 
+                                        ng-checked="Customer.CustomerType == null ? checked : ''">
                                     </div>
                                 </div>
                                 <label class="col-md-3 text-right" for="inline-radios">Corporate</label>

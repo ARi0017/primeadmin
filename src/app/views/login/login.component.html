@@ -1,45 +1,47 @@
 <section class="login-bg">
-  <div class="mainLogin">
-    <div class="container">
-      <div class="login">
-        <div class="row lgn">
-          <div class="col-md-12 text-center">
-          </div>
-          <div class="col-md-12 text-center">
-            <form class="register-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="disabled">
+  <div class="row full-sec">
+    <div class="col-md-6 text-center">
+      <h1>Welcome Back !</h1>
+      <img src="assets/img/logo.png" class="img-responsive">
+    </div>
+    <div class="col-md-6">
+      <div class="mainLogin">
+          <div class="login">
+            <div class="row text-center">
+                <form class="register-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="disabled">
 
-              <h1>Login</h1>
-              <p class="text-muted">Sign In to your account</p>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-user"></i></span>
-                </div>
-                <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-                  formControlName="username" type="text" placeholder="Username">
-                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                  <p *ngIf="f.username.errors.required">Email is required</p>
-                </div>
-              </div>
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password" placeholder="Password" formControlName="password" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <p *ngIf="f.password.errors.required">Password is required</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <button type="submit" class="btn btn-danger btn-block">Login</button>
-                </div>
-              </div>
+                  <h2>Login</h2>
+                  <p class="text-muted">Sign In to your account</p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                      formControlName="username" type="text" placeholder="Username">
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                      <p *ngIf="f.username.errors.required">Email is required</p>
+                    </div>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" placeholder="Password" formControlName="password" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <p *ngIf="f.password.errors.required">Password is required</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-danger btn-block">Login</button>
+                    </div>
+                  </div>
 
-              
-            </form>
+
+                </form>
+            </div>
           </div>
-        </div>
       </div>
     </div>
   </div>

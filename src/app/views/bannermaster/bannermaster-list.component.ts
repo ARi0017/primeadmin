@@ -12,6 +12,8 @@ import { ToasterService } from '../../services/toaster.service';
 export class BannermasterListComponent implements OnInit {
   data: any;
   url: any;
+  BannerId: any='';
+  IsActive:any ='';
   constructor(private bannermasterService: BannermasterService,
     private router: Router,
     private toaster: ToasterService) {
@@ -51,14 +53,26 @@ console.log(data.Imgurl);
               this.router.navigate(["/bannermaster-list"]);
       }
     });
-
   }
   // Change Status
-  onStatus(id: any, is_active: string) {
-    if (!confirm("Are You Sure ?")) {
+  onStatus(id: any, is_active: any) {   
+    if (!confirm('Are You Sure ?')) {
       return;
     }
-
+    this.BannerId = id;
+    this.IsActive = is_active;
+    const banstatus = {
+      'BannerId': this.BannerId,
+      'IsActive': this.IsActive,
+      'CreatedBy': '1'
+     };
+    this.bannermasterService.statusChange(banstatus).subscribe(data => {
+      this.data = data.data[0];
+      if (data.status == 200) {
+        this.toaster.Success("Status Updated Successfully");
+        this.getBanners();
+      }
+    });
   }
 
 

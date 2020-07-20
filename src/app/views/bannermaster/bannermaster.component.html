@@ -3,27 +3,7 @@
     <div class="col-sm-12">
       <div class="card">
         <form #bannermasterForm="ngForm" (ngSubmit)="onSubmit()">
-          <div class="card-header">
-            <strong>Add Banner</strong>
-          </div>
           <div class="card-body">
-            <!--/.row-->
-            <div class="row">
-
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 text-right">Link With</label>
-                  <div class="col-md-9">
-                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="1"
-                      (click)="showdiv('Category')"> Category
-                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="2"
-                      (click)="showdiv('Product')"> Product
-                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="3"
-                      (click)="showdiv('Combo')"> Combo
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="row">
               <div class="col-sm-6">
@@ -37,12 +17,23 @@
                   </div>
                 </div>
               </div>
+              <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 text-right">Link With</label>
+                  <div class="col-md-9">
+                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="3"
+                      (click)="showdiv('Combo')"> Combo
+                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="1"
+                      (click)="showdiv('Category')"> Category
+                  </div>
+                </div>
+              </div>
               <div class="col-sm-6" *ngIf="Category">
                 <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Parent Category</label>
+                  <label class="col-md-3 col-form-label text-right">Category</label>
                   <div class="col-md-9">
                     <select name="ParentCategory" class="form-control" [(ngModel)]="Bannermaster.LinkId">
-                      <option value="">Select Parent Category</option>
+                      <option value="">Select Category</option>
                       <option *ngFor="let val of parentcategory" [value]="val.CategoryId">
                         {{val.Category}}
                       </option>
@@ -50,7 +41,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6" *ngIf="Product">
+              <!-- <div class="col-sm-6" *ngIf="Product">
                 <div class="row form-group">
                   <label class="col-md-3 col-form-label text-right">Product</label>
                   <div class="col-md-9">
@@ -62,7 +53,7 @@
                     </select>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
 
               <div class="col-sm-6">
@@ -97,6 +88,7 @@
             <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/bannermaster-list']"><i
                 class="fa fa-ban"></i>
               Cancel</button>
+              <button type="button" class="btn btn-sm btn-secondary" (click)="backpage()"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
           </div>
         </form>
       </div>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ExcelService } from '../../services/Excel/excel.service';
 import * as XLSX from 'ts-xlsx';
 import { CategoryService } from '../../services/Category/category.service';
+import { ToasterService } from '../../services/toaster.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html'
@@ -15,8 +16,11 @@ export class ProductListComponent implements OnInit {
   formdata;
   uploadFile: File;
   loginchk;
-
-
+  page: number = 1;
+  count: number;
+  ProductId: any='';
+  IsActive:any ='';
+  name: any='';
   url: string;
   sampleExcelLink: any;
   boolValid: boolean;
@@ -24,40 +28,58 @@ export class ProductListComponent implements OnInit {
   arrayBuffer: any;
   exceljsondata: any;
   catdata: any;
-  categoryid: any;
+  categoryid: any='';
+  
   constructor(private categoryService: CategoryService,private productService: ProductService,
     private excelService: ExcelService,
+    private toaster: ToasterService,
     private router: Router) {
   }
 
   ngOnInit() {
-    this.getProducts();
+    let initialProduct = {categoryid: this.categoryid, name: this.name, page: this.page}
+    this.getProducts(initialProduct);
     this.getCategories();
+    this.getCount(this.categoryid, this.name);
   }
 
-  search(productname: string) {
-    const product = {"categoryid":this.categoryid,"name":productname,"Page":"","Size":""};
+  search() {
+    const product = {categoryid:this.categoryid,name:this.name,page : this.page};
     this.productService.getProductList(product).subscribe(data => {
       this.data = data.data[0];
         this.url = data.imgurl;
     });
+    this.getCount(this.categoryid, this.name);
   }
 
-  getProducts() {
-    const product =  {"categoryid":"","name":"","Page":"","Size":""};
+  getProducts(productInterface: {categoryid: any, name: string, page: number}) {
+    const product =  productInterface;
     this.productService.getProductList(product).subscribe(data => {
       this.data = data.data[0];
       this.url = data.imgurl;
     });
   }
+  getPagination(page: number){
+    this.page = page;
+    this.getProducts({categoryid: this.categoryid, name: this.name, page: this.page});
+  }
+
+  getCount(categoryid: any, name: string) {
+    this.productService.getCount(categoryid, name)
+      .subscribe(res => {
+        this.count = res.TotalItemsCount;
+      });
+  }
+
   getCategories() {
     const category = {
-      'category': '',
+      'categoryname': '',
       'page': '',
       'size': ''
      };
-    this.categoryService.getCategories(category).subscribe(data => {
+    this.productService.getChildCategories().subscribe(data => {
       this.catdata = data.data[0];
+      console.log(this.catdata);
     });
   }
   addProduct() {
@@ -67,14 +89,33 @@ export class ProductListComponent implements OnInit {
     if (!confirm('Are You Sure ?')) {
       return;
     }
-
+    this.productService.deleteProduct(id).subscribe(data => {
+      //  this.data = data.data[0];
+        if (data.status == 200) {
+          this.toaster.Success("Product Deleted Successfully");
+                this.router.navigate(["/products-list"]);
+        }
+      });
   }
-  // Change Status
-  onStatus(id: any, is_active: string) {
+  
+  onStatus(id: any, is_active: any) {   
     if (!confirm('Are You Sure ?')) {
       return;
     }
-
+    this.ProductId = id;
+    this.IsActive = is_active;
+    const prostatus = {
+      'ProductId': this.ProductId,
+      'IsActive': this.IsActive,
+      'CreatedBy': '1'
+     };
+    this.productService.statusChange(prostatus).subscribe(data => {
+      this.data = data.data[0];
+      if (data.status == 200) {
+        this.toaster.Success("Product Status Updated Successfully");
+        this.search();
+      }
+    });
   }
   onFileChanged(event) {
     if (event.target.files.length > 0) {

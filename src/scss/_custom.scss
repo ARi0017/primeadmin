@@ -1,14 +1,14 @@
 // Here you can add other styles
-.displayimage{ width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ccc; padding: 3px; } 
+.displayimage{ width: 35px; height: 35px; border-radius: 50%; border: 2px solid #ccc; padding: 1px; } 
 .table th, .table td{ padding: 0.3rem; }
 .dash i{ font-size: 3em; }
-
-
-
-
-
-
-
+.sidebar .nav-link{ font-weight: 700; }
+.sidebar{ background: #28a40e; }
+.sidebar .nav-link.active{ background: #ffdd00; color: #000 !important; }
+.sidebar .nav-link.active .nav-icon, .sidebar .nav-link .nav-icon{ color: #000; }
+.app-header{ background-color: #2f2f2f; }
+.btn-info, .btn-danger{ color: #fff !important; }
+.sidebar .nav-link .nav-icon{ color: #fff; }
 
 
 

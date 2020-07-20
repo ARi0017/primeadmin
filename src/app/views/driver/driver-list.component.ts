@@ -15,25 +15,26 @@ export class DriverListComponent implements OnInit {
 @ViewChild("myModal1", { static: true }) myModal1: ModalDirective;
 
   data: any;
+  drivername: any='';
   url: string;
+  page: number = 1;
+  count: number;
+  DriverId: any='';
+  IsActive:any ='';
   constructor(private driverService: DriverService,
     private router: Router,
     private toaster: ToasterService) {
   }
 
   ngOnInit() {
-    this.getDriver();
+    let initialDriver = {drivername: this.drivername, page: this.page}
+    this.getDriver(initialDriver);
+    this.getCount();
   }
 
-  search(name: string) { 
+  search() { 
     const driver1 = {
-      "Name":name,
-      "Phone":"",
-      "Email":"",
-      "Address":"",
-      "Pincode":"",
-      "Page":1,
-      "Size":10
+      drivername:this.drivername,page : this.page
 };
     this.driverService.getDriver(driver1).subscribe(data => {
       this.data = data.data;
@@ -43,16 +44,8 @@ export class DriverListComponent implements OnInit {
   }
   GetPendingorder(DriverId: string){}
   GetCompleteorder(DriverId: string){}
-  getDriver() {
-    const driver = {
-      "Name":"",
-      "Phone":"",
-      "Email":"",
-      "Address":"",
-      "Pincode":"",
-      "Page":1,
-      "Size":10
-};
+  getDriver(driverInterface: {drivername: string, page: number}) {
+    const driver =  driverInterface;
     this.driverService.getDriver(driver).subscribe(data => {
       this.data = data.data;
       this.url = data.Imgurl;
@@ -60,27 +53,42 @@ export class DriverListComponent implements OnInit {
     });
   }
 
+
+  getPagination(page: number){
+    this.page = page;
+    this.getDriver({drivername: this.drivername, page: this.page});
+  }
+
+  getCount() {
+    this.driverService.getCount()
+      .subscribe(res => {
+        this.count = res.TotalDriverCount;
+      });
+  }
+
   addDriver() {
     this.router.navigate(['/driver-list/add']);
   }
 
-  onDelete(id: any) {
-    if (!confirm("Are You Sure ?")) {
+  onStatus(id: any, is_active: any) {
+   
+    if (!confirm('Are You Sure ?')) {
       return;
     }
-    this.driverService.deleteDriver(id).subscribe(data => {
+    this.DriverId = id;
+    this.IsActive = is_active;
+    const drivertatus = {
+      'DriverId': this.DriverId,
+      'IsActive': this.IsActive,
+      'CreatedBy': '1'
+     };
+    this.driverService.statusChange(drivertatus).subscribe(data => {
       this.data = data.data[0];
       if (data.status == 200) {
-        this.toaster.Success("Driver Deleted Successfully");
+        this.toaster.Success("Product Status Updated Successfully");
+        this.search();
       }
     });
-  }
-  // Change Status
-  onStatus(id: any, is_active: string) {
-    if (!confirm("Are You Sure ?")) {
-      return;
-    }
-
   }
 
 

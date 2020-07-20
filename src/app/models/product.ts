@@ -14,7 +14,7 @@ export class Product {
   public CoverVideo: string,
   public IsFeatured: number,
   public IsShowOnHomePage: number,
-  public DisplayOrder: number,
+  public DisplayOrder: number = 0,
   public MetaKeyWords: string,
   public MetaDescription: string,
   public MetaTitle: string,
@@ -31,7 +31,10 @@ export class Product {
   public Height: number,
   public ProductTags: string,
   public Manufacturer: string,
-  public CreatedBy:number)
+  public CreatedBy:number,
+  public Brand: string,
+  public FoodType: string
+  )
     {}
 }
 

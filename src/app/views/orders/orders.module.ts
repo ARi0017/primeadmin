@@ -8,7 +8,7 @@ import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersComponent } from './orders.component';
 import { CommonModule } from '@angular/common';
 import { OrdersListComponent } from './orders-list.component';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
 
 @NgModule({
@@ -18,7 +18,8 @@ import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.s
     OrdersRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    PaginationModule.forRoot(),
   ],
   exports: [OrdersComponent],
   declarations: [ OrdersComponent , OrdersListComponent],

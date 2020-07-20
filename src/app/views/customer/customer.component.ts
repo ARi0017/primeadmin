@@ -12,7 +12,7 @@ import { ToasterService } from '../../services/toaster.service';
 })
 export class CustomerComponent implements OnInit {
 
-  Customer: Customer = new Customer("", "", "", "", "", "", null, localStorage.getItem('id'), "", "", "0");
+  Customer: Customer = new Customer("", "", "", "", "", "", null, 1, "", "", "0");
   parentcategory: any;
   id: any;
   response: any;
@@ -48,6 +48,8 @@ export class CustomerComponent implements OnInit {
   }
 
   onSubmit() {
+    this.Customer.CreatedBy = 1;
+    // this.Customer
     this.customerService.AddNewCustomer(this.Customer)
       .subscribe(res => {
         if (res.status == 200) {

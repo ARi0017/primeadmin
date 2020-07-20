@@ -94,6 +94,9 @@ getDriver(){
     this.driverpicture = data.data[0].ProfileImage;
   });
 }
+backpage() {
+  this.router.navigate(['/driver-list']);
+}
 
 editDriver(){
   this.filename = [];

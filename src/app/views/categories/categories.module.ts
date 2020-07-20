@@ -8,7 +8,7 @@ import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoriesComponent } from './categories.component';
 import { CommonModule } from '@angular/common';
 import { CategoriesListComponent } from './categories-list.component'; 
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
 import { DataTableModule } from "angular2-datatable";
 
@@ -20,7 +20,8 @@ import { DataTableModule } from "angular2-datatable";
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
-    DataTableModule
+    DataTableModule,
+    PaginationModule.forRoot(),
   ],
   exports: [CategoriesComponent],
   declarations: [ CategoriesComponent , CategoriesListComponent],

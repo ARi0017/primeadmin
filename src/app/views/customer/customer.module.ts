@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { CustomerListComponent } from './customer-list.component';
 import { CustomerAddressComponent } from './customer-address.component';
 import { DataTableModule } from "angular2-datatable";
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { DataTableModule } from "angular2-datatable";
     BsDropdownModule,
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
-    DataTableModule
+    DataTableModule,
+    PaginationModule.forRoot(),
   ],
   exports: [CustomerComponent],
   declarations: [ CustomerComponent , CustomerListComponent , CustomerAddressComponent]

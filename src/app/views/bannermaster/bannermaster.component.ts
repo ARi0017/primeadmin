@@ -19,7 +19,7 @@ export class BannermasterComponent implements OnInit {
   response: any;
   dlFile: any;
   Category: boolean=false;
-  Product: boolean=false;
+  //Product: boolean=false;
   filename: any[];
   constructor(private bannermasterService: BannermasterService,
     private router: Router,
@@ -32,13 +32,10 @@ export class BannermasterComponent implements OnInit {
 showdiv(divshow){
   if(divshow == 'Category'){
     this.Category = true;
-    this.Product = false;
-  }if(divshow == 'Product'){
-    this.Category = false;
-    this.Product = true;
+    //this.Product = false;
   }if(divshow == 'Combo'){
     this.Category = false;
-    this.Product = false;
+    //this.Product = false;
   }
 }
   ngOnInit() {
@@ -46,7 +43,7 @@ showdiv(divshow){
       this.getBanner();
     }
     this.getParentategories();
-    this.getProducts();
+    //this.getProducts();
   }
   onSubmit() {
     !this.id ? this.addBanner() : this.editBanner();
@@ -56,14 +53,14 @@ showdiv(divshow){
       this.Bannermaster = data.data[0];
       if(this.Bannermaster.LinkFlag == "1"){
         this.Category =true;
-        this.Product = false;
+        //this.Product = false;
       }
       else if(this.Bannermaster.LinkFlag == "2"){
         this.Category =false;
-        this.Product = true;
+        //this.Product = true;
       }else{
         this.Category = false;
-        this.Product = false;
+        //this.Product = false;
       }
       console.log(this.Bannermaster);
     });
@@ -215,18 +212,20 @@ showdiv(divshow){
 
     });
   }
-
-  getProducts() {
-    const product = {
-      'category': '',
-      'name': '',
-      'page': '1',
-      'size': '10'
-     };
-    this.bannermasterService.getProducts(product).subscribe(data => {
-      this.productdetails = data.data[0];
-//console.log(this.data);
-    });
+  backpage() {
+    this.router.navigate(['/bannermaster-list']);
   }
+//   getProducts() {
+//     const product = {
+//       'category': '',
+//       'name': '',
+//       'page': '1',
+//       'size': '10'
+//      };
+//     this.bannermasterService.getProducts(product).subscribe(data => {
+//       this.productdetails = data.data[0];
+// //console.log(this.data);
+//     });
+//   }
 
 }

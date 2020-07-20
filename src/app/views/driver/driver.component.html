@@ -3,9 +3,6 @@
     <div class="col-sm-12">
       <div class="card">
         <form #driverForm="ngForm" (ngSubmit)="onSubmit()">
-          <div class="card-header">
-            <strong>Details</strong>
-          </div>
           <div class="card-body">
             <!--/.row-->
             <div class="row">
@@ -25,7 +22,7 @@
                 <div class="row form-group">
                   <label class="col-md-3 col-form-label text-right">Phone</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter Phone" name="Phone"
+                    <input type="number" class="form-control" placeholder="Enter Phone" name="Phone"
                       [(ngModel)]="Driver.Phone" #phoneRef="ngModel"
                       [class.is-invalid]="phoneRef.invalid && phoneRef.touched" required />
                     <small class="text-danger" [class.d-none]="phoneRef.valid || phoneRef.untouched">Phone is required
@@ -73,7 +70,7 @@
                 <div class="row form-group">
                   <label class="col-md-3 col-form-label text-right">Pincode</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter Pincode" name="Pincode"
+                    <input type="number" class="form-control" placeholder="Enter Pincode" name="Pincode"
                       [(ngModel)]="Driver.Pincode" #pincodeRef="ngModel"
                       [class.is-invalid]="pincodeRef.invalid && pincodeRef.touched" required />
                     <small class="text-danger" [class.d-none]="pincodeRef.valid || pincodeRef.untouched">Pincode is required
@@ -101,6 +98,7 @@
             </button>
             <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/driver-list']"><i class="fa fa-ban"></i>
               Cancel</button>
+              <button type="button" class="btn btn-sm btn-secondary" (click)="backpage()"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
           </div>
         </form>
       </div>

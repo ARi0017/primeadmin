@@ -7,7 +7,7 @@ export class Customer {
     public DefaultLandmark: string,
     public DefaultPincode: string,
     public ProfileImage: object,
-    public CreatedBy: string,
+    public CreatedBy: number,
     public RefCode: string,
     public CustomerType: string,
     public CustomerId?: string,

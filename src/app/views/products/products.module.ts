@@ -8,6 +8,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
 import { CommonModule } from "@angular/common";
 import { ProductListComponent } from './product-list.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { DataTableModule } from "angular2-datatable";
 import { SelectModule } from 'ng-select';
 
@@ -20,7 +21,8 @@ import { SelectModule } from 'ng-select';
     BsDropdownModule,
     ButtonsModule.forRoot(),
     SelectModule,
-    DataTableModule
+    DataTableModule,
+    PaginationModule.forRoot(),
   ],
   exports: [ProductsComponent],
   declarations: [ ProductsComponent , ProductListComponent]

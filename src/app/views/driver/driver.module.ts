@@ -11,6 +11,7 @@ import { DriverComponent } from './driver.component';
 import { CommonModule } from '@angular/common';
 import { DriverListComponent } from './driver-list.component';
 import { DataTableModule } from "angular2-datatable";
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
 
@@ -23,7 +24,8 @@ import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.s
     BsDropdownModule,
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
-    DataTableModule
+    DataTableModule,
+    PaginationModule.forRoot(),
   ],
   exports: [DriverComponent],
   declarations: [ DriverComponent , DriverListComponent],

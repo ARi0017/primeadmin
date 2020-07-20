@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CategoriesComponent implements OnInit {
 //@ViewChild('categoryForm',{ read: true, static: false }) public createcategoryform: NgForm;
-  Category = new Category(null,"","","","",null,null,null);
+  Category = new Category(null,"","","","",null,null,null,null);
   parentcategory: any;
   id: any;
   response: any;
@@ -56,7 +56,7 @@ addCategory(){
         this.Category.CoverVideo = file.name;
         this.Category.CreatedBy = 1;
         this.Category.IsFeatured = 1;
-        this.Category.IsSpecial = (this.Category.IsSpecial == 'false') ? "0" : "1";
+        this.Category.IsSpecial = this.Category.IsSpecial;
         this.categoryService.addeditCategories(this.Category).subscribe(
           res => {
             console.log(res.status);
@@ -110,7 +110,7 @@ editCategory(){
           this.Category.CreatedBy = 1;
           this.Category.IsFeatured = 1;
           this.Category.CategoryId = this.id;
-          this.Category.IsSpecial = (this.Category.IsSpecial == 'false') ? "0" : "1";
+          this.Category.IsSpecial = this.Category.IsSpecial;
           this.categoryService.addeditCategories(this.Category).subscribe(
             res => {
               console.log(res.status);
@@ -145,7 +145,7 @@ editCategory(){
       }
     }
     else{
-      this.Category.IsSpecial = (this.Category.IsSpecial == 'false') ? "0" : "1";
+      this.Category.IsSpecial = this.Category.IsSpecial;
       this.categoryService.addeditCategories(this.Category).subscribe(
         res => {
           console.log(res.status);
@@ -172,5 +172,8 @@ editCategory(){
       }
 
     });
+  }
+  backpage() {
+    this.router.navigate(['/categories-list']);
   }
 }

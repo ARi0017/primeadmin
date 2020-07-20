@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {UrlService} from '../Url/url.service';
 interface Idriver {
   data: object;
+  TotalDriverCount: any;
   status: number;
   Imgurl: string;
 }
@@ -10,24 +12,32 @@ interface Idriver {
   providedIn: 'root'
 })
 export class DriverService {
-  url = localStorage.getItem('ServerUrl');
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private url: UrlService) { }
 
   getDriver(driver: object): Observable<Idriver> {
-    return this.http.post<Idriver>(`${this.url}/driver`, driver);
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/driver`, driver);
   }
   getDriverbyid(id: string): Observable<Idriver> {
-    return this.http.post<Idriver>(`${this.url}/driverselectrow/${id}`, {});
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/driverselectrow/${id}`, {});
   }
 
   addeditDriver(adddata: object): Observable<Idriver> {
-    return this.http.post<Idriver>(`${this.url}/driveraddedit`, adddata);
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/driveraddedit`, adddata);
   }
   deleteDriver(id: string): Observable<Idriver> {
-    return this.http.post<Idriver>(`${this.url}/deletedriver/${id}`, {});
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/deletedriver/${id}`, {});
   }
    fileupload(adddata: object): Observable<Idriver> {
-    return this.http.post<Idriver>(`${this.url}/uploaddriverimage`, adddata);
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/uploaddriverimage`, adddata);
+  }
+
+  getCount(): Observable<Idriver> {
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/drivercount`, '');
+  }
+
+  statusChange(driverstatus : object): Observable<Idriver> {
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/driverstatus`,driverstatus);
   }
 }
 

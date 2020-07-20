@@ -33,11 +33,7 @@ export const navItems: NavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    icon: 'icon-speedometer',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
+    icon: 'icon-speedometer'
   },
   {
     name: 'Catalog',
@@ -47,17 +43,17 @@ export const navItems: NavData[] = [
       {
         name: 'Products',
         url: '/products-list',
-        icon: 'icon-star'
+        icon: 'fa fa-cutlery'
       },
       {
         name: 'Categories',
         url: '/categories-list',
-        icon: 'icon-star'
+        icon: 'fa fa-server'
       },
       {
         name: 'Banner',
         url: '/bannermaster-list',
-        icon: 'icon-star'
+        icon: 'fa fa-file-image-o'
       }
     ]
   },
@@ -70,12 +66,12 @@ export const navItems: NavData[] = [
       {
         name: 'Order',
         url: '/orders-list',
-        icon: 'icon-star'
+        icon: 'icon-basket-loaded'
       },
       {
         name: 'Customers',
         url: '/customer-list',
-        icon: 'icon-star'
+        icon: 'icon-people'
       }
     ]
   },
@@ -87,12 +83,12 @@ export const navItems: NavData[] = [
       {
         name: 'Retailer Listing',
         url: '/retailer-list',
-        icon: 'icon-star'
+        icon: 'icon-list'
       },
       {
         name: 'Product Mapping',
         url: '/retailerproduct-list',
-        icon: 'icon-star'
+        icon: 'icon-pin'
       }
     ]
   },
@@ -104,7 +100,7 @@ export const navItems: NavData[] = [
       {
         name: 'Drivers',
         url: '/driver-list',
-        icon: 'icon-star'
+        icon: 'fa fa-drivers-license'
       }
     ]
   },

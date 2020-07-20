@@ -1,48 +1,18 @@
 <div class="col-lg-12">
-  <!-- <div class="card">
-
-      <div class="card-header">
-        <strong>Categories</strong>
-      </div>
-      <div class="card-body">
-
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="row form-group">
-              <label class="col-md-3 col-form-label text-right">Category</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" placeholder="Enter Category" #categoryname />
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="card-footer">
-        <button type="button" (click)="search(categoryname.value)" class="btn btn-sm btn-primary">
-          <i class="fa fa-dot-circle-o"></i>
-          Search
-        </button>
-
-      </div>
-
-  </div> -->
 
   <div class="card">
 
     <div class="card-body">
-      <div class="pull-right"  style="margin-bottom: 10px;">
-        <button type="button" class="btn btn-success btn-sm" (click)="addBanner()">
-          <i class="fa fa-plus"></i>
-          Add
-        </button></div>
-
+        <div class="row pull-right">
+            <button type="button" class="btn btn-success btn-sm" (click)="addBanner()"><i class="fa fa-plus"></i> Add</button>
+        </div>
         <table class="table table-striped table-hover" mfDefaultSorter [mfData]="data" #mf="mfDataTable"
         [mfRowsOnPage]="10">  <thead>
           <tr>
             <th><mfDefaultSorter by="BannerName">Banner Images</mfDefaultSorter></th>
             <th><mfDefaultSorter by="BannerName">Name</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="BannerName">Special</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="BannerName">Specification</mfDefaultSorter></th>
             <th><mfDefaultSorter by="Remarks">Remarks</mfDefaultSorter></th>
             <th><mfDefaultSorter by="IsActive">Status</mfDefaultSorter></th>
             <th width="12%">Action</th>
@@ -53,16 +23,18 @@
           <tr *ngFor="let dataval of mf.data">
             <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.BannerImage}} /></td>
             <td>{{dataval.BannerName}}</td>
+            <td>{{dataval.LinkFlag}}</td>
+            <td>{{dataval.LinkSpecification}}</td>
             <td>{{dataval.Remarks}}</td>
             <td>
               <span class="text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan"
-                (click)="onStatus(dataval.BannerId, '0')">Active</span>
-              <ng-template #elseSpan>
-                <span class="text-danger pointer" (click)="onStatus(dataval.BannerId, 1)">Inactive</span>
-              </ng-template>
+                  (click)="onStatus(dataval.BannerId, '0')"><i class="fa fa-check fa-lg"></i></span>
+                <ng-template #elseSpan>
+                  <span class="text-danger pointer" (click)="onStatus(dataval.BannerId, 1)"><i class="fa fa-close fa-lg"></i></span>
+                </ng-template>
             </td>
             <td>
-              <a class="btn btn-info btn-sm" [routerLink]="['edit', dataval.BannerId]">Edit</a> <a class="btn btn-danger btn-sm" (click)="onDelete(dataval.BannerId)">Delete</a>
+              <a class="btn btn-sm btn-warning" [routerLink]="['edit', dataval.BannerId]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
             </td>
           </tr>
         </tbody>

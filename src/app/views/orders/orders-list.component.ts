@@ -14,55 +14,48 @@ export class OrdersListComponent implements OnInit {
   data: any;
   driverdata: any;
   driverid: string;
+  page: number = 1;
+  count: number;
+  ordernumber : any='';
+  drivername : any='';
   constructor(private orderService: OrderService,
     private router: Router,
     private toaster: ToasterService) {
   }
 
   ngOnInit() {
-    this.getOrders();
+    let initialOrders = {ordernumber: this.ordernumber, drivername: this.drivername, page: this.page}
+    this.getOrders(initialOrders);
+    this.getCount({drivername: this.drivername});
     this.getactivedriver();
   }
 
-  search(name: string,drivername: string) {
-    const order = {
-      "OrderNo": name,
-      "CustomerId":"",
-      "CustomerName": "",
-      "FromDate": "",
-      "ToDate": "",
-      "DriverName": drivername,
-      "DeliveryFromDate": "",
-      "DeliveryToDate": "",
-      "OrderStatusId": "",
-      "PaymentModeId": "",
-      "Page": "1",
-      "Size": "10"
-    }
+  search() {
+    const order = {ordernumber:this.ordernumber,drivername:this.drivername,page : this.page};
     this.orderService.getOrders(order).subscribe(data => {
       this.data = data.data;
     });
   }
 
-getOrders() {
-    const order = {
-      "OrderNo": "",
-      "CustomerId": "",
-      "CustomerName": "",
-      "FromDate": "",
-      "ToDate": "",
-      "DriverName": "",
-      "DeliveryFromDate": "",
-      "DeliveryToDate": "",
-      "OrderStatusId": "",
-      "PaymentModeId": "",
-      "Page": "1",
-      "Size": "10"
-    }
+getOrders(orderInterface: {ordernumber: any, drivername: string, page: number}) {
+    const order = orderInterface
     this.orderService.getOrders(order).subscribe(data => {
       this.data = data.data;
     });
   }
+
+  getPagination(page: number){
+    this.page = page;
+    this.getOrders({ordernumber: this.ordernumber, drivername: this.drivername, page: this.page});
+  }
+
+  getCount(drivername: any) {
+    this.orderService.getCount(drivername)
+      .subscribe(res => {
+        this.count = res.TotalOrderCount;
+      });
+  }
+
   mapdriver(orderid:string){
     const order = {
       "OrderId": orderid,

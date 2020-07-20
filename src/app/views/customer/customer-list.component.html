@@ -2,34 +2,25 @@
   <div class="card">
 
     <div class="card-body">
-      <!--/.row-->
       <div class="row">
         <div class="col-sm-6">
           <div class="row form-group">
             <label class="col-md-3 col-form-label text-right">Customer</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" placeholder="Enter Customer" #customername />
+              <input type="text" class="form-control" [(ngModel)] = "customername" placeholder="Enter Customer"  />
             </div>
           </div>
         </div>
         <div class="col-sm-2">
-          <button type="button" (click)="search(customername.value)" class="btn btn-sm btn-primary">
+          <button type="button" (click)="search()" class="btn btn-sm btn-primary">
             <i class="fa fa-dot-circle-o"></i>
             Search
           </button>
+          <button type="button" class="btn btn-success btn-sm" (click)="addCustomer()">
+            <i class="fa fa-plus"></i>
+            Add
+          </button>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-
-    <div class="card-body">
-      <div class="pull-right" style="margin-bottom: 10px;">
-        <button type="button" class="btn btn-success btn-sm" (click)="addCustomer()">
-          <i class="fa fa-plus"></i>
-          Add
-        </button>
       </div>
       <table class="table table-striped table-hover" mfDefaultSorter [mfData]="data" #mf="mfDataTable"
       [mfRowsOnPage]="10">
@@ -55,27 +46,28 @@
             <td><i class="fa fa-home" aria-hidden="true" [routerLink]="['address', dataval.CustomerId]"></i></td>
             <td>
               <span class="text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan"
-                (click)="onStatus(dataval.CustomerId, '0')">Active</span>
-              <ng-template #elseSpan>
-                <span class="text-danger pointer" (click)="onStatus(dataval.CustomerId, 1)">Inactive</span>
-              </ng-template>
+                  (click)="onStatus(dataval.CustomerId, '0')"><i class="fa fa-check fa-lg"></i></span>
+                <ng-template #elseSpan>
+                  <span class="text-danger pointer" (click)="onStatus(dataval.CustomerId, 1)"><i class="fa fa-close fa-lg"></i></span>
+                </ng-template>
             </td>
             <td><i class="fa fa-shopping-cart" aria-hidden="true" (click)="myModal.show()" (click)="GetCustomerCart(dataval.CustomerId)"></i></td>
             <td><i class="fa fa-first-order" aria-hidden="true" (click)="myModal1.show()" (click)="GetCustomerOrder(dataval.CustomerId)"></i></td>
             <td>
-              <a class="btn btn-info btn-sm" [routerLink]="['edit', dataval.CustomerId]">Edit</a>
-              &nbsp;&nbsp;
-              <a class="btn btn-danger btn-sm" (click)="onDelete(dataval.CustomerId)">Delete</a>
+              <a class="btn btn-sm btn-warning" [routerLink]="['edit', dataval.CustomerId]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="9">
-              <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]"></mfBootstrapPaginator>
-            </td>
+              <td colspan="4" class="pull-right">
+                  <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]"></mfBootstrapPaginator> -->
+                  <pagination [totalItems]="count" [boundaryLinks]='true' [maxSize]="5" [rotate]='false'
+                      [(ngModel)]="page" (pageChanged)="getPagination($event.page)">
+                  </pagination>
+              </td>
           </tr>
-        </tfoot>
+      </tfoot>
       </table>
       <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
       aria-labelledby="myModalLabel" aria-hidden="true">

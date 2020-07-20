@@ -41,6 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './views/logout/logout.component';
 
+
 @NgModule({
   imports: [
     FormsModule,
@@ -64,7 +65,7 @@ import { LogoutComponent } from './views/logout/logout.component';
     ...APP_CONTAINERS,
     LoginComponent,
     LogoutComponent,
-    ForgotPasswordComponent,
+    ForgotPasswordComponent
   ],
   providers: [{
     provide: LocationStrategy,

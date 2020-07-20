@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../services/Customer/customer.service';
 import { ToasterService } from '../../services/toaster.service';
-//import { CustomerService } from 'src/app/services/Customer/customer.service';
+
 interface Assets {
   status: number;
   data: any;
@@ -18,18 +18,18 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private customerService: CustomerService,
     private toaster: ToasterService,
   ) {
-    // const serverURL = 'http://localhost:3000/webservice';
-   // const serverURL = 'http://18.224.6.146:3000/webservice';
-   const serverURL = 'https://service.onlyalibaba.in/webservice';
-    localStorage.setItem('ServerUrl', serverURL);
+
+
   }
 
   ngOnInit() {
+    localStorage.clear();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

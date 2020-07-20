@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
       'DeliveryToDate': '',
       'OrderStatusId': '',
       'PaymentModeId': '',
-      'Page': '1',
+      'page': '1',
       'Size': '10'
      };
      this.orderService.getOrders(orders).subscribe(data => {
@@ -45,12 +45,12 @@ export class DashboardComponent implements OnInit {
   }
    getDriver() {
     const driver = {
-      "Name":"",
+      "drivername":"",
       "Phone":"",
       "Email":"",
       "Address":"",
       "Pincode":"",
-      "Page":1,
+      "page":1,
       "Size":10
 };
     this.driverService.getDriver(driver).subscribe(data => {
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
 "OwnRefCode":"",
 "RefByCustomerName":"",
 "RefByCustomerPhone":"",
-"Page":"1",
+"page":"1",
 "Size":"10"
 }
     this.customerService.getCustomerList(customer).subscribe(data => {

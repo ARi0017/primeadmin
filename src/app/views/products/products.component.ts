@@ -13,12 +13,13 @@ import { ProductService } from '../../services/Product/product.service';
 })
 export class ProductsComponent implements OnInit {
 
-  Product = new Product(null,null,null,"","","",null,null,null,null,"","",null,null,null,"","","","",null,null,null,null,null,null,null,null,null,null,"","",null);
+  Product = new Product(null,null,null,"","","",null,null,null,null,"","",null,null,0,"","","","",null,null,null,null,null,null,null,null,null,null,"","",null,"", "");
 
   parentcategory: object;
+  taxcategory: object;
   id: any;
   response: any;
-  dlFile: any;
+  dlFile: any; vlFile: any;
   filename: any[];
   constructor(private productService: ProductService,
     //private productService: ProductService,
@@ -32,24 +33,39 @@ export class ProductsComponent implements OnInit {
      }
 
   ngOnInit() {
+    this.getChildCategories();
+    this.getTaxCategories();
     if(this.id){
       this.getProduct();
     }
-    this.getParentategories();
+    // this.getTaxCategories();
   }
-
-  getParentategories(){
-    this.productService.getParentategories().subscribe(data => {
+  backpage() {
+    this.router.navigate(['/products-list']);
+  }
+  getChildCategories(){
+    this.productService.getChildCategories().subscribe(data => {
       this.parentcategory = data.data[0];
-      //console.log(data);
+      //console.log(data); taxcategory
+    });
+  }
+  getTaxCategories(){
+    this.productService.getTaxCategories().subscribe(data => {
+      this.taxcategory = data.data[0];
+      //console.log(data); taxcategory
     });
   }
   onSubmit() {
     !this.id ? this.addProduct() : this.editProduct();
   }
-  uploadFile(event: any) {
+  uploadFileImage(event: any) {
     this.dlFile = event.target.files;
     console.log(this.dlFile);
+
+  }
+  uploadFileVideo(event: any) {
+    this.vlFile = event.target.files;
+    console.log(this.vlFile);
 
   }
   getProduct(){
@@ -69,10 +85,8 @@ export class ProductsComponent implements OnInit {
       const uploadData = new FormData();
       if (file != undefined) {
         uploadData.append("myFile", file, file.name);
-        this.Product.CoverImage = file.name;
-        
+        this.Product.CoverImage = file.name;        
         this.Product.CreatedBy = 1;
-        this.Product.IsFeatured = 1;
         this.Product.ProductId = this.id;
         this.productService.addeditProduct(this.Product).subscribe(
           res => {
@@ -91,7 +105,7 @@ export class ProductsComponent implements OnInit {
                 }
               );
               this.toaster.Success("Product Updated Successfully");
-              this.router.navigate(["/product-list"]);
+              this.router.navigate(["/products-list"]);
             } else {
               this.toaster.Error("Server Error!");
             }
@@ -109,15 +123,16 @@ export class ProductsComponent implements OnInit {
   }
   else{
     this.Product.CreatedBy = 1;
-    this.Product.IsFeatured = 1;
     this.Product.ProductId = this.id;
     this.productService.addeditProduct(this.Product).subscribe(
       res => {
         console.log(res.status);
         var status = res.status;
+        //alert(status);
         if (status == 200) {
+          //alert('+++');
           this.toaster.Success("Product Updated Successfully");
-          this.router.navigate(["/product-list"]);
+          this.router.navigate(["/products-list"]);
         } else {
           this.toaster.Error("Server Error!");
         }
@@ -132,9 +147,10 @@ export class ProductsComponent implements OnInit {
     this.filename = [];
     var i = 0;
     // this.strDlFileName = "";
+    if (this.dlFile!= undefined) {
     for (let file of this.dlFile) {
       const uploadData = new FormData();
-      if (file != undefined) {
+    
         uploadData.append("myFile", file, file.name);
         this.Product.CoverImage = file.name;
 
@@ -159,7 +175,7 @@ export class ProductsComponent implements OnInit {
                 }
               );
               this.toaster.Success("Product Added Successfully");
-              this.router.navigate(["/product-list"]);
+              this.router.navigate(["/products-list"]);
             } else {
               this.toaster.Error("Server Error!");
             }
@@ -169,10 +185,32 @@ export class ProductsComponent implements OnInit {
           }
         );
 
-      }
+      
 
       this.filename[i] = file.name;
       i++;
     }
-}
+  }
+    else{
+      this.Product.ProductId = 0;
+      //this.Product.IsFeatured = 1;
+      this.Product.CreatedBy = 1;
+      this.productService.addeditProduct(this.Product).subscribe(
+        res => {
+          console.log(res.status);
+          var status = res.status;
+          if (status == 200) {
+            
+            this.toaster.Success("Product Added Successfully");
+            this.router.navigate(["/products-list"]);
+          } else {
+            this.toaster.Error("Server Error!");
+          }
+        },
+        err => {
+          this.toaster.Error("Something Went Wrong");
+        }
+      );
+    }
+  }
 }
