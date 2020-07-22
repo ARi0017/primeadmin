@@ -23,58 +23,27 @@ export class CategoriesListComponent implements OnInit {
     private toaster: ToasterService) {
   }
 
-  ngOnInit() {
-    let initialCategory = {categoryname: this.categoryname, page: this.page}
-    this.getCategories(initialCategory);
-    this.getCount();
+  ngOnInit() {    
+    this.getCategories(this.page);
   }
 
-  search() {
-    const category1 = {
-      categoryname:this.categoryname,page : this.page
-     };
-    this.categoryService.getCategories(category1).subscribe(data => {
+  getCategories(page: number) {
+    let Category = {categoryname: this.categoryname, page: page}
+    this.categoryService.getCategories(Category).subscribe(data => {
       this.data = data.data[0];
       this.url = data.Imgurl;
-//console.log(data);
-    });
-  }
-
-  getCategories(categoryInterface: {categoryname: string, page: number}) {
-    const category =  categoryInterface;
-    this.categoryService.getCategories(category).subscribe(data => {
-      this.data = data.data[0];
-      this.url = data.Imgurl;
-//console.log(this.data);
+      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      console.log("Total Row Count",this.count);
     });
   }
 
   getPagination(page: number){
     this.page = page;
-    this.getCategories({categoryname: this.categoryname, page: this.page});
-  }
-
-  getCount() {
-    this.categoryService.getCount()
-      .subscribe(res => {
-        this.count = res.TotalCategoryCount;
-      });
+    this.getCategories(this.page);
   }
 
   addCategories() {
     this.router.navigate(['/categories-list/add']);
-  }
-
-  onDelete(id: any) {
-    if (!confirm("Are You Sure ?")) {
-      return;
-    }
-    this.categoryService.deleteCategories(id).subscribe(data => {
-      this.data = data.data[0];
-      if (data.status == 200) {
-        this.toaster.Success("Category Deleted Successfully");
-      }
-    });
   }
   // Change Status
   onStatus(id: any, is_active: string) {
@@ -92,7 +61,7 @@ export class CategoriesListComponent implements OnInit {
       this.data = data.data[0];
       if (data.status == 200) {
         this.toaster.Success("Status Updated Successfully");
-        this.search();
+        this.getCategories(this.page);
       }
     });
   }

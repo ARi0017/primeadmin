@@ -58,11 +58,17 @@
                 <div class="row form-group">
                   <label class="col-md-3 text-right">Category Type</label>
                   <div class="col-md-9">
-                    <!-- <input name="IsSpecial" type="checkbox" [(ngModel)]="Category.IsSpecial"
-                    value=""> -->
-                    <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="0"> General(Food, Grocery, Frozen)
-                    <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="1"> Skybar
-                    <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="2"> Medicine
+                    <div class="row">
+                    <div class="col-sm-6">
+                      <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="0"> <strong class="text-success">General(Food, Grocery, Frozen)</strong>
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="2"> <strong class="text-primary">Medicine</strong>
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="1"> <strong class="text-warning">Skybar</strong>
+                    </div>
+                  </div>
                   </div>
                 </div>
               </div>

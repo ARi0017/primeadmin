@@ -13,8 +13,9 @@ import { ToasterService } from '../../services/toaster.service';
 export class OrdersListComponent implements OnInit {
   data: any;
   driverdata: any;
-  driverid: string;
+  Driverid: string;
   page: number = 1;
+  orderstatus: number = 0;
   count: number;
   ordernumber : any='';
   drivername : any='';
@@ -24,48 +25,36 @@ export class OrdersListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let initialOrders = {ordernumber: this.ordernumber, drivername: this.drivername, page: this.page}
-    this.getOrders(initialOrders);
-    this.getCount({drivername: this.drivername});
+    this.getOrders(this.page);
     this.getactivedriver();
   }
 
-  search() {
-    const order = {ordernumber:this.ordernumber,drivername:this.drivername,page : this.page};
-    this.orderService.getOrders(order).subscribe(data => {
+getOrders(page: number) {
+    let initialOrders = {ordernumber: this.ordernumber, drivername: this.drivername, OrderStatusId:this.orderstatus, page: page}
+    this.orderService.getOrders(initialOrders).subscribe(data => {
       this.data = data.data;
+      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      console.log("Total Row Count",this.count);
     });
-  }
-
-getOrders(orderInterface: {ordernumber: any, drivername: string, page: number}) {
-    const order = orderInterface
-    this.orderService.getOrders(order).subscribe(data => {
-      this.data = data.data;
-    });
+    
   }
 
   getPagination(page: number){
     this.page = page;
-    this.getOrders({ordernumber: this.ordernumber, drivername: this.drivername, page: this.page});
+    this.getOrders(this.page);
   }
 
-  getCount(drivername: any) {
-    this.orderService.getCount(drivername)
-      .subscribe(res => {
-        this.count = res.TotalOrderCount;
-      });
-  }
-
-  mapdriver(orderid:string){
+  mapdriver(orderid:string, event:any){
     const order = {
       "OrderId": orderid,
-      "DriverId": this.driverid,
+      "DriverId": event.target.value,
       "ModifiedBy": "1"
     }
+    console.log(order);
     this.orderService.oderdrivermap(order).subscribe(data => {
       if (data.status == 200) {
         this.toaster.Success("Driver Mapped Successfully");
-        this.router.navigate(["/order-list"]);
+        this.getOrders(this.page);
       }
     });
   }
@@ -75,21 +64,23 @@ getactivedriver(){
   });
 }
 
-  onDelete(id: any) {
-    if (!confirm("Are You Sure ?")) {
+cancelOrder(OrderId: any, OrderStatusId: any) {   
+    if (!confirm('Are You Sure ?')) {
       return;
     }
-
+    const order = {
+      'OrderId': OrderId,
+      'OrderStatus': OrderStatusId,
+      'CancelBy': '1'
+     };
+    this.orderService.cancelOrder(order).subscribe(data => {
+      this.data = data.data;
+      if (data.status == 200) {
+        this.toaster.Success("Order cancelled.");
+        this.getOrders(this.page);
+      }
+    });
   }
-  // Change Status
-  onStatus(id: any, is_active: string) {
-    if (!confirm("Are You Sure ?")) {
-      return;
-    }
-
-  }
-
-
 
 
 }

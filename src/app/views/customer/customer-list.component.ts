@@ -37,40 +37,23 @@ export class CustomerListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let initialCustomer = {customername: this.customername, page: this.page}
-    this.getCustomers(initialCustomer);
-    this.getCount();
-  }
-
-  search(){
-    const customer = {
-      customername:this.customername,page : this.page
-      }
-          this.customerService.getCustomerList(customer).subscribe(data => {
-            this.data = data.data;
-            this.url = data.Imgurl;
-          });
+    this.getCustomers(this.page);
   }
 
 
   getPagination(page: number){
     this.page = page;
-    this.getCustomers({customername: this.customername, page: this.page});
-  }
-
-  getCount() {
-    this.customerService.getCount()
-      .subscribe(res => {
-        this.count = res.TotalCustomerCount;
-      });
+    this.getCustomers(this.page);
   }
 
 
-  getCustomers(customerInterface: {customername: string, page: number}) {
-    const customer =  customerInterface;
-    this.customerService.getCustomerList(customer).subscribe(data => {
+  getCustomers(page: number) {
+    let initialCustomer = {customername: this.customername, page: page}
+    this.customerService.getCustomerList(initialCustomer).subscribe(data => {
       this.data = data.data;
       this.url = data.Imgurl;
+      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      console.log("Total Row Count",this.count);
     });
   }
   GetCustomerCart(id :string) {
@@ -150,7 +133,7 @@ export class CustomerListComponent implements OnInit {
       this.data = data.data[0];
       if (data.status == 200) {
         this.toaster.Success("Product Status Updated Successfully");
-        this.search();
+        this.getCustomers(this.page);
       }
     });
   }

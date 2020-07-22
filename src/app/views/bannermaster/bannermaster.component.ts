@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BannermasterService } from '../../services/Bannermaster/bannermaster.service';
 import { Bannermaster } from '../../models/bannermaster';
 import { ToasterService } from '../../services/toaster.service';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-bannermaster',
@@ -12,7 +13,7 @@ import { ToasterService } from '../../services/toaster.service';
 })
 export class BannermasterComponent implements OnInit {
 
-  Bannermaster = new Bannermaster(null,"","","",null,"",null,null);
+  Bannermaster = new Bannermaster(null,"","","",null,"",null,null,null,null);
   parentcategory: any;
   productdetails:any;
   id: any;

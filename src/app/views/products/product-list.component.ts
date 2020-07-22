@@ -37,38 +37,22 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let initialProduct = {categoryid: this.categoryid, name: this.name, page: this.page}
-    this.getProducts(initialProduct);
+    this.getProducts(this.page);
     this.getCategories();
-    this.getCount(this.categoryid, this.name);
   }
 
-  search() {
-    const product = {categoryid:this.categoryid,name:this.name,page : this.page};
-    this.productService.getProductList(product).subscribe(data => {
-      this.data = data.data[0];
-        this.url = data.imgurl;
-    });
-    this.getCount(this.categoryid, this.name);
-  }
-
-  getProducts(productInterface: {categoryid: any, name: string, page: number}) {
-    const product =  productInterface;
-    this.productService.getProductList(product).subscribe(data => {
+  getProducts(page: number) {
+    let Product = {categoryid: this.categoryid, name: this.name, page: page};
+    this.productService.getProductList(Product).subscribe(data => {
       this.data = data.data[0];
       this.url = data.imgurl;
+      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      console.log("Total Row Count",this.count);
     });
   }
   getPagination(page: number){
     this.page = page;
-    this.getProducts({categoryid: this.categoryid, name: this.name, page: this.page});
-  }
-
-  getCount(categoryid: any, name: string) {
-    this.productService.getCount(categoryid, name)
-      .subscribe(res => {
-        this.count = res.TotalItemsCount;
-      });
+    this.getProducts(this.page );
   }
 
   getCategories() {
@@ -113,7 +97,7 @@ export class ProductListComponent implements OnInit {
       this.data = data.data[0];
       if (data.status == 200) {
         this.toaster.Success("Product Status Updated Successfully");
-        this.search();
+        this.getProducts(this.page );
       }
     });
   }

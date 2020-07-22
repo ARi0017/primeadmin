@@ -18,10 +18,6 @@ export class CategoryService {
   getCategories(category: object): Observable<Icategory> {
     return this.http.post<Icategory>(`${this.url.ServiceUrl}/category`, category);
   }
-  
-  getCount(): Observable<Icategory> {
-    return this.http.post<Icategory>(`${this.url.ServiceUrl}/categorycount`, '');
-  }
 
   getCategorybyid(id: string): Observable<Icategory> {
     return this.http.get<Icategory>(`${this.url.ServiceUrl}/category/${id}`);

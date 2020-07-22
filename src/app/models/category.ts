@@ -10,6 +10,8 @@ export class Category {
     public IsFeatured:number,
     public CategoryId?:number,
     public IsActive?:string,
+    public CategoryMain?:string,
+    public CategoryParent?:string,
   ) {}
 }
 

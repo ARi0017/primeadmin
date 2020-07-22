@@ -7,7 +7,9 @@ export class Bannermaster {
     public LinkId:number,
     public Remarks:string,
     public CreatedBy:number,
-    public IsFeatured:number
+    public IsFeatured:number,
+    public DisplayOrder:number,
+    public IsHead:number,
   ) {}
 }
 

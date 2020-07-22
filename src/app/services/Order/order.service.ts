@@ -28,6 +28,9 @@ export class OrderService {
   getCount(adddata: object): Observable<Iorder> {
     return this.http.post<Iorder>(`${this.url.ServiceUrl}/ordercount`, adddata);
   }
+  cancelOrder(order : object): Observable<Iorder> {
+    return this.http.post<Iorder>(`${this.url.ServiceUrl}/ordercancelbyadmin`,order);
+  }
 
 }
 

@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="col-sm-2">
-          <button type="button" (click)="search()" class="btn btn-sm btn-primary">
+          <button type="button" (click)="getDriver(1)" class="btn btn-sm btn-primary">
             <i class="fa fa-dot-circle-o"></i>
             Search
           </button>
@@ -29,9 +29,10 @@
             <th><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
             <th><mfDefaultSorter by="Phone">Phone</mfDefaultSorter></th>
             <th><mfDefaultSorter by="Email">Email</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Address">Address</mfDefaultSorter></th>
             <th>Pending</th>
             <th>Complete</th>
-            <th><mfDefaultSorter by="IsActive">Status</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="IsActive">Publish</mfDefaultSorter></th>
             <th width="12%">Action</th>
           </tr>
         </thead>
@@ -41,6 +42,7 @@
             <td>{{dataval.Name}}</td>
             <td>{{dataval.Phone}}</td>
             <td>{{dataval.Email}}</td>
+            <td>{{dataval.Address}}</td>
             <td><i class="fa fa-shopping-cart" aria-hidden="true" (click)="myModal.show()" (click)="GetPendingorder(dataval.DriverId)"></i></td>
             <td><i class="fa fa-first-order" aria-hidden="true" (click)="myModal1.show()" (click)="GetCompleteorder(dataval.DriverId)"></i></td>
             <td>

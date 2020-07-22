@@ -20,7 +20,7 @@
         </select>
         </div>
         <div class="col-sm-2">
-          <button type="button" (click)="search()" class="btn btn-sm btn-primary">
+          <button type="button" (click)="getProducts(1)" class="btn btn-sm btn-primary">
             <i class="fa fa-dot-circle-o"></i>
             Search
           </button>
@@ -36,14 +36,14 @@
         [mfRowsOnPage]="10">
           <thead>
             <tr>
-              <th width="8%"><mfDefaultSorter by="Cover">Cover</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
+              <th width="8%"><mfDefaultSorter by="Cover">Picture</mfDefaultSorter></th>
               <th><mfDefaultSorter by="Category">Category</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Sku">Sku</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Cost">Cost</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Standard Price">Standard Price</mfDefaultSorter></th>
+              <th><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
+              <th><mfDefaultSorter by="Sku">SKU</mfDefaultSorter></th>
+              <th><mfDefaultSorter by="Standard Price">MRP</mfDefaultSorter></th>
+              <th><mfDefaultSorter by="Cost">Purchase Price</mfDefaultSorter></th>
               <th><mfDefaultSorter by="Type">Type</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="IsActive">Status</mfDefaultSorter></th>
+              <th><mfDefaultSorter by="IsActive">Publish</mfDefaultSorter></th>
               <th width="8%">Action</th>
 
             </tr>
@@ -51,11 +51,11 @@
           <tbody>
             <tr *ngFor="let dataval of mf.data">
               <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.CoverImage}} /></td>
-              <td>{{dataval.Name}}</td>
               <td>{{dataval.Category}}</td>
+              <td>{{dataval.Name}}</td>
               <td>{{dataval.Sku}}</td>
-              <td>₹{{dataval.Cost}}</td>
               <td>₹{{dataval.StandardPrice}}</td>
+              <td>₹{{dataval.Cost}}</td>
               <td>{{dataval.FoodType}}</td>
               <td>
                 <span class="text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan"

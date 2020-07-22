@@ -27,43 +27,25 @@ export class DriverListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let initialDriver = {drivername: this.drivername, page: this.page}
-    this.getDriver(initialDriver);
-    this.getCount();
+    this.getDriver(this.page);
   }
-
-  search() { 
-    const driver1 = {
-      drivername:this.drivername,page : this.page
-};
-    this.driverService.getDriver(driver1).subscribe(data => {
-      this.data = data.data;
-      this.url = data.Imgurl;
-//console.log(data);
-    });
-  }
+  
   GetPendingorder(DriverId: string){}
   GetCompleteorder(DriverId: string){}
-  getDriver(driverInterface: {drivername: string, page: number}) {
-    const driver =  driverInterface;
-    this.driverService.getDriver(driver).subscribe(data => {
+  getDriver(page: number) {
+    let Driver = {drivername: this.drivername, page: page}
+    this.driverService.getDriver(Driver).subscribe(data => {
       this.data = data.data;
       this.url = data.Imgurl;
-//console.log(this.data);
+      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      console.log("Total Row Count",this.count);
     });
   }
 
 
   getPagination(page: number){
     this.page = page;
-    this.getDriver({drivername: this.drivername, page: this.page});
-  }
-
-  getCount() {
-    this.driverService.getCount()
-      .subscribe(res => {
-        this.count = res.TotalDriverCount;
-      });
+    this.getDriver(this.page);
   }
 
   addDriver() {
@@ -86,7 +68,7 @@ export class DriverListComponent implements OnInit {
       this.data = data.data[0];
       if (data.status == 200) {
         this.toaster.Success("Product Status Updated Successfully");
-        this.search();
+        this.getDriver(this.page);
       }
     });
   }

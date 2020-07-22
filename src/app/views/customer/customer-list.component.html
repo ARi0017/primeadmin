@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="col-sm-2">
-          <button type="button" (click)="search()" class="btn btn-sm btn-primary">
+          <button type="button" (click)="getCustomers(1)" class="btn btn-sm btn-primary">
             <i class="fa fa-dot-circle-o"></i>
             Search
           </button>
@@ -51,8 +51,20 @@
                   <span class="text-danger pointer" (click)="onStatus(dataval.CustomerId, 1)"><i class="fa fa-close fa-lg"></i></span>
                 </ng-template>
             </td>
-            <td><i class="fa fa-shopping-cart" aria-hidden="true" (click)="myModal.show()" (click)="GetCustomerCart(dataval.CustomerId)"></i></td>
-            <td><i class="fa fa-first-order" aria-hidden="true" (click)="myModal1.show()" (click)="GetCustomerOrder(dataval.CustomerId)"></i></td>
+            <td>
+                <i style="cursor: pointer;" class="fa fa-shopping-cart" aria-hidden="true" *ngIf="dataval.TotalCartQuantity != null; else elseCart"
+                (click)="myModal.show(); GetCustomerCart(dataval.CustomerId);"></i> <sup>{{dataval.TotalCartQuantity}}</sup>
+                <ng-template #elseCart>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </ng-template>
+            </td>
+            <td>
+              <i style="cursor: pointer;" class="fa fa-first-order" aria-hidden="true"  *ngIf="dataval.TotalOrder != null; else elseOrder"
+              (click)="myModal1.show(); GetCustomerOrder(dataval.CustomerId);"></i> <sup>{{dataval.TotalOrder}}</sup>
+              <ng-template #elseOrder>
+                <i class="fa fa-first-order" aria-hidden="true"></i>
+              </ng-template>
+            </td>
             <td>
               <a class="btn btn-sm btn-warning" [routerLink]="['edit', dataval.CustomerId]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
             </td>
@@ -74,7 +86,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Cart</h4>
+            <h4 class="modal-title">Abandone Cart</h4>
             <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
