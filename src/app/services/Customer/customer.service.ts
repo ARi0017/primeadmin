@@ -6,9 +6,17 @@ import { Customeraddress } from '../../models/customeraddress';
 import { UrlService } from '../Url/url.service';
 interface Icustomer {
   data: object;
+  customerinfo: object;
+  addressinfo: object;
+  cartinfo: object;
+  ordeinfo: object;
+  walletinfo: object;
+  accountinfo: object;
+
   TotalCustomerCount: any;
   status: number;
   Imgurl: string;
+  productimg: string;
 }
 @Injectable({
   providedIn: 'root'
@@ -30,7 +38,7 @@ export class CustomerService {
   }
 
   AddEditCustomerAddress(customeraddress: Customeraddress): Observable<Icustomer> {
-    return this.http.post<Icustomer>(`${this.url.ServiceUrl}/cutomeradderssdelete`, customeraddress);
+    return this.http.post<Icustomer>(`${this.url.ServiceUrl}/customeradderssupdate`, customeraddress);
   }
   GetAddressbyid(id: string): Observable<Icustomer> {
     return this.http.post<Icustomer>(`${this.url.ServiceUrl}/customeradderss/${id}`, {});
@@ -42,7 +50,9 @@ export class CustomerService {
   GetCustomerOrder(customer: object): Observable<Icustomer> {
     return this.http.post<Icustomer>(`${this.url.ServiceUrl}/orderlistbycustomerid`, customer);
   }
-
+  GetCustomerWallet(customer: object): Observable<Icustomer> {
+    return this.http.post<Icustomer>(`${this.url.ServiceUrl}/customerwallet`, customer);
+  }
   DeleteCustomerAddress(customer: object): Observable<Icustomer> {
     return this.http.post<Icustomer>(`${this.url.ServiceUrl}/cutomeradderssdelete`, customer);
   }
@@ -74,5 +84,15 @@ export class CustomerService {
 
   statusChange(customertatus : object): Observable<Icustomer> {
     return this.http.post<Icustomer>(`${this.url.ServiceUrl}/customerstatus`,customertatus);
+  }
+  getBankData(customer: object): Observable<Icustomer> {
+    return this.http.post<Icustomer>(`${this.url.ServiceUrl}/customeraccount`, customer);
+  }
+  CustomerWalletPayment(customer: object): Observable<Icustomer> {
+    return this.http.post<Icustomer>(`${this.url.ServiceUrl}/cutomerwalletupdate`, customer);
+  }
+
+  getWholeCustomerData(customer: object): Observable<Icustomer> {
+    return this.http.post<Icustomer>(`${this.url.ServiceUrl}/customerall`, customer);
   }
 }

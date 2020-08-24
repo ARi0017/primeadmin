@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { OrdersListComponent } from './orders-list.component';
 import { OrdersComponent } from './orders.component';
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
+import { InvoiceComponent } from '../invoice/invoice.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,14 @@ const routes: Routes = [
     data: {
       title: 'Edit Order'
     }
-  }
+  },
+  // {
+  //   path: 'print/:id',
+  //   component: InvoiceComponent,
+  //   data: {
+  //     title: 'Print Order'
+  //   }
+  // }
 ];
 
 @NgModule({

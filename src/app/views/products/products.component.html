@@ -37,7 +37,7 @@
                   </div>
                   <div class="col-md-9">
                     <select name="CategoryId" class="form-control" [(ngModel)]="Product.CategoryId">
-                      <option value="">Select Category</option>
+                      <option [value]="" selected>Select Category</option>
                       <option *ngFor="let val of parentcategory" [value]="val.CategoryId">
                         {{val.Category}}
                       </option>
@@ -132,9 +132,15 @@
                     <label for="ccnumber">Manufacturer</label>
                   </div>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter Manufacturer" name="Manufacturer" 
+                    <!-- <input type="text" class="form-control" placeholder="Enter Manufacturer" name="Manufacturer" 
                     [(ngModel)]="Product.Manufacturer" #ManufacturerRef="ngModel"
-                    >
+                    > -->
+                    <select name="Manufacturer" class="form-control" [(ngModel)]="Product.Manufacturer">
+                      <option [value]="" selected>Select Manufacturer</option>
+                      <option *ngFor="let val of retailerlist" [value]="val.RetailerId">
+                        {{val.Name}}
+                      </option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -145,7 +151,7 @@
                   </div>
                   <div class="col-md-9">
                     <select name="TaxCategoryId" class="form-control" [(ngModel)]="Product.TaxCategoryId">
-                      <option value="">Select Tax Category</option>
+                      <option [value]="" selected>Select Tax Category</option>
                       <option *ngFor="let val of taxcategory" [value]="val.TaxCategoryId">
                         {{val.TaxCategory}}
                       </option>
@@ -163,7 +169,7 @@
                   <div class="col-md-9">
                     <input type="number" class="form-control" placeholder="Enter Price" name="Cost" 
                     [(ngModel)]="Product.Cost" #CostRef="ngModel"
-                    [class.is-invalid]="CostRef.invalid && CostRef.touched" required>
+                    [class.is-invalid]="CostRef.invalid && CostRef.touched" min="0" required>
                     <small class="text-danger" [class.d-none]="CostRef.valid || CostRef.untouched">Price is required
                     </small>                  
                   </div>
@@ -177,7 +183,7 @@
                   <div class="col-md-9">
                     <input type="number" class="form-control" placeholder="Enter Standard Price" name="StandardPrice" 
                     [(ngModel)]="Product.StandardPrice" #StandardPriceRef="ngModel"
-                    [class.is-invalid]="StandardPriceRef.invalid && StandardPriceRef.touched" required>
+                    [class.is-invalid]="StandardPriceRef.invalid && StandardPriceRef.touched" min="0" required>
                     <small class="text-danger" [class.d-none]="StandardPriceRef.valid || StandardPriceRef.untouched">Standard Price is required
                     </small>                  
                   </div>
@@ -199,7 +205,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-6" style="display: none;">
                 <div class="row form-group">
                   <div class="col-md-3">
                     <label for="ccnumber">Display Order</label>
@@ -298,7 +304,7 @@
             </div>
             <div class="row">
               <hr>
-              <div class="col-sm-4">
+              <div class="col-sm-6">
                 <div class="row">
                   <div class="col-md-4">
                     <label for="ccnumber">Food Type</label>
@@ -309,12 +315,10 @@
                     <input type="radio" [(ngModel)]="Product.FoodType" name="FoodType" value="Grocery"> Grocery
                     <input type="radio" [(ngModel)]="Product.FoodType" name="FoodType" value="Medicine"> Medicine
                     <input type="radio" [(ngModel)]="Product.FoodType" name="FoodType" value="Liquor"> Liquor
-                    
-                    <!-- <input type="checkbox"  name="IsFeatured" value="1" [(ngModel)]="Product.IsFeatured" #IsFeaturedRef="ngModel"/>                    -->
                   </div>
                 </div>
               </div> 
-              <div class="col-sm-4">
+              <div class="col-sm-4" style="display: none;">
                 <div class="row">
                   <div class="col-md-6">
                     <label for="ccnumber">Combo</label>
@@ -325,7 +329,7 @@
                   </div>
                 </div>
               </div> 
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <div class="row">
                   <div class="col-md-6">
                     <label for="ccnumber">Featured</label>
@@ -338,7 +342,7 @@
                   </div>
                 </div>
               </div> 
-              <div class="col-sm-4">
+              <div class="col-sm-4" style="display: none;">
                 <div class="row">
                   <div class="col-md-4">
                     <label for="ccnumber">Show On Home Page</label>
@@ -351,7 +355,7 @@
                   </div>
                 </div>
               </div> 
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <div class="row">
                   <div class="col-md-6">
                     <label for="ccnumber">Free Shipping</label>
@@ -390,7 +394,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-4" style="display: none;">
                 <div class="row">
                   <div class="col-md-6">
                     <label for="ccnumber">Display Stock Availability</label>

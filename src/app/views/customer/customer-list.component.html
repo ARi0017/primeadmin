@@ -1,40 +1,55 @@
+<style>
+  .my-custom-scrollbar {
+    position: relative;
+    height: 600px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+</style>
 <div class="col-lg-12">
   <div class="card">
 
     <div class="card-body">
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
           <div class="row form-group">
             <label class="col-md-3 col-form-label text-right">Customer</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" [(ngModel)] = "customername" placeholder="Enter Customer"  />
+              <input type="text" class="form-control" [(ngModel)] = "customername" placeholder="Enter Customer Name"  />
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="row form-group">
+            <label class="col-md-3 col-form-label text-right">Phone</label>
+            <div class="col-md-9">
+              <input type="tel" class="form-control" [(ngModel)] = "customerphone" placeholder="Enter Customer Phone" maxlength="10"  />
             </div>
           </div>
         </div>
         <div class="col-sm-2">
-          <button type="button" (click)="getCustomers(1)" class="btn btn-sm btn-primary">
+          <button type="button" (click)="getCustomers(1)" class="btn btn-sm btn-primary" [disabled]="PageSize==0">
             <i class="fa fa-dot-circle-o"></i>
             Search
           </button>
-          <button type="button" class="btn btn-success btn-sm" (click)="addCustomer()">
-            <i class="fa fa-plus"></i>
-            Add
-          </button>
+          <button type="button" class="btn btn-success btn-sm" [routerLink]="['/customer-list/add']"><i class="fa fa-plus"></i> Add</button>
         </div>
       </div>
-      <table class="table table-striped table-hover" mfDefaultSorter [mfData]="data" #mf="mfDataTable"
-      [mfRowsOnPage]="10">
+      <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="data" #mf="mfDataTable">
        <thead>
           <tr>
-            <th><mfDefaultSorter by="Name">Profile Image</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="Name">Customer Name</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="Phone">Phone No</mfDefaultSorter></th>
+            <th width="5%"><mfDefaultSorter by="ProfileImage">Image</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Phone">Phone</mfDefaultSorter></th>
             <th><mfDefaultSorter by="Email">Email</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="Name">Address</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="IsActive">Status</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="Name">Cart</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="Name">Order</mfDefaultSorter></th>
-            <th width="12%">Action</th>
+            <th colspan="3"><mfDefaultSorter by="AddressCount">Default Address</mfDefaultSorter></th>
+            <th class="text-center" width="6%"><mfDefaultSorter by="TotalCartQuantity">Cart</mfDefaultSorter></th>
+            <th class="text-center" width="6%"><mfDefaultSorter by="TotalOrder">Order</mfDefaultSorter></th>
+            <th class="text-center" width="6%"><mfDefaultSorter by="TotalWalletAmt">Wallet</mfDefaultSorter></th>
+            <th class="text-center" width="6%">Status</th>
+            <th width="8%"> </th>
           </tr>
         </thead>
         <tbody>
@@ -43,40 +58,52 @@
             <td>{{dataval.Name}}</td>
             <td>{{dataval.Phone}}</td>
             <td>{{dataval.Email}}</td>
-            <td><i class="fa fa-home" aria-hidden="true" [routerLink]="['address', dataval.CustomerId]"></i></td>
-            <td>
-              <span class="text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan"
-                  (click)="onStatus(dataval.CustomerId, '0')"><i class="fa fa-check fa-lg"></i></span>
-                <ng-template #elseSpan>
-                  <span class="text-danger pointer" (click)="onStatus(dataval.CustomerId, 1)"><i class="fa fa-close fa-lg"></i></span>
-                </ng-template>
+            <td colspan="3">
+              <ng-template #elseAdd>{{dataval.DefaultAddress}}, {{dataval.DefaultPincode}}</ng-template>
+             <a *ngIf="dataval.AddressCount != null; else elseAdd" (click)="myModal3.show(); CustomerAddressList(dataval.CustomerId, dataval.Name);" style="cursor: pointer; float: right;">
+               <i class="fa fa-address-book" aria-hidden="true"> <sup>{{dataval.AddressCount}}</sup></i> {{dataval.DefaultAddress}}, {{dataval.DefaultPincode}}</a>
             </td>
-            <td>
+            <td class="text-center">
                 <i style="cursor: pointer;" class="fa fa-shopping-cart" aria-hidden="true" *ngIf="dataval.TotalCartQuantity != null; else elseCart"
-                (click)="myModal.show(); GetCustomerCart(dataval.CustomerId);"></i> <sup>{{dataval.TotalCartQuantity}}</sup>
-                <ng-template #elseCart>
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                </ng-template>
+                (click)="myModal.show(); GetCustomerCart(dataval.CustomerId, dataval.Name);"> <sup>{{dataval.TotalCartQuantity}}</sup></i>
+                <ng-template #elseCart>N/A</ng-template>
             </td>
-            <td>
+            <td class="text-center">
               <i style="cursor: pointer;" class="fa fa-first-order" aria-hidden="true"  *ngIf="dataval.TotalOrder != null; else elseOrder"
-              (click)="myModal1.show(); GetCustomerOrder(dataval.CustomerId);"></i> <sup>{{dataval.TotalOrder}}</sup>
-              <ng-template #elseOrder>
-                <i class="fa fa-first-order" aria-hidden="true"></i>
+              (click)="myModal1.show(); GetCustomerOrder(dataval.CustomerId, dataval.Name);"> <sup>{{dataval.TotalOrder}}</sup></i>
+              <ng-template #elseOrder>N/A</ng-template>
+            </td> 
+            <td class="text-center">
+              <i style="cursor: pointer;" class="fa fa-inr" aria-hidden="true"  *ngIf="dataval.TotalWalletAmt != null; else elseWallet"
+              (click)="myModal2.show(); GetCustomerWallet(dataval.CustomerId, dataval.Name);"> <sup>{{dataval.TotalWalletAmt}}</sup></i>
+              <ng-template #elseWallet>N/A</ng-template>
+            </td>
+            <td class="text-center">
+              <i class="fa fa-check fa-lg text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan" (click)="onStatus(dataval.CustomerId, '0')"></i>
+              <ng-template #elseSpan>
+                <i class="fa fa-close fa-lg text-danger pointer" (click)="onStatus(dataval.CustomerId, 1)"></i>
               </ng-template>
             </td>
             <td>
-              <a class="btn btn-sm btn-warning" [routerLink]="['edit', dataval.CustomerId]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+              <a class="btn btn-sm btn-warning" [routerLink]="['edit', dataval.CustomerId]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Detail</a>
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-              <td colspan="4" class="pull-right">
-                  <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]"></mfBootstrapPaginator> -->
-                  <pagination [totalItems]="count" [boundaryLinks]='true' [maxSize]="5" [rotate]='false'
+              <td colspan="10">
+                  <pagination [totalItems]="count" [boundaryLinks]='true' [itemsPerPage]="PageSize" [maxSize]="5" [rotate]='false'
                       [(ngModel)]="page" (pageChanged)="getPagination($event.page)">
                   </pagination>
+              </td>
+              <td colspan="2">
+                <select class="form-control" [(ngModel)]="PageSize" (change)="PageSize > 0 ? getCustomers(1) : ''">
+                  <option value="0">Page Size</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
               </td>
           </tr>
       </tfoot>
@@ -86,34 +113,29 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Abandone Cart</h4>
+            <h4 class="modal-title">{{cusName}}'s Abandone Cart</h4>
             <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="animated fadeIn">
-              <div class="card">
-                <table class="table">
+              <div class="card table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-striped mb-0">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                       <th>ShortDescription</th>
                       <th>CoverImage</th>
+                      <th>Name</th>
                       <th>Quantity</th>
                       <th>Price</th>
-                      <th>IsSpecial</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let val of cartdata">
+                      <td><img class="displayimage" alt="No Image" src={{produrl}}{{val.CoverImage}} /></td>
                       <td>{{val.Name}}</td>
-                      <td>{{val.ShortDescription}}</td>
-                      <td>{{val.CoverImage}}</td>
                       <td>{{val.Quantity}}</td>
                       <td>{{val.Price}}</td>
-                      <td>{{val.IsSpecial}}</td>
-
                     </tr>
                   </tbody>
                 </table>
@@ -121,41 +143,39 @@
             </div>
           </div>
         </div>
-        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
     </div>
 
     <div bsModal #myModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width:50% !important">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Orders</h4>
+          <h4 class="modal-title">{{cusName}}'s Orders</h4>
           <button type="button" class="close" (click)="myModal1.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="animated fadeIn">
-            <div class="card">
-              <table class="table">
+            <div class="card table-wrapper-scroll-y my-custom-scrollbar">
+              <table class="table table-bordered table-striped mb-0">
                 <thead>
                   <tr>
-                    <th>OrderDetail</th>
-                     <th>OrderNo</th>
-                    <th>OrderStatus</th>
-                    <th>OrderTotal</th>
-                    <th>OrderedOn</th>
+                    <th>Order #</th>
+                    <th>On</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th colspan="4">OrderDetail</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let val of orderdata">
-                    <td>{{val.OrderDetail}}</td>
                     <td>{{val.OrderNo}}</td>
+                    <td>{{val.OrderedOn | date: 'dd-MM-yyyy'}}</td>
                     <td>{{val.OrderStatus}}</td>
                     <td>{{val.OrderTotal}}</td>
-                    <td>{{val.OrderedOn}}</td>
+                    <td colspan="4">{{val.OrderDetail}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -163,10 +183,92 @@
           </div>
         </div>
       </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
   </div>
+
+  <div bsModal #myModal2="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{cusName}}'s Wallet History</h4>
+        <button type="button" class="close" (click)="myModal2.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="animated fadeIn">
+          <div class="card table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+              <thead>
+                <tr>
+                  <th>Amount</th>
+                  <th>On</th>
+                  <th>From</th>
+                  <th width="24%">Order #</th>
+                  <th>Order Amt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let val of walletdata">
+                  <td>&#8377; {{val.Amount}}</td>
+                  <td>{{val.TranOn | date: 'dd-MM-yyyy'}}</td>
+                  <td>{{val.CustomerFrom}}</td>
+                  <td>{{val.OrderNo}}</td>
+                  <td>&#8377; {{val.OrderTotal}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #myModal3="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{cusName}}'s Address List</h4>
+        <a class="warning" [routerLink]="['edit', CustomerId]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+        <button type="button" class="close" (click)="myModal3.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="animated fadeIn">
+          <div class="card table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th colspan="2">Address</th>
+                  <th>Pincode</th>
+                  <th colspan="2">Location</th>
+                  <th width="5%"><i class="fa fa-trash" aria-hidden="true"></i></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let val of addressdata">
+                  <td>{{val.AddressName}}</td>
+                  <td colspan="2">{{val.Address}}</td>
+                  <td>{{val.Pincode}}</td>
+                  <td colspan="2">{{val.Location}}</td>
+                  <td>
+                    <i class="fa fa-trash" aria-hidden="true" style="cursor: pointer;" (click)="onDelete(val.AddressId)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
 </div>

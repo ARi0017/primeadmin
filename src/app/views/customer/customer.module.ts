@@ -9,7 +9,6 @@ import { CustomerRoutingModule } from './customer-routing.module';
 import { CustomerComponent } from './customer.component';
 import { CommonModule } from '@angular/common';
 import { CustomerListComponent } from './customer-list.component';
-import { CustomerAddressComponent } from './customer-address.component';
 import { DataTableModule } from "angular2-datatable";
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
@@ -26,6 +25,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     PaginationModule.forRoot(),
   ],
   exports: [CustomerComponent],
-  declarations: [ CustomerComponent , CustomerListComponent , CustomerAddressComponent]
+  declarations: [ CustomerComponent , CustomerListComponent ]
 })
 export class CustomerModule { }

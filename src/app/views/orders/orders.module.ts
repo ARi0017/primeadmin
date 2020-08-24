@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { OrdersListComponent } from './orders-list.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { DataTableModule } from 'angular2-datatable';
 
 @NgModule({
   imports: [
@@ -20,6 +22,8 @@ import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.s
     BsDropdownModule,
     ButtonsModule.forRoot(),
     PaginationModule.forRoot(),
+    DataTableModule,
+    ModalModule.forRoot(),
   ],
   exports: [OrdersComponent],
   declarations: [ OrdersComponent , OrdersListComponent],

@@ -1,11 +1,8 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../services/Category/category.service';
 import { Category } from '../../models/category';
 import { ToasterService } from '../../services/toaster.service';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-categories',
@@ -13,12 +10,12 @@ import { NgForm } from '@angular/forms';
 })
 export class CategoriesComponent implements OnInit {
 //@ViewChild('categoryForm',{ read: true, static: false }) public createcategoryform: NgForm;
-  Category = new Category(null,"","","","",null,null,null,null);
+  Category = new Category("",null,null,null,"",null,null,null,null,'1');
   parentcategory: any;
-  id: any;
+  id: any = 0;
   response: any;
-  dlFile: any;
-  filename: any[];
+  dlFile: any = null;
+  vFile: any = null;
 
   constructor(private categoryService: CategoryService,
     private router: Router,
@@ -27,6 +24,7 @@ export class CategoriesComponent implements OnInit {
       this.route.paramMap.subscribe(res => {
         this.id = res.get("id");
       });
+      console.log("CategoryId",this.id);
     }
 
   ngOnInit() {
@@ -35,61 +33,87 @@ export class CategoriesComponent implements OnInit {
     }
     this.getParentategories();
   }
-  onSubmit() {
-    !this.id ? this.addCategory() : this.editCategory();
-  }
+
   uploadFile(event: any) {
     this.dlFile = event.target.files;
     console.log(this.dlFile);
-
   }
 
-addCategory(){
-  this.filename = [];
-    var i = 0;
-    for (let file of this.dlFile) {
-      const uploadData = new FormData();
-      if (file != undefined) {
-        uploadData.append("myFile", file, file.name);
-        uploadData.append("name", "vridhi");
-        this.Category.CoverImage = file.name;
-        this.Category.CoverVideo = file.name;
-        this.Category.CreatedBy = 1;
-        this.Category.IsFeatured = 1;
-        this.Category.IsSpecial = this.Category.IsSpecial;
-        this.categoryService.addeditCategories(this.Category).subscribe(
+  uploadFile1(event: any) {
+    this.vFile = event.target.files;
+    console.log('vfile', this.vFile);
+  }
+
+  onSubmit() {
+    if (this.dlFile != null){
+      for (let file of this.dlFile) {
+        const uploadData = new FormData();
+        if (file != undefined) {
+          uploadData.append("myFile", file, file.name);
+          this.Category.CoverImage = file.name;
+          this.categoryService.fileupload(uploadData).subscribe(
+            res => {
+              var status = res.status;
+              if (status == 200) {
+                console.log('Cover Image uploaded');
+                console.log(file.name);
+                this.Category.CoverImage = file.name;
+                console.log(this.Category.CoverImage)
+              }
+            },
+            err => {
+              this.toaster.Error('Something Went Wrong');
+              return;
+            }
+          );
+        }
+      }
+    }
+    if (this.vFile!=null){
+      for (let file of this.vFile) {
+        const uploadData = new FormData();
+        if (file != undefined) {
+          uploadData.append("myFile", file, file.name);
+        }
+        this.categoryService.fileupload(uploadData).subscribe(
           res => {
-            console.log(res.status);
             var status = res.status;
             if (status == 200) {
-              this.categoryService.fileupload(uploadData).subscribe(
-                res => {
-                  var status = res.status;
-                  if (status == 200) {
-                    console.log('file uploaded');
-                  }
-                },
-                err => {
-                  this.toaster.Error('Something Went Wrong');
-                }
-              );
-              this.toaster.Success("Category Added Successfully");
-              this.router.navigate(["/categories-list"]);
-            } else {
-              this.toaster.Error("Server Error!");
+              console.log('Cover Video uploaded');
+              this.Category.CoverVideo = file.name;
             }
           },
           err => {
-            this.toaster.Error("Something Went Wrong");
+            this.toaster.Error('Something Went Wrong');
+            return;
           }
         );
-
       }
-
-      this.filename[i] = file.name;
-      i++;
     }
-}
+    this.Category.CreatedBy = 1;
+    this.Category.IsFeatured = "1";
+    this.Category.CategoryId = this.id != null ? this.id : 0;
+    console.log(this.Category)
+    this.categoryService.addeditCategories(this.Category).subscribe(
+
+      res => {
+        console.log(res.status);
+        var status = res.status;
+        if (status == 200) {
+          if (this.id!= null)
+            this.toaster.Success("Category Updated Successfully");
+          else
+            this.toaster.Success("Category Added Successfully");
+          this.router.navigate(["/categories-list"]);
+        } else {
+          this.toaster.Error("Server Error!");
+        }
+      },
+      err => {
+        this.toaster.Error("Something Went Wrong");
+      }
+    );
+  }
 
 getCategory(){
   this.categoryService.getCategorybyid(this.id).subscribe(data => {
@@ -97,83 +121,11 @@ getCategory(){
   });
 }
 
-editCategory(){
-  this.filename = [];
-    var i = 0;
-    if(this.dlFile!= undefined){
-      for (let file of this.dlFile) {
-        const uploadData = new FormData();
-        if (file != undefined) {
-          uploadData.append("myFile", file, file.name);
-          this.Category.CoverImage = file.name;
-          this.Category.CoverVideo = file.name;
-          this.Category.CreatedBy = 1;
-          this.Category.IsFeatured = 1;
-          this.Category.CategoryId = this.id;
-          this.Category.IsSpecial = this.Category.IsSpecial;
-          this.categoryService.addeditCategories(this.Category).subscribe(
-            res => {
-              console.log(res.status);
-              var status = res.status;
-              if (status == 200) {
-                this.categoryService.fileupload(uploadData).subscribe(
-                  res => {
-                    var status = res.status;
-                    if (status == 200) {
-                      console.log('file uploaded');
-                    }
-                  },
-                  err => {
-                    this.toaster.Error('Something Went Wrong');
-                  }
-                );
-                this.toaster.Success("Category Updated Successfully");
-                this.router.navigate(["/categories-list"]);
-              } else {
-                this.toaster.Error("Server Error!");
-              }
-            },
-            err => {
-              this.toaster.Error("Something Went Wrong");
-            }
-          );
-
-        }
-
-        this.filename[i] = file.name;
-        i++;
-      }
-    }
-    else{
-      this.Category.IsSpecial = this.Category.IsSpecial;
-      this.categoryService.addeditCategories(this.Category).subscribe(
-        res => {
-          console.log(res.status);
-          var status = res.status;
-          if (status == 200) {
-            this.toaster.Success("Category Updated Successfully");
-            this.router.navigate(["/categories-list"]);
-          } else {
-            this.toaster.Error("Server Error!");
-          }
-        },
-        err => {
-          this.toaster.Error("Something Went Wrong");
-        }
-      );
-    }
-
-}
-
   getParentategories(){
     this.categoryService.getParentategories().subscribe(data => {
       if(data){
         this.parentcategory = data.data[0];
       }
-
     });
-  }
-  backpage() {
-    this.router.navigate(['/categories-list']);
   }
 }

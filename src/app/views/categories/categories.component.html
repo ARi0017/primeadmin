@@ -30,16 +30,24 @@
                   </div>
                 </div>
               </div>
+              
+              
               <div class="col-sm-6">
                 <div class="row form-group">
                   <label class="col-md-3 col-form-label text-right">Parent Category</label>
                   <div class="col-md-9">
-                    <select name="ParentCategoryId" class="form-control" [(ngModel)]="Category.ParentCategoryId">
-                      <option value="">Select Parent Category</option>
-                      <option *ngFor="let val of parentcategory" [value]="val.CategoryId">
-                        {{val.Category}}
-                      </option>
-                    </select>
+                    <!-- <div *ngIf="Category.IsEdit == '1'"> -->
+                      <select name="ParentCategoryId" class="form-control" [(ngModel)]="Category.ParentCategoryId" #parentcategoryRef="ngModel"
+                      [class.is-invalid]="parentcategoryRef.invalid && parentcategoryRef.touched" [disabled]="Category.IsEdit == '0'" required>
+                        <option value="" selected>Select Parent Category</option>
+                        <option *ngFor="let val of parentcategory" [value]="val.CategoryId">
+                          {{val.Category}}
+                        </option>
+                      </select>
+                      <small class="text-danger" [class.d-none]="parentcategoryRef.valid || parentcategoryRef.untouched">Parent Category is required
+                      </small>
+                    <!-- </div>
+                    <b class="col-form-label text-right" *ngIf="Category.IsEdit == '0'">This is a Parent Category. Non Editable.</b> -->
                   </div>
                 </div>
               </div>
@@ -48,13 +56,23 @@
                 <div class="row form-group">
                   <label class="col-md-3 text-right">Cover Image</label>
                   <div class="col-md-9">
-                    <input name="file" type="file" id="name" placeholder="CoverImage"
+                    <input name="Ifile" type="file" id="Iname" placeholder="Cover Image"
                       (change)="uploadFile($event)">
-
                   </div>
                 </div>
               </div>
+
               <div class="col-sm-6">
+                <div class="row form-group">
+                  <label class="col-md-3 text-right">Cover Video</label>
+                  <div class="col-md-9">
+                    <input name="Vfile" type="file" id="Vname" placeholder="Cover Video"
+                      (change)="uploadFile1($event)">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6" style="display: none;">
                 <div class="row form-group">
                   <label class="col-md-3 text-right">Category Type</label>
                   <div class="col-md-9">
@@ -77,8 +95,8 @@
           </div>
           <div class="card-footer">
             <button type="submit" [disabled]="categoryForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/categories-list']"><i class="fa fa-ban"></i> Cancel</button>
-            <button type="button" class="btn btn-sm btn-secondary" (click)="backpage()"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            <button type="button" class="btn btn-sm btn-secondary" [routerLink]="['/categories-list']"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
           </div>
         </form>
       </div>

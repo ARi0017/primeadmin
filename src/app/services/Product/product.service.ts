@@ -15,7 +15,9 @@ export class ProductService {
 
   
   constructor(private http: HttpClient, private url: UrlService) { }
-
+  getDashDetail(): Observable<Iproduct> {
+    return this.http.post<Iproduct>(`${this.url.ServiceUrl}/dashboardcount `, '');
+  }
   getProductList(product: object): Observable<Iproduct> {
     return this.http.post<Iproduct>(`${this.url.ServiceUrl}/products`, product);
   }
@@ -54,5 +56,8 @@ export class ProductService {
   }
   getTaxCategories(): Observable<Iproduct> {
     return this.http.post<Iproduct>(`${this.url.ServiceUrl}/taxselect`, '');
+  }
+  getRetailer(category: object): Observable<Iproduct> {
+    return this.http.post<Iproduct>(`${this.url.ServiceUrl}/retailerlist`, category);
   }
 }

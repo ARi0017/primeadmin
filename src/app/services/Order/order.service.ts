@@ -6,6 +6,8 @@ interface Iorder {
   data: object;
   TotalOrderCount: any;
   status: number;
+  master:object;
+  detail:object;
 }
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,8 @@ export class OrderService {
   cancelOrder(order : object): Observable<Iorder> {
     return this.http.post<Iorder>(`${this.url.ServiceUrl}/ordercancelbyadmin`,order);
   }
-
+  getOrderWholeData(order: object): Observable<Iorder> {
+    return this.http.post<Iorder>(`${this.url.ServiceUrl}/orderfulldetailsbyid`, order);
+  }
 }
 

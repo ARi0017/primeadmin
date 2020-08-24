@@ -7,180 +7,190 @@
           <button type="button" class="btn btn-transparent p-0 float-right">
             <i class="icon-note"></i>
           </button>
-          <div class="text-value">9.823</div>
+          <div class="text-value">{{NewOrder}}</div>
           <div>New Order</div>
         </div>
       </div>
-    </div><!--/.col-->
+    </div>
+    <!--/.col-->
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-primary">
         <div class="card-body dash">
-            <button type="button" class="btn btn-transparent p-0 float-right" >
-              <i class="fa fa-history"></i>
-            </button>
-          <div class="text-value">9.823</div>
+          <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="fa fa-history"></i>
+          </button>
+          <div class="text-value">{{PendingOrder}}</div>
           <div>Pending Order</div>
         </div>
       </div>
-    </div><!--/.col-->
+    </div>
+    <!--/.col-->
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-warning">
         <div class="card-body dash">
-            <button type="button" class="btn btn-transparent p-0 float-right">
-              <i class="fa fa-shopping-basket"></i>
-            </button>
-          <div class="text-value">9.823</div>
+          <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="fa fa-shopping-basket"></i>
+          </button>
+          <div class="text-value">{{TotalOrder}}</div>
           <div>All order</div>
         </div>
       </div>
-    </div><!--/.col-->
+    </div>
+    <!--/.col-->
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-danger">
         <div class="card-body dash">
-            <button type="button" class="btn btn-transparent p-0 float-right">
-              <i class="fa fa-check"></i>
-            </button>
-          <div class="text-value">9.823</div>
+          <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="fa fa-check"></i>
+          </button>
+          <div class="text-value">{{ActiveDriver}}</div>
           <div>Active Delivery Boy</div>
         </div>
       </div>
-    </div><!--/.col-->
-  </div><!--/.row-->
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body">
-          <h5>Order List</h5>
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>OrderNo</th>
-            <th>Customer</th>
-            <th>Order Details</th>
-            <th>Payment</th>
-            <th>Delivery</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let dataval of data;let i = index">
-                <ng-container *ngIf="i < 5">
-                <td>{{dataval.OrderNo}}
-                  {{dataval.OrderedOn}}
-                 <span class="orderstatus">{{dataval.OrderStatus}}</span>
-                </td>
-                <td>{{dataval.CustomerName}}
-                Phone:  {{dataval.CustomerPhone}}
-                </td>
-                <td>{{dataval.OrderDetail}} </td>
-
-                <td>{{dataval.PaymentMode}}
-                  Discount: {{dataval.Discount}}
-                  TaxAmt: {{dataval.TaxAmt}}
-                  TaxRate: {{dataval.TaxRate}}
-                  DeliveryAmt: {{dataval.DeliveryAmt}}
-                  TotalAmt: {{dataval.TotalAmt}}
-                </td>
-
-                <td>
-                  <span *ngIf="dataval.DriverName == 'Driver not yet selected';else isdriverselected">Driver not yet selected</span>
-
-                <ng-template #isdriverselected>
-                  {{dataval.DriverName}}
-                </ng-template></td>
-              </ng-container >
-
-              </tr>
-
-
-
-
-            </tbody>
-
-          </table>
-          <button type="submit" class="btn btn-sm btn-ghost-secondary active pull-right" [routerLink]="['/orders-list']">
-            More...
-          </button>
-        </div>
-      </div>
-
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5>Orders <button type="button" class="btn btn-success btn-sm pull-right" [routerLink]="['/orders-list']">More...</button></h5>
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+                <th width="12%">Order #</th>
+                <th width="8%">Status</th>
+                <th width="12%">Payment Mode</th>
+                <th width="8%">Total</th>
+                <th width="12%">Customer</th>
+                <th colspan="4">Order Details</th>
+                <th width="12%">Driver</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dataval of data;">
+                <td>{{dataval.OrderNo}}<br />
+                  On: {{dataval.OrderedOn | date:"dd-MM-yyyy HH:mm"}}
+                </td>
+                <td>
+                  <h5><span class="badge badge-warning" *ngIf="dataval.OrderStatusId == 1;">Pending</span></h5>
+                  <h5><span class="badge badge-primary" *ngIf="dataval.OrderStatusId == 2;">Processing</span></h5>
+                  <h5><span class="badge badge-success" *ngIf="dataval.OrderStatusId == 3;">Complete</span></h5>
+                  <h5><span class="badge badge-danger" *ngIf="dataval.OrderStatusId == 4;">Cancelled</span></h5>
+                </td>
+                <td>{{dataval.PaymentMode}}</td>
+                <td>{{dataval.TotalAmt}}</td>
+                <td>{{dataval.CustomerName}}<br />
+                  Phone: {{dataval.CustomerPhone}}
+                </td>
+                <td colspan="4">{{dataval.OrderDetail}}</td>
+                <td>
+                  {{dataval.DriverName}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="row">
     <div class="col-md-6">
       <div class="card">
 
         <div class="card-body">
-          <h5>Customer List</h5>
-          <table class="table table-striped table-hover">
+          <h5>Customers <button type="button" class="btn btn-success btn-sm pull-right" [routerLink]="['/customer-list']">More...</button></h5>
+          <table class="table table-bordered table-striped mb-0">
             <thead>
               <tr>
-                <th>Profile Image</th>
-                <th>Customer Name</th>
-                <th>Phone No</th>
-                <th>Email</th>
-                <th>Status</th>
+                <!-- <th width="12%">Image</th> -->
+                <th colspan="2">Name</th>
+                <th>Phone</th>
+                <!-- <th colspan="2">Email</th> -->
+                <th class="text-center" width="10%">Cart</th>
+                <th class="text-center" width="12%">Orders</th>
+                <th class="text-center" width="12%">Wallet</th>
+                <th class="text-center" width="12%">Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let dataval of customerdata;let i = index">
-                <ng-container *ngIf="i < 5">
-                <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td>
-                <td>{{dataval.Name}}</td>
+              <tr *ngFor="let dataval of customerdata;">
+                <!-- <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td> -->
+                <td colspan="2">{{dataval.Name}}</td>
                 <td>{{dataval.Phone}}</td>
-                <td>{{dataval.Email}}</td>
-                <td>
-                  <span class="text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan">Active</span>
+                <!-- <td colspan="2">{{dataval.Email}}</td> -->
+                <td class="text-center">
+                  <i class="fa fa-shopping-cart" aria-hidden="true"
+                    *ngIf="dataval.TotalCartQuantity != null; else elseCart">
+                    <sup>{{dataval.TotalCartQuantity}}</sup></i>
+                  <ng-template #elseCart>N/A</ng-template>
+                </td>
+                <td class="text-center">
+                  <i class="fa fa-first-order" aria-hidden="true" *ngIf="dataval.TotalOrder != null; else elseOrder">
+                    <sup>{{dataval.TotalOrder}}</sup></i>
+                  <ng-template #elseOrder>N/A</ng-template>
+                </td>
+                <td class="text-center">
+                  <i class="fa fa-inr" aria-hidden="true" *ngIf="dataval.TotalWalletAmt != null; else elseWallet">
+                    <sup>{{dataval.TotalWalletAmt}}</sup></i>
+                  <ng-template #elseWallet>N/A</ng-template>
+                </td>
+                <td class="text-center">
+                  <i class="fa fa-check fa-lg text-success" *ngIf="dataval.IsActive == 1; else elseSpan"></i>
                   <ng-template #elseSpan>
-                    <span class="text-danger pointer">Inactive</span>
+                    <i class="fa fa-close fa-lg text-danger"></i>
                   </ng-template>
                 </td>
-              </ng-container>
               </tr>
             </tbody>
-
           </table>
-          <button type="submit" class="btn btn-sm btn-ghost-secondary active pull-right" [routerLink]="['/customer-list']">
-            More...
-          </button>
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <h5>Driver List</h5>
-          <table class="table table-striped table-hover">
+          <h5>Drivers <button type="button" class="btn btn-success btn-sm pull-right" [routerLink]="['/driver-list']">
+            More...
+          </button></h5>
+          
+          <table class="table table-bordered table-striped mb-0">
             <thead>
               <tr>
-                <th>Profile Image</th>
+                <!-- <th>Image</th> -->
                 <th>Name</th>
                 <th>Phone</th>
-                <th>email</th>
-                <th>Status</th>
-
+                <th class="text-center" width="14%">Pending</th>
+                <th class="text-center" width="16%">Complete</th>
+                <th class="text-center" width="16%">Published</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let dataval of driverdata;let i = index"> <ng-container *ngIf="i < 5">
-                <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td>
+              <tr *ngFor="let dataval of driverdata;">
+                <!-- <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td> -->
                 <td>{{dataval.Name}}</td>
                 <td>{{dataval.Phone}}</td>
-                <td>{{dataval.Email}}</td>
-                <td>
-                  <span class="text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan">Active</span>
+                <td class="text-center">
+                  <i class="fa fa-shopping-cart" aria-hidden="true" *ngIf="dataval.Pendings != null; else elsePend">
+                    <sup>{{dataval.Pendings}}</sup></i>
+                  <ng-template #elsePend>N/A</ng-template>
+                </td>
+                <td class="text-center">
+                  <i class="fa fa-first-order" aria-hidden="true" (click)="myModal1.show()"
+                    *ngIf="dataval.Completes != null; else elseComp"> <sup>{{dataval.Completes}}</sup></i>
+                  <ng-template #elseComp>N/A</ng-template>
+                </td>
+                <td class="text-center">
+                  <i class="fa fa-check fa-lg text-success" *ngIf="dataval.IsActive == 1; else elseSpan"></i>
                   <ng-template #elseSpan>
-                    <span class="text-danger pointer">Inactive</span>
+                    <i class="fa fa-close fa-lg text-danger"></i>
                   </ng-template>
                 </td>
-              </ng-container>
               </tr>
             </tbody>
 
           </table>
-          <button type="submit" class="btn btn-sm btn-ghost-secondary active pull-right" [routerLink]="['/driver-list']">
-            More...
-          </button>
         </div>
       </div>
     </div>

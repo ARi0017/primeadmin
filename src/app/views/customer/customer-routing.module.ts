@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomerListComponent } from './customer-list.component';
 import { CustomerComponent } from './customer.component';
-import { CustomerAddressComponent } from './customer-address.component';
 
 const routes: Routes = [
   {
@@ -26,13 +25,6 @@ const routes: Routes = [
       title: 'Edit Customer'
     }
   },
-  {
-    path: 'address/:id',
-    component: CustomerAddressComponent,
-    data: {
-      title: 'Add Address'
-    }
-  }
 ];
 
 @NgModule({

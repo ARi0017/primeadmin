@@ -11,9 +11,10 @@
                   <label class="col-md-3 col-form-label text-right">Banner Name</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control" placeholder="Enter Banner Name" name="BannerName"
-                      [(ngModel)]="Bannermaster.BannerName" #BannerNameRef="ngModel" />
-                    <!-- <small class="text-danger" [class.d-none]="nameRef.valid || nameRef.untouched">Name is required
-                    </small> -->
+                      [(ngModel)]="Bannermaster.BannerName" #BannerNameRef="ngModel"
+                      [class.is-invalid]="BannerNameRef.invalid && BannerNameRef.touched" required />
+                    <small class="text-danger" [class.d-none]="BannerNameRef.valid || BannerNameRef.untouched">Name is required
+                    </small>
                   </div>
                 </div>
               </div>
@@ -21,8 +22,13 @@
                 <div class="row form-group">
                   <label class="col-md-3 text-right">Link With</label>
                   <div class="col-md-9">
-                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="3" (click)="showdiv('Combo')"> Combo
+                    <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="3" (click)="showdiv('Combo')"> N/A
                     <input type="radio" [(ngModel)]="Bannermaster.LinkFlag" name="LinkFlag" value="1" (click)="showdiv('Category')"> Category
+
+                    <input type="hidden" name="hdnLinkFlag" [(ngModel)]="Bannermaster.LinkFlag" #LinkFlagRef="ngModel"  
+                      [class.is-invalid]="LinkFlagRef.invalid && LinkFlagRef.touched" required />
+                    <small class="text-danger" [class.d-none]="LinkFlagRef.valid || LinkFlagRef.untouched">Select Link with
+                    </small>
                   </div>
                 </div>
               </div>
@@ -50,7 +56,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <!-- <div class="col-sm-6">
                 <div class="row form-group">
                   <label class="col-md-3 col-form-label text-right">Display Order</label>
                   <div class="col-md-9">
@@ -58,13 +64,18 @@
                       [(ngModel)]="Bannermaster.DisplayOrder" #RemarksRef="ngModel" />
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-sm-6">
                 <div class="row form-group">
                   <label class="col-md-3 text-right" for="ccnumber">Top Banner</label>
                   <div class="col-md-9">
                     <input type="radio" [(ngModel)]="Bannermaster.IsHead" name="DisplayStockAvailability" value="1"> Yes
                     <input type="radio" [(ngModel)]="Bannermaster.IsHead" name="DisplayStockAvailability" value="0"> No
+
+                    <input type="hidden" name="hdnIsHead" [(ngModel)]="Bannermaster.IsHead" #IsHeadRef="ngModel"  
+                      [class.is-invalid]="IsHeadRef.invalid && IsHeadRef.touched" required />
+                    <small class="text-danger" [class.d-none]="IsHeadRef.valid || IsHeadRef.untouched">Select Top Banner
+                    </small>
                   </div>
                 </div>
               </div> 
@@ -73,22 +84,20 @@
                 <div class="row form-group">
                   <label class="col-md-3 col-form-label text-right">Banner Image</label>
                   <div class="col-md-9">
-                    <input name="file" type="file" id="name" placeholder="CoverImage" (change)="uploadFile($event)">
-
+                    <input name="file" type="file" id="name" placeholder="CoverImage" (change)="uploadFile($event)"/>
+                    <input type="hidden" name="fileName" [(ngModel)]="Bannermaster.BannerImage" #BannerImageRef="ngModel"  
+                      [class.is-invalid]="BannerImageRef.invalid && BannerImageRef.touched" required />
+                    <small class="text-danger" [class.d-none]="BannerImageRef.valid || BannerImageRef.untouched">Banner is required
+                    </small>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <button type="submit" [disabled]="bannermasterForm.invalid" class="btn btn-sm btn-primary">
-              <i class="fa fa-dot-circle-o"></i>
-              Submit
-            </button>
-            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/bannermaster-list']"><i
-                class="fa fa-ban"></i>
-              Cancel</button>
-              <button type="button" class="btn btn-sm btn-secondary" (click)="backpage()"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
+            <button type="submit" [disabled]="bannermasterForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            <button type="button" class="btn btn-sm btn-secondary" [routerLink]="['/bannermaster-list']"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
           </div>
         </form>
       </div>

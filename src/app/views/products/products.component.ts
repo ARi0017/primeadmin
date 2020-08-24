@@ -1,7 +1,4 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { navItems } from "../../_nav";
-import { DOCUMENT } from "@angular/common";
-import { HttpClient } from "@angular/common/http";
 import { Router, ActivatedRoute  } from "@angular/router";
 import { Product } from '../../models/product';
 import { ToasterService } from '../../services/toaster.service';
@@ -17,6 +14,7 @@ export class ProductsComponent implements OnInit {
 
   parentcategory: object;
   taxcategory: object;
+  retailerlist: object;
   id: any;
   response: any;
   dlFile: any; vlFile: any;
@@ -35,6 +33,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.getChildCategories();
     this.getTaxCategories();
+    this.getRetailers();
     if(this.id){
       this.getProduct();
     }
@@ -53,6 +52,21 @@ export class ProductsComponent implements OnInit {
     this.productService.getTaxCategories().subscribe(data => {
       this.taxcategory = data.data[0];
       //console.log(data); taxcategory
+    });
+  }
+  getRetailers() {
+    const retailer = {
+      "Name": "",
+      "Phone": "",
+      "Address": "",
+      "Pincode": "",
+      "Landmark": "",
+      "ContactPerson": "",
+      "Page": "1",
+      "Size": "10"
+    }
+    this.productService.getRetailer(retailer).subscribe(data => {
+      this.retailerlist = data.data;
     });
   }
   onSubmit() {

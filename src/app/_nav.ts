@@ -43,7 +43,7 @@ export const navItems: NavData[] = [
       {
         name: 'Products',
         url: '/products-list',
-        icon: 'fa fa-cutlery'
+        icon: 'fa fa-product-hunt'
       },
       {
         name: 'Categories',
@@ -51,7 +51,7 @@ export const navItems: NavData[] = [
         icon: 'fa fa-server'
       },
       {
-        name: 'Banner',
+        name: 'Banners',
         url: '/bannermaster-list',
         icon: 'fa fa-file-image-o'
       }
@@ -64,7 +64,7 @@ export const navItems: NavData[] = [
     icon: 'icon-chart',
     children: [
       {
-        name: 'Order',
+        name: 'Orders',
         url: '/orders-list',
         icon: 'icon-basket-loaded'
       },
@@ -75,34 +75,60 @@ export const navItems: NavData[] = [
       }
     ]
   },
-  {
-    name: 'Retailers',
-    url: '/pages',
-    icon: 'icon-people',
-    children: [
-      {
-        name: 'Retailer Listing',
-        url: '/retailer-list',
-        icon: 'icon-list'
-      },
-      {
-        name: 'Product Mapping',
-        url: '/retailerproduct-list',
-        icon: 'icon-pin'
-      }
-    ]
-  },
+  // {
+  //   name: 'Retailers',
+  //   url: '/pages',
+  //   icon: 'icon-people',
+  //   children: [
+  //     {
+  //       name: 'Retailers',
+  //       url: '/retailer-list',
+  //       icon: 'icon-list'
+  //     },
+  //     {
+  //       name: 'Products',
+  //       url: '/retailerproduct-list',
+  //       icon: 'icon-pin'
+  //     }
+  //   ]
+  // },
   {
     name: 'Transport',
     url: '/pages',
-    icon: 'icon-people',
+    icon: 'fa fa-ship',
     children: [
       {
         name: 'Drivers',
         url: '/driver-list',
-        icon: 'fa fa-drivers-license'
+        icon: 'fa fa-motorcycle'
+      },
+      {
+        name: 'Pincodes',
+        url: '/pincode',
+        icon: 'fa fa-map-pin'
       }
     ]
   },
-
+  {
+    name: 'Settings',
+    url: '/pages',
+    icon: 'fa fa-cogs',
+    children: [
+      {
+        name: 'CMS',
+        url: '/cms',
+        icon: 'fa fa-info'
+      },
+      {
+          name: 'Miscellaneous',
+          url: '/miscellaneous',
+          icon: 'fa fa-sliders'
+      }
+    ]
+  },
+  // {
+  //   name: 'Report',
+  //   url: '/invoice',
+  //   icon: 'icon-speedometer'
+  // }
 ];

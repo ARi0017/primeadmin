@@ -1,115 +1,424 @@
-<div class="col-lg-12">
+<div class="row">
+  <div class="col-lg-12">
 
-  <div class="card">
+    <div class="card">
 
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="row form-group">
-            <label class="col-md-3 col-form-label text-right">Order</label>
-            <div class="col-md-9">
-              <input type="text" class="form-control" [(ngModel)] = "ordernumber" placeholder="Enter Order No"  />
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="row form-group">
+              <label class="col-md-4 col-form-label text-right">Order</label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" [(ngModel)]="ordernumber" placeholder="Enter Order No" />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="row form-group">
+              <label class="col-md-3 col-form-label text-right">Driver</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" [(ngModel)]="drivername" placeholder="Enter Driver" />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="row form-group">
+              <label class="col-md-5 col-form-label text-right">Status</label>
+              <div class="col-md-7">
+                <select class="form-control" [(ngModel)]="orderstatus">
+                  <option [value]="0" selected>Select</option>
+                  <option [value]="1">Pending</option>
+                  <option [value]="2">Processing</option>
+                  <option [value]="3">Completed</option>
+                  <option [value]="4">Cancelled</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" (click)="getOrders(1)" class="btn btn-sm btn-primary" [disabled]="PageSize==0">
+              <i class="fa fa-dot-circle-o"></i>
+              Search
+            </button>
+          </div>
+        </div>
+
+        <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="data" #mf="mfDataTable">
+          <thead>
+            <tr>
+              <th width="12%"><mfDefaultSorter by="OrderNo">Order #</mfDefaultSorter></th>
+              <th width="8%"><mfDefaultSorter by="OrderStatusId">Status</mfDefaultSorter></th>
+              <th width="12%"><mfDefaultSorter by="PaymentMode">Payment Mode</mfDefaultSorter></th>
+              <th width="6%"><mfDefaultSorter by="TotalAmt">Total</mfDefaultSorter></th>
+              <th width="10%"><mfDefaultSorter by="CustomerName">Customer</mfDefaultSorter></th>
+              <th colspan="4"><mfDefaultSorter by="OrderDetail">Order Details</mfDefaultSorter></th>
+              <th width="6%" class="text-center">Note</th>
+              <th width="15%"><mfDefaultSorter by="DriverName">Driver</mfDefaultSorter></th>
+              <th width="6%" class="text-center">Cancel</th>
+              <th width="6%" class="text-center">Print</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dataval of mf.data">
+              <td><b style="color: navy;">{{dataval.OrderNo}}</b><br />
+                On: <b style="color: olivedrab;">{{dataval.OrderedOn | date:"dd-MM-yyyy HH:mm"}}</b>
+              </td>
+              <td>
+                <h5><span class="badge badge-warning" *ngIf="dataval.OrderStatusId == 1;">Pending</span></h5>
+                <h5><span class="badge badge-primary" *ngIf="dataval.OrderStatusId == 2;">Processing</span></h5>
+                <h5><span class="badge badge-success" *ngIf="dataval.OrderStatusId == 3;">Complete</span></h5>
+                <h5><span class="badge badge-danger" *ngIf="dataval.OrderStatusId == 4;">Cancelled</span></h5>
+              </td>
+              <td><b style="color: blueviolet;">{{dataval.PaymentMode}}</b></td>
+              <td><b style="color: darkred;">{{dataval.TotalAmt}}</b></td>
+              <td><b style="color: indianred;">{{dataval.CustomerName}}</b><br />
+                <b style="color:navy;">{{dataval.CustomerPhone}}</b>
+              </td>
+              <td colspan="4"><b style="color:forestgreen;">{{dataval.OrderDetail}}</b> </td>
+              <td class="text-center" style="color:goldenrod;">
+                <i style="cursor: pointer;" class="fa fa-sticky-note" aria-hidden="true"
+                  *ngIf="dataval.CustomerRemarks!=''; else noRemarks"
+                  (click)="myModal.show(); GetCustomerRemarks(dataval.OrderNo, dataval.CustomerName, dataval.CustomerRemarks, dataval.OrderDetail);">
+                  <sup>1</sup></i>
+                <ng-template #noRemarks>
+                  N/A
+                </ng-template>
+              </td>
+              <td style="color:teal;">
+                <select *ngIf="dataval.OrderStatusId <= 3;else isdriverselected" class="form-control"
+                  (change)="mapdriver(dataval.OrderId, $event)" [(ngModel)]="dataval.DriverId">
+                  <option [value]="undefined" disabled selected>Select</option>
+                  <option *ngFor="let val of driverdata" [value]="val.DriverId">
+                    {{val.Name}}
+                  </option>
+                </select>
+                <ng-template #isdriverselected>
+                  <b>{{dataval.DriverName}}</b>
+                </ng-template>
+              </td>
+              <td class="text-center" style="color: red;">
+                <a style="cursor: pointer;" *ngIf="dataval.OrderStatusId <= 3;else iscancelled"
+                  (click)="cancelOrder(dataval.OrderId, dataval.OrderStatusId)" title="Cancel Order"><i
+                    class="fa fa-ban" aria-hidden="true"></i></a>
+                <ng-template #iscancelled>
+                  <b>Cancelled</b>
+                </ng-template>
+              </td>
+              <td class="text-center">
+                <i style="cursor: pointer;" class="fa fa-print" aria-hidden="true"
+                  (click)="myModal1.show(); OrderWholeData(dataval.OrderId);"></i>
+                <!-- <a title="Print Order" target="_blank" [routerLink]="['/invoice', dataval.OrderId]"><i class="fa fa-print" aria-hidden="true"></i></a> -->
+              </td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="11">
+                <pagination [totalItems]="count" [boundaryLinks]='true' [itemsPerPage]="PageSize" [maxSize]="5"
+                  [rotate]='false' [(ngModel)]="page" (pageChanged)="getPagination($event.page)">
+                </pagination>
+              </td>
+              <td colspan="2">
+                <select class="form-control" [(ngModel)]="PageSize" (change)="PageSize > 0 ? getOrders(1) : ''">
+                  <option value="0">Page Size</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Customer Order's Note</h4>
+                <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="animated fadeIn">
+                  <div class="card">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td>Order No</td>
+                          <td colspan="3">{{orderno}}</td>
+                        </tr>
+                        <tr>
+                          <td>Customer Name</td>
+                          <td colspan="3">{{customername}}</td>
+                        </tr>
+                        <tr>
+                          <td>Order Detail</td>
+                          <td colspan="3">{{orderdetail}}</td>
+                        </tr>
+                        <tr>
+                          <td>Order Note</td>
+                          <td colspan="3">{{customerremarks}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="row form-group">
-            <label class="col-md-3 col-form-label text-right">Driver</label>
-            <div class="col-md-9">
-              <input type="text" class="form-control" [(ngModel)] = "drivername" placeholder="Enter Driver"  />
+
+        <div bsModal #myModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:50% !important">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn btn-sm btn-info" (click)="print()">Print</button>
+              <button type="button" class="close" (click)="myModal1.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="animated fadeIn">
+<style>
+  #invoice-POS {
+    /*box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);*/
+    padding: 1mm;
+   /* margin: 0 auto;
+    width: 44mm; */
+    background: #FFF;
+  }
+  #invoice-POS ::selection {
+    background: #f31544;
+    color: #FFF;
+  }
+  #invoice-POS ::moz-selection {
+    background: #f31544;
+    color: #FFF;
+  }
+  #invoice-POS h1 {
+    font-size: 1.5em;
+    color: #222;
+  }
+  #invoice-POS h2 {
+    font-size: .9em;
+  }
+  #invoice-POS h3 {
+    font-size: 1.2em;
+    font-weight: 300;
+    padding-top:0;
+    margin-top:0;
+  }
+  #invoice-POS h4 {
+    font-size: 1em;
+    line-height: .1em;
+  }
+  #invoice-POS p {
+    font-size: .7em;
+    color: #666;
+    line-height: 1.2em;
+  }
+  #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
+    /* Targets all id with 'col-' */
+    border-bottom: 1px solid #EEE;
+  }
+  #invoice-POS #top {
+    min-height: 80px;
+  }
+  #invoice-POS #mid {
+    min-height: 65px;
+  }
+  #invoice-POS #bot {
+    min-height: 50px;
+  }
+  #invoice-POS #top .logo {
+    height: 60px;
+    width: 60px;
+    background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
+    background-size: 60px 60px;
+  }
+  #invoice-POS .clientlogo {
+    float: left;
+    height: 60px;
+    width: 60px;
+    background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+    background-size: 60px 60px;
+    border-radius: 50px;
+  }
+  #invoice-POS .info {
+    display: block;
+    margin-left: 0;
+    text-align:center;
+  }
+  #invoice-POS .title {
+    float: right;
+  }
+  #invoice-POS .title p {
+    text-align: right;
+  }
+  #invoice-POS table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  #invoice-POS .tabletitle {
+    font-size: .7em;
+    background: #EEE;
+  }
+  #invoice-POS .service {
+    border-bottom: 1px solid #ada2a2;
+  }
+  /*#invoice-POS .item {
+    width: 24mm;
+  }*/
+  #invoice-POS .no {
+    width: 1mm;
+  }
+  #invoice-POS .item {
+    width: 24mm;
+  }
+  #invoice-POS .qty {
+    width: 3mm;
+  }
+  #invoice-POS .rate {
+    width: 4mm;
+  }
+  #invoice-POS .itemtext {
+    font-size: .7em;
+    font-weight:600;
+    margin:0;
+  }
+  #invoice-POS #legalcopy {
+    margin-top: 5mm;
+  }
+  #invoice-POS .itemDate {
+    font-size: .8em;
+  }  
+  .numberCircle {
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    padding: 4px;
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    font: 18px Arial, sans-serif;
+    float:right;
+  }
+</style>
+                <div id="invoice-POS" *ngIf="master">
+                  <div style="font-family: Arial">
+                              
+                      <div id="top">
+                          <div class="info">
+                              <h3>
+                                  Only Alibaba</h3>
+                              <p>
+                                  GUHA ROY FOOD JOINT & HOTEL PVT LTD<br />
+                                  5A ISWAR MONDAL LANE KOL-700046<br />
+                                  Ph. No.:033-6661 2222/033-4021 2222</p>
+                              <p>
+                                  GSTIN: 19AADCG2408E1ZY&nbsp; | &nbsp;SAC:(5):996331</p>
+                          </div>
+                          <!--End Info-->
+                      </div>
+                      <!--End InvoiceTop-->
+                      <div id="mid">
+                          <div class="info">
+                              <h4>TAX INVOICE</h4>
+                              <p>
+                                  Customer: <strong>{{master.CustomerName}}</strong>&nbsp; | &nbsp;Phone: +91 <label>{{master.CustomerPhone}}</label>
+                                  <br />
+                                  Address: <label>{{master.Address}}</label>
+                              </p>
+                              <p>
+                                  Inv #: <strong>{{master.OrderNo}}</strong> | Date: <label class="itemDate">{{master.OrderedOn | date: 'dd-MM-yyyy HH:mm a'}}</label>
+                              </p>
+                          </div>
+                      </div>
+                      <!--End Invoice Mid-->
+                      <div id="bot">
+                          <div id="table">
+                              <table>
+                                  <thead>
+                                      <tr class="tabletitle">
+                                          <td class="no"><h2>No</h2></td>
+                                          <td class="item"><h2>Item</h2></td>
+                                          <td class="qty"><h2>Qty</h2></td>
+                                          <td class="rate"><h2>Sub Total</h2></td>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="divItemDetail">
+                                      <tr class="service" style="border-color: #000;" *ngFor="let val of detail">
+                                          <td>{{val.RowNo}}</td>
+                                          <td class="tableitem"><strong class="itemtext">{{val.ProductName}}</strong></td>
+                                          <td>{{val.Quantity}}</td>
+                                          <td class="tableitem"><strong class="itemtext">₹ {{val.OrderPrice}}</strong></td>
+                                      </tr>
+                                      <tr class="service">
+                                          <td></td>
+                                          <td class="tableitem"><strong class="itemtext">Sub Total</strong></td>
+                                          <td>{{master.TotalQty}}</td>
+                                          <td class="tableitem"><strong class="itemtext">₹ {{master.SubTotal}}</strong></td>
+                                      </tr>
+                                      <tr class="service">
+                                          <td></td>
+                                          <td class="tableitem"><p class="itemtext">CGST @2.50%</p></td>
+                                          <td></td>
+                                          <td class="tableitem"><strong class="itemtext">₹ {{master.CGST}}</strong></td>
+                                      </tr>
+                                      <tr class="service">
+                                          <td></td>
+                                          <td class="tableitem"><p class="itemtext">SGST @2.50%</p></td>
+                                          <td></td>
+                                          <td class="tableitem"><strong class="itemtext">₹ {{master.SGST}}</strong></td>
+                                      </tr>
+                                      <tr class="service" style="border-color: #000;">
+                                          <td></td>
+                                          <td class="tableitem"><p class="itemtext">Delivery Charges</p></td>
+                                          <td></td>
+                                          <td class="tableitem"><strong class="itemtext">₹ {{master.DeliveryAmt}}</strong></td>
+                                      </tr>
+                                      <tr class="service" style="border-color: #000;">
+                                          <td></td>
+                                          <td class="tableitem"><strong class="itemtext">Net Amount</strong></td>
+                                          <td></td>
+                                          <td class="tableitem"><strong class="itemtext">₹ {{master.TotalAmt}}</strong></td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      <div class="info">
+                          <div id="legalcopy">
+                              <!--<p class="legal">
+                                  <strong>APP SPECIAL!</strong>
+                                  <br />
+                                  Install Only Alibaba App & get exciting offers. Download here: http://onlyalibaba.com.<br />
+                                  T&C Apply
+                              </p>-->
+                              <p class="legal">
+                                  <strong>Thank you for using Only Alibaba App!</strong>
+                                  <br />
+                                  ITEMS ARE FOR IMMEDIATE CONSUMPTION.<br />
+                                  <span>{{DeliveryTime | date: 'dd-MM-yyyy HH:mm a'}}</span>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="row form-group">
-            <label class="col-md-5 col-form-label text-right">Status</label>
-            <div class="col-md-7">
-              <select  class="form-control" [(ngModel)]="orderstatus">
-                <option [value]="0" selected>Select</option>
-                <option [value]="1">Pending</option>
-                <option [value]="2">Processing</option>
-                <option [value]="3">Completed</option>
-                <option [value]="4">Cancelled</option>
-            </select>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-2">
-          <button type="button" (click)="getOrders(1)" class="btn btn-sm btn-primary">
-            <i class="fa fa-dot-circle-o"></i>
-            Search
-          </button>
         </div>
       </div>
 
-        <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>Order #</th>
-            <th>Status</th>
-            <th>Payment Mode</th>
-            <th>Order Total</th>
-            <th>Customer</th>
-            <th>Order Details</th>
-            <th>Driver</th>
-            <th>Cancel</th>
-            <th>Print</th>
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let dataval of data">
-            <td>{{dataval.OrderNo}}<br/>
-            On: {{dataval.OrderedOn | date:"dd/MM/yyyy HH:mm"}}            
-            </td>
-            <td>
-              <span class="btn btn-warning btn-sm text-light" *ngIf="dataval.OrderStatusId == 1;">Pending</span>
-              <span class="btn btn-primary btn-sm" *ngIf="dataval.OrderStatusId == 2;">Processing</span>
-              <span class="btn btn-success btn-sm" *ngIf="dataval.OrderStatusId == 3;">Complete</span>
-              <span class="btn btn-danger btn-sm" *ngIf="dataval.OrderStatusId == 4;">Cancelled</span>
-            </td>
-            <td>{{dataval.PaymentMode}}</td>
-            <td>{{dataval.TotalAmt}}</td>
-            <td>{{dataval.CustomerName}}<br/>
-         Phone: {{dataval.CustomerPhone}}
-            </td>
-            <td><span>{{dataval.OrderDetail}}</span> </td>
-            <td>
-               <select *ngIf="dataval.OrderStatusId <= 3;else isdriverselected"  class="form-control" (change)="mapdriver(dataval.OrderId, $event)"
-               [(ngModel)]="dataval.DriverId">
-                <option [value]="undefined" disabled  selected>Select</option>
-                <option *ngFor="let val of driverdata" [value]="val.DriverId">
-                {{val.Name}}
-              </option>
-            </select>
-            <ng-template #isdriverselected>
-              {{dataval.DriverName}}
-            </ng-template>
-          </td>
-            <td>
-              <a style="cursor: pointer;" *ngIf="dataval.OrderStatusId <= 3;else iscancelled" (click)="cancelOrder(dataval.OrderId, dataval.OrderStatusId)" title="Cancel Order"><i class="fa fa-ban" aria-hidden="true"></i></a>
-              <ng-template #iscancelled>
-                Cancelled
-              </ng-template>
-            </td>
-            <td>
-              <a [routerLink]=""title="Print Order"><i class="fa fa-print" aria-hidden="true"></i></a>
-              <!-- (click)="['edit', dataval.BannerId]"  -->
-            </td>
-          </tr>
-        </tbody>
-
-        <tfoot>
-          <tr>
-              <td colspan="4" class="pull-right">
-                  <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]"></mfBootstrapPaginator> -->
-                  <pagination [totalItems]="count" [boundaryLinks]='true' [maxSize]="5" [rotate]='false'
-                      [(ngModel)]="page" (pageChanged)="getPagination($event.page)">
-                  </pagination>
-              </td>
-          </tr>
-      </tfoot>
-      </table>
+      </div>
     </div>
   </div>
 </div>

@@ -125,8 +125,8 @@ editDriver(){
                     this.toaster.Error('Something Went Wrong');
                   }
                 );
-                this.toaster.Success("Category Updated Successfully");
-                this.router.navigate(["/categories-list"]);
+                this.toaster.Success("Driver Updated Successfully");
+                this.router.navigate(["/driver-list"]);
               } else {
                 this.toaster.Error("Server Error!");
               }
@@ -151,8 +151,8 @@ editDriver(){
           console.log(res.status);
           var status = res.status;
           if (status == 200) {
-            this.toaster.Success("Category Updated Successfully");
-            this.router.navigate(["/categories-list"]);
+            this.toaster.Success("Driver Updated Successfully");
+            this.router.navigate(["/driver-list"]);
           } else {
             this.toaster.Error("Server Error!");
           }

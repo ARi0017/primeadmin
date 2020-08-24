@@ -1,17 +1,18 @@
 export class Category {
   constructor(
-    public ParentCategoryId:number,
+    public ParentCategoryId:string,
     public Category:string,
-    public CoverImage:any,
+    public CoverImage:string,
     public CoverVideo:string,
     public Description:string,
     public CreatedBy:number,
-    public IsSpecial:number,
-    public IsFeatured:number,
+    public IsSpecial:string,
+    public IsFeatured:string,
     public CategoryId?:number,
     public IsActive?:string,
     public CategoryMain?:string,
     public CategoryParent?:string,
+    public IsEdit?:string,
   ) {}
 }
 

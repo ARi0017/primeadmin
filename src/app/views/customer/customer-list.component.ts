@@ -1,8 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { Product } from '../../models/product';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../../services/Customer/customer.service';
-import { Category } from '../../models/category';
 import { Customeraddress } from '../../models/customeraddress';
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { ToasterService } from '../../services/toaster.service';
@@ -12,12 +10,15 @@ import { ToasterService } from '../../services/toaster.service';
   templateUrl: './customer-list.component.html'
 })
 export class CustomerListComponent implements OnInit {
-  Customeraddress: Customeraddress = new Customeraddress("", "", "", "", "", "", null, "","", "", "0","");
+  // Customeraddress: Customeraddress = new Customeraddress("", "", "", "", "", "", null, "","", "", "0","");
   @ViewChild("myModal", { static: true }) myModal: ModalDirective;
   @ViewChild("myModal1", { static: true }) myModal1: ModalDirective;
+  @ViewChild("myModal2", { static: true }) myModal2: ModalDirective;
+  @ViewChild("myModal3", { static: true }) myModal3: ModalDirective;
   data: any;
   url:any;
   customername: any='';
+  customerphone: any='';
   page: number = 1;
   count: number;
   addressname:any;
@@ -27,6 +28,10 @@ export class CustomerListComponent implements OnInit {
   IsActive:any ='';
   cartdata: object;
   orderdata: object;
+  walletdata:object;
+  produrl: string;
+  cusName:string;
+  PageSize:number=10;
   constructor(private customerService: CustomerService,
     private router: Router,
     private route: ActivatedRoute,
@@ -48,68 +53,43 @@ export class CustomerListComponent implements OnInit {
 
 
   getCustomers(page: number) {
-    let initialCustomer = {customername: this.customername, page: page}
+    let initialCustomer = {customername: this.customername, customerphone: this.customerphone, page: page, Size: this.PageSize}
     this.customerService.getCustomerList(initialCustomer).subscribe(data => {
       this.data = data.data;
       this.url = data.Imgurl;
       this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
-      console.log("Total Row Count",this.count);
     });
   }
-  GetCustomerCart(id :string) {
-    const customer = {
-"CustomerId":id
-}
+  GetCustomerCart(id :string, name:string) {
+    this.cusName = name;
+    const customer = {"CustomerId":id}
     this.customerService.GetCustomerCart(customer).subscribe(data => {
       this.cartdata = data.data;
+      this.produrl = data.productimg;
     });
   }
-  GetCustomerOrder(id :string) {
-    const customer = {
-"CustomerId":id
-}
+  GetCustomerOrder(id :string, name:string) {
+    this.cusName = name;
+    const customer = {"CustomerId":id}
     this.customerService.GetCustomerOrder(customer).subscribe(data => {
       this.orderdata = data.data;
     });
   }
+  GetCustomerWallet(id :string, name:string) {
+    this.cusName = name;
+    const customer = {"CustomerId":id}
+    this.customerService.GetCustomerWallet(customer).subscribe(data => {
+      this.walletdata = data.data;
+    });
+  }
 
-  CustomerAddressList(id :string) {
-    const customerid = {
-"CustomerId":id
-}
+  CustomerAddressList(id :string, name:string) {
+    this.cusName = name;
+    this.CustomerId = id;
+    const customerid = {"CustomerId":id}
     this.customerService.CustomerAddressList(customerid).subscribe(data => {
       this.addressdata = data.data;
     });
-  }
-  onSubmitaddress(addressid : string) {
-    if(addressid != ''){
-      this.Customeraddress.AddressId = addressid;
-      this.customerService.AddEditCustomerAddress(this.Customeraddress)
-      .subscribe(res => {
-        if (res.status == 200) {
-
-            this.toaster.Success("Customer Address Added Successfully");
-
-          this.router.navigate(['customer-list']);
-        }
-      }, err => {
-        this.toaster.Error("Server Error");
-      })
-    }else{
-      this.customerService.AddEditCustomerAddress(this.Customeraddress)
-      .subscribe(res => {
-        if (res.status == 200) {
-
-            this.toaster.Success("Customer Address Updated Successfully");
-
-
-          this.router.navigate(['customer-list']);
-        }
-      }, err => {
-        this.toaster.Error("Server Error");
-      })
-    }
-
   }
 
   addCustomer() {
@@ -132,13 +112,29 @@ export class CustomerListComponent implements OnInit {
     this.customerService.statusChange(customertatus).subscribe(data => {
       this.data = data.data[0];
       if (data.status == 200) {
-        this.toaster.Success("Product Status Updated Successfully");
+        this.toaster.Success("Status Updated Successfully");
         this.getCustomers(this.page);
       }
     });
   }
 
 
-
+  onDelete(id: any) {
+    const customer = {"AdderssId":id, "CreatedBy":1}
+    if (!confirm("Are You Sure ?")) {
+      return;
+    }
+    this.customerService.DeleteCustomerAddress(customer).subscribe(res => {
+      if (res.status == 200) {
+          const customerid = {"CustomerId":this.CustomerId}
+          this.customerService.CustomerAddressList(customerid).subscribe(data => {
+            this.addressdata = data.data;
+          });
+          this.toaster.Success("Customer Address Deteled Successfully");
+      }
+    }, err => {
+      this.toaster.Error("Server Error");
+    });
+  }
 
 }

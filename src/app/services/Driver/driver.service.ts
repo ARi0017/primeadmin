@@ -14,7 +14,12 @@ interface Idriver {
 export class DriverService {
 
   constructor(private http: HttpClient, private url: UrlService) { }
-
+  GetDriverPendingOrder(driver: object): Observable<Idriver> {
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/driverpendingorder`, driver);
+  }
+  GetDriverCompleteOrder(driver: object): Observable<Idriver> {
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/drivercompletedorder`, driver);
+  }
   getDriver(driver: object): Observable<Idriver> {
     return this.http.post<Idriver>(`${this.url.ServiceUrl}/driver`, driver);
   }

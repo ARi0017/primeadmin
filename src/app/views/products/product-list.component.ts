@@ -29,6 +29,7 @@ export class ProductListComponent implements OnInit {
   exceljsondata: any;
   catdata: any;
   categoryid: any='';
+  PageSize:number=10;
   
   constructor(private categoryService: CategoryService,private productService: ProductService,
     private excelService: ExcelService,
@@ -42,12 +43,12 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts(page: number) {
-    let Product = {categoryid: this.categoryid, name: this.name, page: page};
+    let Product = {categoryid: this.categoryid, name: this.name, page: page, Size: this.PageSize};
     this.productService.getProductList(Product).subscribe(data => {
       this.data = data.data[0];
       this.url = data.imgurl;
       this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
-      console.log("Total Row Count",this.count);
+      console.log("Total Data Count",this.count);
     });
   }
   getPagination(page: number){
@@ -56,11 +57,6 @@ export class ProductListComponent implements OnInit {
   }
 
   getCategories() {
-    const category = {
-      'categoryname': '',
-      'page': '',
-      'size': ''
-     };
     this.productService.getChildCategories().subscribe(data => {
       this.catdata = data.data[0];
       console.log(this.catdata);

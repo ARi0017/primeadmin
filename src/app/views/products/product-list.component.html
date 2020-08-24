@@ -20,7 +20,7 @@
         </select>
         </div>
         <div class="col-sm-2">
-          <button type="button" (click)="getProducts(1)" class="btn btn-sm btn-primary">
+          <button type="button" (click)="getProducts(1)" class="btn btn-sm btn-primary" [disabled]="PageSize==0">
             <i class="fa fa-dot-circle-o"></i>
             Search
           </button>
@@ -32,27 +32,26 @@
         </div>
 
       </div>
-        <table class="table table-striped table-hover" mfDefaultSorter [mfData]="data" #mf="mfDataTable"
-        [mfRowsOnPage]="10">
+        <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="data" #mf="mfDataTable">
           <thead>
             <tr>
-              <th width="8%"><mfDefaultSorter by="Cover">Picture</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Category">Category</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Sku">SKU</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Standard Price">MRP</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Cost">Purchase Price</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="Type">Type</mfDefaultSorter></th>
-              <th><mfDefaultSorter by="IsActive">Publish</mfDefaultSorter></th>
-              <th width="8%">Action</th>
+              <th style="width: 6%;"><mfDefaultSorter by="CoverImage">Picture</mfDefaultSorter></th>
+              <th colspan="2"><mfDefaultSorter by="Category">Category</mfDefaultSorter></th>
+              <th colspan="3"><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
+              <th style="width: 7%;"><mfDefaultSorter by="Sku">SKU</mfDefaultSorter></th>
+              <th style="width: 6%;"><mfDefaultSorter by="StandardPrice">MRP</mfDefaultSorter></th>
+              <th style="width: 6%;"><mfDefaultSorter by="Cost">PP</mfDefaultSorter></th>
+              <th style="width: 8%;"><mfDefaultSorter by="FoodType">Type</mfDefaultSorter></th>
+              <th style="width: 6%;"><mfDefaultSorter by="IsActive">Publish</mfDefaultSorter></th>
+              <th style="width: 7%;">Action</th>
 
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let dataval of mf.data">
-              <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.CoverImage}} /></td>
-              <td>{{dataval.Category}}</td>
-              <td>{{dataval.Name}}</td>
+              <td><img class="displayimage" alt="" src={{url}}{{dataval.CoverImage}} /></td>
+              <td colspan="2">{{dataval.Category}}</td>
+              <td colspan="3">{{dataval.Name}}</td>
               <td>{{dataval.Sku}}</td>
               <td>₹{{dataval.StandardPrice}}</td>
               <td>₹{{dataval.Cost}}</td>
@@ -71,11 +70,19 @@
           </tbody>
           <tfoot>
             <tr>
-                <td colspan="4" class="pull-right">
-                    <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]"></mfBootstrapPaginator> -->
-                    <pagination [totalItems]="count" [boundaryLinks]='true' [maxSize]="5" [rotate]='false'
+                <td colspan="10">
+                    <pagination [totalItems]="count" [boundaryLinks]='true' [itemsPerPage]="PageSize" [maxSize]="5" [rotate]='false'
                         [(ngModel)]="page" (pageChanged)="getPagination($event.page)">
                     </pagination>
+                </td>
+                <td colspan="2">
+                  <select class="form-control" [(ngModel)]="PageSize" (change)="getProducts(1)">
+                    <option value="0">Page Size</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
                 </td>
             </tr>
         </tfoot>

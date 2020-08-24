@@ -38,8 +38,12 @@ import { ChartsModule } from 'ng2-charts';
 import { LoginComponent } from './views/login/login.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LogoutComponent } from './views/logout/logout.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+//import { InvoiceComponent } from './views/invoice/invoice.component';
+//import { PincodeComponent } from './views/pincode/pincode.component';
+//import { MiscelleniousComponent } from './views/pincode/miscellenious.component';
 
 
 @NgModule({
@@ -65,11 +69,19 @@ import { LogoutComponent } from './views/logout/logout.component';
     ...APP_CONTAINERS,
     LoginComponent,
     LogoutComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    //InvoiceComponent,
+    //PincodeComponent,
+    //MiscelleniousComponent
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
   }],
   bootstrap: [ AppComponent ]
 })

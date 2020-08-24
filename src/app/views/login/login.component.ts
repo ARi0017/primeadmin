@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('username', data.data[0][0].UserName);
           localStorage.setItem('phone', data.data[0][0].Phone);
           localStorage.setItem('email', data.data[0][0].EmailId);
+          localStorage.setItem('token', data.token);
           this.router.navigate(['/dashboard']);
           this.toaster.Success("Login Successful");
         },

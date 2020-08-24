@@ -18,6 +18,8 @@ export class CategoriesListComponent implements OnInit {
   count: number;
   CategoryId: any='';
   IsActive:any ='';
+  PageSize:number=10;
+  // dataCount: number;
   constructor(private categoryService: CategoryService,
     private router: Router,
     private toaster: ToasterService) {
@@ -28,12 +30,14 @@ export class CategoriesListComponent implements OnInit {
   }
 
   getCategories(page: number) {
-    let Category = {categoryname: this.categoryname, page: page}
+    let Category = {categoryname: this.categoryname, page: page, Size: this.PageSize}
     this.categoryService.getCategories(Category).subscribe(data => {
       this.data = data.data[0];
       this.url = data.Imgurl;
+      //this.dataCount = (this.data.length > 0) ? this.data[0].RowCount : 0;
       this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
-      console.log("Total Row Count",this.count);
+      // this.count = (this.dataCount - (this.dataCount%this.PageSize))/this.PageSize + 1;
+      console.log("Total Page Count",this.count);
     });
   }
 

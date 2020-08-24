@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="col-sm-2">
-          <button type="button" (click)="getCategories(1)" class="btn btn-sm btn-primary">
+          <button type="button" (click)="getCategories(1)" class="btn btn-sm btn-primary" [disabled]="PageSize==0">
             <i class="fa fa-dot-circle-o"></i>
             Search
           </button>
@@ -23,15 +23,15 @@
         </div>
 
       </div>
-      <table class="table table-striped table-hover" mfDefaultSorter [mfData]="data" #mf="mfDataTable"
-      [mfRowsOnPage]="10">   <thead>
+      <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="data" #mf="mfDataTable">   
+        <thead>
           <tr>
-            <th width="10%"><mfDefaultSorter by="Name">Picture</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="PCategory">Parent Category</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="MCategory">Category</mfDefaultSorter></th>
+            <th width="7%"><mfDefaultSorter by="CoverImage">Picture</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="CategoryParent">Parent Category</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="CategoryMain">Category</mfDefaultSorter></th>
             <th><mfDefaultSorter by="Description">Description</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="IsActive">Publish</mfDefaultSorter></th>
-            <th width="12%">Action</th>
+            <th width="8%"><mfDefaultSorter by="IsActive">Publish</mfDefaultSorter></th>
+            <th width="10%">Action</th>
 
           </tr>
         </thead>
@@ -42,12 +42,17 @@
             <td>{{dataval.CategoryMain}}</td>
             <td>{{dataval.Description}}</td>
             <td>
-
               <span class="text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan"
-                  (click)="onStatus(dataval.CategoryId, '0')"><i class="fa fa-check fa-lg"></i></span>
-                <ng-template #elseSpan>
-                  <span class="text-danger pointer" (click)="onStatus(dataval.CategoryId, 1)"><i class="fa fa-close fa-lg"></i></span>
-                </ng-template>
+                (click)="onStatus(dataval.CategoryId, '0')"><i class="fa fa-check fa-lg"></i></span>
+              <ng-template #elseSpan>
+                <span class="text-danger pointer" (click)="onStatus(dataval.CategoryId, 1)"><i class="fa fa-close fa-lg"></i></span>
+              </ng-template>
+                <!-- <p *ngIf="dataval.IsEdit == 1; else elseEditIsActive">
+                  
+                </p>
+                <ng-template #elseEditIsActive>
+                  Not Editable
+                </ng-template> -->
             </td>
 
             <td>
@@ -61,11 +66,19 @@
         </tbody>
         <tfoot>
           <tr>
-              <td colspan="4" class="pull-right">
-                  <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]"></mfBootstrapPaginator> -->
-                  <pagination [totalItems]="count" [boundaryLinks]='true' [maxSize]="5" [rotate]='false'
+              <td colspan="5">
+                  <pagination [totalItems]="count" [boundaryLinks]='true' [itemsPerPage]="PageSize" [maxSize]="5" [rotate]='false'
                       [(ngModel)]="page" (pageChanged)="getPagination($event.page)">
                   </pagination>
+              </td>
+              <td colspan="1">
+                <select class="form-control" [(ngModel)]="PageSize" (change)="PageSize > 0 ? getCategories(1) : ''">
+                  <option value="0">Page Size</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
               </td>
           </tr>
       </tfoot>

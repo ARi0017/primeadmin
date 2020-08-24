@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderService } from '../../services/Order/order.service';
-import { Category } from '../../models/category';
 import { ToasterService } from '../../services/toaster.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-orders-list',
@@ -11,7 +10,8 @@ import { ToasterService } from '../../services/toaster.service';
   templateUrl: './orders-list.component.html'
 })
 export class OrdersListComponent implements OnInit {
-  data: any;
+  @ViewChild("myModal", { static: true }) myModal: ModalDirective;
+  data: any=null;
   driverdata: any;
   Driverid: string;
   page: number = 1;
@@ -19,6 +19,11 @@ export class OrdersListComponent implements OnInit {
   count: number;
   ordernumber : any='';
   drivername : any='';
+  orderno:any="";
+  customername:any="";
+  customerremarks:any="";
+  orderdetail:any="";
+  PageSize:number=10;
   constructor(private orderService: OrderService,
     private router: Router,
     private toaster: ToasterService) {
@@ -30,10 +35,10 @@ export class OrdersListComponent implements OnInit {
   }
 
 getOrders(page: number) {
-    let initialOrders = {ordernumber: this.ordernumber, drivername: this.drivername, OrderStatusId:this.orderstatus, page: page}
+    let initialOrders = {ordernumber: this.ordernumber, drivername: this.drivername, OrderStatusId:this.orderstatus, page: page, Size: this.PageSize}
     this.orderService.getOrders(initialOrders).subscribe(data => {
       this.data = data.data;
-      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      this.count = (Object.keys(this.data).length > 0) ? this.data[0].RowCount : 0;
       console.log("Total Row Count",this.count);
     });
     
@@ -81,6 +86,37 @@ cancelOrder(OrderId: any, OrderStatusId: any) {
       }
     });
   }
+  GetCustomerRemarks(OrderNo:string, CustomerName:string, CustomerRemarks:string, OrderDetail:string){
+    this.orderno = OrderNo;
+    this.customername = CustomerName;
+    this.customerremarks = CustomerRemarks;
+    this.orderdetail = OrderDetail;
+  }
+  
+  
+master:object; detail:object; DeliveryTime:any = new Date();
 
-
+  OrderWholeData(id: string) {
+    const orderid = {"OrderId":id}
+    // const orderid = {"OrderId":171}
+    this.orderService.getOrderWholeData(orderid).subscribe(data => {
+      if (data) {
+          this.master = data.master[0];
+          console.log("Master",this.master);
+          this.detail = data.detail;
+          console.log("Detail",data.detail);
+        }
+        else {
+          this.toaster.Error("Couldn't fetch detail, server error");
+        }
+    });
+  }
+  print(): void {
+    let newWin;
+    var divToPrint = document.getElementById("invoice-POS");  
+    newWin = window.open("");  
+    newWin.document.write(divToPrint.outerHTML);  
+    newWin.print();  
+    newWin.close(); 
+}
 }

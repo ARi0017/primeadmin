@@ -83,6 +83,22 @@ export const routes: Routes = [
       {
         path: 'orders-list',
         loadChildren: () => import('./views/orders/orders.module').then(m => m.OrdersModule)
+      },
+      {
+        path: 'pincode',
+        loadChildren: () => import('./views/pincode/pincode.module').then(m => m.PincodeModule)
+      },
+      {
+          path: 'miscellaneous',
+          loadChildren: () => import('./views/miscellaneous/miscellaneous.module').then(m => m.MiscellaneousModule)
+      },
+      {
+        path: 'cms',
+        loadChildren: () => import('./views/cms/cms.module').then(m => m.CmsModule)
+      },
+      {
+        path: 'invoice/:id',
+        loadChildren: () => import('./views/invoice/invoice.module').then(m => m.InvoiceModule)
       }
     ]
   }

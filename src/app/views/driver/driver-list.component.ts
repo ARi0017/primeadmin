@@ -18,9 +18,14 @@ export class DriverListComponent implements OnInit {
   drivername: any='';
   url: string;
   page: number = 1;
+  //dataCount: number;
   count: number;
   DriverId: any='';
   IsActive:any ='';
+  PageSize:number=10;
+  driveName:string;
+  pendingOrder: object;
+  completeOrder: object;
   constructor(private driverService: DriverService,
     private router: Router,
     private toaster: ToasterService) {
@@ -30,15 +35,29 @@ export class DriverListComponent implements OnInit {
     this.getDriver(this.page);
   }
   
-  GetPendingorder(DriverId: string){}
-  GetCompleteorder(DriverId: string){}
+  GetPendingorder(DriverId: string, name:string){
+    this.driveName = name;
+    const driver = {"DriverId":DriverId}
+    this.driverService.GetDriverPendingOrder(driver).subscribe(data => {
+      this.pendingOrder = data.data;
+    });
+  }
+  GetCompleteorder(DriverId: string, name:string){
+    this.driveName = name;
+    const driver = {"DriverId":DriverId}
+    this.driverService.GetDriverCompleteOrder(driver).subscribe(data => {
+      this.completeOrder = data.data;
+    });
+  }
   getDriver(page: number) {
-    let Driver = {drivername: this.drivername, page: page}
+    let Driver = {drivername: this.drivername, page: page, Size: this.PageSize}
     this.driverService.getDriver(Driver).subscribe(data => {
       this.data = data.data;
       this.url = data.Imgurl;
+      //this.dataCount = (this.data.length > 0) ? this.data[0].RowCount : 0;
       this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
-      console.log("Total Row Count",this.count);
+      // this.count = (this.dataCount - (this.dataCount%this.PageSize))/this.PageSize + 1;
+      console.log("Total Page Count",this.count);
     });
   }
 
@@ -67,7 +86,7 @@ export class DriverListComponent implements OnInit {
     this.driverService.statusChange(drivertatus).subscribe(data => {
       this.data = data.data[0];
       if (data.status == 200) {
-        this.toaster.Success("Product Status Updated Successfully");
+        this.toaster.Success("Driver Status Updated Successfully");
         this.getDriver(this.page);
       }
     });
