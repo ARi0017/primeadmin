@@ -4,142 +4,111 @@
       <div class="card">
         <form #driverForm="ngForm" (ngSubmit)="onSubmit()">
           <div class="card-header">
-            <strong>Details</strong>
+            <h5><strong class="pull-left" *ngIf="Retailer.Name != '' && Retailer.Name != null">{{Retailer.Name}}'s Info!</strong>
+              <strong *ngIf="Retailer.RetailerTag != '' && Retailer.RetailerTag != null" style="padding-left: 30%;">Supplier Code: {{Retailer.RetailerTag}}</strong>
+              <button type="button" class="btn btn-sm btn-secondary pull-right" [routerLink]="['/retailer-list']"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button> &nbsp;
+              <button type="reset" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Reset</button> &nbsp;
+              <button type="submit" [disabled]="validateForm()" class="btn btn-sm btn-primary pull-right"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            </h5>
           </div>
           <div class="card-body">
-            <!--/.row-->
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Retailer Name</label>
-                  <div class="col-md-9">
+            <table class="table table-bordered table-striped mb-0">
+              <tbody>
+                <tr>
+                  <td><b>Name*</b></td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Name" name="name"
-                      [(ngModel)]="Retailer.Name" #nameRef="ngModel"
-                      [class.is-invalid]="nameRef.invalid && nameRef.touched" required />
-                    <small class="text-danger" [class.d-none]="nameRef.valid || nameRef.untouched">Name is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Phone</label>
-                  <div class="col-md-9">
+                      [(ngModel)]="Retailer.Name" />
+                  </td>
+                  <td><b>Phone*</b></td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Phone" name="Phone"
-                      [(ngModel)]="Retailer.Phone" #phoneRef="ngModel"
-                      [class.is-invalid]="phoneRef.invalid && phoneRef.touched" required />
-                    <small class="text-danger" [class.d-none]="phoneRef.valid || phoneRef.untouched">Phone is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Email</label>
-                  <div class="col-md-9">
+                      [(ngModel)]="Retailer.Phone" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Email*</b></td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Email" name="Email"
-                      [(ngModel)]="Retailer.Email" #emailRef="ngModel"
-                      [class.is-invalid]="emailRef.invalid && emailRef.touched" required />
-                    <small class="text-danger" [class.d-none]="emailRef.valid || emailRef.untouched">Email is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Address</label>
-                  <div class="col-md-9">
+                      [(ngModel)]="Retailer.Email" />
+                  </td>
+                  <td><b>Address*</b></td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Address" name="Address"
-                      [(ngModel)]="Retailer.Address" #addrRef="ngModel"
-                      [class.is-invalid]="addrRef.invalid && addrRef.touched" required />
-                    <small class="text-danger" [class.d-none]="addrRef.valid || addrRef.untouched">Address is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Location</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter Location" name="Location"
-                      [(ngModel)]="Retailer.Location" #locationRef="ngModel"
-                      [class.is-invalid]="locationRef.invalid && locationRef.touched" required />
-                    <small class="text-danger" [class.d-none]="locationRef.valid || locationRef.untouched">Location is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Latitude</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter Latitude" name="Latitude"
-                      [(ngModel)]="Retailer.Latitude" #latRef="ngModel"
-                      [class.is-invalid]="latRef.invalid && latRef.touched" required />
-                    <small class="text-danger" [class.d-none]="latRef.valid || latRef.untouched">Latitude is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Longitude</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter Longitude" name="Longitude"
-                      [(ngModel)]="Retailer.Longitude" #longRef="ngModel"
-                      [class.is-invalid]="longRef.invalid && longRef.touched" required />
-                    <small class="text-danger" [class.d-none]="longRef.valid || longRef.untouched">Longitude is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Landmark</label>
-                  <div class="col-md-9">
+                      [(ngModel)]="Retailer.Address" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Landmark</td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Landmark" name="Landmark"
-                      [(ngModel)]="Retailer.Landmark" #landmarkRef="ngModel"
-                      [class.is-invalid]="landmarkRef.invalid && landmarkRef.touched" required />
-                    <small class="text-danger" [class.d-none]="landmarkRef.valid || landmarkRef.untouched">Landmark is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Pincode</label>
-                  <div class="col-md-9">
+                      [(ngModel)]="Retailer.Landmark" />
+                  </td>
+                  <td>Pincode</td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Pincode" name="Pincode"
-                      [(ngModel)]="Retailer.Pincode" #pincodeRef="ngModel"
-                      [class.is-invalid]="pincodeRef.invalid && pincodeRef.touched" required />
-                    <small class="text-danger" [class.d-none]="pincodeRef.valid || pincodeRef.untouched">Pincode is required
-                    </small>
-                  </div>
-                </div>
-              </div>
+                      [(ngModel)]="Retailer.Pincode" />
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>Contact Person Name</td>
+                  <td colspan="3">
+                    <input type="text" class="form-control" placeholder="Enter Contact Person Name" name="ContactPerson"
+                      [(ngModel)]="Retailer.ContactPerson"/>
+                  </td>
+                  <td>Contact Person Phone</td>
+                  <td colspan="3">
+                    <input type="text" class="form-control" placeholder="Enter Contact Person Phone" name="ContactPersonPhone"
+                      [(ngModel)]="Retailer.ContactPersonPhone" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Contact Person Address</td>
+                  <td colspan="3">
+                    <input type="text" class="form-control" placeholder="Enter Contact Person Address" name="ContactPersonAddress"
+                      [(ngModel)]="Retailer.ContactPersonAddress" />
+                  </td>
+                  <td>Contact Person Email</td>
+                  <td colspan="3">
+                    <input type="text" class="form-control" placeholder="Enter Contact Person Email" name="ContactPersonEmail"
+                      [(ngModel)]="Retailer.ContactPersonEmail" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Vendor Image</td>
+                  <td colspan="3">
+                    <input name="file" type="file" id="VendorImage" (change)="uploadVendorFile($event)">
 
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Retailer Image</label>
-                  <div class="col-md-9">
-                    <input name="file" type="file" id="name" (change)="uploadFile($event)">
+                    <img src={{url}}{{VimgURL}} runat="server" alt="" style="float: right; height: 150px; width: 150px;" /><br>
+                      <small style="color: red;">{{messageV}}</small>
+                  </td>
+                  <td>Contact Person Image</td>
+                  <td colspan="3">
+                    <input name="file" type="file" id="ContactImage" (change)="uploadCPFile($event)">
 
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="card-footer">
-            <button type="submit" [disabled]="driverForm.invalid" class="btn btn-sm btn-primary">
-              <i class="fa fa-dot-circle-o"></i>
-              Submit
-            </button>
-            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/retailer-list']"><i class="fa fa-ban"></i>
-              Cancel</button>
+                    <img src={{url}}{{CPimgURL}} runat="server" alt="" style="float: right; height: 150px; width: 150px;" /><br>
+                      <small style="color: red;">{{messageCP}}</small>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </form>
       </div>
     </div>
-    <!--/.col-->
   </div>
+
+
+  <!-- <div class="col-sm-6">
+    <div class="row form-group">
+      <label class="col-md-3 col-form-label text-right">Longitude</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" placeholder="Enter Longitude" name="Longitude"
+          [(ngModel)]="Retailer.Longitude" #longRef="ngModel"
+          [class.is-invalid]="longRef.invalid && longRef.touched" required />
+        <small class="text-danger" [class.d-none]="longRef.valid || longRef.untouched">Longitude is required
+        </small>
+      </div>
+    </div>
+  </div> -->

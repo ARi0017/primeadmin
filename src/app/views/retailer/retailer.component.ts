@@ -12,11 +12,13 @@ import { Retailer } from '../../models/retailer';
   templateUrl: './retailer.component.html',
 })
 export class RetailerComponent implements OnInit {
-//@ViewChild('categoryForm',{ read: true, static: false }) public createcategoryform: NgForm;
-Retailer = new Retailer(null,null,null,null,null,"",null,null,null,null,null,"",null,null,"",null,null,null);
+  // RetailerId:number, Name:string, Phone:number, Address:string, Email:string, Location:string, Latitude:string, Longitude:string, Landmark:string, Pincode:number,
+  // RetailerImage:string, ContactPerson:string, ContactPersonPhone:number, ContactPersonAddress:string, ContactPersonEmail:string, ContactPersonImage:string, CreatedBy:number
+  Retailer = new Retailer(0,"","","","",null,null,null,"","",null,"","","","",null,null,null);
   id: any;
   response: any;
-  dlFile: any;
+  vFile: any;
+  cpFile: any;
   filename: any[];
   retailerpicture: string;
 
@@ -34,135 +36,137 @@ Retailer = new Retailer(null,null,null,null,null,"",null,null,null,null,null,"",
       this.getRetailer();
     }
   }
-  onSubmit() {
-    !this.id ? this.addReatailer() : this.editRetailer();
+
+  getRetailer() {
+    const retailerid = {
+          'RetailerId': this.id
+        };
+    this.retailerService.getRetailerbyid(retailerid).subscribe(data => {
+      this.Retailer = data.data[0];
+      this.retailerpicture = data.data[0].RetailerImage;
+    });
   }
-  uploadFile(event: any) {
-    this.dlFile = event.target.files;
-    console.log(this.dlFile);
+  messageV: string; VimgURL: any;
+  uploadVendorFile(event: any) {
+    if (event.target.files.length === 0) return;
 
-  }
+    this.vFile = event.target.files;
+    console.log(this.vFile);    
 
-addReatailer(){
-  this.filename = [];
-    var i = 0;
-    for (let file of this.dlFile) {
-      const uploadData = new FormData();
-      if (file != undefined) {
-        uploadData.append("myFile", file, file.name);
-        this.Retailer.RetailerImage = file.name;
-        this.Retailer.RetailerId = 0;
-        this.Retailer.CreatedBy = 1;
-        this.retailerService.addeditRetailer(this.Retailer).subscribe(
-          res => {
-            console.log(res.status);
-            var status = res.status;
-            if (status == 200) {
-              this.retailerService.fileupload(uploadData).subscribe(
-                res => {
-                  var status = res.status;
-                  if (status == 200) {
-                    console.log('file uploaded');
-                  }
-                },
-                err => {
-                  this.toaster.Error('Something Went Wrong');
-                }
-              );
-              this.toaster.Success("Retailer Added Successfully");
-              this.router.navigate(["/retailer-list"]);
-            } else {
-              this.toaster.Error("Server Error!");
-            }
-          },
-          err => {
-            this.toaster.Error("Something Went Wrong");
-          }
-        );
-
-      }
-
-      this.filename[i] = file.name;
-      i++;
+    var mimeType = this.vFile[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.messageV = "Only images are supported.";
+      return;
     }
-}
+    this.messageV = "";
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]); 
+    reader.onload = (_event) => { 
+      this.VimgURL = reader.result; 
+      this.url = ""; 
+    }
+  }
 
-getRetailer() {
-  const retailerid = {
-        'RetailerId': this.id
-      };
-  this.retailerService.getRetailerbyid(retailerid).subscribe(data => {
-    this.Retailer = data.data[0];
-    this.retailerpicture = data.data[0].RetailerImage;
-  });
-}
+  messageCP: string; CPimgURL: any;
+  uploadCPFile(event: any) {
+    if (event.target.files.length === 0) return;
 
-editRetailer(){
-  this.filename = [];
+    this.cpFile = event.target.files;
+    console.log(this.cpFile);    
+
+    var mimeType = this.cpFile[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.messageCP = "Only images are supported.";
+      return;
+    }
+    this.messageCP = "";
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]); 
+    reader.onload = (_event) => { 
+      this.CPimgURL = reader.result; 
+      this.url = ""; 
+    }
+  }
+  url:any;
+  onSubmit() {
+    this.filename = [];
     var i = 0;
-    if(this.dlFile!= undefined){
-      for (let file of this.dlFile) {
+    if(this.vFile!= undefined){
+      for (let file of this.vFile) {
         const uploadData = new FormData();
         if (file != undefined) {
           uploadData.append("myFile", file, file.name);
           this.Retailer.RetailerImage = file.name;
-          this.Retailer.RetailerId = this.id;
-          this.Retailer.CreatedBy = 1;
-          this.retailerService.addeditRetailer(this.Retailer).subscribe(
+          this.retailerService.fileupload(uploadData).subscribe(
             res => {
-              console.log(res.status);
               var status = res.status;
               if (status == 200) {
-                this.retailerService.fileupload(uploadData).subscribe(
-                  res => {
-                    var status = res.status;
-                    if (status == 200) {
-                      console.log('file uploaded');
-                    }
-                  },
-                  err => {
-                    this.toaster.Error('Something Went Wrong');
-                  }
-                );
-                this.toaster.Success("Retailer Updated Successfully");
-                this.router.navigate(["/retailer-list"]);
-              } else {
-                this.toaster.Error("Server Error!");
+                console.log('Retailer Image uploaded. File name: ', this.Retailer.RetailerImage);
               }
             },
             err => {
-              this.toaster.Error("Something Went Wrong");
+              this.toaster.Error('Something Went Wrong');
+              this.Retailer.RetailerImage = null;
+              return;
             }
           );
-
         }
 
         this.filename[i] = file.name;
         i++;
       }
     }
-    else{
-      this.Retailer.RetailerImage = this.retailerpicture;
-      this.Retailer.RetailerId = this.id;
-      this.Retailer.CreatedBy = 1;
-      this.retailerService.addeditRetailer(this.Retailer).subscribe(
-        res => {
-          console.log(res.status);
-          var status = res.status;
-          if (status == 200) {
-            this.toaster.Success("Retailer Updated Successfully");
-            this.router.navigate(["/retailer-list"]);
-          } else {
-            this.toaster.Error("Server Error!");
-          }
-        },
-        err => {
-          this.toaster.Error("Something Went Wrong");
+    if (this.cpFile!=null){
+      for (let file of this.cpFile) {
+        const uploadData = new FormData();
+        if (file != undefined) {
+          uploadData.append("myFile", file, file.name);
         }
-      );
+        this.Retailer.ContactPersonImage = file.name;
+        this.retailerService.fileupload(uploadData).subscribe(
+          res => {
+            var status = res.status;
+            if (status == 200) {
+              console.log('Contact Person Image uploaded. File name: ', this.Retailer.ContactPersonImage);
+            }
+          },
+          err => {
+            this.toaster.Error('Something Went Wrong');
+            this.Retailer.ContactPersonImage = null;
+            return;
+          }
+        );
+      }
     }
 
-}
+    this.Retailer.CreatedBy = 1;
+    this.Retailer.RetailerId = this.id != null ? this.id : 0;
+    this.retailerService.addeditRetailer(this.Retailer).subscribe(
+      res => {
+        console.log(res.status);
+        var status = res.status;
+        if (status == 200) {
+          if (this.Retailer.RetailerId != null)
+            this.toaster.Success("Vendor Updated Successfully");
+          else
+            this.toaster.Success("Vendor Inserted Successfully");
+          this.router.navigate(["/retailer-list"]);
+        } else {
+          this.toaster.Error("Server Error!");
+        }
+      },
+      err => {
+        this.toaster.Error("Something Went Wrong");
+      }
+    );
+  }
 
-
+  validateForm(){
+    if (this.Retailer.Name == null || this.Retailer.Name == "") return true;
+    if (this.Retailer.Phone == null || this.Retailer.Phone == "") return true;
+    if (this.Retailer.Email == null || this.Retailer.Email == "") return true;
+    if (this.Retailer.Address == null || this.Retailer.Address == "") return true;
+   if (this.vFile!= undefined && this.messageV!="") return true;
+   if (this.cpFile!= undefined && this.messageCP!="") return true;
+  }
 }

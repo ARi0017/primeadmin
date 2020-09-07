@@ -12,48 +12,32 @@ import { RetailerService } from '../../services/Retailer/retailer.service';
 export class RetailerListComponent implements OnInit {
   data: any;
   url: string;
+  retailername: any='';
+  PageSize:number=10;
+  count: number; page: number = 1;
   constructor(private retailerService: RetailerService,
     private router: Router,
     private toaster: ToasterService) {
   }
 
   ngOnInit() {
-    this.getRetailer();
+    this.search(this.page);
   }
 
-  search(name: string) {
-    const retailer1 = {
-      "Name": name,
-      "Phone":"",
-      "Address":"",
-      "Pincode":"",
-      "Landmark":"",
-      "ContactPerson":"",
-      "Page":"1",
-      "Size":"10"
-    }
+  search(page: number) {
+    let retailer1 = {Name: this.retailername, Phone:"", Address:"", Pincode:"", Landmark:"", ContactPerson:"", Page:page, Size: this.PageSize}
     this.retailerService.getRetailer(retailer1).subscribe(data => {
       this.data = data.data;
       this.url = data.Imgurl;
-//console.log(data);
+      //this.dataCount = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      this.count = (Object.keys(this.data).length > 0) ? this.data[0].RowCount : 0;
+      // this.count = (this.dataCount - (this.dataCount%this.PageSize))/this.PageSize + 1;
+      console.log("Total Page Count",this.count);
     });
   }
-
-  getRetailer() {
-      const retailer = {
-      "Name": "",
-      "Phone":"",
-      "Address":"",
-      "Pincode":"",
-      "Landmark":"",
-      "ContactPerson":"",
-      "Page":"1",
-      "Size":"10"
-    }
-    this.retailerService.getRetailer(retailer).subscribe(data => {
-      this.data = data.data;
-      this.url = data.Imgurl;
-    });
+  getPagination(page: number){
+    this.page = page;
+    this.search(this.page);
   }
 
   addRetailer() {

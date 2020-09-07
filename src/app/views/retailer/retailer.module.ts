@@ -11,6 +11,7 @@ import { RetailerListComponent } from './retailer-list.component';
 
 import { DataTableModule } from "angular2-datatable";
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.s
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
-    DataTableModule
+    DataTableModule,
+    PaginationModule.forRoot(),
   ],
   exports: [RetailerComponent],
   declarations: [ RetailerComponent , RetailerListComponent],

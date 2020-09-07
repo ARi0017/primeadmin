@@ -32,7 +32,7 @@ export class PincodeListComponent implements OnInit {
       this.pincodeService.getPincode(Pincode).subscribe(data => {
         this.data = data.data;
         console.log(this.data);
-        this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+        this.count = (Object.keys(this.data).length > 0) ? this.data[0].RowCount : 0;
         console.log("Total Row Count",this.count);
 
 

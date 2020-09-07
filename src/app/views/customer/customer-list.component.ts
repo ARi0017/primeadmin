@@ -57,7 +57,7 @@ export class CustomerListComponent implements OnInit {
     this.customerService.getCustomerList(initialCustomer).subscribe(data => {
       this.data = data.data;
       this.url = data.Imgurl;
-      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      this.count = (Object.keys(this.data).length > 0) ? this.data[0].RowCount : 0;
     });
   }
   GetCustomerCart(id :string, name:string) {

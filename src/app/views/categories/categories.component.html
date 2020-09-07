@@ -4,39 +4,29 @@
       <div class="card">
         <form #categoryForm="ngForm" (ngSubmit)="onSubmit()">
           <div class="card-body">
-            <!--/.row-->
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Category Name</label>
-                  <div class="col-md-9">
+            <table class="table table-bordered table-striped mb-0">
+              <tbody>
+                <tr>
+                  <td><b>Name*</b></td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Name" name="name"
                       [(ngModel)]="Category.Category" #nameRef="ngModel"
                       [class.is-invalid]="nameRef.invalid && nameRef.touched" required />
                     <small class="text-danger" [class.d-none]="nameRef.valid || nameRef.untouched">Name is required
                     </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Description</label>
-                  <div class="col-md-9">
+                  </td>
+                  <td><b>Description*</b></td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Description" name="Description"
                       [(ngModel)]="Category.Description" #descriptionRef="ngModel"
                       [class.is-invalid]="descriptionRef.invalid && descriptionRef.touched" required />
                     <small class="text-danger" [class.d-none]="descriptionRef.valid || descriptionRef.untouched">Description is required
                     </small>
-                  </div>
-                </div>
-              </div>
-              
-              
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Parent Category</label>
-                  <div class="col-md-9">
-                    <!-- <div *ngIf="Category.IsEdit == '1'"> -->
+                  </td>
+                </tr>
+                <tr>
+                    <td>Parent</td>
+                    <td colspan="3">
                       <select name="ParentCategoryId" class="form-control" [(ngModel)]="Category.ParentCategoryId" #parentcategoryRef="ngModel"
                       [class.is-invalid]="parentcategoryRef.invalid && parentcategoryRef.touched" [disabled]="Category.IsEdit == '0'" required>
                         <option value="" selected>Select Parent Category</option>
@@ -46,52 +36,23 @@
                       </select>
                       <small class="text-danger" [class.d-none]="parentcategoryRef.valid || parentcategoryRef.untouched">Parent Category is required
                       </small>
-                    <!-- </div>
-                    <b class="col-form-label text-right" *ngIf="Category.IsEdit == '0'">This is a Parent Category. Non Editable.</b> -->
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 text-right">Cover Image</label>
-                  <div class="col-md-9">
-                    <input name="Ifile" type="file" id="Iname" placeholder="Cover Image"
+                    </td>
+                    <td>Cover Image</td>
+                    <td colspan="3">
+                      <input name="Ifile" type="file" id="Iname" placeholder="Cover Image"
                       (change)="uploadFile($event)">
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 text-right">Cover Video</label>
-                  <div class="col-md-9">
+                    </td>
+                </tr>
+                <tr>
+                  <td>Cover Video</td>
+                  <td colspan="3">
                     <input name="Vfile" type="file" id="Vname" placeholder="Cover Video"
                       (change)="uploadFile1($event)">
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-sm-6" style="display: none;">
-                <div class="row form-group">
-                  <label class="col-md-3 text-right">Category Type</label>
-                  <div class="col-md-9">
-                    <div class="row">
-                    <div class="col-sm-6">
-                      <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="0"> <strong class="text-success">General(Food, Grocery, Frozen)</strong>
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="2"> <strong class="text-primary">Medicine</strong>
-                    </div>
-                    <div class="col-sm-2">
-                      <input type="radio" [(ngModel)]="Category.IsSpecial" name="IsSpecial" value="1"> <strong class="text-warning">Skybar</strong>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+                  </td>
+                  <td colspan="4"></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="card-footer">
             <button type="submit" [disabled]="categoryForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>

@@ -6,13 +6,12 @@ export class Category {
     public CoverVideo:string,
     public Description:string,
     public CreatedBy:number,
-    public IsSpecial:string,
     public IsFeatured:string,
+    public IsEdit:string,
     public CategoryId?:number,
     public IsActive?:string,
     public CategoryMain?:string,
     public CategoryParent?:string,
-    public IsEdit?:string,
   ) {}
 }
 

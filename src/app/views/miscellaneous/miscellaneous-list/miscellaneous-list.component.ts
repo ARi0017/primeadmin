@@ -3,6 +3,8 @@ import { MiscellaneousService } from '../../../services/miscellaneous/miscellane
 import { ToasterService } from '../../../services/toaster.service';
 import { Router } from '@angular/router';
 import { Miscellaneous } from '../../../models/miscellaneous';
+import { ProductService } from '../../../services/Product/product.service';
+import { TaxCategory } from '../../../models/taxcategory';
 
 @Component({
   selector: 'app-miscellaneous-list',
@@ -13,8 +15,9 @@ export class MiscellaneousListComponent implements OnInit {
   data: any;
   page: number = 1;
   count: number;
-
-  constructor(private miscService: MiscellaneousService, private toaster: ToasterService, private router: Router) { }
+  taxcategory: Array<{ TaxCategoryId: any, TaxCategory: any, Percentage: any, IsActive: any }>;
+  TaxCategory = new TaxCategory(0,'',1,'','1');
+  constructor(private miscService: MiscellaneousService, private toaster: ToasterService, private router: Router, private productService: ProductService) { }
   DefaultDiscountRate: number = 0;
   SpecialDiscountRate: number = 0;
   DefaultTaxRate: number = 0;
@@ -48,10 +51,22 @@ export class MiscellaneousListComponent implements OnInit {
       this.OrderReturnCommRateOA = data.data[0].OrderReturnCommRateOA;
       this.RefByAddCommRate = data.data[0].RefByAddCommRate;
     });
+    this.getTaxCategories();
+  }
+  getTaxCategories(){
+    this.productService.getTaxCategories().subscribe(data => {
+      this.taxcategory = data.data[0];
+    });
   }
 
-
-
+addNewTaxCategory(){
+  this.TaxCategory = new TaxCategory(0,'',1,'','1');
+  this.taxcategory.push(this.TaxCategory);
+}
+// removeTaxCategory(i){
+//   console.log("index",i);
+//   this.taxcategory.splice(i, 1);
+// }
    updateValues() {
 
     const Misc = {
@@ -86,16 +101,34 @@ export class MiscellaneousListComponent implements OnInit {
 
   }
 
-  addMisc() {
-    console.log('add misc');
+  ValidateTax(val:object){
+    if (val['TaxCategory'] == null || val['TaxCategory'] == "") return true;
+    if (val['Percentage'] == null || val['Percentage'] == 0) return true;
   }
-
-
-
-
-
-  onSubmit() {
-    console.log('submit');
+  AddEditTaxCategory(val:object){
+    // if (val['TaxCategory'] == null || val['TaxCategory'] == "") return true;
+    // if (val['Percentage'] == null || val['Percentage'] == 0) return true;
+    this.getTaxCategories();
+    alert("Hi");
   }
-
+TaxCategoryId:any; IsActive:any;
+  onStatus(id: any, is_active: string) {
+    if (!confirm("Are You Sure ?")) {
+      return;
+    }
+    this.TaxCategoryId = id;
+    this.IsActive = is_active;
+    // const catstatus = {
+    //   'CategoryId': this.CategoryId,
+    //   'IsActive': this.IsActive,
+    //   'CreatedBy': '1'
+    //  };
+    // this.categoryService.statusChange(catstatus).subscribe(data => {
+    //   this.data = data.data[0];
+    //   if (data.status == 200) {
+    //     this.toaster.Success("Status Updated Successfully");
+    //     this.getCategories(this.page);
+    //   }
+    // });
+  }
 }

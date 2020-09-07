@@ -10,7 +10,7 @@ import { ToasterService } from '../../services/toaster.service';
 })
 export class CategoriesComponent implements OnInit {
 //@ViewChild('categoryForm',{ read: true, static: false }) public createcategoryform: NgForm;
-  Category = new Category("",null,null,null,"",null,null,null,null,'1');
+  Category = new Category("",null,null,null,"",null,null,'1',null,'1');
   parentcategory: any;
   id: any = 0;
   response: any;
@@ -31,7 +31,9 @@ export class CategoriesComponent implements OnInit {
     if(this.id){
       this.getCategory();
     }
-    this.getParentategories();
+    if (this.Category.IsEdit != '0'){
+      this.getParentategories();
+    }
   }
 
   uploadFile(event: any) {
@@ -55,14 +57,12 @@ export class CategoriesComponent implements OnInit {
             res => {
               var status = res.status;
               if (status == 200) {
-                console.log('Cover Image uploaded');
-                console.log(file.name);
-                this.Category.CoverImage = file.name;
-                console.log(this.Category.CoverImage)
+                console.log('Cover Image uploaded. File name: ', this.Category.CoverImage);
               }
             },
             err => {
               this.toaster.Error('Something Went Wrong');
+              this.Category.CoverImage = null;
               return;
             }
           );
@@ -75,16 +75,17 @@ export class CategoriesComponent implements OnInit {
         if (file != undefined) {
           uploadData.append("myFile", file, file.name);
         }
+        this.Category.CoverVideo = file.name;
         this.categoryService.fileupload(uploadData).subscribe(
           res => {
             var status = res.status;
             if (status == 200) {
-              console.log('Cover Video uploaded');
-              this.Category.CoverVideo = file.name;
+              console.log('Cover Video uploaded. Video name: ', this.Category.CoverVideo);
             }
           },
           err => {
             this.toaster.Error('Something Went Wrong');
+            this.Category.CoverVideo = null;
             return;
           }
         );
@@ -95,7 +96,6 @@ export class CategoriesComponent implements OnInit {
     this.Category.CategoryId = this.id != null ? this.id : 0;
     console.log(this.Category)
     this.categoryService.addeditCategories(this.Category).subscribe(
-
       res => {
         console.log(res.status);
         var status = res.status;
@@ -125,6 +125,7 @@ getCategory(){
     this.categoryService.getParentategories().subscribe(data => {
       if(data){
         this.parentcategory = data.data[0];
+        console.log("Sanjib",data.data[0]);
       }
     });
   }

@@ -43,11 +43,11 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts(page: number) {
-    let Product = {categoryid: this.categoryid, name: this.name, page: page, Size: this.PageSize};
+    let Product = {categoryid: this.categoryid != "" ? this.categoryid : "0", name: this.name, page: page, Size: this.PageSize};
     this.productService.getProductList(Product).subscribe(data => {
       this.data = data.data[0];
       this.url = data.imgurl;
-      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      this.count = (Object.keys(this.data).length > 0) ? this.data[0].RowCount : 0;
       console.log("Total Data Count",this.count);
     });
   }

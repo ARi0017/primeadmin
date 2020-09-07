@@ -7,7 +7,7 @@
           <div class="row form-group">
             <label class="col-md-3 col-form-label text-right">Category</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" [(ngModel)] = "categoryname" placeholder="Enter Category" />
+              <input type="text" class="form-control" [(ngModel)]="categoryname" placeholder="Enter Category" />
             </div>
           </div>
         </div>
@@ -47,12 +47,6 @@
               <ng-template #elseSpan>
                 <span class="text-danger pointer" (click)="onStatus(dataval.CategoryId, 1)"><i class="fa fa-close fa-lg"></i></span>
               </ng-template>
-                <!-- <p *ngIf="dataval.IsEdit == 1; else elseEditIsActive">
-                  
-                </p>
-                <ng-template #elseEditIsActive>
-                  Not Editable
-                </ng-template> -->
             </td>
 
             <td>

@@ -4,7 +4,7 @@
             <div class="card">
                 <form #customerForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
                     <div class="card-header">
-                        <h5>{{Customer.Name}}'s Info!
+                        <h5><strong *ngIf="Customer.Name != '' && Customer.Name != null">{{Customer.Name}}'s Info!</strong>
                             <button type="button" class="btn btn-sm btn-secondary pull-right" [routerLink]="['/customer-list']"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button> &nbsp;
                             <button type="reset" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Reset</button> &nbsp;
                             <button type="submit" class="btn btn-sm btn-primary pull-right" [disabled]="customerForm.invalid"><i class="fa fa-dot-circle-o"></i> Submit</button> 
@@ -109,11 +109,11 @@
               <thead>
                 <tr>
                   <th><mfDefaultSorter by="AddressName">Type</mfDefaultSorter></th>
-                  <th><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
+                  <th colspan="2"><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
                   <th><mfDefaultSorter by="Phone">Phone</mfDefaultSorter></th>
-                  <th><mfDefaultSorter by="Email">Email</mfDefaultSorter></th>
+                  <th colspan="2"><mfDefaultSorter by="Email">Email</mfDefaultSorter></th>
                   <th colspan="3"><mfDefaultSorter by="Address">Address</mfDefaultSorter></th>
-                  <th><mfDefaultSorter by="Landmark">Landmark</mfDefaultSorter></th>
+                  <th colspan="2"><mfDefaultSorter by="Landmark">Landmark</mfDefaultSorter></th>
                   <th><mfDefaultSorter by="Pincode">Pincode</mfDefaultSorter></th>
                   <th colspan="4"><mfDefaultSorter by="Location">Location</mfDefaultSorter></th>
                   <th width="9%">Action</th>
@@ -122,11 +122,11 @@
               <tbody>
                 <tr *ngFor="let val of addressdata">
                   <td>{{val.AddressName}}</td>
-                  <td>{{val.Name}}</td>
+                  <td colspan="2">{{val.Name}}</td>
                   <td>{{val.Phone}}</td>
-                  <td>{{val.Email}}</td>
+                  <td colspan="2">{{val.Email}}</td>
                   <td colspan="3">{{val.Address}}</td>
-                  <td>{{val.Landmark}}</td>
+                  <td colspan="2">{{val.Landmark}}</td>
                   <td>{{val.Pincode}}</td>
                   <td colspan="4">{{val.Location}}</td>
                   <td>

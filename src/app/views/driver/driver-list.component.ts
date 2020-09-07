@@ -55,7 +55,7 @@ export class DriverListComponent implements OnInit {
       this.data = data.data;
       this.url = data.Imgurl;
       //this.dataCount = (this.data.length > 0) ? this.data[0].RowCount : 0;
-      this.count = (this.data.length > 0) ? this.data[0].RowCount : 0;
+      this.count = (Object.keys(this.data).length > 0) ? this.data[0].RowCount : 0;
       // this.count = (this.dataCount - (this.dataCount%this.PageSize))/this.PageSize + 1;
       console.log("Total Page Count",this.count);
     });
