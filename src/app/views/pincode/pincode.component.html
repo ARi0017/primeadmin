@@ -4,83 +4,76 @@
       <div class="card">
         <form #pincodeForm="ngForm" (ngSubmit)="onSubmit()">
           <div class="card-body">
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Pincode</label>
-                  <div class="col-md 9">
+            <table class="table table-bordered table-striped mb-0">
+              <tbody>
+                <tr>
+                  <td><b>Pincode*</b></td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Pincode" name="Pincode"
                     [(ngModel)]="Pincode.Pincode" #pincodeRef="ngModel" [class.is-invalid]="pincodeRef.invalid && pincodeRef.touched" required>
                     <small class="text-danger" [class.d-none]="pincodeRef.valid || pincodeRef.untouched">Pincode is required></small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Area</label>
-                  <div class="col-md-9">
+                  </td>
+                  <td><b>Area*</b></td>
+                  <td colspan="3">
                     <input type="text" class="form-control" placeholder="Enter Description" name="Area"
                       [(ngModel)]="Pincode.Area" #areaRef="ngModel"
                       [class.is-invalid]="areaRef.invalid && areaRef.touched" required />
                     <small class="text-danger" [class.d-none]="areaRef.valid || areaRef.untouched">Area is required
                     </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">District</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter Description" name="District"
-                      [(ngModel)]="Pincode.District" #districtRef="ngModel"
-                      [class.is-invalid]="districtRef.invalid && districtRef.touched" required />
-                    <small class="text-danger" [class.d-none]="districtRef.valid || districtRef.untouched">District is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row form-group">
-                  <label class="col-md-3 col-form-label text-right">Route</label>
-                  <div class="col-md-9">
-
-                    <select name="Route" class="form-control" [(ngModel)]="Pincode.Route" #routeRef="ngModel"
-                     [class.is-invalid]="routeRef.invalid && routeRef.touched" required>
-                     <option [value]="" selected>Select Route</option>
-                     <option [value]="'ROUTE 1'">ROUTE 1</option>
-                     <option [value]="'ROUTE 2'">ROUTE 2</option>
-                     <option [value]="'ROUTE 3'">ROUTE 3</option>
-                     <option [value]="'ROUTE 4'">ROUTE 4</option>
-                     <option [value]="'ROUTE 5'">ROUTE 5</option>
-                     <option [value]="'ROUTE 6'">ROUTE 6</option>
-                     <option [value]="'ROUTE 7'">ROUTE 7</option>
-                     <option [value]="'ROUTE 8'">ROUTE 8</option>
-                     <option [value]="'ROUTE 9'">ROUTE 9</option>
-                     <option [value]="'ROUTE 10'">ROUTE 10</option>
-                     <option [value]="'ROUTE 11'">ROUTE 11</option>
-                     <option [value]="'ROUTE 12'">ROUTE 12</option>
-                     <option [value]="'ROUTE 13'">ROUTE 13</option>
-                     <option [value]="'ROUTE 14'">ROUTE 14</option>
-                     <option [value]="'ROUTE 15'">ROUTE 15</option>
-                     <option [value]="'ROUTE 16'">ROUTE 16</option>
-                     <option [value]="'ROUTE 17'">ROUTE 17</option>
-                     <option [value]="'ROUTE 18'">ROUTE 18</option>
-                     <option [value]="'ROUTE 19'">ROUTE 19</option>
-                     <option [value]="'ROUTE 20'">ROUTE 20</option>
-                    </select>
-                    <small class="text-danger" [class.d-none]="routeRef.valid || routeRef.untouched">District is required
-                    </small>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </td>
+                </tr>
+                <tr>
+                    <td>District</td>
+                    <td colspan="3">
+                      <select name="District" class="form-control" [(ngModel)]="Pincode.District" #routeRef="ngModel"
+                        [class.is-invalid]="districtRef.invalid && districtRef.touched" required>
+                        <option [value]="" selected>Select District</option>
+                        <option [value]="'Kolkata'">Kolkata</option>
+                        <option [value]="'North 24 Parganas'">North 24 Parganas</option>
+                        <option [value]="'Howrah'">Howrah</option>
+                      </select>
+                      <small class="text-danger" [class.d-none]="districtRef.valid || districtRef.untouched">District is required
+                      </small>
+                    </td>
+                    <td>Route</td>
+                    <td colspan="3">
+                      <select name="Route" class="form-control" [(ngModel)]="Pincode.Route" #routeRef="ngModel"
+                        [class.is-invalid]="routeRef.invalid && routeRef.touched" required>
+                        <option [value]="" selected>Select Route</option>
+                        <option [value]="'ROUTE 1'">ROUTE 1</option>
+                        <option [value]="'ROUTE 2'">ROUTE 2</option>
+                        <option [value]="'ROUTE 3'">ROUTE 3</option>
+                        <option [value]="'ROUTE 4'">ROUTE 4</option>
+                        <option [value]="'ROUTE 5'">ROUTE 5</option>
+                        <option [value]="'ROUTE 6'">ROUTE 6</option>
+                        <option [value]="'ROUTE 7'">ROUTE 7</option>
+                        <option [value]="'ROUTE 8'">ROUTE 8</option>
+                        <option [value]="'ROUTE 9'">ROUTE 9</option>
+                        <option [value]="'ROUTE 10'">ROUTE 10</option>
+                        <option [value]="'ROUTE 11'">ROUTE 11</option>
+                        <option [value]="'ROUTE 12'">ROUTE 12</option>
+                        <option [value]="'ROUTE 13'">ROUTE 13</option>
+                        <option [value]="'ROUTE 14'">ROUTE 14</option>
+                        <option [value]="'ROUTE 15'">ROUTE 15</option>
+                        <option [value]="'ROUTE 16'">ROUTE 16</option>
+                        <option [value]="'ROUTE 17'">ROUTE 17</option>
+                        <option [value]="'ROUTE 18'">ROUTE 18</option>
+                        <option [value]="'ROUTE 19'">ROUTE 19</option>
+                        <option [value]="'ROUTE 20'">ROUTE 20</option>
+                      </select>
+                      <small class="text-danger" [class.d-none]="routeRef.valid || routeRef.untouched">Route is required
+                      </small>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
 
 
           </div>
           <div class="card-footer">
             <button type="submit" [disabled]="pincodeForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/pincode']"><i class="fa fa-ban"></i> Cancel</button>
-            <button type="button" class="btn btn-sm btn-secondary" (click)="backPage()"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button>
+            <button type="button" class="btn btn-sm btn-secondary" [routerLink]="['/pincode']"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
           </div>
         </form>
       </div>

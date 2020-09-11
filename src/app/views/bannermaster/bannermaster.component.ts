@@ -13,7 +13,7 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
 })
 export class BannermasterComponent implements OnInit {
 
-  Bannermaster = new Bannermaster(null,"","","",null,"",null, null)
+  Bannermaster = new Bannermaster(null,"","","",0,"",null, null)
   parentcategory: any;
   productdetails:any;
   id: any = 0;
@@ -36,6 +36,7 @@ showdiv(divshow){
     //this.Product = false;
   }if(divshow == 'Combo'){
     this.Category = false;
+    this.Bannermaster.LinkId = 0;
     //this.Product = false;
   }
 }
@@ -49,6 +50,7 @@ showdiv(divshow){
   getBanner(){
     this.bannermasterService.getBannerbyid(this.id).subscribe(data => {
       this.Bannermaster = data.data[0];
+      this.imgURL = this.Bannermaster.BannerImage;
       if(this.Bannermaster.LinkFlag == "1"){
         this.Category =true;
         //this.Product = false;
@@ -71,9 +73,24 @@ showdiv(divshow){
 
     });
   }
-
+  messageDl: string; imgURL: any; url:any;
   uploadFile(event: any) {
+    if (event.target.files.length === 0) return;
+
     this.dlFile = event.target.files;
+    var mimeType = this.dlFile[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.messageDl = "Only images are supported.";
+      return;
+    }
+    this.messageDl = "";
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+      this.url = ""; 
+    }
+
     if (this.dlFile!=null){
       this.Bannermaster.BannerImage = this.dlFile[0].name;
     }

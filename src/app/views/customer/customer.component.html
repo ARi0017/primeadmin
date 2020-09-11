@@ -14,6 +14,13 @@
                         <table class="table table-bordered table-striped mb-0">
                             <tbody>
                               <tr>
+                                <td rowspan="5">
+                                  <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 160px; width: 100%;" /><br>
+                                  <input type="file" name="image" (change)="getFileInfo($event)">
+                                  <small style="color: red;">{{messageDl}}</small>
+                                </td>
+                              </tr>
+                              <tr>
                                 <td>Type</td>
                                 <td colspan="3">
                                     <input type="radio" [(ngModel)]="Customer.CustomerType" name="CustomerType" value="1"> Individual
@@ -78,14 +85,6 @@
                                 <td colspan="3">
                                     <textarea id="textarea-input" name="DefaultAddress" class="form-control" [(ngModel)]="Customer.DefaultAddress"></textarea>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>Profile Image</td>
-                                <td colspan="3">
-                                    <input type="file" name="image" (change)="getFileInfo($event)">
-                                </td>
-                                <td></td>
-                                <td colspan="3"></td>
                             </tr>
                             </tbody>
                           </table>

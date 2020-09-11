@@ -91,7 +91,7 @@
 
         <tfoot>
           <tr>
-            <td colspan="4">
+            <td colspan="5">
               <pagination [totalItems]="count" [boundaryLinks]='true' [itemsPerPage]="PageSize" [maxSize]="5" [rotate]='false' [(ngModel)]="page"
                 (pageChanged)="getPagination($event.page)">
               </pagination>

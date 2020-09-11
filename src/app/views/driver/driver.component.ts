@@ -38,10 +38,23 @@ export class DriverComponent implements OnInit {
   onSubmit() {
     !this.id ? this.addDriver() : this.editDriver();
   }
+  messageDl: string; imgURL: any; url:any;
   uploadFile(event: any) {
+    if (event.target.files.length === 0) return;
     this.dlFile = event.target.files;
     console.log(this.dlFile);
-
+    var mimeType = this.dlFile[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.messageDl = "Only images are supported.";
+      return;
+    }
+    this.messageDl = "";
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+      this.url = "";
+    }
   }
 
 addDriver(){
@@ -92,6 +105,7 @@ getDriver(){
   this.driverService.getDriverbyid(this.id).subscribe(data => {
     this.Driver = data.data[0];
     this.driverpicture = data.data[0].ProfileImage;
+    this.imgURL = data.data[0].ProfileImage;
   });
 }
 backpage() {

@@ -85,16 +85,16 @@
                 </ng-template>
               </td>
               <td style="color:teal;">
-                <select *ngIf="dataval.OrderStatusId <= 3;else isdriverselected" class="form-control"
+                <!-- <select *ngIf="dataval.OrderStatusId <= 3;else isdriverselected" class="form-control"
                   (change)="mapdriver(dataval.OrderId, $event)" [(ngModel)]="dataval.DriverId">
                   <option [value]="undefined" disabled selected>Select</option>
                   <option *ngFor="let val of driverdata" [value]="val.DriverId">
                     {{val.Name}}
                   </option>
                 </select>
-                <ng-template #isdriverselected>
+                <ng-template #isdriverselected> -->
                   <b>{{dataval.DriverName}}</b>
-                </ng-template>
+                <!-- </ng-template> -->
               </td>
               <td class="text-center" style="color: red;">
                 <a style="cursor: pointer;" *ngIf="dataval.OrderStatusId <= 3;else iscancelled"
@@ -108,7 +108,7 @@
                 <i style="cursor: pointer;" class="fa fa-print" aria-hidden="true"
                   (click)="myModal1.show(); OrderWholeData(dataval.OrderId);"></i>
                 <!-- <a title="Print Order" target="_blank" [routerLink]="['/invoice', dataval.OrderId]"><i class="fa fa-print" aria-hidden="true"></i></a> -->
-              </td>
+              </td>      
             </tr>
           </tbody>
 

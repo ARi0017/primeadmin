@@ -108,10 +108,15 @@ export const navItems: NavData[] = [
         icon: 'fa fa-motorcycle'
       },
       {
+        name: 'Vehicles',
+        url: '/vehicles-list',
+        icon: 'fa fa-car'
+      },
+      {
         name: 'Pincodes',
         url: '/pincode',
         icon: 'fa fa-map-pin'
-      }
+      },
     ]
   },
   {

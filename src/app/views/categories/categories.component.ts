@@ -16,7 +16,7 @@ export class CategoriesComponent implements OnInit {
   response: any;
   dlFile: any = null;
   vFile: any = null;
-
+  url:any;
   constructor(private categoryService: CategoryService,
     private router: Router,
     private route: ActivatedRoute,
@@ -36,9 +36,26 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
+  messageDl: string; imgURL: any;
   uploadFile(event: any) {
+    if (event.target.files.length === 0) return;
+
     this.dlFile = event.target.files;
     console.log(this.dlFile);
+
+    var mimeType = this.dlFile[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.messageDl = "Only images are supported.";
+      return;
+    }
+    this.messageDl = "";
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+      this.url = ""; 
+    }
+
   }
 
   uploadFile1(event: any) {
@@ -118,6 +135,7 @@ export class CategoriesComponent implements OnInit {
 getCategory(){
   this.categoryService.getCategorybyid(this.id).subscribe(data => {
     this.Category = data.data[0];
+    this.imgURL = this.Category.CoverImage;
   });
 }
 

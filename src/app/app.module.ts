@@ -41,6 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LogoutComponent } from './views/logout/logout.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { VehiclesComponent } from './views/vehicles/vehicles.component';
 //import { InvoiceComponent } from './views/invoice/invoice.component';
 //import { PincodeComponent } from './views/pincode/pincode.component';
 //import { MiscelleniousComponent } from './views/pincode/miscellenious.component';
@@ -70,6 +71,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     LoginComponent,
     LogoutComponent,
     ForgotPasswordComponent,
+    // VehiclesComponent,
     //InvoiceComponent,
     //PincodeComponent,
     //MiscelleniousComponent

@@ -21,6 +21,7 @@ export class RetailerComponent implements OnInit {
   cpFile: any;
   filename: any[];
   retailerpicture: string;
+  contactPersonPicture: string;
 
   constructor(private retailerService: RetailerService,
     private router: Router,
@@ -44,6 +45,9 @@ export class RetailerComponent implements OnInit {
     this.retailerService.getRetailerbyid(retailerid).subscribe(data => {
       this.Retailer = data.data[0];
       this.retailerpicture = data.data[0].RetailerImage;
+      this.VimgURL = data.data[0].RetailerImage;
+      this.contactPersonPicture = data.data[0].ContactPersonImage;
+      this.CPimgURL = data.data[0].ContactPersonImage;
     });
   }
   messageV: string; VimgURL: any;
@@ -51,7 +55,7 @@ export class RetailerComponent implements OnInit {
     if (event.target.files.length === 0) return;
 
     this.vFile = event.target.files;
-    console.log(this.vFile);    
+    console.log(this.vFile);
 
     var mimeType = this.vFile[0].type;
     if (mimeType.match(/image\/*/) == null) {
@@ -60,10 +64,10 @@ export class RetailerComponent implements OnInit {
     }
     this.messageV = "";
     var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]); 
-    reader.onload = (_event) => { 
-      this.VimgURL = reader.result; 
-      this.url = ""; 
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.VimgURL = reader.result;
+      this.url = "";
     }
   }
 
@@ -72,7 +76,7 @@ export class RetailerComponent implements OnInit {
     if (event.target.files.length === 0) return;
 
     this.cpFile = event.target.files;
-    console.log(this.cpFile);    
+    console.log(this.cpFile);
 
     var mimeType = this.cpFile[0].type;
     if (mimeType.match(/image\/*/) == null) {
@@ -81,10 +85,10 @@ export class RetailerComponent implements OnInit {
     }
     this.messageCP = "";
     var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]); 
-    reader.onload = (_event) => { 
-      this.CPimgURL = reader.result; 
-      this.url = ""; 
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.CPimgURL = reader.result;
+      this.url = "";
     }
   }
   url:any;

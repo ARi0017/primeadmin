@@ -4,6 +4,7 @@ export class TaxCategory {
       public TaxCategory:string,
       public Percentage:number,
       public Description:string,
-      public IsActive:string
+      public IsActive:string,
+      public CreatedBy: number
     ) {}
   }

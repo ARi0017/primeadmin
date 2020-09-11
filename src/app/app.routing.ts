@@ -99,6 +99,10 @@ export const routes: Routes = [
       {
         path: 'invoice/:id',
         loadChildren: () => import('./views/invoice/invoice.module').then(m => m.InvoiceModule)
+      },
+      {
+        path: 'vehicles-list',
+        loadChildren: () => import('./views/vehicles/vehicles.module').then(m => m.VehiclesModule)
       }
     ]
   }

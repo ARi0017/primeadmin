@@ -31,7 +31,7 @@ export class CustomerComponent implements OnInit {
   produrl: string = null;
   walletdata:object = null;
   bankData:object = null;
-  PayAmount:number = null;
+  PayAmount:number = null; url:any = "https://service.onlyalibaba.in/customer/img/";
   constructor(private customerService: CustomerService,
     private router: Router,
     private route: ActivatedRoute,
@@ -51,6 +51,7 @@ export class CustomerComponent implements OnInit {
     this.customerService.getWholeCustomerData(customerid).subscribe(data => {
       if (data) {
           this.Customer = data.customerinfo[0];
+          this.imgURL = this.Customer.ProfileImage;
           this.addressdata = Object.keys(data.addressinfo).length > 0 ? data.addressinfo : null;
           this.cartdata = Object.keys(data.cartinfo).length > 0 ? data.cartinfo : null;
           this.produrl = data.productimg;
@@ -63,8 +64,26 @@ export class CustomerComponent implements OnInit {
         }
     });
   }
+  messageDl: string; imgURL: any;
   getFileInfo(event: any) {
+    if (event.target.files.length === 0) return;
+
     this.dlFile = event.target.files;
+
+    var mimeType = this.dlFile[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.messageDl = "Only images are supported.";
+      return;
+    }
+    this.messageDl = "";
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+      console.log(reader.result);
+      this.url = ""; 
+    }
+    
     for (let file of this.dlFile) {
       this.uploadData = new FormData();
       if (file != undefined) {

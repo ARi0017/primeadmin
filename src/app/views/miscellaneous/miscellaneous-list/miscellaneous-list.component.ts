@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Miscellaneous } from '../../../models/miscellaneous';
 import { ProductService } from '../../../services/Product/product.service';
 import { TaxCategory } from '../../../models/taxcategory';
+import { TaxCategoryService } from '../../../services/TaxCategory/tax-category.service';
 
 @Component({
   selector: 'app-miscellaneous-list',
@@ -15,9 +16,10 @@ export class MiscellaneousListComponent implements OnInit {
   data: any;
   page: number = 1;
   count: number;
-  taxcategory: Array<{ TaxCategoryId: any, TaxCategory: any, Percentage: any, IsActive: any }>;
-  TaxCategory = new TaxCategory(0,'',1,'','1');
-  constructor(private miscService: MiscellaneousService, private toaster: ToasterService, private router: Router, private productService: ProductService) { }
+  // taxcategory: Array<{ TaxCategoryId: any, TaxCategory: any, Percentage: any, IsActive: any, Description: string }>;
+  taxcategory: any;
+  TaxCategory = new TaxCategory(0,'',1,'','1',1);
+  constructor(private miscService: MiscellaneousService, private taxService: TaxCategoryService,private toaster: ToasterService, private router: Router, private productService: ProductService) { }
   DefaultDiscountRate: number = 0;
   SpecialDiscountRate: number = 0;
   DefaultTaxRate: number = 0;
@@ -54,13 +56,14 @@ export class MiscellaneousListComponent implements OnInit {
     this.getTaxCategories();
   }
   getTaxCategories(){
-    this.productService.getTaxCategories().subscribe(data => {
-      this.taxcategory = data.data[0];
+    this.taxService.getTaxCategories().subscribe(data => {
+      this.taxcategory = data.data;
+      console.log(this.taxcategory);
     });
   }
 
 addNewTaxCategory(){
-  this.TaxCategory = new TaxCategory(0,'',1,'','1');
+  this.TaxCategory = new TaxCategory(0,'',1,'','1',1);
   this.taxcategory.push(this.TaxCategory);
 }
 // removeTaxCategory(i){
@@ -108,16 +111,40 @@ addNewTaxCategory(){
   AddEditTaxCategory(val:object){
     // if (val['TaxCategory'] == null || val['TaxCategory'] == "") return true;
     // if (val['Percentage'] == null || val['Percentage'] == 0) return true;
-    this.getTaxCategories();
-    alert("Hi");
+    this.taxService.addEditTaxCategory(val).subscribe(resData => {
+      console.log('taxcategory add edit', resData);
+      if (resData.status == 200) {
+        this.toaster.Success("Saved Successfully");
+        this.getTaxCategories();
+      } else {
+        this.toaster.Error("Server Error");
+      }
+    }, error => {
+      this.toaster.Error("Something went wrong");
+    })
+
   }
-TaxCategoryId:any; IsActive:any;
+
+  TaxCategoryId:any;
+  IsActive:any;
   onStatus(id: any, is_active: string) {
     if (!confirm("Are You Sure ?")) {
       return;
     }
     this.TaxCategoryId = id;
     this.IsActive = is_active;
+    const taxStatus = {
+      "TaxCategoryId": this.TaxCategoryId,
+      "IsActive": this.IsActive,
+      "CreatedBy": 1
+    }
+    this.taxService.taxCategoryStatus(taxStatus).subscribe(resData => {
+      console.log('taxstatus data', resData);
+      if (resData.status == 200) {
+        this.toaster.Success("Status updated successfully");
+        this.getTaxCategories();
+      }
+    })
     // const catstatus = {
     //   'CategoryId': this.CategoryId,
     //   'IsActive': this.IsActive,
