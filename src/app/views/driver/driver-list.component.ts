@@ -34,7 +34,7 @@ export class DriverListComponent implements OnInit {
   ngOnInit() {
     this.getDriver(this.page);
   }
-  
+
   GetPendingorder(DriverId: string, name:string){
     this.driveName = name;
     const driver = {"DriverId":DriverId}
@@ -52,6 +52,7 @@ export class DriverListComponent implements OnInit {
   getDriver(page: number) {
     let Driver = {drivername: this.drivername, page: page, Size: this.PageSize}
     this.driverService.getDriver(Driver).subscribe(data => {
+      console.log(data)
       this.data = data.data;
       this.url = data.Imgurl;
       //this.dataCount = (this.data.length > 0) ? this.data[0].RowCount : 0;
@@ -72,7 +73,7 @@ export class DriverListComponent implements OnInit {
   }
 
   onStatus(id: any, is_active: any) {
-   
+
     if (!confirm('Are You Sure ?')) {
       return;
     }

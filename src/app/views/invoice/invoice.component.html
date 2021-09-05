@@ -1,4 +1,6 @@
 <button class="btn btn-sm btn-info" (click)="print()">Print</button>
+<button type="button" (click)="back()"  class="btn btn-sm btn-primary" >
+    <i class="fa fa-dot-circle-o"></i> Back</button>
 <div id="invoice-POS" *ngIf="master">
 <div style="font-family: Arial">
             
@@ -13,10 +15,184 @@
             <p>
                 GSTIN: 19AADCG2408E1ZY&nbsp; | &nbsp;SAC:(5):996331</p>
         </div>
+         <div id="x">
+            <div class="info">
+                <h4>TAX INVOICE</h4>
+                              <p>
+                                  Customer: <strong>{{master.CustomerName}}</strong>&nbsp; | &nbsp;Phone: +91 <label>{{master.CustomerPhone}}</label>
+                                  <br />
+                                  Address: <label>{{master.Address}}</label>
+                              </p>
+                              <p>
+                                  Inv #: <strong>{{master.OrderNo}}</strong> | Date: <label class="itemDate">{{master.OrderedOn | date: 'dd-MM-yyyy HH:mm a'}}</label>
+                              </p>
+                          </div>
+    </div>
         <!--End Info-->
     </div>
+
+  <div id="bot">
+        <div id="table">
+            <table width="100%">
+                <thead>
+                    <tr class="tabletitle">
+                        <td class="no">
+                            <h4>No</h4>
+                        </td>
+                        <td class="item">
+                            <h4>Item</h4>
+                        </td>
+                        <td class="qty">
+                            <h4>Hsn Code</h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4>Qty</h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4>SGST</h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4>CGST</h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4>Tax Amount</h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4>Sub Total</h4>
+                        </td>
+                        
+                    </tr>
+                </thead>
+                <tbody id="divItemDetail" runat="server">
+                    
+                </tbody>
+                <tbody>
+                    <tr class="service" *ngFor="let val of detail">
+                        <td>
+                            {{val.RowNo}}
+                        </td>
+                        <td>
+                            {{val.ProductName}}
+                        </td>
+                        <td>
+                             {{val.HSNCode}}
+                        </td>
+                        <td>
+                            {{val.Quantity}}
+                        </td>
+                        <td>
+                            {{val.SGST}}
+                        </td>
+                        <td>
+                            {{val.CGST}}
+                        </td>
+                        <td>
+                            {{val.TaxAmt}}
+                        </td>
+                        <td>
+                           {{val.OrderPrice}}.
+                        </td>
+                  
+                    </tr>
+                    
+                  
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <div class="info" style="margin-top:50px;">
+         <div>
+        <table width="100%">
+            <thead>
+                    <tr class="tabletitle">
+                        <td class="no">
+                            <h4></h4>
+                        </td>
+                        <td class="item">
+                            <h4><u>Sub Total</u></h4>
+                        </td>
+                        <td class="qty">
+                            <h4><u>Total Quantity</u></h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4><u>SGST @2.50%</u></h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4><u>CGST @2.50%</u></h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4><u>Delivery Charges</u></h4>
+                        </td>
+                        <td class="rate" align="center">
+                            <h4><u>Net Amount</u></h4>
+                        </td>
+                    
+                        
+                    </tr>
+                </thead>
+            <tbody  >
+            <tr>
+            <td></td>
+                <td class="tableitem"><strong class="itemtext">₹ {{master.SubTotal}}</strong></td>
+                <td><strong class="itemtext">{{master.TotalQty}}</strong></td>
+                <td class="tableitem"><strong class="itemtext">₹ {{master.SGST}}</strong></td>
+                 <td class="tableitem"><strong class="itemtext">₹ {{master.CGST}}</strong></td>
+                 <td class="tableitem"><strong class="itemtext">₹ {{master.DeliveryAmt}}</strong></td>
+                <td class="tableitem"><strong class="itemtext">₹ {{master.TotalAmt}}</strong></td>
+            </tr>                     
+           <!--  <tr class="service">
+                <td></td>
+                <td class="tableitem"><p class="itemtext">CGST @2.50%</p></td>
+                <td></td>
+                <td class="tableitem"><strong class="itemtext">₹ {{master.CGST}}</strong></td>
+            </tr>
+            <tr class="service">
+                <td></td>
+                <td class="tableitem"><p class="itemtext">SGST @2.50%</p></td>
+                <td></td>
+                <td class="tableitem"><strong class="itemtext">₹ {{master.SGST}}</strong></td>
+            </tr>
+            <tr class="service" style="border-color: #000;">
+                <td></td>
+                <td class="tableitem"><p class="itemtext">Delivery Charges</p></td>
+                <td></td>
+                <td class="tableitem"><strong class="itemtext">₹ {{master.DeliveryAmt}}</strong></td>
+            </tr>
+            <tr class="service" style="border-color: #000;">
+                <td></td>
+                <td class="tableitem"><strong class="itemtext">Net Amount</strong></td>
+                <td></td>
+                <td class="tableitem"><strong class="itemtext">₹ {{master.TotalAmt}}</strong></td>
+            </tr> -->
+            </tbody>
+        </table>
+                        
+            <p class="legal">
+                <strong>Thank you for using Only Alibaba App!</strong>
+                <br />
+                ITEMS ARE FOR IMMEDIATE CONSUMPTION.<br/>
+                <span>{{DeliveryTime | date: 'dd-MM-yyyy HH:mm a'}}</span>
+            </p>
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+
+
+
+
     <!--End InvoiceTop-->
-    <div id="mid">
+   <!--  <div id="mid">
         <div class="info">
             <h4>TAX INVOICE</h4>
             <p>
@@ -28,15 +204,24 @@
                 Inv #: <strong>{{master.OrderNo}}</strong> | Date: <label class="itemDate">{{master.OrderedOn | date: 'dd-MM-yyyy HH:mm a'}}</label>
             </p>
         </div>
-    </div>
+    </div> -->
+
+
+
+
+
+
     <!--End Invoice Mid-->
-    <div id="bot">
+<!--     <div id="bot">
         <div id="table">
             <table>
                 <thead>
                     <tr class="tabletitle">
                         <td class="no"><h2>No</h2></td>
                         <td class="item"><h2>Item</h2></td>
+                        <td class="hsncode"><h2>Hsn Code</h2></td>
+                        <td class="item"><h2>Item</h2></td>
+
                         <td class="qty"><h2>Qty</h2></td>
                         <td class="rate"><h2>Sub Total</h2></td>
                     </tr>
@@ -45,6 +230,8 @@
                     <tr class="service" style="border-color: #000;" *ngFor="let val of detail">
                         <td>{{val.RowNo}}</td>
                         <td class="tableitem"><strong class="itemtext">{{val.ProductName}}</strong></td>
+                        <td></td>
+                        <td></td>
                         <td>{{val.Quantity}}</td>
                         <td class="tableitem"><strong class="itemtext">₹ {{val.OrderPrice}}</strong></td>
                     </tr>
@@ -84,13 +271,13 @@
     </div>
     <div class="info">
         <div id="legalcopy">
-            <!--<p class="legal">
+            <p class="legal">
                 <strong>APP SPECIAL!</strong>
                 <br />
                 Install Only Alibaba App & get exciting offers. Download here: http://onlyalibaba.com.<br />
                 T&C Apply
             </p>-->
-            <p class="legal">
+            <!-- <p class="legal">
                 <strong>Thank you for using Only Alibaba App!</strong>
                 <br />
                 ITEMS ARE FOR IMMEDIATE CONSUMPTION.<br />
@@ -99,4 +286,4 @@
         </div>
     </div>
 </div>
-</div>
+</div> -->

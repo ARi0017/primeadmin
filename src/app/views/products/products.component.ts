@@ -14,7 +14,7 @@ export class ProductsComponent implements OnInit {
   // NotReturnable: number, Weight: number, Length: number, Width: number, Height: number, ProductTags: string, Manufacturer: string, CreatedBy:number, Brand: string,
   // FoodType: string, HSNCode: string, RetailerId: number
 
-  Product = new Product(null,"0",0,null,"","",1,null,null,null,null,null,null,"0","0",0,"","","",null,"0","0",0,"0","0","0",0,0,0,0,"","",null,null, null, null, 0, null);
+  Product = new Product(null,"0",0,null,"","",1,null,null,null,null,null,null,"0","0",0,"","","",null,"0","0",0,"0","0","0",0,0,0,0,"","",null,null, null, null, 0, null,0);
 
   parentcategory: object;
   taxcategory: object;
@@ -87,16 +87,17 @@ export class ProductsComponent implements OnInit {
             },
             err => {
               this.toaster.Error('Something Went Wrong');
-              this.Product.CoverImage = null;
+              this.Product.CoverImage = "";
               return;
             }
-          );
+          )
         }
 
         this.filename[i] = file.name;
         i++;
       }
     }
+
     if (this.vlFile!=null){
       for (let file of this.vlFile) {
         const uploadData = new FormData();
@@ -116,14 +117,22 @@ export class ProductsComponent implements OnInit {
             this.Product.CoverVideo = null;
             return;
           }
-        );
+        )
       }
+    }
+    if (this.dlFile == null) {
+      if (!confirm("No picture is selected. Proceed ?")) {
+        return;
+      }
+      this.Product.CoverImage = "";
     }
 
     this.Product.CreatedBy = 1;
     this.Product.ProductId = this.id != null ? this.id : 0;
+
     this.productService.addeditProduct(this.Product).subscribe(
       res => {
+        console.log(this.Product)
         console.log(res.status);
         var status = res.status;
         if (status == 200) {
@@ -146,7 +155,7 @@ export class ProductsComponent implements OnInit {
     if (event.target.files.length === 0) return;
 
     this.dlFile = event.target.files;
-    console.log(this.dlFile);    
+    console.log(this.dlFile);
 
     var mimeType = this.dlFile[0].type;
     if (mimeType.match(/image\/*/) == null) {
@@ -155,10 +164,10 @@ export class ProductsComponent implements OnInit {
     }
     this.messageDl = "";
     var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
-      this.url = ""; 
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+      this.url = "";
     }
   }
   messageVl: string; vidURL: any;
@@ -175,10 +184,10 @@ export class ProductsComponent implements OnInit {
     }
     this.messageVl = "";
     var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]); 
-    reader.onload = (_event) => { 
-      this.vidURL = reader.result; 
-      this.url = ""; 
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.vidURL = reader.result;
+      this.url = "";
     }
   }
   url:any;
@@ -188,7 +197,7 @@ export class ProductsComponent implements OnInit {
       this.Product = data.data[0];
       this.imgURL = this.Product.CoverImage != null ? this.Product.CoverImage : "";
       this.vidURL = this.Product.CoverImage != null ? this.Product.CoverVideo : "";
-      this.url = data.imgurl; 
+      this.url = data.imgurl;
       console.log(this.Product);
     });
   }

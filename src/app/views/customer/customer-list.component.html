@@ -40,7 +40,8 @@
       <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="data" #mf="mfDataTable">
        <thead>
           <tr>
-            <th width="5%"><mfDefaultSorter by="ProfileImage">Image</mfDefaultSorter></th>
+           
+            <th width="7%"><mfDefaultSorter by="ProfileImage">Image</mfDefaultSorter></th>
             <th><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
             <th><mfDefaultSorter by="Phone">Phone</mfDefaultSorter></th>
             <th><mfDefaultSorter by="Email">Email</mfDefaultSorter></th>
@@ -49,13 +50,16 @@
             <th class="text-center" width="6%"><mfDefaultSorter by="TotalOrder">Order</mfDefaultSorter></th>
             <th class="text-center" width="6%"><mfDefaultSorter by="TotalWalletAmt">Wallet</mfDefaultSorter></th>
             <th class="text-center" width="6%">Status</th>
-            <th width="8%"> </th>
+            <th width="8%">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let dataval of mf.data">
+           
             <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td>
-            <td>{{dataval.Name}}</td>
+            <td>{{dataval.Name}}
+              <br>#: {{dataval.CustomerCode}}
+            </td>
             <td>{{dataval.Phone}}</td>
             <td>{{dataval.Email}}</td>
             <td colspan="3">
@@ -72,11 +76,11 @@
               <i style="cursor: pointer;" class="fa fa-first-order" aria-hidden="true"  *ngIf="dataval.TotalOrder != null; else elseOrder"
               (click)="myModal1.show(); GetCustomerOrder(dataval.CustomerId, dataval.Name);"> <sup>{{dataval.TotalOrder}}</sup></i>
               <ng-template #elseOrder>N/A</ng-template>
-            </td> 
+            </td>
             <td class="text-center">
               <i style="cursor: pointer;" class="fa fa-inr" aria-hidden="true"  *ngIf="dataval.TotalWalletAmt != null; else elseWallet"
               (click)="myModal2.show(); GetCustomerWallet(dataval.CustomerId, dataval.Name);"> <sup>{{dataval.TotalWalletAmt}}</sup></i>
-              <ng-template #elseWallet>N/A</ng-template>
+              <ng-template #elseWallet> 0 </ng-template>
             </td>
             <td class="text-center">
               <i class="fa fa-check fa-lg text-success pointer" *ngIf="dataval.IsActive == 1; else elseSpan" (click)="onStatus(dataval.CustomerId, '0')"></i>

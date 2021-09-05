@@ -4,7 +4,8 @@ import { OrdersListComponent } from './orders-list.component';
 import { OrdersComponent } from './orders.component';
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
 import { InvoiceComponent } from '../invoice/invoice.component';
-
+import { OrderMapComponent } from './order-map.component';
+import {FinalorderComponent} from '../orders/finalorder/finalorder.component';
 const routes: Routes = [
   {
     path: 'add',
@@ -22,12 +23,26 @@ const routes: Routes = [
     }
   },
   {
+    path: 'order-map',
+    component: OrderMapComponent,
+    data: {
+      title: "Order Mapping"
+    }
+  },
+  {
     path: 'edit/:id',
     component: OrdersComponent,
     data: {
       title: 'Edit Order'
     }
   },
+  {
+    path: 'payment-details',
+    component: FinalorderComponent,
+    data: {
+      title: 'payment'
+    }
+  }
   // {
   //   path: 'print/:id',
   //   component: InvoiceComponent,

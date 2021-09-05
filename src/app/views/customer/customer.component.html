@@ -7,15 +7,15 @@
                         <h5><strong *ngIf="Customer.Name != '' && Customer.Name != null">{{Customer.Name}}'s Info!</strong>
                             <button type="button" class="btn btn-sm btn-secondary pull-right" [routerLink]="['/customer-list']"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button> &nbsp;
                             <button type="reset" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Reset</button> &nbsp;
-                            <button type="submit" class="btn btn-sm btn-primary pull-right" [disabled]="customerForm.invalid"><i class="fa fa-dot-circle-o"></i> Submit</button> 
+                            <button type="submit" class="btn btn-sm btn-primary pull-right" [disabled]="customerForm.invalid"><i class="fa fa-dot-circle-o"></i> Submit</button>
                         </h5>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped mb-0">
                             <tbody>
                               <tr>
-                                <td rowspan="5">
-                                  <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 160px; width: 100%;" /><br>
+                                <td rowspan="6" colspan="2">
+                                  <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 160px; width: 100%; margin-bottom: 10px;" /><br>
                                   <input type="file" name="image" (change)="getFileInfo($event)">
                                   <small style="color: red;">{{messageDl}}</small>
                                 </td>
@@ -25,8 +25,8 @@
                                 <td colspan="3">
                                     <input type="radio" [(ngModel)]="Customer.CustomerType" name="CustomerType" value="1"> Individual
                                     <input type="radio" [(ngModel)]="Customer.CustomerType" name="CustomerType" value="2"> Corporate
-                
-                                    <input type="hidden" name="hdnLinkFlag" [(ngModel)]="Customer.CustomerType" #CustomerTypeRef="ngModel"  
+
+                                    <input type="hidden" name="hdnLinkFlag" [(ngModel)]="Customer.CustomerType" #CustomerTypeRef="ngModel"
                                     [class.is-invalid]="CustomerTypeRef.invalid && CustomerTypeRef.touched" required />
                                     <small class="text-danger" [class.d-none]="CustomerTypeRef.valid || CustomerTypeRef.untouched">Select Type
                                     </small>
@@ -86,6 +86,12 @@
                                     <textarea id="textarea-input" name="DefaultAddress" class="form-control" [(ngModel)]="Customer.DefaultAddress"></textarea>
                                 </td>
                             </tr>
+                            <tr>
+                              <td>Wallet Balance</td>
+                              <td colspan="3">
+                                <input type="text" class="form-control" placeholder="Enter Ref Code" name="TotalWalletAmt" [(ngModel)]="Customer.TotalWalletAmt">
+                              </td>
+                            </tr>
                             </tbody>
                           </table>
                     </div>
@@ -130,7 +136,7 @@
                   <td colspan="4">{{val.Location}}</td>
                   <td>
                     <a class="btn btn-info btn-sm" (click)="myModal.show(); getAddressbyid(val.AddressId, val.AddressName, val.Name, val.Phone, val.Address, val.Email, val.Landmark)" style="cursor: pointer;">
-                      <i class="fa fa-pencil-square-o"></i>  Edit</a> 
+                      <i class="fa fa-pencil-square-o"></i>  Edit</a>
                     <a class="btn btn-danger btn-sm" (click)="onDelete(val.AddressId)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                   </td>
                 </tr>
@@ -170,7 +176,7 @@
                                 </small>
                               </td>
                             </tr>
-      
+
                             <tr>
                               <td>Phone</td>
                               <td>
@@ -189,7 +195,7 @@
                                 </small>
                               </td>
                             </tr>
-      
+
                             <tr>
                               <td>Email</td>
                               <td>
@@ -212,7 +218,7 @@
                               <td colspan="2"></td>
                               <td colspan="2">
                                 <button type="submit" [disabled]="addressForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>  
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
                               </td>
                             </tr>
                           </tbody>
@@ -228,7 +234,7 @@
         </div>
       </div>
 
-    
+
     <div class="col-md-6" *ngIf="orderdata!=null">
       <div class="card">
         <div class="card-header">
@@ -238,11 +244,11 @@
           <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="orderdata" #mf="mfDataTable">
             <thead>
               <tr>
-                <th width="15%"><mfDefaultSorter by="OrderNo">Order #</mfDefaultSorter></th>
+                <th width="12%"><mfDefaultSorter by="OrderNo">Order #</mfDefaultSorter></th>
                 <th width="10%"><mfDefaultSorter by="OrderedOn">On</mfDefaultSorter></th>
-                <th><mfDefaultSorter by="OrderStatus">Status</mfDefaultSorter></th>
+                <th width="10%"><mfDefaultSorter by="OrderStatus">Status</mfDefaultSorter></th>
                 <th width="6%"><mfDefaultSorter by="OrderTotal">Total</mfDefaultSorter></th>
-                <th colspan="4"><mfDefaultSorter by="OrderDetail">Order Detail</mfDefaultSorter></th>
+                <th width="15%"><mfDefaultSorter by="OrderDetail">Order Detail</mfDefaultSorter></th>
               </tr>
             </thead>
             <tbody>
@@ -257,7 +263,7 @@
                   <h5><span class="badge badge-danger" *ngIf="val.OrderStatusId == 4;">Cancelled</span></h5>
                 </td>
                 <td>{{val.OrderTotal}}</td>
-                <td colspan="4">{{val.OrderDetail}}</td>
+                <td>{{val.OrderDetail}}</td>
               </tr>
             </tbody>
           </table>
@@ -269,12 +275,12 @@
         <div class="card-header">
             <h5>Abondone Cart!</h5>
         </div>
-        <div class="card-body" style="height:200px; overflow: auto;">       
+        <div class="card-body" style="height:200px; overflow: auto;">
           <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="cartdata" #mf="mfDataTable">
             <thead>
               <tr>
                 <th width="10%"><mfDefaultSorter by="CoverImage">Image</mfDefaultSorter></th>
-                <th><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
+                <th width="10%"><mfDefaultSorter by="Name">Name</mfDefaultSorter></th>
                 <th width="10%"><mfDefaultSorter by="Quantity">Quantity</mfDefaultSorter></th>
                 <th width="9%"><mfDefaultSorter by="Price">Price</mfDefaultSorter></th>
               </tr>
@@ -319,7 +325,7 @@
                     </td>
                     <td>
                       <b *ngIf="val.Amount < 0" style="color: green;"> {{val.TranOn | date: 'dd-MM-yyyy'}}</b>
-                      <b *ngIf="val.Amount > 0" style="color: red;"> {{val.TranOn | date: 'dd-MM-yyyy'}}</b>                      
+                      <b *ngIf="val.Amount > 0" style="color: red;"> {{val.TranOn | date: 'dd-MM-yyyy'}}</b>
                     </td>
                     <td>
                       <b *ngIf="val.Amount < 0" style="color: green;"> {{val.CustomerFrom}}</b>
@@ -329,7 +335,7 @@
                       <b *ngIf="val.Amount < 0" style="color: green;"> {{val.OrderNo}}</b>
                       <b *ngIf="val.Amount > 0" style="color: red;"> {{val.OrderNo}}</b>
                     </td>
-                    <td>                      
+                    <td>
                       <b *ngIf="val.Amount < 0" style="color: green;"> {{val.OrderTotal}}</b>
                       <b *ngIf="val.Amount > 0" style="color: red;">&#8377; {{val.OrderTotal}}</b>
                     </td>
@@ -343,10 +349,10 @@
         <div class="card">
           <div class="card-header">
               <h5>Bank Account!
-                <button type="reset" class="btn btn-sm btn-danger pull-right" *ngIf="Customer.TotalWalletAmt > 0" [disabled]="bankData.length < 1 || PayAmount < 1 || PayAmount > Customer.TotalWalletAmt" (click)="UpdateWalletPayment()"><i class="fa fa-paypal"></i> Pay Customer</button> 
+                <button type="reset" class="btn btn-sm btn-danger pull-right" *ngIf="Customer.TotalWalletAmt > 0" [disabled]="bankData.length < 1 || PayAmount < 1 || PayAmount > Customer.TotalWalletAmt" (click)="UpdateWalletPayment()"><i class="fa fa-paypal"></i> Pay Customer</button>
             </h5>
           </div>
-          <div class="card-body" style="height:200px; overflow: auto;">       
+          <div class="card-body" style="height:200px; overflow: auto;">
             <table class="table table-bordered table-striped mb-0">
               <tbody>
                 <tr>

@@ -8,6 +8,8 @@ export class Vehicle {
     public EngineCC: number,
     public Description: string,
     public VehiclaImage: string,
+    public InsuranceExpiredOn: any,
+    public PollutionExpiredOn: any,
 
     public CreatedBy?: any
 

@@ -17,7 +17,7 @@ export class CustomerListComponent implements OnInit {
   @ViewChild("myModal3", { static: true }) myModal3: ModalDirective;
   data: any;
   url:any;
-  customername: any='';
+  customername: any=''; 
   customerphone: any='';
   page: number = 1;
   count: number;
@@ -32,6 +32,7 @@ export class CustomerListComponent implements OnInit {
   produrl: string;
   cusName:string;
   PageSize:number=10;
+  ProductImgUrl : string;
   constructor(private customerService: CustomerService,
     private router: Router,
     private route: ActivatedRoute,
@@ -64,8 +65,9 @@ export class CustomerListComponent implements OnInit {
     this.cusName = name;
     const customer = {"CustomerId":id}
     this.customerService.GetCustomerCart(customer).subscribe(data => {
+      console.log(data)
       this.cartdata = data.data;
-      this.produrl = data.productimg;
+      this.produrl = data.ProductImgUrl;
     });
   }
   GetCustomerOrder(id :string, name:string) {

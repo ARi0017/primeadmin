@@ -38,6 +38,7 @@ export class DefaultLayoutComponent implements OnDestroy , OnInit {
   }
   logout() {
     if (confirm('Are You Sure ?')) {
+      localStorage.clear()
       this.router.navigate(['logout']);
     }
   }

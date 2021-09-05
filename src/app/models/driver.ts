@@ -8,7 +8,9 @@ export class Driver {
     public Landmark:string,
     public Pincode:string,
     public ProfileImage:string,
-    public CreatedBy:number
+    public CreatedBy:number,
+    public DrivingLicenseNo: any,
+    public DrivingLicenseImage: any
   ) {}
 }
 

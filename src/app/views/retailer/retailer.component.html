@@ -6,9 +6,7 @@
           <div class="card-header">
             <h5><strong class="pull-left" *ngIf="Retailer.Name != '' && Retailer.Name != null">{{Retailer.Name}}'s Info!</strong>
               <strong *ngIf="Retailer.RetailerTag != '' && Retailer.RetailerTag != null" style="padding-left: 30%;">Supplier Code: {{Retailer.RetailerTag}}</strong>
-              <button type="button" class="btn btn-sm btn-secondary pull-right" [routerLink]="['/retailer-list']"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button> &nbsp;
-              <button type="reset" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Reset</button> &nbsp;
-              <button type="submit" [disabled]="validateForm()" class="btn btn-sm btn-primary pull-right"><i class="fa fa-dot-circle-o"></i> Submit</button>
+
             </h5>
           </div>
           <div class="card-body">
@@ -87,12 +85,19 @@
                   <td colspan="3">
                     <input name="file" type="file" id="ContactImage" (change)="uploadCPFile($event)">
 
-                    <img src={{url}}{{CPimgURL}} runat="server" alt="" style="float: right; height: 150px; width: 150px;" /><br>
+                    <img src={{CPimgURL}} runat="server" alt="" style="float: right; height: 150px; width: 150px;" /><br>
                       <small style="color: red;">{{messageCP}}</small>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class="card-footer">
+            <button type="submit" [disabled]="validateForm()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button> &nbsp;
+            <button type="button" class="btn btn-sm btn-secondary " [routerLink]="['/retailer-list']"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button> &nbsp;
+
+
           </div>
         </form>
       </div>

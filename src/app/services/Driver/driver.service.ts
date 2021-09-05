@@ -37,6 +37,10 @@ export class DriverService {
     return this.http.post<Idriver>(`${this.url.ServiceUrl}/uploaddriverimage`, adddata);
   }
 
+  driverLicenceFileUpload(driverLicenseUploadData: Object): Observable<Idriver> {
+    return this.http.post<Idriver>(`${this.url.ServiceUrl}/uploaddriverlicenseimage`, driverLicenseUploadData);
+  }
+
   getCount(): Observable<Idriver> {
     return this.http.post<Idriver>(`${this.url.ServiceUrl}/drivercount`, '');
   }

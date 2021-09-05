@@ -26,4 +26,25 @@ export class TaxCategoryService {
   addEditTaxCategory(addEditData: object): Observable<ITax> {
     return this.http.post<ITax>(`${this.url.ServiceUrl}/taxaddedit`, addEditData);
   }
+  DailySaleRegister(addData: object): Observable<ITax> {
+    return this.http.post<ITax>(`${this.url.ServiceUrl}/daliy-sale-register`, addData);
+  }
+  CommissionPayable(addData: object): Observable<any> {
+    return this.http.post<any>(`${this.url.ServiceUrl}/commission-payable`, addData);
+  }
+  AgentTreeTraking(addData: object): Observable<any> {
+    return this.http.post<any>(`${this.url.ServiceUrl}/agent-tree-traking`, addData);
+  }
+  paymentReceiptAndPayable(addData:object):Observable<any>{
+    return this.http.post<any>(`${this.url.ServiceUrl}/payment-payable-receipt`,addData);
+  }
+  paymentReceiptAndPayableForCommission(addData:object):Observable<any>{
+    return this.http.post<any>(`${this.url.ServiceUrl}/payment-payable-commission-receipt`,addData);
+  }
+  performanceTraking(addData:object):Observable<any>{
+    return this.http.post<any>(`${this.url.ServiceUrl}/performance-tracking`,addData);
+  }
+  allDriver():Observable<any>{
+    return this.http.get<any>(`${this.url.ServiceUrl}/driver-listing`)
+  }
 }

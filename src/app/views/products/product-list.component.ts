@@ -45,7 +45,7 @@ export class ProductListComponent implements OnInit {
   getProducts(page: number) {
     let Product = {categoryid: this.categoryid != "" ? this.categoryid : "0", name: this.name, page: page, Size: this.PageSize};
     this.productService.getProductList(Product).subscribe(data => {
-      this.data = data.data[0];
+      this.data = data.data;
       this.url = data.imgurl;
       this.count = (Object.keys(this.data).length > 0) ? this.data[0].RowCount : 0;
       console.log("Total Data Count",this.count);
@@ -115,9 +115,9 @@ export class ProductListComponent implements OnInit {
 
 this.exceljsondata = XLSX.utils.sheet_to_json(worksheet,{raw:true});
         console.log(this.exceljsondata);
-         this.excelService.excelImport(this.exceljsondata).subscribe(data=>{
-          console.log(data);
-         })
+        //  this.excelService.excelImport(this.exceljsondata).subscribe(data=>{
+        //   console.log(data);
+        //  })
      }
      fileReader.readAsArrayBuffer(this.file);
   }

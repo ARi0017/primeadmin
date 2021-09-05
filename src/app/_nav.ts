@@ -37,7 +37,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Catalog',
-    url: '/products',
+    url: '/pages',
     icon: 'icon-layers',
     children: [
       {
@@ -65,8 +65,25 @@ export const navItems: NavData[] = [
     children: [
       {
         name: 'Orders',
-        url: '/orders-list',
-        icon: 'icon-basket-loaded'
+        url: '/pages',
+        icon: 'icon-basket-loaded',
+        children: [
+          {
+            name: 'History',
+            url: '/orders',
+            icon: 'icon-basket-loaded',
+          },
+          {
+            name: 'Map Order',
+            url: '/orders/order-map',
+            icon: 'icon-basket-loaded',
+          },
+          {
+            name: 'Payment checklist',
+            url: '/orders/payment-details',
+            icon: 'icon-basket-loaded',
+          },
+        ]
       },
       {
         name: 'Customers',
@@ -80,23 +97,6 @@ export const navItems: NavData[] = [
       }
     ]
   },
-  // {
-  //   name: 'Retailers',
-  //   url: '/pages',
-  //   icon: 'icon-people',
-  //   children: [
-  //     {
-  //       name: 'Retailers',
-  //       url: '/retailer-list',
-  //       icon: 'icon-list'
-  //     },
-  //     {
-  //       name: 'Products',
-  //       url: '/retailerproduct-list',
-  //       icon: 'icon-pin'
-  //     }
-  //   ]
-  // },
   {
     name: 'Transport',
     url: '/pages',
@@ -130,15 +130,65 @@ export const navItems: NavData[] = [
         icon: 'fa fa-info'
       },
       {
-          name: 'Miscellaneous',
-          url: '/miscellaneous',
+          name: 'Tax & Others',
+          url: '/tax&others',
           icon: 'fa fa-sliders'
       }
     ]
   },
-  // {
-  //   name: 'Report',
-  //   url: '/invoice',
-  //   icon: 'icon-speedometer'
-  // }
+  {
+    name: 'MIS Report',
+    url: '/pages',
+    icon: 'fa fa-cogs',
+    children: [
+      {
+        name: 'Sale Register',
+        url: '/sale-register',
+        icon: 'fa fa-info'
+      },
+      {
+          name: 'Performance Tracking',
+          url: '/performance-tracking',
+          icon: 'fa fa-sliders'
+      },
+      {
+        name: 'Commission Payable',
+        url: '/commision-payable',
+        icon: 'fa fa-sliders'
+    },
+    {
+      name: 'Agnet Tree Traking',
+      url: '/agent-tree',
+      icon: 'fa fa-sliders'
+    },
+    {
+      name: 'Payment Receipt',
+      url: '/payment-receipt',
+      icon: 'fa fa-sliders'
+    },
+    // {
+    //   name: 'Vendor Payments',
+    //   url: '/vendor-payments',
+    //   icon: 'fa fa-sliders'
+    // }
+    ]
+  },
+  {
+    name: 'Transactions',
+    url: '/pages',
+    icon: 'fa fa-cogs',
+    children: [
+      {
+        name: 'Past Withdrawals',
+        url: '/past-withdrawals',
+        icon: 'fa fa-sliders'
+      },
+      {
+        name: 'Withdrawals',
+        url: '/payouts',
+        icon: 'fa fa-sliders'
+      }
+
+    ]
+  }
 ];

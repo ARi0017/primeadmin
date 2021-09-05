@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  customerToken : any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -29,7 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.clear();
+   // localStorage.clear();
+    this.customerToken = localStorage.getItem('token');
+     if(this.customerToken != null){
+      this.toaster.Error("Already LoggedIn !! ");
+       this.router.navigate(['/dashboard']);
+     }
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

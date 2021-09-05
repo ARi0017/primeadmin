@@ -6,16 +6,16 @@
           <div class="card-body">
             <table class="table table-bordered table-striped mb-0">
               <tbody>
-                <tr>
-                  <td rowspan="4">
-                    <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 80px; width: 100%;" /><br>
+                <!-- <tr>
+                  <td rowspan="4" colspan="2">
+                    <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 100px; width: 100%;" /><br>
                     <input name="file" type="file" id="name" (change)="uploadFile($event)">
                     <small style="color: red;">{{messageDl}}</small>
                   </td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td><b>Name*</b></td>
-                  <td colspan="3">
+                  <td colspan="5">
                     <input type="text" class="form-control" placeholder="Enter Name" name="name"
                       [(ngModel)]="Driver.Name" #nameRef="ngModel"
                       [class.is-invalid]="nameRef.invalid && nameRef.touched" required />
@@ -23,7 +23,7 @@
                     </small>
                   </td>
                   <td><b>Phone*</b></td>
-                  <td colspan="3">
+                  <td colspan="5">
                     <input type="number" class="form-control" placeholder="Enter Phone" name="Phone"
                       [(ngModel)]="Driver.Phone" #phoneRef="ngModel"
                       [class.is-invalid]="phoneRef.invalid && phoneRef.touched" required />
@@ -33,29 +33,55 @@
                 </tr>
                 <tr>
                   <td>Email</td>
-                  <td colspan="3">
+                  <td colspan="5">
                     <input type="text" class="form-control" placeholder="Enter Email" name="Email"
                       [(ngModel)]="Driver.Email" />
                   </td>
+                  <td>Address</td>
+                  <td colspan="5">
+                    <input type="text" class="form-control" placeholder="Enter Address" name="Address"
+                      [(ngModel)]="Driver.Address" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Pincode</td>
+                  <td colspan="5">
+                    <input type="number" class="form-control" placeholder="Enter Pincode" name="Pincode"
+                      [(ngModel)]="Driver.Pincode" />
+                  </td>
                   <td>Landmark</td>
-                  <td colspan="3">
+                  <td colspan="5">
                     <input type="text" class="form-control" placeholder="Enter Landmark" name="Landmark"
                       [(ngModel)]="Driver.Landmark" />
                   </td>
                 </tr>
                 <tr>
-                  <td>Pincode</td>
-                  <td colspan="3">
-                    <input type="number" class="form-control" placeholder="Enter Pincode" name="Pincode"
-                      [(ngModel)]="Driver.Pincode" />
+                  <td>Driving License</td>
+                  <td colspan="5">
+                    <input type="text" class="form-control" placeholder="Enter Driving License" name="DrivingLicenseNo"
+                      [(ngModel)]="Driver.DrivingLicenseNo" />
                   </td>
-                  <td colspan="4"></td>
+                </tr>
+                <tr>
+                  <td>Driver Image</td>
+                  <td colspan="5">
+                    <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 130px; width: 100px;" /><br>
+                    <input name="file" type="file" id="name" (change)="uploadFile($event)">
+                    <small style="color: red;">{{messageDl}}</small>
+                  </td>
+
+                  <td>Driving License</td>
+                  <td colspan="5">
+                    <img src={{url}}{{drivingLicenceImage}} runat="server" alt="" style="float: right; height: 130px; width: 100px;" /><br>
+                    <input name="file" type="file" id="name" (change)="uploadDrivingLicenseFile($event)">
+                    <small style="color: red;">{{drivingLicenceMessage}}</small>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="card-footer">
-            <button type="submit" [disabled]="driverForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="submit"  [disabled]="driverForm.invalid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
             <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="backpage()"><i class="fa fa-step-backward" aria-hidden="true"></i> Back</button>
           </div>

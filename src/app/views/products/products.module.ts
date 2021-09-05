@@ -16,7 +16,7 @@ import { SelectModule } from 'ng-select';
   imports: [
     CommonModule,
     FormsModule,
-    ProductsRoutingModule,
+    ProductsRoutingModule, 
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),

@@ -12,7 +12,9 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CanDeactivateGuardService } from '../../services/can-deactivate-guard.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DataTableModule } from 'angular2-datatable';
-
+import { OrderMapComponent } from './order-map.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { FinalorderComponent } from './finalorder/finalorder.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,9 +26,10 @@ import { DataTableModule } from 'angular2-datatable';
     PaginationModule.forRoot(),
     DataTableModule,
     ModalModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   exports: [OrdersComponent],
-  declarations: [ OrdersComponent , OrdersListComponent],
+  declarations: [ OrdersComponent , OrdersListComponent, OrderMapComponent, FinalorderComponent],
   providers:[CanDeactivateGuardService],
 })
 export class OrdersModule { }

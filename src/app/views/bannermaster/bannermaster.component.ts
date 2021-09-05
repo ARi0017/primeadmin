@@ -85,14 +85,16 @@ showdiv(divshow){
     }
     this.messageDl = "";
     var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
-      this.url = ""; 
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+      this.url = "";
     }
 
     if (this.dlFile!=null){
       this.Bannermaster.BannerImage = this.dlFile[0].name;
+    } else {
+      this.Bannermaster.BannerImage = null;
     }
   }
   onSubmit() {
@@ -103,6 +105,7 @@ showdiv(divshow){
           uploadData.append("myFile", file, file.name);
           this.bannermasterService.fileupload(uploadData).subscribe(
             res => {
+              console.log(uploadData)
               var status = res.status;
               if (status == 200) {
                 console.log('Banner Image uploaded');
@@ -113,14 +116,21 @@ showdiv(divshow){
               this.toaster.Error('Something Went Wrong');
               return;
             }
-          );
+          )
         }
       }
+    }
+    if (this.dlFile == null) {
+      if (!confirm("No picture is selected. Proceed ?")) {
+        return;
+      }
+      this.Bannermaster.BannerImage = "";
     }
     this.Bannermaster.CreatedBy = 1;
     this.Bannermaster.BannerId = this.id != null ? this.id : 0;
     this.bannermasterService.addeditBannermaster(this.Bannermaster).subscribe(
       res => {
+        console.log(this.Bannermaster)
         console.log(res.status);
         var status = res.status;
         if (status == 200) {

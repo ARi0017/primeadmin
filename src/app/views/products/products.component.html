@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-sm-12">
-        <div class="card">        
+        <div class="card">
           <form #productsForm="ngForm" (ngSubmit)="onSubmit()">
           <div class="card-body">
             <table class="table table-bordered table-striped mb-0">
@@ -9,12 +9,12 @@
                 <tr>
                   <td><b>Product Name*</b></td>
                   <td colspan="3">
-                    <input type="text" class="form-control" placeholder="Enter Product Name" name="Name" 
-                    [(ngModel)]="Product.Name" #NameRef="ngModel"> 
+                    <input type="text" class="form-control" placeholder="Enter Product Name" name="Name"
+                    [(ngModel)]="Product.Name" #NameRef="ngModel">
                   </td>
                   <td><b>SKU*</b></td>
                   <td colspan="3">
-                    <input type="text" class="form-control" placeholder="Enter Product SKU" name="Sku" 
+                    <input type="text" class="form-control" placeholder="Enter Product SKU" name="Sku"
                     [(ngModel)]="Product.Sku" #SkuRef="ngModel">
                   </td>
                 </tr>
@@ -42,24 +42,24 @@
                 <tr>
                   <td>Short Description</td>
                   <td colspan="3">
-                    <textarea class="form-control" id="" placeholder="Enter Short Description" 
+                    <textarea class="form-control" id="" placeholder="Enter Short Description"
                     name="ShortDescription" [(ngModel)]="Product.ShortDescription" #ShortDescriptionRef="ngModel"></textarea>
                   </td>
                   <td>Full Description</td>
                   <td colspan="3">
-                    <textarea class="form-control" placeholder="Enter Full Description" 
+                    <textarea class="form-control" placeholder="Enter Full Description"
                     name="FullDescription" [(ngModel)]="Product.FullDescription" #FullDescriptionRef="ngModel"></textarea>
                   </td>
                 </tr>
                 <tr>
                   <td>Meta Title</td>
                   <td colspan="3">
-                    <input type="text" class="form-control" placeholder="Enter Meta Title" name="MetaTitle" 
+                    <input type="text" class="form-control" placeholder="Enter Meta Title" name="MetaTitle"
                     [(ngModel)]="Product.MetaTitle" #MetaTitleRef="ngModel" >
                   </td>
                   <td>Meta Key Words</td>
                   <td colspan="3">
-                    <input type="text" class="form-control" placeholder="Enter Meta Key Words" name="MetaKeyWords" 
+                    <input type="text" class="form-control" placeholder="Enter Meta Key Words" name="MetaKeyWords"
                     [(ngModel)]="Product.MetaKeyWords" #MetaKeyWordsRef="ngModel">
                   </td>
                 </tr>
@@ -70,7 +70,7 @@
                     </td>
                     <td>Product Tags</td>
                     <td colspan="3">
-                      <input type="text" class="form-control" placeholder="Enter Product Tags" name="ProductTags" 
+                      <input type="text" class="form-control" placeholder="Enter Product Tags" name="ProductTags"
                     [(ngModel)]="Product.ProductTags" #ProductTagsRef="ngModel">
                     </td>
                 </tr>
@@ -82,7 +82,7 @@
                 <tr>
                   <td><b>Brand*</b></td>
                   <td colspan="3">
-                    <input type="text" class="form-control" placeholder="Enter Brand" name="Brand" [(ngModel)]="Product.Brand" #DisplayOrderRef="ngModel">      
+                    <input type="text" class="form-control" placeholder="Enter Brand" name="Brand" [(ngModel)]="Product.Brand" #DisplayOrderRef="ngModel">
                   </td>
                   <td><b>Manufacturer*</b></td>
                   <td colspan="3">
@@ -91,16 +91,20 @@
                   </td>
                 </tr>
                 <tr>
-                  <td><b>Supplier*</b></td>
+                  <td><b>Vendors*</b></td>
                   <td colspan="3">
                     <select name="Supplier" class="form-control" [(ngModel)]="Product.RetailerId">
-                      <option value="0" selected>Select Supplier</option>
+                      <option value="0" selected>Select Vendor</option>
                       <option *ngFor="let val of retailerlist" [value]="val.RetailerId">
                         {{val.Name}}
                       </option>
                     </select>
                   </td>
-                  <td colspan="4"></td>
+                  <td><b>Min Order Quantity*</b></td>
+                  <td colspan="3">
+                    <input type="number" class="form-control" placeholder="Minimum Order Quantity" name="MinOrderQty"
+                    [(ngModel)]="Product.MinOrderQty" #PcsRef="ngModel">
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -119,50 +123,51 @@
                     </td>
                     <td><b>HSN Code*</b></td>
                     <td colspan="3">
-                      <input type="text" class="form-control" placeholder="Enter HSN Code" name="HSNCode" 
+                      <input type="text" class="form-control" placeholder="Enter HSN Code" name="HSNCode"
                     [(ngModel)]="Product.HSNCode" #ProductTagsRef="ngModel">
                     </td>
                 </tr>
               </tbody>
             </table>
-            
+
             <table class="table table-bordered table-striped mb-0">
               <tbody>
                 <tr>
                   <td><b>Purchase Price*</b></td>
                   <td colspan="3">
-                    <input type="number" class="form-control" placeholder="Enter Price" name="Cost" 
+                    <input type="number" class="form-control" placeholder="Enter Price" name="Cost"
                     [(ngModel)]="Product.Cost" #CostRef="ngModel">
                   </td>
                   <td><b>MRP*</b></td>
                   <td colspan="3">
-                    <input type="number" class="form-control" placeholder="Enter Standard Price" name="StandardPrice" 
+                    <input type="number" class="form-control" placeholder="Enter Standard Price" name="StandardPrice"
                     [(ngModel)]="Product.StandardPrice" #StandardPriceRef="ngModel">
                   </td>
                 </tr>
                 <tr>
                   <td><b>Discounted Price</b></td>
                   <td colspan="3">
-                    <input type="number" class="form-control" placeholder="Enter Discounted Price" name="DiscountedPrice" 
+                    <input type="number" class="form-control" placeholder="Enter Discounted Price" name="DiscountedPrice"
                     [(ngModel)]="Product.DiscountedPrice" #PcsRef="ngModel">
                   </td>
                   <td><b>Pcs*</b></td>
                   <td colspan="3">
-                    <input type="number" class="form-control" placeholder="Enter Standard Price" name="Pcs" 
+                    <input type="number" class="form-control" placeholder="Enter Standard Price" name="Pcs"
                     [(ngModel)]="Product.Pcs" #PcsRef="ngModel">
                   </td>
+
                 </tr>
               </tbody>
             </table>
 
-            <div class="row" style="display: none;"> 
+            <div class="row" style="display: none;">
               <div class="col-sm-6">
                 <div class="row form-group">
                   <div class="col-md-3">
                     <label for="ccnumber">Display Order</label>
                   </div>
                   <div class="col-md-9">
-                    <input type="number" class="form-control" placeholder="Enter Display Order" name="DisplayOrder" [(ngModel)]="Product.DisplayOrder" #DisplayOrderRef="ngModel" min="0">      
+                    <input type="number" class="form-control" placeholder="Enter Display Order" name="DisplayOrder" [(ngModel)]="Product.DisplayOrder" #DisplayOrderRef="ngModel" min="0">
                   </div>
                 </div>
               </div>
@@ -206,28 +211,29 @@
                     </td>
                     <td colspan="4"></td>
                 </tr>
-                
+
               </tbody>
             </table>
             <table class="table table-bordered table-striped mb-0">
               <tbody>
                 <tr>
-                  <td>Cover Image</td>
+                  <td><b>Cover Image</b></td>
                   <td colspan="3">
                     <input name="ifile" type="file" id="iname" (change)="uploadFileImage($event)">
 
                     <!-- <a id="lnkItemCover" runat="server" data-fancybox="gallery"> -->
-                      <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 150px; width: 150px;" /><br>
+                      <img src={{url}}{{imgURL}} runat="server" alt="" style=" height: 150px; width: 150px;" /><br>
                       <small style="color: red;">{{messageDl}}</small>
                     <!-- </a>
                     <b><a href="#" onclick="resetImage()"><input type="hidden" id="hdnImage" runat="server" value="" />&times;</a></b> -->
                   </td>
-                  <td>Cover Video</td>
+                  <td colspan="4"></td>
+                  <!-- <td>Cover Video</td>
                   <td colspan="3">
                     <input name="vfile" type="file" id="vname" (change)="uploadFileVideo($event)">
                     <video src={{url}}{{vidURL}} style="float: right; height: 150px; width: 150px;" controls></video><br>
                     <small style="color: red;">{{messageVl}}</small>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>
@@ -240,7 +246,7 @@
         </form>
         </div>
       </div><!--/.col-->
-      
+
     </div><!--/.row-->
   </div>
 
@@ -248,7 +254,7 @@
 
 
 
-  
+
 
   <!-- <div class="row" style="display:none;">
     <div class="col-sm-3">
@@ -257,11 +263,11 @@
           <label for="ccnumber">Weight</label>
         </div>
         <div class="col-md-9">
-          <input type="number" class="form-control" placeholder="Enter Weight" name="Weight" 
+          <input type="number" class="form-control" placeholder="Enter Weight" name="Weight"
           [(ngModel)]="Product.Weight" #WeightRef="ngModel"
           [class.is-invalid]="WeightRef.invalid && WeightRef.touched" required>
           <small class="text-danger" [class.d-none]="WeightRef.valid || WeightRef.untouched">Weight Can Not Be Blank
-          </small>                  
+          </small>
         </div>
       </div>
     </div>
@@ -271,11 +277,11 @@
           <label for="ccnumber">Length</label>
         </div>
         <div class="col-md-9">
-          <input type="number" class="form-control" placeholder="Enter Length" name="Length" 
+          <input type="number" class="form-control" placeholder="Enter Length" name="Length"
           [(ngModel)]="Product.Length" #LengthRef="ngModel"
           [class.is-invalid]="LengthRef.invalid && LengthRef.touched" required>
           <small class="text-danger" [class.d-none]="LengthRef.valid || LengthRef.untouched">Length Can Not Be Blank
-          </small>                  
+          </small>
         </div>
       </div>
     </div>
@@ -285,11 +291,11 @@
           <label for="ccnumber">Width</label>
         </div>
         <div class="col-md-9">
-          <input type="number" class="form-control" placeholder="Enter Width" name="Width" 
+          <input type="number" class="form-control" placeholder="Enter Width" name="Width"
           [(ngModel)]="Product.Width" #WidthRef="ngModel
           [class.is-invalid]="WidthRef.invalid && WidthRef.touched" required>
           <small class="text-danger" [class.d-none]="WidthRef.valid || WidthRef.untouched">Width Can Not Be Blank
-          </small>                  
+          </small>
         </div>
       </div>
     </div>
@@ -299,11 +305,11 @@
           <label for="ccnumber">Height</label>
         </div>
         <div class="col-md-9">
-          <input type="number" class="form-control" placeholder="Enter Width" name="Height" 
+          <input type="number" class="form-control" placeholder="Enter Width" name="Height"
           [(ngModel)]="Product.Height" #HeightRef="ngModel"
           [class.is-invalid]="HeightRef.invalid && HeightRef.touched" required>
           <small class="text-danger" [class.d-none]="HeightRef.valid || HeightRef.untouched">Height Can Not Be Blank
-          </small>                  
+          </small>
         </div>
       </div>
     </div>

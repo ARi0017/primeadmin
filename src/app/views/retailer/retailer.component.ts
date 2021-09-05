@@ -110,7 +110,7 @@ export class RetailerComponent implements OnInit {
             },
             err => {
               this.toaster.Error('Something Went Wrong');
-              this.Retailer.RetailerImage = null;
+              this.Retailer.RetailerImage = "";
               return;
             }
           );
@@ -119,6 +119,11 @@ export class RetailerComponent implements OnInit {
         this.filename[i] = file.name;
         i++;
       }
+    } else {
+      if (!confirm("No Vendor Image is selected. Proceed ?")) {
+        return;
+      }
+      this.Retailer.RetailerImage = "";
     }
     if (this.cpFile!=null){
       for (let file of this.cpFile) {
@@ -141,12 +146,19 @@ export class RetailerComponent implements OnInit {
           }
         );
       }
+    } else {
+      if (!confirm("No Contact Person Image is selected. Proceed ?")) {
+        return;
+      }
+      this.Retailer.ContactPersonImage = "";
     }
+
 
     this.Retailer.CreatedBy = 1;
     this.Retailer.RetailerId = this.id != null ? this.id : 0;
     this.retailerService.addeditRetailer(this.Retailer).subscribe(
       res => {
+        console.log(this.Retailer)
         console.log(res.status);
         var status = res.status;
         if (status == 200) {

@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
 
   <div class="row">
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-4">
       <div class="card text-white bg-info">
         <div class="card-body dash">
           <button type="button" class="btn btn-transparent p-0 float-right">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-4">
       <div class="card text-white bg-primary">
         <div class="card-body dash">
           <button type="button" class="btn btn-transparent p-0 float-right">
@@ -25,7 +25,31 @@
       </div>
     </div>
     <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-4">
+      <div class="card text-white bg-success">
+        <div class="card-body dash">
+          <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="fa fa-history"></i>
+          </button>
+          <div class="text-value">{{ CompletedOrder }}</div>
+          <div>Completed Order</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4">
+      <div class="card text-white bg-dark">
+        <div class="card-body dash">
+          <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="fa fa-history"></i>
+          </button>
+          <div class="text-value">{{ DispatchedOrder }}</div>
+          <div>Dispatched Order</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4">
       <div class="card text-white bg-warning">
         <div class="card-body dash">
           <button type="button" class="btn btn-transparent p-0 float-right">
@@ -37,7 +61,7 @@
       </div>
     </div>
     <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-4">
       <div class="card text-white bg-danger">
         <div class="card-body dash">
           <button type="button" class="btn btn-transparent p-0 float-right">
@@ -54,7 +78,11 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <h5>Orders <button type="button" class="btn btn-success btn-sm pull-right" [routerLink]="['/orders-list']">More...</button></h5>
+          <h5>
+            Orders
+            <button type="button" style="margin-left: 5px;" class="btn btn-success btn-sm pull-right" [routerLink]="['/orders/order-map']">Map Orders</button>
+            <button type="button" class="btn btn-success btn-sm pull-right" [routerLink]="['/orders']">More...</button>
+          </h5>
           <table class="table table-bordered table-striped mb-0">
             <thead>
               <tr>
@@ -94,7 +122,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-6">
       <div class="card">
@@ -154,7 +182,7 @@
           <h5>Drivers <button type="button" class="btn btn-success btn-sm pull-right" [routerLink]="['/driver-list']">
             More...
           </button></h5>
-          
+
           <table class="table table-bordered table-striped mb-0">
             <thead>
               <tr>
@@ -190,6 +218,34 @@
               </tr>
             </tbody>
 
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5>
+            Customer Feedback
+          </h5>
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+                <th width="10%">Order No</th>
+                <th width="12%">Rating</th>
+                <th width="8%">Review</th>
+              </tr>
+            </thead>
+              <tbody>
+                <tr *ngFor="let dataval of customerReviewData;">
+                  <td>{{dataval.OrderNo}}</td>
+                  <td>{{dataval.OrderRate}}</td>
+                  <td>{{dataval.OrderReview}}</td>
+                </tr>
+              </tbody>
           </table>
         </div>
       </div>

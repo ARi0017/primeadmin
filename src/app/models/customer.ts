@@ -14,5 +14,6 @@ export class Customer {
     public data?: object,
     public TotalWalletAmt?:number,
     public token?: string,
+    public ProductImgUrl?: string,
   ) { }
 }

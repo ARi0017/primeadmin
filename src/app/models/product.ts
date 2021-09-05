@@ -37,7 +37,8 @@ export class Product {
   public FoodType: string,
   public HSNCode: string,
   public RetailerId: number,
-  public ProductCode: string
+  public ProductCode: string,
+  public MinOrderQty: number
   )
     {}
 }

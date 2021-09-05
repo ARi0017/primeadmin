@@ -19,10 +19,16 @@ export class DashboardComponent implements OnInit {
   TotalOrder:number=0;
   TotalCustomer:number=0;
   ActiveDriver:number=0;
+  CompletedOrder: number = 0;
+  DispatchedOrder: number = 0;
+  customerReviewData: any;
 
   constructor(private orderService: OrderService,
     private router: Router,
-    private toaster: ToasterService,private driverService: DriverService,private customerService: CustomerService,private productService: ProductService) {
+    private toaster: ToasterService,
+    private driverService: DriverService,
+    private customerService: CustomerService,
+    private productService: ProductService) {
   }
   ngOnInit() {
     this.getDashDetail();
@@ -38,6 +44,8 @@ export class DashboardComponent implements OnInit {
       this.TotalOrder = data.data[0].TotalOrder;
       this.TotalCustomer = data.data[0].TotalCustomer;
       this.ActiveDriver = data.data[0].ActiveDriver;
+      this.CompletedOrder = data.data[0].CompleteOrder;
+      this.DispatchedOrder = data.data[0].DespatchOrder;
     });
   }
   formatDate() {
@@ -47,9 +55,9 @@ export class DashboardComponent implements OnInit {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) 
+    if (month.length < 2)
         month = '0' + month;
-    if (day.length < 2) 
+    if (day.length < 2)
         day = '0' + day;
 
     return [year, month, day].join('-');
@@ -70,6 +78,7 @@ export class DashboardComponent implements OnInit {
       'Size': 5
      };
      this.orderService.getOrders(orders).subscribe(data => {
+       console.log(data)
       this.data = data.data;
     });
   }
@@ -106,4 +115,14 @@ export class DashboardComponent implements OnInit {
       this.customerdata = data.data;
     });
   }
+
+  getCustomerOrderReview() {
+    this.orderService.getOrderReview().subscribe(data => {
+      console.log(data)
+      if (data.status ==200) {
+        this.customerReviewData = data.data;
+      }
+    })
+  }
+
 }

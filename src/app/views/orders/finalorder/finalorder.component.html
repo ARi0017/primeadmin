@@ -1,0 +1,104 @@
+<div class="col-lg-12">
+
+    <div class="card">
+      <div class="card-body">
+  
+        <div class="row">
+
+          <div class="col-lg-12">
+            <div class="card"> 
+          
+              <div class="card-body">
+                <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="resData" #mf="mfDataTable" [mfRowsOnPage]="10">
+                 <thead>
+                    <tr>
+                      <th class="text-center"><mfDefaultSorter by="Name">Order Number </mfDefaultSorter></th>
+                      <th class="text-center"><mfDefaultSorter by="Name">Order On</mfDefaultSorter></th>
+                      <th class="text-center"><mfDefaultSorter by="Phone">Bank<br> Reference No.</mfDefaultSorter></th>
+                      <th class="text-center"><mfDefaultSorter by="AddressCount">Order Amount</mfDefaultSorter></th>
+                      <th class="text-center"><mfDefaultSorter by="TotalOrder">Payment Mode</mfDefaultSorter></th>
+                      <th class="text-center" ><mfDefaultSorter by="TotalWalletAmt">Payment Details</mfDefaultSorter></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dataval of mf.data">
+                      <td class="text-center">{{dataval.OrderNo}}</td>
+                      <td class="text-center">{{dataval.OrderedOn}}</td>
+                      <td class="text-center">{{dataval.bank_ref_no}}</td>
+                      <td class="text-center">₹ {{dataval.amount}} {{dataval.currency}}</td>
+                      <td class="text-center">
+                        {{dataval.payment_mode}}
+                      </td>
+                      <td ><button type="button" data-target=".bd-example-modal-lg" style="margin-left: 25%;" class="btn btn-dark" (click)="myModal2.show(); getpaymentDetailsByBank(dataval.tracking_id,dataval.order_id)"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Details</button></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="6">
+                          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                      </td>
+                      
+                  </tr>
+                  </tfoot>
+                </table>
+                </div>
+                </div>
+                </div>
+
+      </div> 
+  
+    </div>
+   
+
+  </div>
+  
+
+
+
+ <div bsModal #myModal2="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+ aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog modal-lg" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h4 class="modal-title">Payment Details History</h4>
+       <button type="button" class="close" (click)="myModal2.hide()" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       <div class="animated fadeIn">
+         <div class="card table-wrapper-scroll-y my-custom-scrollbar">
+           <table class="table table-bordered table-striped mb-0"  >
+             <thead>
+               <tr >
+                 <th width="17%">Order Ref</th>
+                 <th width="17%">Ref No.</th>
+                 <th>Pre Od Id</th>
+                 <th>Order Amount</th>
+                 <th>Request Ip</th>
+                 <th >Request Device #</th>
+                 <th>Bank Res</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr >
+                 <td> {{finalresPaymentData.order_bank_ref_no}}</td>
+                 <td>{{finalresPaymentData.reference_no}}</td>
+                 <td> {{finalresPaymentData.order_no}}</td>
+                 <td>&#8377; {{finalresPaymentData.order_amt}}</td>
+                 <td> {{finalresPaymentData.order_ip}}</td>
+                 <td> {{finalresPaymentData.order_device_type}}</td>
+                 <td> {{finalresPaymentData.order_bank_response}}</td>
+                 <!-- <td>{{val.OrderId}}</td>
+                 <td>{{val.Remarks}}</td>  -->
+                 <!-- &#8377; -->
+               </tr>
+             </tbody>
+           </table>
+           <!-- <p *ngIf='data==""'>Oops! No Data Found</p> -->
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>

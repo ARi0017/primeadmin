@@ -7,9 +7,9 @@
             <table class="table table-bordered table-striped mb-0">
               <tbody>
                 <tr>
-                  <td rowspan="3">
-                    <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 80px; width: 100%;" /><br>
-                    <input name="Ifile" type="file" id="Iname" placeholder="Cover Image" (change)="uploadFile($event)">
+                  <td rowspan="3" colspan="2">
+                    <img src={{url}}{{imgURL}} runat="server" alt="" style="float: right; height: 100px; width: 100%;" /><br>
+                    <input name="Ifile" type="file" id="Iname" placeholder="Cover Image" (change)="uploadFile($event)" style="margin-top: 10px;">
                     <small style="color: red;">{{messageDl}}</small>
                   </td>
                 </tr>

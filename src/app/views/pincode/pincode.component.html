@@ -25,7 +25,7 @@
                 <tr>
                     <td>District</td>
                     <td colspan="3">
-                      <select name="District" class="form-control" [(ngModel)]="Pincode.District" #routeRef="ngModel"
+                      <select name="District" class="form-control" [(ngModel)]="Pincode.District" #districtRef="ngModel"
                         [class.is-invalid]="districtRef.invalid && districtRef.touched" required>
                         <option [value]="" selected>Select District</option>
                         <option [value]="'Kolkata'">Kolkata</option>

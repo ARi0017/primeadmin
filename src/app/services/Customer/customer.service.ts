@@ -17,6 +17,7 @@ interface Icustomer {
   status: number;
   Imgurl: string;
   productimg: string;
+  ProductImgUrl?: string;
 }
 @Injectable({
   providedIn: 'root'
@@ -94,5 +95,8 @@ export class CustomerService {
 
   getWholeCustomerData(customer: object): Observable<Icustomer> {
     return this.http.post<Icustomer>(`${this.url.ServiceUrl}/customerall`, customer);
+  }
+  customerListForPayout():Observable<any>{
+    return this.http.get<any>(`${this.url.ServiceUrl}/customer-list-payout`);
   }
 }

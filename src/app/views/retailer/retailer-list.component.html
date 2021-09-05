@@ -21,28 +21,28 @@
           </button>
         </div>
       </div>
-      <table class="table table-striped table-hover" mfDefaultSorter [mfData]="data" #mf="mfDataTable"
+      <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="data" #mf="mfDataTable"
       [mfRowsOnPage]="10">  <thead>
           <tr>
-            <th width="6%">Image</th>
-            <th width="6%"><mfDefaultSorter by="RetailerTag">V Code</mfDefaultSorter></th>
-            <th colspan="3"><mfDefaultSorter by="Name">V Name</mfDefaultSorter></th>
-            <th colspan="3"><mfDefaultSorter by="Address">Address</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="Phone">Phone</mfDefaultSorter></th>
-            <th colspan="2"><mfDefaultSorter by="Email">Email</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="ContactPerson">Contact Person</mfDefaultSorter></th>
-            <th><mfDefaultSorter by="ContactPersonPhone">Contact Phone</mfDefaultSorter></th>
-            <th width="4%">Action</th>
+            <th width="7%">Image</th>
+            <th width="10%"><mfDefaultSorter by="RetailerTag">V Code</mfDefaultSorter></th>
+            <th width="10%"><mfDefaultSorter by="Name">V Name</mfDefaultSorter></th>
+            <th width="16%"><mfDefaultSorter by="Address">Address</mfDefaultSorter></th>
+            <th width="10%"><mfDefaultSorter by="Phone">Phone</mfDefaultSorter></th>
+            <th width="15%"><mfDefaultSorter by="Email">Email</mfDefaultSorter></th>
+            <th width="15%"><mfDefaultSorter by="ContactPerson">Contact Person</mfDefaultSorter></th>
+            <th width="12%"><mfDefaultSorter by="ContactPersonPhone">Contact Phone</mfDefaultSorter></th>
+            <th width="7%">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let dataval of mf.data">
             <td><img class="displayimage" alt="No Image" src={{url}}{{dataval.ProfileImage}} /></td>
             <td>{{dataval.RetailerTag}}</td>
-            <td colspan="3">{{dataval.Name}}</td>
-            <td colspan="3">{{dataval.Address}}</td>
+            <td>{{dataval.Name}}</td>
+            <td>{{dataval.Address}}</td>
             <td>{{dataval.Phone}}</td>
-            <td colspan="2">{{dataval.Email}}</td>
+            <td>{{dataval.Email}}</td>
             <td>{{dataval.ContactPerson}}</td>
             <td>{{dataval.ContactPersonPhone}}</td>
             <td>

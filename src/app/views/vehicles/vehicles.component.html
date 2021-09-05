@@ -7,8 +7,8 @@
             <table class="table table-bordered table-striped mb-0">
               <tbody>
                 <tr>
-                  <td rowspan="4">
-                    <img src="{{ imgUrl }}" alt="no image" runat="server" style="float: right; height: 80px; width: 100%;"><br>
+                  <td rowspan="5" colspan="2">
+                    <img src="{{ imgUrl }}" alt="no image" runat="server" style="float: right; height: 100px; width: 100%;"><br>
                     <input name="image" type="file" id="name" (change)="uploadFile($event)">
                     <small style="color: red;">{{messageDl}}</small>
                   </td>
@@ -45,8 +45,8 @@
                       <input type="radio" [(ngModel)]="vehicle.FuelType" name="FuelType" value="Petrol"> Petrol
                       <input type="radio" [(ngModel)]="vehicle.FuelType" name="FuelType" value="Diesel"> Diesel
                       <input type="radio" [(ngModel)]="vehicle.FuelType" name="FuelType" value="Others"> Others
-  
-                      <input type="hidden" name="hdnLinkFlag" [(ngModel)]="vehicle.FuelType" #FuelTypeRef="ngModel"  
+
+                      <input type="hidden" name="hdnLinkFlag" [(ngModel)]="vehicle.FuelType" #FuelTypeRef="ngModel"
                       [class.is-invalid]="FuelTypeRef.invalid && FuelTypeRef.touched" required />
                       <small class="text-danger" [class.d-none]="FuelTypeRef.valid || FuelTypeRef.untouched">Select Type
                       </small>
@@ -64,6 +64,19 @@
                         [(ngModel)]="vehicle.Description" />
                     </td>
                 </tr>
+                <tr>
+                  <td>Insurance Expires On</td>
+                    <td colspan="3">
+                      <input type="text" datetime="yyyy-MM-dd HH:mm:ss" class="form-control" placeholder="Enter Insurance Expiry" name="InsuranceExpiredOn"
+                        [(ngModel)]="vehicle.InsuranceExpiredOn" />
+                    </td>
+                    <td>Pollution Expires On</td>
+                    <td colspan="3">
+                      <input type="text" datetime="yyyy-MM-dd HH:mm:ss" class="form-control" placeholder="Enter Pollution Expiry" name="PollutionExpiredOn"
+                        [(ngModel)]="vehicle.PollutionExpiredOn" />
+                    </td>
+                </tr>
+
               </tbody>
             </table>
           </div>

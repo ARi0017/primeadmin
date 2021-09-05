@@ -16,7 +16,7 @@ export class CustomerComponent implements OnInit {
   Customeraddress: Customeraddress = new Customeraddress("", "", "", "", "", null, "");
   Customer: Customer = new Customer("", "", "", "", "", "", null, 1, "", "", "0");
   @ViewChild("myModal", { static: true }) myModal: ModalDirective;
-  
+
   parentcategory: any;
   id: any;
   response: any;
@@ -31,7 +31,7 @@ export class CustomerComponent implements OnInit {
   produrl: string = null;
   walletdata:object = null;
   bankData:object = null;
-  PayAmount:number = null; url:any = "https://service.onlyalibaba.in/customer/img/";
+  PayAmount:number = null; url:any = "https://api.onlyalibaba.in/customer/img/";
   constructor(private customerService: CustomerService,
     private router: Router,
     private route: ActivatedRoute,
@@ -51,6 +51,7 @@ export class CustomerComponent implements OnInit {
     this.customerService.getWholeCustomerData(customerid).subscribe(data => {
       if (data) {
           this.Customer = data.customerinfo[0];
+          console.log(data)
           this.imgURL = this.Customer.ProfileImage;
           this.addressdata = Object.keys(data.addressinfo).length > 0 ? data.addressinfo : null;
           this.cartdata = Object.keys(data.cartinfo).length > 0 ? data.cartinfo : null;
@@ -77,13 +78,13 @@ export class CustomerComponent implements OnInit {
     }
     this.messageDl = "";
     var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
       console.log(reader.result);
-      this.url = ""; 
+      this.url = "";
     }
-    
+
     for (let file of this.dlFile) {
       this.uploadData = new FormData();
       if (file != undefined) {
@@ -94,6 +95,12 @@ export class CustomerComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.dlFile === null) {
+      if (!confirm("No picture is selected. Proceed ?")) {
+        return;
+      }
+      this.Customer.ProfileImage = {};
+    }
     this.Customer.CreatedBy = 1;
     // this.Customer
     this.customerService.AddNewCustomer(this.Customer)
@@ -103,6 +110,7 @@ export class CustomerComponent implements OnInit {
             this.customerService.fileupload(this.uploadData)
               .subscribe(res => console.log("File Uploaded Successfully!"), err => console.log("File not uploaded", err));
           }
+
           if (this.id!= null)
             this.toaster.Success("Customer Info Updated Successfully");
           else
@@ -114,7 +122,7 @@ export class CustomerComponent implements OnInit {
         this.toaster.Error("Server Error");
       })
   }
-  
+
   backpage() {
     this.router.navigate(['/customer-list']);
   }
@@ -166,6 +174,7 @@ export class CustomerComponent implements OnInit {
     const customer = {"CustomerId":id}
     this.customerService.GetCustomerWallet(customer).subscribe(data => {
       this.walletdata = data.data;
+
     });
   }
   UpdateWalletPayment() {

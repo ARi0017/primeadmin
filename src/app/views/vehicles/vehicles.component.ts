@@ -11,7 +11,7 @@ import { Vehicle } from '../../models/vehicle';
 })
 export class VehiclesComponent implements OnInit {
   vehicleid: any;
-  vehicle = new Vehicle (null, '', '', '', 'Petrol', 0, '', '', 1);
+  vehicle = new Vehicle (null, '', '', '', 'Petrol', 0, '', '',null,null,1);
   messageDl: string;
   fileName: any[];
   imgUrl: any;
@@ -46,6 +46,8 @@ export class VehiclesComponent implements OnInit {
       this.vehicle.FuelType = data.data[0].FuelType;
       this.vehicle.EngineCC = data.data[0].EngineCC;
       this.vehicle.Description = data.data[0].Description;
+      this.vehicle.PollutionExpiredOn = data.data[0].PollutionExpiredOn;
+      this.vehicle.InsuranceExpiredOn = data.data[0].InsuranceExpiredOn;
     })
   }
 
@@ -165,6 +167,9 @@ export class VehiclesComponent implements OnInit {
       }
     }
     else{
+      if (!confirm("No picture is selected. Proceed ?")) {
+        return;
+      }
       this.vehicle.VehiclaImage = this.vehiclePicture;
       this.vehicle.VehicleId = this.vehicleid;
       this.vehicle.CreatedBy = 1;

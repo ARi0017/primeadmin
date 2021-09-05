@@ -11,21 +11,21 @@ const routes: Routes = [
     path: '',
     component: MiscellaneousListComponent,
     data: {
-      title: 'Miscellaneous'
+      title: 'Tax & Others'
     }
   },
   {
     path: 'add',
     component: MiscellaneousComponent,
     data: {
-      title: 'Add Miscellaneous'
+      title: 'Add Tax & Others'
     }
   },
   {
     path: 'edit',
     component: MiscellaneousComponent,
     data: {
-      title: 'Edit Miscellaneous'
+      title: 'Edit Tax & Others'
     }
   }
 ]
