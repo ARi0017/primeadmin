@@ -148,7 +148,7 @@
                   <td><b>Discounted Price</b></td>
                   <td colspan="3">
                     <input type="number" class="form-control" placeholder="Enter Discounted Price" name="DiscountedPrice"
-                    [(ngModel)]="Product.DiscountedPrice" #PcsRef="ngModel">
+                    [(ngModel)]="Product.DiscountedPrice" #discPrice="ngModel">
                   </td>
                   <td><b>Pcs*</b></td>
                   <td colspan="3">
@@ -156,6 +156,24 @@
                     [(ngModel)]="Product.Pcs" #PcsRef="ngModel">
                   </td>
 
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="table table-bordered table-striped mb-0">
+              <tbody>
+                <tr>
+                  <td><b>Not Returnable*</b></td>
+                    <td colspan="3">
+                      <input type="radio" [(ngModel)]="Product.NotReturnable" name="NotReturnable" value="1" > Yes
+                      <input type="radio" [(ngModel)]="Product.NotReturnable" name="NotReturnable" value="0" > No
+                    </td>
+                  <td><b>Return Policy Days*</b></td>
+                  <td colspan="3">
+                    <input type="number" class="form-control" placeholder="Enter Return Policy Days" name="ReturnPolicyDays" [disabled]="Product.NotReturnable==1"
+                    [(ngModel)]="Product.ReturnPolicyDays" #returnRef="ngModel">
+                  </td>
+                  
                 </tr>
               </tbody>
             </table>
@@ -197,11 +215,7 @@
                       <input type="radio" [(ngModel)]="Product.IsFreeShipping" name="IsFreeShipping" value="1"> Yes
                       <input type="radio" [(ngModel)]="Product.IsFreeShipping" name="IsFreeShipping" value="0"> No
                     </td>
-                    <td><b>Not Returnable*</b></td>
-                    <td colspan="3">
-                      <input type="radio" [(ngModel)]="Product.NotReturnable" name="NotReturnable" value="1" > Yes
-                      <input type="radio" [(ngModel)]="Product.NotReturnable" name="NotReturnable" value="0" > No
-                    </td>
+                    
                 </tr>
                 <tr>
                     <td><b>Tax Exempted*</b></td>
@@ -210,8 +224,29 @@
                       <input type="radio" [(ngModel)]="Product.IsTaxExempt" name="IsTaxExempt" value="0"> No
                     </td>
                     <td colspan="4"></td>
+                    
                 </tr>
 
+              </tbody>
+            </table>
+
+            <table class="table table-bordered mb-0">
+              <tbody>
+                <tr>
+                  <button type="button" class="btn btn-sm btn-primary" (click)='addField()' >Add Fields</button>
+                 
+                  <section *ngFor='let items of Bulksection;let i = index; '>
+                    <label><b>Bulk Quantity</b></label>
+                    <input type='number' [(ngModel)]="items.BulkQuantity" placeholder="Enter Bulk Quantity"
+                        name="BulkQuantity_{{items.id}}"/>
+                    
+                    <label><b>Bulk Offer</b></label>
+                    <input type='number' [(ngModel)]="items.BulkOffer" placeholder="Enter Bulk Offer"
+                          name="BulkOffer_{{items.id}}"/>
+                    <button type="button" class="btn btn-sm btn-danger" *ngIf='i!==0' (click)="removefield(items.id)" >Remove</button>  
+                    
+                  </section>
+                </tr>
               </tbody>
             </table>
             <table class="table table-bordered table-striped mb-0">
@@ -219,10 +254,10 @@
                 <tr>
                   <td><b>Cover Image</b></td>
                   <td colspan="3">
-                    <input name="ifile" type="file" id="iname" (change)="uploadFileImage($event)">
+                    <input name="ifile"  type="file" id="iname" (change)="uploadFileImage($event)">
 
                     <!-- <a id="lnkItemCover" runat="server" data-fancybox="gallery"> -->
-                      <img src={{url}}{{imgURL}} runat="server" alt="" style=" height: 150px; width: 150px;" /><br>
+                      <img src={{url}}{{imgURL}}  runat="server" alt="" style=" height: 150px; width: 150px;" /><br>
                       <small style="color: red;">{{messageDl}}</small>
                     <!-- </a>
                     <b><a href="#" onclick="resetImage()"><input type="hidden" id="hdnImage" runat="server" value="" />&times;</a></b> -->

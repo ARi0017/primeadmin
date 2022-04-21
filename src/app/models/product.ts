@@ -38,7 +38,9 @@ export class Product {
   public HSNCode: string,
   public RetailerId: number,
   public ProductCode: string,
-  public MinOrderQty: number
+  public MinOrderQty: number,
+  public ReturnPolicyDays :number,
+  public Bulksection:any[]
   )
     {}
 }

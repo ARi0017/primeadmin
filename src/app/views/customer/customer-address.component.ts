@@ -12,7 +12,7 @@ import { ToasterService } from '../../services/toaster.service';
   templateUrl: './customer-address.component.html'
 })
 export class CustomerAddressComponent implements OnInit {
-  Customeraddress: Customeraddress = new Customeraddress("", "", "", "", "", "", null, "","", "", "0","");
+  Customeraddress: Customeraddress = new Customeraddress("", "", "", "", "", "", null);
 
   @ViewChild("myModal", { static: true }) myModal: ModalDirective;
   data: any;

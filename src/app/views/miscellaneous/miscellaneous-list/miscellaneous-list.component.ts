@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MiscellaneousService } from '../../../services/miscellaneous/miscellaneous.service';
+// import { MiscellaneousService } from '../../../services/miscellaneous.service';
+import { MiscellaneousService } from '../../../services/Miscellaneous/miscellaneous.service';
 import { ToasterService } from '../../../services/toaster.service';
 import { Router } from '@angular/router';
 import { Miscellaneous } from '../../../models/miscellaneous';

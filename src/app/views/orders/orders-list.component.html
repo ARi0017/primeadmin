@@ -154,19 +154,14 @@
                 </ng-template>
               </td>
               <td class="text-center">
-
-
-                <input type="text"
-                placeholder="03/07/2021"
-                class="form-control"
-                bsDatepicker 
-               [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
-               [(ngModel)]="dataval.ExpectedDeliveryTime">
-
-                <!-- <textarea class="form-control" [(ngModel)]="dataval.ExpectedDeliveryTime" ></textarea> -->
-             
-                <button class="btn btn-outline-primary" (click)="expectedTimeDelivery(dataval.OrderId,dataval.ExpectedDeliveryTime)">Submit</button>
-                <pre class="code-preview">{{dataval.ExpectedDeliveryTime | date}}</pre>
+                
+                <b type="button"  *ngIf="dataval.ExpectedDeliveryTime==null" style="color: green;" (click)="openModal1(datemodal,dataval.OrderId,dataval.ExpectedDeliveryTime)"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add Expected Delivery Date</b>
+                <b *ngIf="dataval.ExpectedDeliveryTime!=null">{{dataval.ExpectedDeliveryTime |date:"dd-MM-yyyy"}}</b>
+                <br>
+               <b type="button" *ngIf="dataval.ExpectedDeliveryTime!=null" style="color: blue;" (click)="openModal1(datemodal,dataval.OrderId,dataval.ExpectedDeliveryTime)" > <i  class="fa fa-pencil-square" aria-hidden="true" ></i> Edit</b>
+                
+                
+                <!-- <pre class="code-preview">{{dataval.ExpectedDeliveryTime |date:"dd-MM-yyyy"}}</pre> -->
               </td>
             
 
@@ -492,3 +487,24 @@
     </div>
   </div>
 </div>
+
+<ng-template #datemodal>
+  <div class="modal-header">
+     <h4 class="modal-title pull-left">Insert Expected Delivery Date</h4>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">×</span>
+     </button>
+  </div>
+  <div class="modal-body">
+    <input type="text"
+    placeholder="DD/MM/YYYY"
+    class="form-control"
+    bsDatepicker 
+   [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+   
+   [minDate]="minDate"
+   [(ngModel)]="ExpectedDeliveryTime"
+   >
+    <button class="btn btn-outline-primary" style="margin-top: 10px;" (click)="expectedTimeDelivery()">Submit</button>
+  </div>
+</ng-template>

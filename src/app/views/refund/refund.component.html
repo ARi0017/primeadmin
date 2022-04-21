@@ -1,0 +1,35 @@
+<div class="col-lg-12">
+    <div class="card">
+  
+      <div class="card-body">
+        <table class="table table-bordered table-striped mb-0" mfDefaultSorter [mfData]="customerData" #mf="mfDataTable">
+            <thead>
+              <tr >
+                <th >ProductName</th>
+                <th >Quantity</th>
+                <th>Date</th>
+                <th >Status</th>
+                <th >Status Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let data of refundList'>
+                <td >{{data.ProductName}}</td>
+                <td >{{data.Quantity}}</td>
+                <td >{{data.CreatedDate|date:'fullDate'}} </td>
+                <td *ngIf="data.RefundStatus==='0'" style="text-align: center; color: gold;">Pending</td>
+                <td *ngIf="data.RefundStatus==='1'" style="text-align: center;color: green;"> Accepted</td>
+                <td style="text-align: center;" *ngIf="data.RefundStatus==='0'">
+                    <a class="btn btn-sm btn-warning" (click)='changeStatus(data.Id)' title="Accept refund request" ><i  class="fa fa-times-circle" aria-hidden="true"></i></a>
+                  </td>
+                <td style="text-align: center;" *ngIf="data.RefundStatus==='1'" title=" Refund request accepted">
+                    <a class="btn btn-sm btn-success" ><i class="fa fa-check-circle" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+            </tbody>
+            
+          </table>
+
+      </div>
+    </div>
+</div>

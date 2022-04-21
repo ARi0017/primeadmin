@@ -188,6 +188,11 @@ export const navItems: NavData[] = [
         url: '/payouts',
         icon: 'fa fa-sliders'
       }
+      ,{
+        name:'refund',
+        url:'/refund',
+        icon:'fa fa-sliders'
+      }
 
     ]
   }

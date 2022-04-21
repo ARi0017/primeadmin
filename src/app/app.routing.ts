@@ -135,6 +135,10 @@ export const routes: Routes = [
       {
         path:'past-withdrawals',
         loadChildren: () => import('./views/payment-complete/payment-complete.module').then(m => m.PaymentCompleteModule)
+      },
+      {
+        path:'refund',
+        loadChildren:()=>import('./views/refund/refund.module').then(m=>m.RefundModule)
       }
     ]
   }

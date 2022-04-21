@@ -29,6 +29,9 @@ export class OrdersListComponent implements OnInit {
   PageSize:number=10;
   orderReview: any;
   expectTime : Date;
+  ExpectedDeliveryTime=new Date();
+  orderId:any=null;
+  minDate=new Date(); 
   constructor(private orderService: OrderService, private router: Router, private toaster: ToasterService, private modalService: BsModalService) {
   }
 
@@ -115,20 +118,31 @@ master:object; detail:object; DeliveryTime:any = new Date();
     //newWin.print();
     //newWin.close();
 }
-expectedTimeDelivery(id:any,expect:any){
-  console.log("id",id)
-  console.log("ExpectedTime",expect)
+expectedTimeDelivery(){
+  console.log("id",this.orderId)
+  console.log("ExpectedTime",this.ExpectedDeliveryTime)
   var addData = {
-    "OrderId":id,
-    "expectedTime":expect
+    "OrderId":this.orderId,
+    "expectedTime":this.ExpectedDeliveryTime
   }
   this.orderService.expectedDeliveryTimeUpdate(addData).subscribe(data => {
     if (data.status == 200) {
       this.toaster.Success("Delivery Time Sucessfully Updated!!");
       this.ngOnInit();
+      this.modalRef.hide();
     }
     else
       this.toaster.Error("Something went wrong.");
   });
+}
+openModal1(datemodal: TemplateRef<any> ,id:any,date:any) {
+  this.ExpectedDeliveryTime=new Date();
+  this.modalRef = this.modalService.show(datemodal);
+  this.orderId=id;
+  if(date!=null){
+    this.ExpectedDeliveryTime=new Date(date);
+  }
+  
+  
 }
 }

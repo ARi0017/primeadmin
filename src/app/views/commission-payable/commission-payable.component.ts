@@ -24,17 +24,18 @@ export class CommissionPayableComponent implements OnInit {
       'firstLoading':1
 
     }
-    
+
     console.log(addData)
     this.TaxService.CommissionPayable(addData).subscribe(data => {
       this.saleRegister = data.data
       this.NOACommission = data.NOACommission
     })
-    
+
   }
   getData(){
     var fromDateData = this.daterangepickerModel[0]
     var toDateData = this.daterangepickerModel[1]
+    console.log(fromDateData, toDateData)
     const fromDate = new Date(fromDateData).toISOString().slice(0, 19).replace('T', ' ');
     const toDate = new Date(toDateData).toISOString().slice(0, 19).replace('T', ' ');
     var addData = {
@@ -42,7 +43,7 @@ export class CommissionPayableComponent implements OnInit {
       'toDate':toDate
 
     }
-    
+
     console.log(addData)
     this.TaxService.CommissionPayable(addData).subscribe(data => {
       this.saleRegister = data.data
