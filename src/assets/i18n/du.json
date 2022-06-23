@@ -1,0 +1,13 @@
+{
+  "Cms": {
+    "CmsHeader": {
+      "addCmsHeader": "Toevoegen Cms",
+      "addCmsButton": "Toevoegen"
+    },
+    "CmsTable": {
+      "name": "Naam",
+      "slug": "Naaktslak",
+      "action": "Actie"
+    }
+  }
+}

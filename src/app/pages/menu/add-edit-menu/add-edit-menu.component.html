@@ -1,0 +1,119 @@
+<form #menuForm="ngForm" nzForm (ngSubmit)="!menuId ? addMenu() : editMenu()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="title" nzRequired
+      >{{ 'Menu.MenuAddForm.title' | translate }}</nz-form-label
+    >
+    <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+      <input
+        nz-input
+        style="width: 80%"
+        id="title"
+        type="text"
+        [(ngModel)]="title"
+        name="title"
+        placeholder="Enter Menu Title"
+        required
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="url" nzRequired
+      >{{ 'Menu.MenuAddForm.url' | translate }}</nz-form-label
+    >
+    <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+      <input
+        nz-input
+        style="width: 80%"
+        id="url"
+        type="text"
+        [(ngModel)]="url"
+        name="url"
+        [disabled]="menuId"
+        placeholder="Enter Menu URL"
+        required
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="icon" nzRequired
+      >{{ 'Menu.MenuAddForm.icon' | translate }}</nz-form-label
+    >
+    <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+      <input
+        nz-input
+        style="width: 80%"
+        id="icon"
+        type="text"
+        [(ngModel)]="icon"
+        name="icon"
+        placeholder="Enter Menu Icon"
+        required
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="category" nzRequired
+      >{{ 'Menu.MenuAddForm.category' | translate }}</nz-form-label
+    >
+    <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+      <input
+        nz-input
+        style="width: 80%"
+        id="category"
+        type="text"
+        [(ngModel)]="category"
+        name="category"
+        placeholder="Enter Menu Category"
+        required
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="priority" nzRequired
+      >{{ 'Menu.MenuAddForm.priority' | translate }}</nz-form-label
+    >
+    <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+      <input
+        nz-input
+        style="width: 80%"
+        id="priority"
+        type="text"
+        [(ngModel)]="priority"
+        name="priority"
+        placeholder="Enter Menu Priority"
+        required
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  
+
+  <nz-form-item nz-row class="register-area">
+    <nz-form-control [nzSpan]="14" [nzOffset]="3">
+      <button
+      *ngIf="!menuId"
+      type="Submit"
+      nz-button
+      nzType="primary"
+      [disabled]="menuForm.invalid"
+    >
+    {{ 'Menu.MenuAddForm.submit' | translate }}
+    </button>
+    <button
+      *ngIf="menuId"
+      type="submit"
+      nz-button
+      nzType="primary"
+      [disabled]="menuForm.invalid"
+    >
+    {{ 'Menu.MenuAddForm.update' | translate }} 
+    </button>
+      &nbsp;
+      <button nz-button nzType="primary" [routerLink]="['/menu']">{{ 'Menu.MenuAddForm.back' | translate }}</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

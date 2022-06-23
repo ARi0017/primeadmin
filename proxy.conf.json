@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://resource.brandwars.com",
+    "secure": false
+  }
+}

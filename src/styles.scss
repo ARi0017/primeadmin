@@ -1,0 +1,158 @@
+/* You can add global styles to this file, and also import other style files */
+
+.pointer {
+    cursor: pointer;
+}
+
+.ant-table table {
+    border: 1px solid #f1f1f1;
+}
+
+.ant-table-tbody>tr>td {
+    padding: 3px;
+    font-size: .8rem;
+}
+
+.ant-table-thead>tr>th {
+    padding: 5px;
+}
+
+.ant-table-column-sorters {
+    padding: 5px;
+}
+
+.anticon {
+    vertical-align: baseline;
+}
+
+.ant-form-item {
+    margin-bottom: 15px;
+}
+
+.head-line {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.head-line span {
+    border-bottom: 2px solid #d71e2e;
+    padding-bottom: 3px;
+}
+
+.team {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.team li {
+    list-style: none;
+    width: 25%;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 15px;
+    color: #88020e;
+}
+
+.team li p {
+    margin: 0;
+}
+
+.team li span {
+    position: absolute;
+    top: 0;
+    right: 33%;
+    background: #333366;
+    color: #fff;
+    width: 18px;
+    height: 18px;
+    border-radius: 40px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 18px;
+}
+
+.team li .cap {
+    font-size: 13px;
+    color: #88020e;
+    font-weight: bold;
+}
+
+.team li b {
+    background: #ccc;
+    border-radius: 12px;
+    display: inline-block;
+    font-size: .7rem;
+    padding: 1px 6px;
+    color: #000;
+}
+
+.ant-modal {
+    width: 700px !important;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+    background: #d71e2e !important;
+}
+
+html {
+    background: #f0f2f5;
+}
+
+.ant-btn-primary {
+    background: #3ea832;
+    border-color: #3ea832;
+}
+
+.ant-modal-footer {
+    background: #fff;
+    padding: 6px 12px;
+}
+
+.ant-modal-header {
+    padding: 7px 12px;
+}
+
+.ant-modal-close-x {
+    width: 37px;
+    height: 37px;
+    line-height: 37px;
+}
+
+.ant-tabs-content {
+    border-bottom: 1px solid #f0f0f0;
+    border-left: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    padding-top: 15px;
+}
+
+.ant-tabs-bar {
+    margin: 0;
+}
+
+.ant-layout.ant-layout-has-sider>.ant-layout,
+.ant-layout.ant-layout-has-sider>.ant-layout-content {
+    overflow: inherit;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background-color: #d71e2e;
+    border-color: #d71e2e;
+}
+
+.minusb {
+    position: absolute;
+    right: -45px;
+    font-size: 1.4rem;
+    top: 4px;
+}
+
+nz-card>div:first-child {
+    background-color: rgb(215, 30, 46);
+}
+
+.ant-card-bordered {
+    border: 1px solid #d71e2e !important;
+}

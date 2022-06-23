@@ -1,0 +1,52 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="head-line"><span>{{ 'Role.RoleListingHeader.RoleHeader' | translate }}</span></h4>
+    </div>
+    <div class="col-md-6 text-right">
+      <button style="margin-bottom: 10px" type="button" nz-button nzType="primary" [routerLink]="['add']"
+        *ngIf="userRole[1]">
+        <i class="fa fa-plus"></i> {{ 'Role.RoleListingHeader.addRoleButton' | translate }}
+      </button>
+    </div>
+
+
+    <div class="col-md-12">
+      <nz-table nzShowSizeChanger [nzData]="allRole" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+        [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getRoleList();">
+        <thead>
+          <tr>
+            <th nzColumnKey="title" [nzSortFn]="true">{{ 'Role.RoleListingTable.name' | translate }}</th>
+            <th nzColumnKey="createdDate" [nzSortFn]="true">{{ 'Role.RoleListingTable.createddate' | translate }}</th>
+            <th>{{ 'Role.RoleListingTable.status' | translate }}</th>
+            <th *ngIf="userRole[2] || userRole[3]">{{ 'Role.RoleListingTable.action' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let role of allRole">
+            <tr>
+              <td>{{ role.name }}</td>
+              <td>{{ role.createdDate | date: "dd/MM/yyyy HH:mm:ss" }}</td>
+              <td>
+                <span class="text-success pointer" *ngIf="role.isActive == '1'; else elseSpan"
+                  (click)="onStatus(role._id)"><i nz-icon nzType="check" nz-tooltip nzTooltipTitle="Active"
+                    nzTheme="outline"></i></span>
+                <ng-template #elseSpan>
+                  <span class="text-danger pointer" (click)="onStatus(role._id)"><i nz-icon nzType="close" nz-tooltip
+                      nzTooltipTitle="Inactive" nzTheme="outline"></i></span>
+                </ng-template>
+              </td>
+              <td *ngIf="userRole[2] || userRole[3]">
+                <a [routerLink]="['edit', role._id]" *ngIf="userRole[2]"><i nz-icon nz-tooltip nzTooltipTitle="Edit"
+                    nzType="edit" nzTheme="twotone" style="margin-right: 10px"></i></a>
+                <i *ngIf="userRole[3]" class="pointer" nz-icon nz-tooltip nzTooltipTitle="Delete" nzType="delete"
+                  nzTheme="twotone" nz-popconfirm nzPopconfirmTitle="Are you sure ?"
+                  (nzOnConfirm)="onDelete(role._id)"></i>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="head-line"><span>Banner</span></h4>
+      </div>
+      <div class="col-md-6 text-right">
+        <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
+          *ngIf="userRole[1]"><i class="fa fa-plus"></i>
+          {{ 'Banner.BannerHeader.addBannerButton' | translate }}</button>
+      </div>
+  
+  
+      <div class="col-md-12">
+        <nz-table nzShowSizeChanger [nzData]="bannerList" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllBanners();">
+          <thead>
+            <tr>
+              <th nzColumnKey="name" [nzSortFn]="true">Name</th>
+              <th nzColumnKey="remarks" [nzSortFn]="true">Remarks</th>
+              <th>Image</th>
+              <th nzColumnKey="displayOrder" [nzSortFn]="true">DisplayOrder</th>
+              <th nzColumnKey="isHead" [nzSortFn]="true">IsHead</th>
+              <th nzColumnKey="isActive" [nzSortFn]="true">IsActive</th>
+              <th>Created Date</th>
+              <th *ngIf="userRole[2]"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let banner of bannerList">
+              <tr>
+                <td>{{ banner.name }}</td>
+                <td>{{ banner.remarks }}</td>
+                <td><img src="{{ banner.image }}"/> </td>
+                <td>{{ banner.displayOrder }}</td>
+                <td>{{ banner.isHead }}</td>
+                <td>{{ banner.isActive }}</td>
+                <td>{{ banner.createdDate | date:"dd-MM-yyyy hh:mm aaaa" }}</td>
+                <td *ngIf="userRole[2]"><a [routerLink]="['edit', banner._id]" *ngIf="userRole[2]">
+                    <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
+                      style="margin-right: 6px;"></i>
+                  </a></td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>

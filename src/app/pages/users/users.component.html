@@ -1,0 +1,55 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="head-line"><span>{{ 'Users.UsersListingHeader.UsersHeader' | translate }}</span></h4>
+    </div>
+    <div class="col-md-6 text-right">
+      <button style="margin-bottom: 10px" type="button" nz-button nzType="primary" [routerLink]="['add']"
+        *ngIf="userRole[1]">
+        <i class="fa fa-plus"></i>{{ 'Users.UsersListingHeader.addUsersButton' | translate }}
+      </button>
+    </div>
+
+  <div class="col-md-12">
+    <nz-table nzShowSizeChanger [nzData]="allUser" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+      [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getUserList()">
+      <thead>
+        <tr>
+          <th nzColumnKey="name" [nzSortFn]="true">{{ 'Users.UsersTable.name' | translate }}</th>
+          <th nzColumnKey="phone" [nzSortFn]="true">{{ 'Users.UsersTable.phone' | translate }}</th>
+          <th nzColumnKey="email" [nzSortFn]="true">{{ 'Users.UsersTable.email' | translate }}</th>
+          <th nzColumnKey="role" [nzSortFn]="true">{{ 'Users.UsersTable.role' | translate }}</th>
+          <th>{{ 'Users.UsersTable.status' | translate }}</th>
+          <th *ngIf="userRole[2] || userRole[3]">{{ 'Users.UsersTable.action' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let user of allUser">
+          <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role?.name }}</td>
+            <td>
+              <span class="text-success pointer" *ngIf="user.isActive == '1'; else elseSpan"
+                (click)="onStatus(user._id)"><i nz-icon nzType="check" nz-tooltip nzTooltipTitle="Active"
+                  nzTheme="outline"></i></span>
+              <ng-template #elseSpan>
+                <span class="text-danger pointer" (click)="onStatus(user._id)"><i nz-icon nzType="close" nz-tooltip
+                    nzTooltipTitle="Inactive" nzTheme="outline"></i></span>
+              </ng-template>
+            </td>
+            <td *ngIf="userRole[2] || userRole[3]">
+              <a [routerLink]="['edit', user._id]" *ngIf="userRole[2]"><i nz-icon nz-tooltip nzTooltipTitle="Edit"
+                  nzType="edit" nzTheme="twotone" style="margin-right: 10px"></i></a>
+              <i *ngIf="userRole[3]" class="pointer" nz-icon nzType="delete" nzTheme="twotone" nz-tooltip
+                nzTooltipTitle="Delete" nz-popconfirm nzPopconfirmTitle="Are you sure ?"
+                (nzOnConfirm)="onDelete(user._id)"></i>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+</div>

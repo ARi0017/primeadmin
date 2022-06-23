@@ -1,0 +1,34 @@
+<form nzForm [formGroup]="roleForm" (ngSubmit)="addEditRole()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="role" nzRequired>{{ 'Role.RoleAddForm.rolename' | translate }}
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Role!">
+      <input type="text" nz-input id="role" formControlName="name" autocomplete="off" placeholder="Enter Name" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- {{ roleForm.value | json }} -->
+  <div formArrayName="menu" *ngFor="let item of menuArray.controls; let i = index">
+    <nz-form-item [formGroupName]="i">
+      <nz-form-label [nzSm]="6" [nzXs]="24">{{ menu[i].title }}</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24">
+        <label nz-checkbox formControlName="view">{{ 'Role.RoleAddForm.labelview' | translate }}</label>
+        <label nz-checkbox formControlName="add">{{ 'Role.RoleAddForm.labeladd' | translate }}</label>
+        <label nz-checkbox formControlName="edit">{{ 'Role.RoleAddForm.lableedit' | translate }}</label>
+        <label nz-checkbox formControlName="delete">{{ 'Role.RoleAddForm.labledelete' | translate }}</label>
+        <label nz-checkbox (change)="checkAll($event.target.checked, i)">All</label>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <nz-form-item nz-row class="register-area">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button type="submit" nz-button nzType="primary" [disabled]="roleForm.invalid">
+        {{ !roleId ? "Submit" : "Update" }}
+      </button>
+      <button type="button" nz-button nzType="primary" class="btn2" [routerLink]="['/roles']">
+        {{ 'Role.RoleAddForm.back' | translate }}
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

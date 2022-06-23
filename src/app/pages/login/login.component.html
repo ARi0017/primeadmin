@@ -1,0 +1,47 @@
+<div class="login-page" style="background-color: #edc71f;">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <img class="logo-img" src="../../../assets/img/logo.png" alt="logo" />
+        <div class="card card-signin my-3">
+          <div class="card-body" *ngIf="isSingIn">
+            <h5 class="card-title text-center">Sign In</h5>
+            <form class="form-signin" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="form-label-group">
+                <label for="inputEmail">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="Email" [(ngModel)]="email"
+                  name="email" required />
+              </div>
+
+              <div class="form-label-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Password" [(ngModel)]="password"
+                  name="password" required />
+              </div>
+              
+              <button class="btn btn-lg btn-forgotpassword text-uppercase forgot-btn" type="button" (click)="forgotPassButton()">
+                Forget Password
+              </button>
+              <button class="btn btn-lg btn-danger btn-block text-uppercase otp-btn" type="submit"
+                [disabled]="!loginForm.valid">
+                Sign in
+              </button>
+              
+            </form>
+          </div>
+
+         
+          <!-- For Forgot PassWord Verification -->
+            
+          <!-- For ForgotPass OTP Verification -->
+          
+          <!-- For Password Reset -->
+          
+
+          <!-- For Change Password In Forgot Password -->
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

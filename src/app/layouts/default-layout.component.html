@@ -1,0 +1,52 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="/welcome" target="_blank">
+        <img src="../../assets/img/logo.png" alt="logo" />
+        <h1>Only Alibaba</h1>
+      </a>
+    </div>
+    <!-- nzOpen -->
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzTitle="Home" nzIcon="dashboard">
+        <ul>
+          <div *ngFor="let role of userRole.role">
+            <li nz-menu-item nzMatchRouter *ngIf="role.category == '1'">
+              <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
+            </li>
+          </div>
+        </ul>
+      </li>
+    </ul>
+
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu  nzTitle="Settings" nzIcon="setting">
+        <ul>
+          <div *ngFor="let role of userRole.role">
+            <li nz-menu-item nzMatchRouter *ngIf="role.category == '2'">
+              <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
+            </li>
+          </div>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </span>
+
+        <i class="pointer pull-right logout-button" nz-icon nzType="logout" nzTheme="outline" nz-popconfirm
+          nzPopconfirmTitle="Are you sure ?" (nzOnConfirm)="logout()" nzPopconfirmPlacement="left"></i>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

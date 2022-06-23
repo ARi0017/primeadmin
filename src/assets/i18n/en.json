@@ -1,0 +1,649 @@
+{
+  "Cms": {
+    "CmsHeader": {
+      "addCmsHeader": "Add Cms",
+      "addCmsButton": "Add"
+    },
+    "CmsTable": {
+      "name": "Name",
+      "slug": "Slug",
+      "metaTitle": "Meta Title",
+      "url": "Url",
+      "icon": "Icon",
+      "status": "Status",
+      "action": "Action"
+    },
+    "CmsForm": {
+      "cmsName": "Cms Name",
+      "cmsKey": "Cms Key",
+      "url": "Url",
+      "icon": "Icon",
+      "isMobileView": "Mobile Display",
+      "metaTitle": "Meta Title",
+      "metaDescription": "Meta Description",
+      "cmsDescription": "Description",
+      "cmsSubmitButton": "Submit",
+      "cmsResetButton": "Reset",
+      "cmsBackButton": "Back"
+    }
+  },
+  "Users": {
+    "UsersListingHeader": {
+      "UsersHeader": "Users",
+      "addUsersButton": "Add"
+    },
+    "UsersTable": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "action": "Action"
+    },
+    "UsersAddForm": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "role": "Role",
+      "password": "Password",
+      "back": "Back"
+    }
+  },
+  "Role": {
+    "RoleListingHeader": {
+      "RoleHeader": "Roles",
+      "addRoleButton": "Add"
+    },
+    "RoleListingTable": {
+      "name": "Name",
+      "createddate": "Created Date",
+      "status": "Status",
+      "action": "Action"
+    },
+    "RoleAddForm": {
+      "rolename": "Role",
+      "labeladd": "Add",
+      "labelview": "View",
+      "lableedit": "Edit",
+      "labledelete": "Delete",
+      "lableall": "All",
+      "back": "Back"
+    }
+  },
+  "Stock": {
+    "StockListingHeader": {
+      "StockHeader": "Add Stocks",
+      "saveStockButton": "Save",
+      "sync": "Sync Stocks",
+      "rank": "Update Ranks"
+    },
+    "StockListingTable": {
+      "image": "Image",
+      "symbol": "Symbol",
+      "alias": "Alias",
+      "companyname": "Company Name",
+      "exchange": "Exchange",
+      "market": "Market",
+      "rank": "Rank",
+      "credit": "Credit",
+      "marketcap": "Market Cap",
+      "marketcapcategory": "Market Cap",
+      "updateddate": "Updated Date",
+      "action": "Action",
+      "status": "Status"
+    }
+  },
+  "Marketcap": {
+    "MarketcapListingHeader": {
+      "MarketcapHeader": "Market Cap",
+      "addMarketcapButton": "Add",
+      "title": "Title",
+      "market": "Market / Exchange",
+      "value": "Value",
+      "action": "Action"
+    },
+    "MarketcapForm": {
+      "MarketcapHeader": "Market Cap",
+      "title": "Title",
+      "market": "Market / Exchange",
+      "value": "Value",
+      "back": "Back",
+      "submit": "Submit",
+      "update": "Update"
+    }
+  },
+  "Match": {
+    "MatchListingHeader": {
+      "MatchHeader": "Match",
+      "addMatchButton": "Add",
+      "AddCategory": "Add Category"
+    },
+    "MatchListingTable": {
+      "category": "Category",
+      "name": "Name",
+      "stockStats": "Stock Stats",
+      "starttime": "Start Time",
+      "endtime": "End Time",
+      "timeleft": "Time Left",
+      "status": "Status",
+      "action": "Action"
+      
+    },
+    "MatchAddForm": {
+      "matchcategory": "Match Category",
+      "matchname": "Match Name",
+      "startdatetime": "Start Date Time",
+      "enddatetime": "End Date Time",
+      "selectfile": "Select File",
+      "clicktoupload": "Click to Upload",
+      "selectstocks": "Select Stocks",
+      "allstocks": "All Stock",
+      "back": "Back",
+      "submit": "Submit",
+      "update": "Update"
+    }
+  },
+  "MatchCategory": {
+    "MatchCategoryHeader": {
+      "matchcategory": "Match Category",
+      "name": "Name",
+      "description": "Description",
+      "dayCount": "Number Of Days",
+      "submit": "Submit"
+    },
+    "MatchCategoryTableListing": {
+      "name": "Name",
+      "description": "Description",
+      "dayCount": "Number Of Days",
+      "date": "Date",
+      "action": "Action",
+      "cancle": "Cancle",
+      "ok": "Ok"
+    }
+  },
+  "Contest": {
+    "ContestListingHeader": {
+      "AddContest": "Add Contest",
+      "AddCategory": "Add Category",
+      "back": "Back"
+    },
+    "ContestListingTable": {
+      "contestname": "Name",
+      "totalpriceamount": "Total Price Amount",
+      "category": "Category",
+      "totalslots": "Total Slots",
+      "entryfee": "Entry Fee",
+      "cancellable": "Auto Cancellable",
+      "status": "Status",
+      "action": "Action"
+    },
+    "ContestAddEditForm": {
+      "name": "Name",
+      "cancellable": "Cancellable",
+      "cancelUpto": "Cancel Upto",
+      "cancelPercent": "Cancel Upto (%)",
+      "contestcategory": "Contest Category",
+      "contesttype": "Contest Type",
+      "maxentry": "Max Entry",
+      "totalslots": "Total Slots",
+      "platformFeePer": "Platform Fee (%)",
+      "platformFee": "Platform Fee",
+      "totalprizeamounts": "Total Prize Amounts",
+      "entryfee": "Entry Fee",
+      "prizebreakup": "Prize Breakup",
+      "position": "Position",
+      "percentage": "Percentage",
+      "amount": "Amount",
+      "addfield": "Add Field",
+      "submit": "Submit",
+      "update": "Update",
+      "back": "Back",
+      "remainingAmount": "Remaining Amount"
+    }
+  },
+  "ContestCategory": {
+    "ContestCategoryHeader": {
+      "contestcategory": "Contest Category",
+      "name": "Name",
+      "description": "Description",
+      "submit": "Submit"
+    },
+    "ContestCategoryTableListing": {
+      "name": "Name",
+      "description": "Description",
+      "date": "Date",
+      "action": "Action",
+      "cancle": "Cancle",
+      "ok": "Ok"
+    }
+  },
+  "Team": {
+    "TeamListHeader": {
+      "headername": "Team List",
+      "matchname": "Match Name",
+      "contestname": "Contest Name",
+      "back": "Back",
+      "refresh": "Refresh"
+    },
+    "TeamTableListing": {
+      "teamname": "Team Name",
+      "playername": "Player Name",
+      "type": "Type",
+      "rank": "Rank",
+      "points": "Points",
+      "winningAmount": "Winning Amount",
+      "createddate": "Created Date",
+      "showstock": "Show Stock",
+      "winnings": "Winning Amount"
+    }
+  },
+  "Player": {
+    "PlayerList": {
+      "headername": "Players",
+      "to":"To",
+      "from":"From",
+      "searchplayers":"Search Players",
+      "total":"Total :",
+      "search":"Search",
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "joindate": "Date",
+      "gender": "Gender",
+      "image": "Image",
+      "kycver": "Kyc",
+      "bankver": "Bank",
+      "refcode": "Refcode",
+      "status": "Status",
+      "action": "Action",
+      "export":"Export"
+    },
+    "PlayerDetails": {
+      "backbtn": "Back",
+      "teams": {
+        "head": "Playing History",
+        "matchcategory": "Match Category",
+        "matchname": "Match Name",
+        "starttime": "Start Time",
+        "endtime": "End Time",
+        "grandleague": "Grand League",
+        "team": "Total Teams",
+        "name": "Name",
+        "action": "Action"
+      },
+      "details": {
+        "head": "Accounts Information",
+        "wallet": {
+          "head": "Wallet",
+          "totalbalance": "Total Balance",
+          "cashdeposited": "Cash Deposited",
+          "winnings": "Winnings",
+          "refferalbonus": "Refferal Bonus"
+        },
+        "kyc": {
+          "head": "KYC Details",
+          "pannumber": "Pan Number",
+          "panimage": "Pan Image",
+          "accountholdername": "Account Holder Name",
+          "accountnumber": "Account Number",
+          "accountimage": "Account Image",
+          "bankname": "Bank Name",
+          "bankbranch": "Bank Branch",
+          "ifsc": "IFSC Code"
+        },
+        "contact": {
+          "head": "Contact Information",
+          "name": "Name",
+          "phone": "Phone",
+          "email": "Email",
+          "profile": "Profile Image",
+          "gender": "Gender ",
+          "address": "Address",
+          "pincode": "Pincode",
+          "city": "City",
+          "state": "State",
+          "country": "Country"
+        }
+      },
+      "transactions": {
+        "head": "Transactions",
+        "transactionid": "Transaction Id",
+        "detail": "Detail",
+        "transactiontype": "Transaction Type",
+        "amount": "Amount",
+        "createddate": "Created Date"
+      },
+      "withdrawl": {
+        "head": "Withdrawl Request",
+        "amount": "Amount",
+        "withdrawdate": "Withdraw Date"
+      }
+    },
+    "team":{
+      "name":"Team Name",
+      "rank":"Rank",
+      "points":"Points",
+      "winning":"Winning Amount",
+      "show":"Show Stock"
+    }
+  },
+  "ActivityLog": {
+    "ActivityLogList": {
+      "headername": "Activity Log",
+      "user": "User",
+      "usertype": "User Type",
+      "title": "Title",
+      "description": "Description",
+      "ip": "IP",
+      "date": "Date"
+    }
+  },
+  "Apk": {
+    "ApkHeader": {
+      "backbtn": "Back",
+      "addButton": "Add",
+      "apkTitle": "App Uploads",
+      "enquiryTitle": "Enquiries"
+    },
+    "ApkTable": {
+      "version": "Version",
+      "platform": "Platform",
+      "release": "Release Note",
+      "file": "Select File",
+      "upload": "Upload",
+      "download": "Download",
+      "submit": "Submit",
+      "url": "Url",
+      "releaseDate": "Release Date",
+      "status": "Status",
+      "action": "Action"
+    },
+    "EnquiryTable": {
+      "phone": "Phone",
+      "downloadDate": "Download Date",
+      "back": "Back"
+    }
+  },
+  "Menu": {
+    "MenuHeader": {
+      "addMenuHeader": "Menu",
+      "addMenuButton": "Add"
+    },
+    "MenuTable": {
+      "title": "Title",
+      "url": "Url",
+      "icon": "Icon",
+      "category": "Category",
+      "action": "Action"
+    },
+    "MenuAddForm": {
+      "title": "Title",
+      "url": "Url",
+      "icon": "Icon",
+      "category": "Category",
+      "priority": "Priority",
+      "submit": "Submit",
+      "update": "Update",
+      "back": "Back"
+    }
+  },
+  "PointSystem": {
+    "PointSystemListingHeader": {
+      "addPointSystemHeader": "Point System",
+      "AddPointSystemButton": "Add"
+    },
+    "PointSystemListingTable": {
+      "name": "Name",
+      "status": "Status",
+      "action": "Action"
+  },
+  "PointSystemUpdateForm": {
+      "name": "Name",
+      "basePercent": "Base Percentage",
+      "basePoints": "Base Points",
+      "upperCircuit": "Upper Circuit",
+      "upperCircuitPercent": "Upper Circuit Percentage",
+      "upperCircuitPoints": "Upper Circuit Points",
+      "bonus": "Bonus",
+      "percentage": "Percentage",
+      "points": "Points",
+      "addfield": "Add Field",
+      "submit": "Submit",
+      "update": "Update",
+      "back": "Back"
+  }
+  },
+  "Payment": {
+    "PaymentListingHeader": {
+        "name": "Payments",
+        "back": "Back",
+        "searchpayment":"Search Payments",
+        "total":"Total :",
+        "from": "From",
+        "to":"To",
+        "search":"Search",
+        "export":"Export"
+    },
+    "PaymentListingTable": {
+        "amount": "Amount",
+        "orderid": "Order Id",
+        "paymentid": "Payment Id",
+        "invoiceid": "Invoice Id",
+        "email": "Email",
+        "player": "Player",
+        "status": "Payment Status",
+        "contact": "Phone",
+        "currency": "Currency",
+        "captured": "Payment Status",
+        "method": "Payment Method",
+        "card_id": "Card",
+        "wallet": "Wallet",
+        "bank": "Bank",
+        "vpa": "VPA",
+        "action": "Action",
+        "date": "Date"
+    }
+},
+  "Withdrawal": {
+    "WithdrawalHeader": {
+        "name": "Withdrawals",
+        "searchwithdraw":"Search Withdraw",
+        "total":"Total :",
+        "from": "From",
+        "to":"To",
+        "search":"Search",
+        "export":"Export"
+    },
+    "WithdrawalTable": {
+        "player": "Players",
+        "amount": "Amount",
+        "razorpayAccountId": "Razorpay Fund Account",
+        "razorpayPayoutId": "Razorpay Payout Id",
+        "date": "Requested On",
+        "paymentdate": "Paid On",
+        "action": "Action"
+    }
+},
+    "Referral": {
+        "ReferralHeader": {
+            "name": "Referral",
+            "add": "Add Referral",
+            "addmoney": "Add Money",
+            "back": "Back"
+        },
+        "ReferralListingTable": {
+            "referralamount": "Referral Amount",
+            "percentageCut": "Percentage Cut",
+            "referralFreq": "Referral Freq",
+            "prizeCommision": "Prize Commision",
+            "tdspercentage": "TDS",
+            "platformfeepercentage": "Platform Fee"
+        },
+        "ReferralForm": {
+            "referralamount": "Referral Amount",
+            "purpose": "Purpose",
+            "submit": "Submit"
+        },
+        "WithdrawalForm": {
+            "withdrawalamount": "Withdrawal Amount",
+            "submit": "Submit"
+        }
+    },
+    "Market":{
+        "MarketHeader":{
+            "name":"Market",
+            "add":"Add Market",
+            "back":"Back"
+        },
+        "MarketListingTable": {
+            "MarketListingTable":"Market Title",
+            "exchanges":"Exchanges",
+            "priority":"Priority",
+            "action":"Action",
+            "status":"Status",
+            "indices":"Indices"
+        },
+        "MarketForm": {
+            "title":"Title",
+            "exchanges":"Exchanges",
+            "priority":"Priority",
+            "add":"Add Market",
+            "update": "Update",
+            "submit": "Submit",
+            "back":"Back",
+            "addField":"Add Field",
+            "indices":"Indices"
+        }
+    },
+    "Welcome": {
+      "StatisticsHeader": {
+          "countPlayer": "Players",
+          "countMatch": "Match",
+          "countContest": "Contest",
+          "countStocks": "Brands",
+          "activePlayers": "Active Players",
+          "more": "More"
+      },
+      "WelcomeStockTable": {
+          "stockTableHeader": "Top Ten Brands",
+          "stockViewButton": "View More",
+          "image": "Image",
+          "symbol": "Symbol",
+          "companyName": "Name",
+          "mktCapCategory": "Cap Category",
+          "rank": "Rank"
+      },
+      "WelcomeMatchTable": {
+          "matchTableHeader": "Match List",
+          "matchViewButton": "View More",
+          "category": "Category",
+          "name": "Name",
+          "starttime": "Start Time",
+          "endtime": "End Time",
+          "status": "Status"
+      },
+      "WelcomeWithdrawalTable": {
+        "withdrawTableHeader": "Recent Withdrawal",
+        "withdrawViewButton": "View More",
+        "image": "Profile Pic",
+        "player": "Players",
+        "amount": "Amount",
+        "date": "Requested On"
+    },
+    "WelcomeDepositTable": {
+      "DepositTableHeader": "Recent Deposits",
+      "DepositViewButton": "View More",
+      "image": "Profile Pic",
+      "player": "Players",
+      "amount": "Amount",
+      "date": "Paid On"
+  },
+      "WelcomeGraph": {
+          "weeklyUserCount": "Weekly User Registration",
+          "weeklyMatchCount": "Weekly Match Count",
+          "monthlyUserCount": "Monthly User Registration",
+          "monthlyMatchCount": "Monthly Match Count",
+          "filterButtonWeekly": "Weekly",
+          "filterButtonMonthly": "Monthly"
+      }
+  },
+  "StockStats": {
+    "StockStatsHeader": {
+        "headername": "Stock Stats",
+        "matchname": "Match Name",
+        "back": "Back",
+        "refresh": "Refresh"
+    },
+    "StockStatsTable": {
+        "image": "Image",
+        "symbol": "Symbol",
+        "credit": "Credit",
+        "totalPoint": "Total Point",
+        "basePoint": "Base Point",
+        "bonusPoint": "Bonus Point",
+        "upperCircuit": "Upper Circuit"
+    }
+},
+"NoticeBoard": {
+  "NoticeBoardListingHeader": {
+      "NoticeBoard": "Notice Board",
+      "AddNoticeBoardButton": "Add",
+      "back": "Back"
+  },
+  "NoticeBoardListingTable": {
+      "name": "Name",
+      "description": "Description",
+      "entrytype": "Entry Type",
+      "match": "Match",
+      "contest": "Contest",
+      "status": "Status",
+      "date": "Date",
+      "action": "Action",
+      "notice": "Notice",
+      "ticker": "Ticker",
+      "notification": "Notification",
+      "other": "Others"
+  },
+  "NoticeBoardAddEditForm": {
+      "name": "Name",
+      "entrytype": "Entry Type",
+      "description": "Description",
+      "match": "Match",
+      "contest": "Contest",
+      "submit": "Submit",
+      "update": "Update",
+      "back": "Back"
+  }
+},
+"PrizeDistribution": {
+  "PrizeDistributionListingHeader": {
+      "PrizeDistribution": "Prize Distribution",
+      "AddPrizeDistributionButton": "Add",
+      "back": "Back"
+  },
+  "PrizeDistributionListingTable": {
+      "name": "Name",
+      "sizefrom": "Size From",
+      "sieto": "Size To",
+      "status": "Status",
+      "date": "Date",
+      "action": "Action",
+      "active": "Active",
+      "inactive": "Inactive"
+  },
+  "PrizeDistributionAddEditForm": {
+      "name": "Name",
+      "prizedistributiontype": "Prize Distribution Type",
+      "sizefrom": "Size From",
+      "sieto": "Size To",
+      "prizebreakup": "Prize Breakup",
+      "position": "Position",
+      "percentage": "Percentage",
+      "amount": "Amount",
+      "addfield": "Add Field",
+      "submit": "Submit",
+      "update": "Update",
+      "back": "Back"
+  }
+}
+}
