@@ -47,11 +47,11 @@ export class AddEditMenuComponent extends CommonComponent implements OnInit {
   //To get edited menu details by its Id
   getMenuById() {
     this.menuService.getMenuById(this.menuId).subscribe((res) => {
-      this.title = res.title;
-      this.url = res.url;
-      this.icon = res.icon;
-      this.category = res.category;
-      this.priority = res.priority;
+      this.title = res.menu.title;
+      this.url = res.menu.url;
+      this.icon = res.menu.icon;
+      this.category = res.menu.category;
+      this.priority = res.menu.priority;
     });
   }
   
@@ -85,7 +85,7 @@ export class AddEditMenuComponent extends CommonComponent implements OnInit {
       priority: this.priority,
     };
     this.menuService.updateMenu(menuData, this.menuId).subscribe((res) => {
-      this.message.success(res.title);
+      this.message.success(res.message);
       this.router.navigate(["menu"]);
     });
   }

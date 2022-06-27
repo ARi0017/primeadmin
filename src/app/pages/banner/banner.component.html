@@ -5,13 +5,24 @@
       </div>
       <div class="col-md-6 text-right">
         <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
-          *ngIf="userRole[1]"><i class="fa fa-plus"></i>
-          {{ 'Banner.BannerHeader.addBannerButton' | translate }}</button>
+          *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
+        </button>
       </div>
-  
+      <!-- <div class="col-md-3 text-right">
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+          <button type="button" [disabled]="fileList.length == 1" nz-button>
+            <i nz-icon nzType="upload"></i>Import
+          </button>
+        </nz-upload>
+        <button style="margin-bottom: 10px" type="button" nz-button nzType="primary" (click)="uploadCsv()">
+         Submit
+        </button>
+        <ng-template #indicatorTemplate><i class="spinner" nz-icon nzType="loading"></i></ng-template>
+        <nz-spin nzSimple [nzIndicator]="indicatorTemplate" *ngIf="isLoading"> </nz-spin>
+      </div> -->
   
       <div class="col-md-12">
-        <nz-table nzShowSizeChanger [nzData]="bannerList" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+        <nz-table nzShowSizeChanger [nzData]="allBanners" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
           [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllBanners();">
           <thead>
             <tr>
@@ -26,11 +37,11 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let banner of bannerList">
+            <ng-container *ngFor="let banner of allBanners">
               <tr>
                 <td>{{ banner.name }}</td>
                 <td>{{ banner.remarks }}</td>
-                <td><img src="{{ banner.image }}"/> </td>
+                <td><img src="{{ banner.image }}" width="90"/> </td>
                 <td>{{ banner.displayOrder }}</td>
                 <td>{{ banner.isHead }}</td>
                 <td>{{ banner.isActive }}</td>

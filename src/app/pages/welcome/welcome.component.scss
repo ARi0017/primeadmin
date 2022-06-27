@@ -27,3 +27,20 @@ nz-divider {
     }
     .demo-chart{ background: #f1f1f1; margin: 1%; }
 
+    .well {
+      min-height: 20px;
+      padding: 19px;
+      margin-bottom: 20px;
+      background-color: #fccf08;
+      border: 1px solid #fccf08;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
+      box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
+  }
+  .well > p {
+    margin-top: 20px;
+    color: green;
+    text-align: center;
+    font-weight: 700;
+    font-family: cursive;
+}

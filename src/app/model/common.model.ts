@@ -21,13 +21,5 @@ export interface IRole {
   }[];
 }
 
-export interface IBanner {
-  _id?: string;
-  name: string;
-  image: string;
-  remarks: string;
-  displayOrder: number;
-  isHead: boolean;
-  isActive: string;
-  createdDate: Date;
-}
+
+

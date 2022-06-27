@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
+import { CommonComponent } from "../common/common.component";
 import { MenuService } from "src/app/services/menu.service";
 import { IMenu } from "src/app/model/common.model";
-import { CommonComponent } from "../common/common.component";
+
 import { AuthService } from "src/app/services/auth.service";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -43,7 +44,7 @@ export class MenuComponent extends CommonComponent implements OnInit {
         this.allMenu = res.data;
         this.total = res.count;
         this.loading = false;
-        console.log(res.data);
+        //console.log(res.data);
       });
   }
 }

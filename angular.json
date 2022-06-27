@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "bw-admin": {
+        "only-alibaba-admin": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/bw-admin",
+                        "outputPath": "dist/only-alibaba-admin",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -72,18 +72,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "bw-admin:build"
+                        "browserTarget": "only-alibaba-admin:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "bw-admin:build:production"
+                            "browserTarget": "only-alibaba-admin:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "bw-admin:build"
+                        "browserTarget": "only-alibaba-admin:build"
                     }
                 },
                 "test": {
@@ -120,18 +120,18 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "bw-admin:serve"
+                        "devServerTarget": "only-alibaba-admin:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "bw-admin:serve:production"
+                            "devServerTarget": "only-alibaba-admin:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "bw-admin",
+    "defaultProject": "only-alibaba-admin",
     "cli": {
         "analytics": false
     }

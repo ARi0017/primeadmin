@@ -1,0 +1,94 @@
+<form #pincodeForm="ngForm" nzForm (ngSubmit)="!pincodeId ? addPincode() : editPincode()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="pincode" nzRequired>
+        Pincode
+      </nz-form-label>
+      <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="pincode" name="pincode" autocomplete="off"
+          placeholder="Enter pincode"
+          [(ngModel)]="pincode.pincode"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="area" nzRequired>
+        Area
+      </nz-form-label>
+      <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="area" name="area" autocomplete="off"
+          placeholder="Enter area"
+          [(ngModel)]="pincode.area"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="district" nzRequired>
+            District
+        </nz-form-label>
+        <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="district" name="district" autocomplete="off"
+            placeholder="Enter district"
+            [(ngModel)]="pincode.district"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="route" nzRequired>
+            Route
+        </nz-form-label>
+        <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="route" name="route" autocomplete="off"
+            placeholder="Enter route"
+            [(ngModel)]="pincode.route"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="latitude" nzRequired>
+            Latitude
+        </nz-form-label>
+        <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="latitude" name="latitude" autocomplete="off"
+            placeholder="Enter latitude"
+            [(ngModel)]="pincode.latitude"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="longitude" nzRequired>
+            Longitude
+        </nz-form-label>
+        <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="longitude" name="longitude" autocomplete="off"
+            placeholder="Enter longitude"
+            [(ngModel)]="pincode.longitude"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+    
+    
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="3">
+        <button type="Submit" *ngIf="!pincodeId" nz-button nzType="primary" [disabled]="pincodeForm.invalid">
+          Submit
+        </button>
+        <button type="Submit" *ngIf="pincodeId" nz-button nzType="primary" [disabled]="pincodeForm.invalid">
+          Update
+        </button>
+        &nbsp;
+        <button nz-button nzType="primary" [routerLink]="['/pincodes']">Back</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  

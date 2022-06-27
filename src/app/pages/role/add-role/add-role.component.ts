@@ -69,7 +69,7 @@ export class AddRoleComponent extends CommonComponent implements OnInit {
   //Get all menu list
   getMenu() {
     this.common.getMenu().subscribe((res) => {
-      this.menu = res.menu;
+      this.menu = res.data;
       this.menu.forEach((item) => {
         this.menuArray.push(this.addAlternateSlots(item._id));
       });

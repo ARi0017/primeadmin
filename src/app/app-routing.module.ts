@@ -35,6 +35,30 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard],
       },
       {
+        path: "categories",
+        loadChildren: () =>
+          import("./pages/category/category.module").then((m) => m.CategoryModule),
+        canActivate: [AuthenticationGuard],
+      },
+      {
+        path: "pincodes",
+        loadChildren: () =>
+          import("./pages/pincode/pincode.module").then((m) => m.PincodeModule),
+        canActivate: [AuthenticationGuard],
+      },
+      {
+        path: "products",
+        loadChildren: () =>
+          import("./pages/product/product.module").then((m) => m.ProductModule),
+        canActivate: [AuthenticationGuard],
+      },
+      {
+        path: "drivers",
+        loadChildren: () =>
+          import("./pages/driver/driver.module").then((m) => m.DriverModule),
+        canActivate: [AuthenticationGuard],
+      },
+      {
         path: "users",
         loadChildren: () =>
           import("./pages/users/users.module").then((m) => m.UsersModule),

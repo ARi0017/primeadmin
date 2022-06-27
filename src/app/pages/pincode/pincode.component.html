@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="head-line"><span>Pincode</span></h4>
+      </div>
+      <div class="col-md-6 text-right">
+        <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
+          *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
+        </button>
+      </div>
+      <!-- <div class="col-md-3 text-right">
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+          <button type="button" [disabled]="fileList.length == 1" nz-button>
+            <i nz-icon nzType="upload"></i>Import
+          </button>
+        </nz-upload>
+        <button style="margin-bottom: 10px" type="button" nz-button nzType="primary" (click)="uploadCsv()">
+         Submit
+        </button>
+        <ng-template #indicatorTemplate><i class="spinner" nz-icon nzType="loading"></i></ng-template>
+        <nz-spin nzSimple [nzIndicator]="indicatorTemplate" *ngIf="isLoading"> </nz-spin>
+      </div> -->
+  
+      <div class="col-md-12">
+        <nz-table nzShowSizeChanger [nzData]="allPincodes" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllPincodes();">
+          <thead>
+            <tr>
+              <th nzColumnKey="pincode" [nzSortFn]="true">Pincode</th>
+              <th nzColumnKey="area" [nzSortFn]="true">Area</th>
+              <th nzColumnKey="district" [nzSortFn]="true">District</th>
+              <th nzColumnKey="route" [nzSortFn]="true">Route</th>
+              <th nzColumnKey="latitude" [nzSortFn]="true">Latitude</th>
+              <th nzColumnKey="longitude" [nzSortFn]="true">Longitude</th>
+              <th *ngIf="userRole[2]"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let pincode of allPincodes">
+              <tr>
+                <td>{{ pincode.pincode }}</td>
+                <td>{{ pincode.area }}</td>
+                <td>{{ pincode.district }}</td>
+                <td>{{ pincode.route }}</td>
+                <td>{{ pincode.latitude }}</td>
+                <td>{{ pincode.longitude }}</td>
+                <td *ngIf="userRole[2]"><a [routerLink]="['edit', pincode._id]" *ngIf="userRole[2]">
+                    <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
+                      style="margin-right: 6px;"></i>
+                  </a></td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>

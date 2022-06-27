@@ -1,8 +1,6 @@
 {
     "MaxUploadFileSize": "1000000",
     "MinUploadFileSize": "10000",
-    "ServiceUrl": "https://resource.brandwars.com/api",
-    "imageUrl": "https://resource.brandwars.com",
-    "ApiKey": "b3f16bba17825cfbc7ef46faa7f8e99e",
-    "ApiUrl": "https://financialmodelingprep.com/api/v3/stock/list"
+    "ServiceUrl": "https://onlyalibaba-api.azurewebsites.net/api",
+    "imageUrl": "https://onlyalibaba-api.azurewebsites.net"
 }

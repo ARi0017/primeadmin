@@ -32,13 +32,13 @@ export class MenuService {
   }
 
   //Get menu details by its id
-  getMenuById(id: string): Observable<IMenu> {
-    return this.http.get<IMenu>(`${this.baseUrl.serviceUrl}/menu/${id}`);
+  getMenuById(id: string): Observable<{ menu: IMenu}> {
+    return this.http.get<{ menu: IMenu}>(`${this.baseUrl.serviceUrl}/menu/${id}`);
   }
 
   //Update menu list
-  updateMenu(editData: object, id: string): Observable<IMenu> {
-    return this.http.put<IMenu>(
+  updateMenu(editData: object, id: string): Observable<{message : string}> {
+    return this.http.put<{message : string}>(
       `${this.baseUrl.serviceUrl}/menu/${id}`,
       editData
     );

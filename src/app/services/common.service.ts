@@ -12,7 +12,7 @@ export class CommonService {
 
   //Get all menu list
   getMenu() {
-    return this.http.get<{ menu: IMenu[] }>(
+    return this.http.get<{ data: IMenu[] }>(
       `${this.baseUrl.serviceUrl}/menu/`,
       {}
     );
