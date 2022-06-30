@@ -15,10 +15,9 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ['./driver.component.scss']
 })
 export class DriverComponent extends CommonComponent implements OnInit {
-  allDriver : Driver[];
-  id: string;
-  total = 1;
-  loading: boolean = false;
+  allDrivers: Driver[] = [];
+  total: number = 0;
+  loading: Boolean = false;
 
   constructor(
     private driverService: DriverService,
@@ -35,14 +34,15 @@ export class DriverComponent extends CommonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getMenuList() {
+  getAllDrivers() {
     this.loading = true;
+    
     this.driverService.driverList(this.pageIndex, this.pageSize, this.sort)
       .subscribe((res) => {
-        this.allDriver = res.data;
+        this.allDrivers = res.data;
         this.total = res.count;
         this.loading = false;
-        console.log(res.data);
+        //console.log(res.data);
       });
   }
 }

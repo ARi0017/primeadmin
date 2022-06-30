@@ -1,1 +1,39 @@
-<p style="color:blue;">Customer List Under Development!</p>
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="head-line"><span>Customer</span></h4>
+      </div>
+      <div class="col-md-6 text-right">
+       
+      </div>
+     
+      <div class="col-md-12">
+        <nz-table nzShowSizeChanger [nzData]="allCustomers" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllCustomers();">
+          <thead>
+            <tr>
+                <th nzColumnKey="name" [nzSortFn]="true">Name</th>
+                <th nzColumnKey="phone" [nzSortFn]="true">Phone No</th>
+                <th nzColumnKey="email" [nzSortFn]="true">Email</th>
+                <th nzColumnKey="referralCode" [nzSortFn]="true">Referral Code</th>
+                <th *ngIf="userRole[2]"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let customer of allCustomers">
+              <tr>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.referralCode }}</td>
+                <td *ngIf="userRole[2]"><a [routerLink]="['edit', customer._id]" *ngIf="userRole[2]">
+                    <i nz-icon nzType="eye" nz-tooltip nzTooltipTitle="View Detail" nzTheme="twotone"
+                      style="margin-right: 6px;"></i>
+                  </a></td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>

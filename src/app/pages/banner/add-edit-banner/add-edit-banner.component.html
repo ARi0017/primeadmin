@@ -1,9 +1,9 @@
 <form #bannerForm="ngForm" nzForm (ngSubmit)="!bannerId ? addBanner() : editBanner()">
     <nz-form-item>
-      <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="title" nzRequired>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="name" nzRequired>
         Name
       </nz-form-label>
-      <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
         <input type="text" nz-input id="name" name="name" autocomplete="off"
           placeholder="Enter banner name"
           [(ngModel)]="banner.name"
@@ -13,10 +13,10 @@
     </nz-form-item>
   
     <nz-form-item>
-      <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="title" nzRequired>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="remarks" nzRequired>
         Remarks
       </nz-form-label>
-      <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
         <input type="text" nz-input id="remarks" name="remarks" autocomplete="off"
           placeholder="Enter remarks"
           [(ngModel)]="banner.remarks"
@@ -26,15 +26,44 @@
     </nz-form-item>
   
     <nz-form-item>
-      <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="title" nzRequired>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="displayOrder" nzRequired>
         Display Order
       </nz-form-label>
-      <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="The input is Required">
+      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
         <input type="text" nz-input id="displayOrder" name="displayOrder" autocomplete="off"
           placeholder="Enter display order"
           [(ngModel)]="banner.displayOrder"
           required
         />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="display: none;">
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="district" nzRequired>
+        District
+      </nz-form-label>
+      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <nz-select nzPlaceHolder="Select district" nzAllowClear nzShowSearch>
+            <nz-option *ngFor="let d of wbDistricts" [nzValue]="d" [nzLabel]="d"></nz-option>
+          </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="12" [nzOffset]="4">
+        <label nz-checkbox name="isHead" [(ngModel)]="banner.isHead">Is Head</label> 
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="4" nzRequired>Select Banner</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+          <button type="button" [disabled]="fileList.length == 1" nz-button>
+            <i nz-icon nzType="upload"></i>Click to Upload
+          </button>
+        </nz-upload>
+        <img *ngIf="banner.image" class="img img-thumbnail" width="70" src="{{ banner.image }}" alt="" />
       </nz-form-control>
     </nz-form-item>
     

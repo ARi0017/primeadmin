@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+  // allCategories: IBanner[] = []
+  // total: number = 0;
+  // loading: boolean = false;
+  // fileList: any[] = [];
 
   constructor() { }
 

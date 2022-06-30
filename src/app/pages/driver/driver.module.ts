@@ -5,6 +5,7 @@ import { DriverRoutingModule } from './driver-routing.module';
 import { DriverComponent } from '../driver/driver.component';
 import { AddEditDriverComponent } from './add-edit-driver/add-edit-driver.component';
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NzModule } from 'src/app/nz.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -18,6 +19,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     DriverRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NzModule,
     TranslateModule.forRoot({
       loader: {

@@ -14,7 +14,7 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ["./menu.component.scss"],
 })
 export class MenuComponent extends CommonComponent implements OnInit {
-  allMenu: IMenu[];
+  allMenu: IMenu[] = [];
   menu: { label: string; value: any }[];
   id: any;
   total = 1;

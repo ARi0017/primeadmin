@@ -12,12 +12,12 @@ export interface IBanner {
 export class Banner {
   constructor(
     public name: string = "",
-    public image: string = "",
     public remarks: string = "",
+    public image: string = "",
     public displayOrder: number = 0,
-    public isHead: boolean = true,
+    public isHead: boolean = false,
     public isActive: string = "1",
-    public createdDate?: Date,
     public _id?: string,
+    public createdDate?: Date,
   ) {}
 }

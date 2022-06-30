@@ -53,6 +53,12 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard],
       },
       {
+        path: "customers",
+        loadChildren: () =>
+          import("./pages/customer/customer.module").then((m) => m.CustomerModule),
+        canActivate: [AuthenticationGuard],
+      },
+      {
         path: "drivers",
         loadChildren: () =>
           import("./pages/driver/driver.module").then((m) => m.DriverModule),

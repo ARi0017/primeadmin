@@ -20,7 +20,7 @@
       </li>
     </ul>
 
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" *ngIf="isSettingsVisible">
       <li nz-submenu  nzTitle="Settings" nzIcon="setting">
         <ul>
           <div *ngFor="let role of userRole.role">

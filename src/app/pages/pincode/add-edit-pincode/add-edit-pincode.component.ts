@@ -34,7 +34,7 @@ export class AddEditPincodeComponent extends CommonComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.pincodeId) {
-      this.getRolebyId();
+      this.getPincodebyId();
       this.editConsent();
     } else {
       this.addConsent();
@@ -51,8 +51,8 @@ export class AddEditPincodeComponent extends CommonComponent implements OnInit {
       });
   }
 
-  //Get a role details by its id
-  getRolebyId() {
+  //Get a Pincode details by its id
+  getPincodebyId() {
     this.pincodeService.getPincodeById(this.pincodeId)
       .subscribe((res) => {
         this.pincode = res.data;

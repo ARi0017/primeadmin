@@ -16,12 +16,11 @@ import { Pincode } from "src/app/model/pincode.model";
 })
 export class PincodeComponent extends CommonComponent implements OnInit {
   allPincodes: Pincode[] = [];
-  id: string;
   total: number = 0;
   loading: boolean = false;
 
   constructor(
-    private PincodeService: PincodeService,
+    private pincodeService: PincodeService,
     private message: NzMessageService,
     router: Router,
     auth: AuthService,
@@ -33,11 +32,13 @@ export class PincodeComponent extends CommonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loading = true;
+    
   }
 
   getAllPincodes(): void {
-    this.PincodeService.pincodeList(this.pageIndex, this.pageSize, this.sort)
+    this.loading = true;
+
+    this.pincodeService.pincodeList(this.pageIndex, this.pageSize, this.sort)
       .subscribe((res) => {
         this.allPincodes = res.data;
         this.total = res.count;

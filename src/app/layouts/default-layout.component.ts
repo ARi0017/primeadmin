@@ -10,10 +10,14 @@ import { AuthService } from "../services/auth.service";
 export class DefaultLayoutComponent implements OnInit {
   isCollapsed = false;
   userRole: any;
+  isSettingsVisible: Boolean = true;
+
   constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit(): void {
     this.userRole = this.auth.getUserRole();
+
+
   }
 
   logout() {

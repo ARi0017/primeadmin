@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { BannerService } from "src/app/services/banner.service";
-import { IBanner } from "src/app/model/banner.model";
+import { Banner } from "src/app/model/banner.model";
 import { CommonComponent } from "../common/common.component";
 import { AuthService } from "src/app/services/auth.service";
 import { TranslateService } from "@ngx-translate/core";
@@ -13,12 +13,9 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ['./banner.component.scss']
 })
 export class BannerComponent extends CommonComponent implements OnInit {
-  allBanners: IBanner[] = []
-  loading: boolean;
-  fileList: any[] = [];
-  isLoading = false;
-  isVisible = false;
-  total: number;
+  allBanners: Banner[] = []
+  total: number = 0;
+  loading: boolean = false;
 
 
   constructor(
@@ -34,9 +31,11 @@ export class BannerComponent extends CommonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loading = true;
+    
   }
   getAllBanners(): void {
+    this.loading = true;
+
     this.bannerService.bannerList(this.pageIndex, this.pageSize, this.sort)
       .subscribe(res => {
         this.allBanners = res.data;
@@ -46,17 +45,5 @@ export class BannerComponent extends CommonComponent implements OnInit {
   }
 
 
-  uploadCsv() {
-    this.isLoading = true;
-    let uploadedFile = this.fileList[0] ? this.fileList[0] : "";
-    if (!uploadedFile) return this.message.warning("Please select a file.");
-    let upload = new FormData();
-    upload.append("uploadedFile", uploadedFile);
-    this.bannerService.uploadCsv(upload).subscribe((res) => {
-      this.message.success(res.message);
-      this.isLoading = false;
-      this.getAllBanners();
-    });
-  }
-
+  
 }

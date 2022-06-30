@@ -10,8 +10,6 @@ import { ProductService } from "src/app/services/product.service";
 import { Product } from "src/app/model/product.model";
 
 
-
-
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -19,7 +17,6 @@ import { Product } from "src/app/model/product.model";
 })
 export class ProductComponent extends CommonComponent implements OnInit {
   allProducts: Product[] = [];
-  id: string;
   total: number = 0;
   loading: boolean = false;
 
@@ -36,10 +33,12 @@ export class ProductComponent extends CommonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loading = true;
+    
   }
 
   getAllProducts(): void {
+    this.loading = true;
+
     this.productService.productList(this.pageIndex, this.pageSize, this.sort)
       .subscribe((res) => {
         this.allProducts = res.data;

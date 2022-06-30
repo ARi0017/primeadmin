@@ -22,7 +22,7 @@ export class Product {
         public manufacturedBY: string = "",
         public isShowOnHomePage: string = "",
         public isBestSeller: string = "",
-        public isActive: string = "",
+        public isActive: string,
         public createdDate?: Date,
     ){}
 }

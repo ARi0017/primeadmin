@@ -1,1 +1,114 @@
-<p style="color:blue;">Driver Add Edit Under Development!</p>
+<!-- {{ driver | json }} -->
+
+<form #driverForm="ngForm" nzForm (ngSubmit)="!driverId ? addDriver() : editDriver()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="name" nzRequired>
+        Name
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="name" name="name" autocomplete="off"
+          placeholder="Enter driver name"
+          [(ngModel)]="driver.name"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="phone" nzRequired>
+        Phone No
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="phone" name="phone" autocomplete="off"
+          placeholder="Enter phone no"
+          [(ngModel)]="driver.phone"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="email" nzRequired>
+            Email
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="email" name="email" autocomplete="off"
+            placeholder="Enter email"
+            [(ngModel)]="driver.email"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="address" nzRequired>
+            Address
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="address" name="address" autocomplete="off"
+            placeholder="Enter address"
+            [(ngModel)]="driver.address"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="landmark" nzRequired>
+            Landmark
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="landmark" name="landmark" autocomplete="off"
+            placeholder="Enter landmark"
+            [(ngModel)]="driver.landmark"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="pincode" nzRequired>
+          Pincode
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="pincode" name="pincode" autocomplete="off"
+            placeholder="Enter pincode"
+            [(ngModel)]="driver.pincode"
+            required
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="12" [nzOffset]="4">
+        <label nz-checkbox name="isOnline" [(ngModel)]="driver.isOnline">Is Online</label> 
+      </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+      <nz-form-label [nzSpan]="4" nzRequired>Select Photo</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+          <button type="button" [disabled]="fileList.length == 1" nz-button>
+            <i nz-icon nzType="upload"></i>{{ 'Match.MatchAddForm.clicktoupload' | translate }}
+          </button>
+        </nz-upload>
+        <img *ngIf="driver.image" class="img img-thumbnail" width="70" src="{{ driver.image }}" alt="" />
+      </nz-form-control>
+    </nz-form-item>
+    
+    <br>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="3">
+        <button type="Submit" *ngIf="!driverId" nz-button nzType="primary" [disabled]="driverForm.invalid">
+          Submit
+        </button>
+        <button type="Submit" *ngIf="driverId" nz-button nzType="primary" [disabled]="driverForm.invalid">
+          Update
+        </button>
+        &nbsp;
+        <button nz-button nzType="primary" [routerLink]="['/drivers']">Back</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  

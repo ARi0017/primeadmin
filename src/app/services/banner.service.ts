@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { Banner, IBanner } from "../model/banner.model";
+import { Banner } from "../model/banner.model";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -19,7 +19,7 @@ export class BannerService {
       .append("pageIndex", `${pageIndex}`)
       .append("pageSize", `${pageSize}`)
       .append("sort", `${sort}`);
-    return this.http.get<{ data: IBanner[]; count: number }>(
+    return this.http.get<{ data: Banner[]; count: number }>(
       `${this.baseUrl.serviceUrl}/banners`,
       {
         params,
@@ -27,18 +27,19 @@ export class BannerService {
     );
   }
 
-  addBanner(bannerData : Banner) {
-    return this.http.post<Banner>(`${this.baseUrl.serviceUrl}/banners`, bannerData);
+  addBanner(bannerData : Banner): Observable<{message: string}> {
+    return this.http.post<{message: string}>(`${this.baseUrl.serviceUrl}/banners`, bannerData);
   }
 
   //Get Banner details by its id
-  getBannerById(id: string): Observable<Banner> {
-    return this.http.get<Banner>(`${this.baseUrl.serviceUrl}/Banners/${id}`);
+  getBannerById(id: string): Observable<{ data: Banner, message: string}> {
+    alert(id);
+    return this.http.get<{ data: Banner, message: string}>(`${this.baseUrl.serviceUrl}/Banners/${id}`);
   }
 
   //Update Banner list
-  updateBanner(id: string, bannerData : Banner): Observable<Banner> {
-    return this.http.put<Banner>(
+  updateBanner(id: string, bannerData : Banner): Observable<{message: string}> {
+    return this.http.put<{message: string}>(
       `${this.baseUrl.serviceUrl}/Banners/${id}`,
       bannerData
     );

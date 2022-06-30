@@ -8,18 +8,6 @@
           *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
         </button>
       </div>
-      <!-- <div class="col-md-3 text-right">
-        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
-          <button type="button" [disabled]="fileList.length == 1" nz-button>
-            <i nz-icon nzType="upload"></i>Import
-          </button>
-        </nz-upload>
-        <button style="margin-bottom: 10px" type="button" nz-button nzType="primary" (click)="uploadCsv()">
-         Submit
-        </button>
-        <ng-template #indicatorTemplate><i class="spinner" nz-icon nzType="loading"></i></ng-template>
-        <nz-spin nzSimple [nzIndicator]="indicatorTemplate" *ngIf="isLoading"> </nz-spin>
-      </div> -->
   
       <div class="col-md-12">
         <nz-table nzShowSizeChanger [nzData]="allBanners" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
