@@ -24,6 +24,7 @@ import { NzCalendarModule } from "ng-zorro-antd/calendar";
 import { NzGridModule } from "ng-zorro-antd/grid";
 import { NzCardModule } from "ng-zorro-antd/card";
 import { NzSpaceModule } from "ng-zorro-antd/space";
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 const CORE_COMPONENT_MODULES = [
   CommonModule,
@@ -57,6 +58,7 @@ const CORE_COMPONENT_MODULES = [
   NzCardModule,
   NzSpaceModule,
   NzSwitchModule,
+  NzSpinModule
 ];
 
 @NgModule({

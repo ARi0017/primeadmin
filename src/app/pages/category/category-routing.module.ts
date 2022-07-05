@@ -1,8 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CategoryComponent } from './category.component';
+import { AddEditCategoryComponent } from './add-edit-category/add-edit-category.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: "",
+    component: CategoryComponent
+  },
+  {
+    path: "add",
+    component: AddEditCategoryComponent,
+  },
+  {
+    path: "edit/:id",
+    component: AddEditCategoryComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

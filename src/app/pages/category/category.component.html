@@ -1,2 +1,70 @@
-<p style="color:blue;">Category Under Development!</p>
-<p style="color:blue;">Category Add Edit Under Development!</p>
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="head-line"><span>Category</span></h4>
+      </div>
+      <div class="col-md-6 text-right">
+        <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
+          *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
+        </button>
+      </div>
+  
+      <div class="col-md-12">
+        <nz-table nzShowSizeChanger [nzData]="allCategories" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllCategories();">
+          <thead>
+            <tr>
+              <th nzColumnKey="categoryName" [nzSortFn]="true">Category Name</th>
+              <th nzColumnKey="description" [nzSortFn]="true">Description</th>
+              <th nzColumnKey="displayOrder" [nzSortFn]="true" class="text-center">Display Order</th>
+              <th nzColumnKey="isFeatured" [nzSortFn]="true" class="text-center">Is Featured</th>
+              <th nzColumnKey="isTopMenu" [nzSortFn]="true" class="text-center">Is TopMenu</th>
+              <th>Cover Image</th>
+              <th nzColumnKey="isActive" [nzSortFn]="true" class="text-center">Is Active</th>
+              <th *ngIf="userRole[2]"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let category of allCategories">
+              <tr>
+                <td>{{ category.categoryName }}</td>
+                <td>{{ category.description }}</td>
+                <td class="text-center">
+                  {{ category.displayOrder }}
+                </td>
+                <td class="text-center">
+                  <span *ngIf="category.isFeatured" class="text-green">
+                    <i nz-icon nzType="check" nzTheme="outline"></i>
+                  </span>
+                  <span *ngIf="!category.isFeatured" class="text-red">
+                    <i nz-icon nzType="close" nzTheme="outline"></i>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span *ngIf="category.isTopMenu" class="text-green">
+                    <i nz-icon nzType="check" nzTheme="outline"></i>
+                  </span>
+                  <span *ngIf="!category.isTopMenu" class="text-red">
+                    <i nz-icon nzType="close" nzTheme="outline"></i>
+                  </span>
+                </td>
+                <td><img src="{{ category.coverImage }}" width="90"/> </td>
+                <td class="text-center">
+                    <span *ngIf="category.isActive" class="text-green">
+                      <i nz-icon nzType="check" nzTheme="outline"></i>
+                    </span>
+                    <span *ngIf="!category.isActive" class="text-red">
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </span>
+                </td>
+                <td *ngIf="userRole[2]"><a [routerLink]="['edit', category._id]" *ngIf="userRole[2]">
+                    <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
+                      style="margin-right: 6px;"></i>
+                  </a></td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>

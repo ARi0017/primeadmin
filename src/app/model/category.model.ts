@@ -1,5 +1,6 @@
 export class Category {
     constructor(
+        public categoryName: string = "",
         public coverImage: string = "",
         public coverVideo: string = "",
         public description: string = "",
@@ -8,6 +9,7 @@ export class Category {
         public isTopMenu: string = "0",
         public isActive?: string,
         public _id?: string,
-        public createdDate?: Date
+        public createdDate?: Date,
+        public createdBy?: string
     ){}
 }

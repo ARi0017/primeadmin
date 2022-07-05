@@ -8,17 +8,25 @@ import { NzMessageService } from "ng-zorro-antd/message";
 import { AuthService } from "src/app/services/auth.service";
 import { TranslateService } from "@ngx-translate/core";
 
+import { ZoneDropdown } from "src/app/model/zone.model";
+import { ZoneService } from "src/app/services/zone.service";
+
+
 @Component({
   selector: 'app-add-edit-pincode',
   templateUrl: './add-edit-pincode.component.html',
   styleUrls: ['./add-edit-pincode.component.scss']
 })
 export class AddEditPincodeComponent extends CommonComponent implements OnInit {
+  loading: Boolean = false;
   pincodeId: string;
   pincode: Pincode = new Pincode();
+  zones: ZoneDropdown[] = [];
+
 
   constructor(
     private pincodeService: PincodeService,
+    private zoneService: ZoneService,
     router: Router,
     auth: AuthService,
     private route: ActivatedRoute,
@@ -33,6 +41,8 @@ export class AddEditPincodeComponent extends CommonComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.pupulateZone();
+
     if (this.pincodeId) {
       this.getPincodebyId();
       this.editConsent();
@@ -41,6 +51,16 @@ export class AddEditPincodeComponent extends CommonComponent implements OnInit {
     }
   }
 
+  pupulateZone(): void {
+    this.loading = true;
+
+    this.zoneService.zoneListForDropdown()
+      .subscribe((res) => {
+        this.zones  = res.data;
+        this.loading = false;
+      });
+  }
+  
 
   addPincode(): void {
     //console.log(this.pincode);
@@ -53,9 +73,12 @@ export class AddEditPincodeComponent extends CommonComponent implements OnInit {
 
   //Get a Pincode details by its id
   getPincodebyId() {
+    this.loading = true;
+
     this.pincodeService.getPincodeById(this.pincodeId)
       .subscribe((res) => {
         this.pincode = res.data;
+        this.loading = false;
       });
   }
 
@@ -67,5 +90,23 @@ export class AddEditPincodeComponent extends CommonComponent implements OnInit {
         this.message.success(res.message);
         this.router.navigate(["pincodes"]);
       });
+  }
+
+  onZoneChange(selectedZoneId: any): void {
+    //console.log(selectedZoneId);
+    this.loading = true;
+
+    if(selectedZoneId) {
+      this.zoneService.getZoneById(selectedZoneId)
+        .subscribe((res) => {
+          this.pincode.area = res.data.area;
+          this.pincode.district = res.data.district;
+          this.loading = false;
+        });
+    } else {
+      this.pincode.area = "";
+      this.pincode.district = "";
+      this.loading = false;
+    }
   }
 }

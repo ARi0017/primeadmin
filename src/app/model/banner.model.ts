@@ -16,7 +16,7 @@ export class Banner {
     public image: string = "",
     public displayOrder: number = 0,
     public isHead: boolean = false,
-    public isActive: string = "1",
+    public isActive?: string,
     public _id?: string,
     public createdDate?: Date,
   ) {}

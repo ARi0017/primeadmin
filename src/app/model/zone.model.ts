@@ -8,3 +8,13 @@ export class Zone {
         public createdDate?: Date,
     ){}
 }
+
+export class ZoneDropdown {
+    constructor(
+        public _id: string,
+        public zoneName: string,
+        public area: string,
+        public district: string
+    ){}
+}
+

@@ -15,7 +15,9 @@
           [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getMenuList();">
           <thead>
             <tr>
-              <th nzColumnKey="title" [nzSortFn]="true">{{ 'Menu.MenuTable.title' | translate }}</th>
+              <th>Parent Menu</th>
+              <th>Sub Menu</th>
+              <th>Display Order</th>
               <th nzColumnKey="url" [nzSortFn]="true">{{ 'Menu.MenuTable.url' | translate }}</th>
               <th nzColumnKey="icon" [nzSortFn]="true">{{ 'Menu.MenuTable.icon' | translate }}</th>
               <th *ngIf="userRole[2]">{{ 'Cms.CmsTable.action' | translate }}</th>
@@ -24,7 +26,17 @@
           <tbody>
             <ng-container *ngFor="let menu of allMenu">
               <tr>
+                <td>
+                  <span [ngSwitch]="menu.category">
+                    <span *ngSwitchCase="1">Home</span>
+                    <span *ngSwitchCase="'2'">Products</span>
+                    <span *ngSwitchCase="'3'">Sales</span>
+                    <span *ngSwitchCase="'4'">Settings</span>
+                    <span *ngSwitchCase="'5'">App Settings</span>
+                  </span>
+                </td>
                 <td>{{ menu.title }}</td>
+                <td>{{ menu.priority }}</td>
                 <td>{{ menu.url }}</td>
                 <td class=""><i class="{{ menu.icon }}"></i> </td>
                 <td *ngIf="userRole[2]"><a [routerLink]="['edit', menu._id]" *ngIf="userRole[2]">

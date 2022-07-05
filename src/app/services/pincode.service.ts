@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Pincode } from "../model/pincode.model";
+import { NzUploadFile } from "ng-zorro-antd";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -49,6 +50,15 @@ export class PincodeService {
     return this.http.put<{message: string}>(
       `${this.baseUrl.serviceUrl}/pincodes/${id}`,
       editData
+    );
+  }
+
+
+
+  importPincode(formData: FormData) {
+    return this.http.post<{ message: string }>(
+      `${this.baseUrl.serviceUrl}/pincodes/uploadexcel`,
+      formData
     );
   }
 }

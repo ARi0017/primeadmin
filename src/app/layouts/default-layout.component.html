@@ -9,7 +9,7 @@
     </div>
     <!-- nzOpen -->
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzTitle="Home" nzIcon="dashboard">
+      <li nz-submenu nzTitle="Home" nzIcon="home">
         <ul>
           <div *ngFor="let role of userRole.role">
             <li nz-menu-item nzMatchRouter *ngIf="role.category == '1'">
@@ -19,12 +19,44 @@
         </ul>
       </li>
     </ul>
-
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" *ngIf="isSettingsVisible">
-      <li nz-submenu  nzTitle="Settings" nzIcon="setting">
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu  nzTitle="Products" nzIcon="code-sandbox">
         <ul>
           <div *ngFor="let role of userRole.role">
             <li nz-menu-item nzMatchRouter *ngIf="role.category == '2'">
+              <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
+            </li>
+          </div>
+        </ul>
+      </li>
+    </ul>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu  nzTitle="Sales" nzIcon="shopping-cart">
+        <ul>
+          <div *ngFor="let role of userRole.role">
+            <li nz-menu-item nzMatchRouter *ngIf="role.category == '3'">
+              <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
+            </li>
+          </div>
+        </ul>
+      </li>
+    </ul>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu  nzTitle="Settings" nzIcon="setting">
+        <ul>
+          <div *ngFor="let role of userRole.role">
+            <li nz-menu-item nzMatchRouter *ngIf="role.category == '4'">
+              <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
+            </li>
+          </div>
+        </ul>
+      </li>
+    </ul>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" *ngIf="isSettingsVisible">
+      <li nz-submenu  nzTitle="App Settings" nzIcon="setting">
+        <ul>
+          <div *ngFor="let role of userRole.role">
+            <li nz-menu-item nzMatchRouter *ngIf="role.category == '5'">
               <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
             </li>
           </div>

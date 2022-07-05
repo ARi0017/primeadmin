@@ -17,10 +17,10 @@
               <th nzColumnKey="name" [nzSortFn]="true">Name</th>
               <th nzColumnKey="remarks" [nzSortFn]="true">Remarks</th>
               <th>Image</th>
-              <th nzColumnKey="displayOrder" [nzSortFn]="true">DisplayOrder</th>
-              <th nzColumnKey="isHead" [nzSortFn]="true">IsHead</th>
-              <th nzColumnKey="isActive" [nzSortFn]="true">IsActive</th>
-              <th>Created Date</th>
+              <th nzColumnKey="displayOrder" [nzSortFn]="true">Display Order</th>
+              <th nzColumnKey="isHead" [nzSortFn]="true" class="text-center">Is Head</th>
+              <th nzColumnKey="isActive" [nzSortFn]="true" class="text-center">Is Active</th>
+              <!-- <th>Created Date</th> -->
               <th *ngIf="userRole[2]"></th>
             </tr>
           </thead>
@@ -31,9 +31,25 @@
                 <td>{{ banner.remarks }}</td>
                 <td><img src="{{ banner.image }}" width="90"/> </td>
                 <td>{{ banner.displayOrder }}</td>
-                <td>{{ banner.isHead }}</td>
-                <td>{{ banner.isActive }}</td>
-                <td>{{ banner.createdDate | date:"dd-MM-yyyy hh:mm aaaa" }}</td>
+                <td>
+                  <span [ngSwitch]="banner.isHead">
+                    <span *ngSwitchCase="true" class="text-green">
+                      <i nz-icon nzType="check" nzTheme="outline"></i>
+                    </span>
+                    <span *ngSwitchCase="false" class="text-red">
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span *ngIf="banner.isActive" class="text-green">
+                    <i nz-icon nzType="check" nzTheme="outline"></i>
+                  </span>
+                  <span *ngIf="!banner.isActive" class="text-red">
+                    <i nz-icon nzType="close" nzTheme="outline"></i>
+                  </span>
+                </td>
+                <!-- <td>{{ banner.createdDate | date:"dd-MM-yyyy hh:mm aaaa" }}</td> -->
                 <td *ngIf="userRole[2]"><a [routerLink]="['edit', banner._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
                       style="margin-right: 6px;"></i>

@@ -65,6 +65,12 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard],
       },
       {
+        path: "zones",
+        loadChildren: () =>
+          import("./pages/zone/zone.module").then((m) => m.ZoneModule),
+        canActivate: [AuthenticationGuard],
+      },
+      {
         path: "users",
         loadChildren: () =>
           import("./pages/users/users.module").then((m) => m.UsersModule),

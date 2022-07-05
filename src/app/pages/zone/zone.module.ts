@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CategoryRoutingModule } from './category-routing.module';
-import { CategoryComponent } from './category.component';
-import { AddEditCategoryComponent } from './add-edit-category/add-edit-category.component';
+import { ZoneRoutingModule } from './zone-routing.module';
+import { ZoneComponent } from '../zone/zone.component';
+import { AddEditZoneComponent } from './add-edit-zone/add-edit-zone.component';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NzModule } from 'src/app/nz.module';
@@ -16,10 +16,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [CategoryComponent, AddEditCategoryComponent],
+  declarations: [ZoneComponent, AddEditZoneComponent],
   imports: [
     CommonModule,
-    CategoryRoutingModule,
+    ZoneRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     NzModule,
@@ -33,4 +33,4 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule
   ]
 })
-export class CategoryModule { }
+export class ZoneModule { }

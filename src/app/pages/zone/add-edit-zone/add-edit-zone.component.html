@@ -1,0 +1,62 @@
+<div class="col-md-12">
+  <h4 class="head-line"><span>{{ zoneId ? "Update" : "Add New" }} Zone</span></h4>
+</div>
+<br>
+
+<form #zoneForm="ngForm" nzForm (ngSubmit)="!zoneId ? addZone() : editZone()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="zoneName" nzRequired>
+        Zone Name
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="zoneName" name="zoneName" autocomplete="off"
+          placeholder="Enter zone name"
+          [(ngModel)]="zone.zoneName"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="area" nzRequired>
+        Area
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="area" name="area" autocomplete="off"
+          placeholder="Enter area"
+          [(ngModel)]="zone.area"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="district" nzRequired>
+        District
+      </nz-form-label>
+      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <nz-select nzPlaceHolder="Select district" nzId="district" name="district"
+            nzAllowClear 
+            nzShowSearch 
+            [(ngModel)]="zone.district"
+            required
+          >
+            <nz-option *ngFor="let d of districts" [nzValue]="d" [nzLabel]="d"></nz-option>
+          </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="20" [nzOffset]="4">
+        <button type="Submit" *ngIf="!zoneId" nz-button nzType="primary" [disabled]="zoneForm.invalid">
+          Submit
+        </button>
+        <button type="Submit" *ngIf="zoneId" nz-button nzType="primary" [disabled]="zoneForm.invalid">
+          Update
+        </button>
+        &nbsp;
+        <button nz-button nzType="primary" [routerLink]="['/zones']">Back</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  

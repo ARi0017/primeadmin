@@ -1,10 +1,10 @@
 <form #bannerForm="ngForm" nzForm (ngSubmit)="!bannerId ? addBanner() : editBanner()">
     <nz-form-item>
-      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="name" nzRequired>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="bannerName" nzRequired>
         Name
       </nz-form-label>
       <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
-        <input type="text" nz-input id="name" name="name" autocomplete="off"
+        <input type="text" nz-input id="bannerName" name="bannerName" autocomplete="off"
           placeholder="Enter banner name"
           [(ngModel)]="banner.name"
           required
@@ -35,17 +35,6 @@
           [(ngModel)]="banner.displayOrder"
           required
         />
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item style="display: none;">
-      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="district" nzRequired>
-        District
-      </nz-form-label>
-      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
-          <nz-select nzPlaceHolder="Select district" nzAllowClear nzShowSearch>
-            <nz-option *ngFor="let d of wbDistricts" [nzValue]="d" [nzLabel]="d"></nz-option>
-          </nz-select>
       </nz-form-control>
     </nz-form-item>
 

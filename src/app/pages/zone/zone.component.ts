@@ -6,24 +6,21 @@ import { AuthService } from "src/app/services/auth.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NzMessageService } from "ng-zorro-antd/message";
 
-import { CategoryService } from 'src/app/services/category.service';
-import { Category } from "src/app/model/category.model";
-import { NzUploadFile } from 'ng-zorro-antd';
-
+import { ZoneService } from "src/app/services/zone.service";
+import { Zone } from "src/app/model/zone.model";
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  selector: 'app-zone',
+  templateUrl: './zone.component.html',
+  styleUrls: ['./zone.component.scss'],
 })
-export class CategoryComponent extends CommonComponent implements OnInit {
-  allCategories: Category[] = [];
+export class ZoneComponent extends CommonComponent implements OnInit {
+  allZones: Zone[] = [];
   total: number = 0;
   loading: boolean = false;
-  fileList: NzUploadFile[] = [];
 
   constructor(
-    private categoryService: CategoryService,
+    private zoneService: ZoneService,
     private message: NzMessageService,
     router: Router,
     auth: AuthService,
@@ -37,15 +34,14 @@ export class CategoryComponent extends CommonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getAllCategories(): void {
+  getAllZones(): void {
     this.loading = true;
 
-    this.categoryService.categoryList(this.pageIndex, this.pageSize, this.sort)
+    this.zoneService.zoneList(this.pageIndex, this.pageSize, this.sort)
       .subscribe((res) => {
-        this.allCategories = res.data;
+        this.allZones = res.data;
         this.total = res.count;
         this.loading = false;
       });
   }
-
 }
