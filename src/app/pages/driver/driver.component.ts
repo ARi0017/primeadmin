@@ -8,6 +8,7 @@ import { Driver } from "src/app/model/driver.model";
 import { AuthService } from "src/app/services/auth.service";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { TranslateService } from "@ngx-translate/core";
+import { NzUploadFile } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-driver',
@@ -18,6 +19,7 @@ export class DriverComponent extends CommonComponent implements OnInit {
   allDrivers: Driver[] = [];
   total: number = 0;
   loading: Boolean = false;
+  fileList: any[] = [];
 
   constructor(
     private driverService: DriverService,
@@ -44,5 +46,31 @@ export class DriverComponent extends CommonComponent implements OnInit {
         this.loading = false;
         //console.log(res.data);
       });
+  }
+
+
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.fileList = this.fileList.concat(file);
+    return false;
+  };
+
+  importDriver(): void {
+    this.loading = true;
+
+    if(this.fileList.length == 1) {
+      let formData = new FormData();
+      formData.append("file", this.fileList[0]);
+
+      this.driverService.importDriver(formData)
+        .subscribe((res) => {
+          this.message.success(res.message);
+          this.fileList = [];
+          this.loading = false;
+          this.getAllDrivers();
+        });
+    } else {
+      this.message.error("Please select an excel file");
+      this.loading = false;
+    }
   }
 }

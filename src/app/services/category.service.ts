@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Category } from '../model/category.model';
+import { Category, CategoryDropDown } from '../model/category.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -24,7 +24,37 @@ export class CategoryService {
         params: _param
       }
     );
-
-    
   }
+
+
+  //Get Category details by its id
+  getCategoryById(id: string): Observable<{ data: Category, message: string}> {
+    return this.http.get<{ data: Category, message: string}>(
+      `${this.baseUrl.serviceUrl}/categorys/${id}`
+      );
+  }
+    
+  addCategory(CategoryData : Category): Observable<{message: string}> {
+    return this.http.post<{message: string}>(
+        `${this.baseUrl.serviceUrl}/categorys`, 
+        CategoryData
+      );
+  }
+  
+    
+  
+  //Update Category list
+  updateCategory(id: string, CategoryData : Category): Observable<{message: string}> {
+    return this.http.put<{message: string}>(
+      `${this.baseUrl.serviceUrl}/categorys/${id}`,
+      CategoryData
+    );
+  }
+
+  categoryListForDropdown() {
+    return this.http.get<{ data: CategoryDropDown[] }>(
+      `${this.baseUrl.serviceUrl}/categorys/dropdown`
+    );
+  }
+  
 }

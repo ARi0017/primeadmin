@@ -43,4 +43,11 @@ export class DriverService {
       editData
     );
   }
+
+  importDriver(formData: FormData): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${this.baseUrl.serviceUrl}/drivers/uploadexcel`,
+      formData
+    )
+  }
 }

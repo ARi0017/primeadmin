@@ -17,7 +17,7 @@
               <th nzColumnKey="name" [nzSortFn]="true">Name</th>
               <th nzColumnKey="remarks" [nzSortFn]="true">Remarks</th>
               <th>Image</th>
-              <th nzColumnKey="displayOrder" [nzSortFn]="true">Display Order</th>
+              <th nzColumnKey="displayOrder" [nzSortFn]="true" class="text-center">Display Order</th>
               <th nzColumnKey="isHead" [nzSortFn]="true" class="text-center">Is Head</th>
               <th nzColumnKey="isActive" [nzSortFn]="true" class="text-center">Is Active</th>
               <!-- <th>Created Date</th> -->
@@ -30,8 +30,8 @@
                 <td>{{ banner.name }}</td>
                 <td>{{ banner.remarks }}</td>
                 <td><img src="{{ banner.image }}" width="90"/> </td>
-                <td>{{ banner.displayOrder }}</td>
-                <td>
+                <td class="text-center">{{ banner.displayOrder }}</td>
+                <td class="text-center">
                   <span [ngSwitch]="banner.isHead">
                     <span *ngSwitchCase="true" class="text-green">
                       <i nz-icon nzType="check" nzTheme="outline"></i>

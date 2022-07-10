@@ -43,7 +43,10 @@ export class AddEditZoneComponent extends CommonComponent implements OnInit {
   }
 
   populateDistricts(): void {
-    this.districts = this.zoneService.getWbDistricts();
+    this.districts = this.zoneService.getWbDistricts()
+      .map((val) => {
+        return val.toUpperCase();
+      });
   }
 
   addZone(): void {

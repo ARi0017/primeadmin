@@ -4,22 +4,22 @@
         <h4 class="head-line"><span>Product</span></h4>
       </div>
       <div class="col-md-6 text-right">
-        <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
-          *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
-        </button>
-      </div>
-      <!-- <div class="col-md-3 text-right">
-        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
-          <button type="button" [disabled]="fileList.length == 1" nz-button>
+        <nz-upload style="display: inline-block;"
+          [(nzFileList)]="fileList" 
+          [nzBeforeUpload]="beforeUpload" 
+          nzAccept=".xls, .xlsx"
+        >
+          <button type="button" class="btn-top1" [disabled]="fileList.length == 1" nz-button>
             <i nz-icon nzType="upload"></i>Import
           </button>
         </nz-upload>
-        <button style="margin-bottom: 10px" type="button" nz-button nzType="primary" (click)="uploadCsv()">
-         Submit
+        <button type="button" nz-button nzType="primary" (click)="importProduct()">
+          Submit
+        </button> 
+        <button style="margin-bottom: 10px; margin-left: 6px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
+          *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
         </button>
-        <ng-template #indicatorTemplate><i class="spinner" nz-icon nzType="loading"></i></ng-template>
-        <nz-spin nzSimple [nzIndicator]="indicatorTemplate" *ngIf="isLoading"> </nz-spin>
-      </div> -->
+      </div>
   
       <div class="col-md-12">
         <nz-table nzShowSizeChanger [nzData]="allProducts" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
@@ -43,7 +43,7 @@
             <ng-container *ngFor="let product of allProducts">
               <tr>
                 <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
+                <td>{{ product.categoryid.categoryName }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.packetSize }}</td>
                 <td>{{ product.priceOne }}</td>

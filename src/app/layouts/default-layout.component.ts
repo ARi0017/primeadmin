@@ -10,7 +10,7 @@ import { AuthService } from "../services/auth.service";
 export class DefaultLayoutComponent implements OnInit {
   isCollapsed = false;
   userRole: any;
-  isSettingsVisible: Boolean = true;
+  isSettingsVisible: Boolean = false;
 
   constructor(private router: Router, private auth: AuthService) {}
 

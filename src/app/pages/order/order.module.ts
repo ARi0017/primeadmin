@@ -1,24 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { OrderRoutingModule } from './order-routing.module';
+import { OrderComponent } from './order.component';
+import { OrderStatusComponent } from './order-status/order-status.component';
 
-import { MenuComponent } from "./menu.component";
-import { QuillModule } from 'ngx-quill';
-import { AddEditMenuComponent } from './add-edit-menu/add-edit-menu.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NzModule } from 'src/app/nz.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MenuRoutingModule } from './menu-routing.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [MenuComponent, AddEditMenuComponent],
-  imports: [CommonModule, FormsModule, NzModule,  MenuRoutingModule,  QuillModule.forRoot(),
+  declarations: [OrderComponent, OrderStatusComponent],
+  imports: [
+    CommonModule,
+    OrderRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NzModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -27,6 +31,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     HttpClientModule
-  ],
+  ]
 })
-export class MenuModule { }
+export class OrderModule { }

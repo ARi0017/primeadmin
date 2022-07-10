@@ -1,1 +1,93 @@
-<p style="color:blue;">Category Add Edit Under Development!</p>
+<!-- {{ category | json }} -->
+
+<form #categoryForm="ngForm" nzForm (ngSubmit)="!categoryId ? addCategory() : editCategory()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="categoryName" nzRequired>
+        Category Name
+      </nz-form-label>
+      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="categoryName" name="categoryName" autocomplete="off"
+          placeholder="Enter category name"
+          [(ngModel)]="category.categoryName"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="description" nzRequired>
+        Description
+      </nz-form-label>
+      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="description" name="description" autocomplete="off"
+          placeholder="Enter description"
+          [(ngModel)]="category.description"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="displayOrder" nzRequired>
+        Display Order
+      </nz-form-label>
+      <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="displayOrder" name="displayOrder" autocomplete="off"
+          placeholder="Enter display order"
+          [(ngModel)]="category.displayOrder"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="12" [nzOffset]="4">
+        <label nz-checkbox name="isFeatured" [(ngModel)]="category.isFeatured">Is Featured</label> 
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control [nzSpan]="12" [nzOffset]="4">
+          <label nz-checkbox name="isTopMenu" [(ngModel)]="category.isTopMenu">Is TopMenu</label> 
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="coverVideo" nzRequired>
+            Cover Video
+        </nz-form-label>
+        <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="coverVideo" name="coverVideo" autocomplete="off"
+            placeholder="Enter cover video"
+            [(ngModel)]="category.coverVideo"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="4" nzRequired>Select Cover Image</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+          <button type="button" [disabled]="fileList.length == 1" nz-button>
+            <i nz-icon nzType="upload"></i>Click to Upload
+          </button>
+        </nz-upload>
+        <img *ngIf="category.coverImage" class="img img-thumbnail" width="70" src="{{ category.coverImage }}" alt="" />
+      </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="3">
+        <button type="Submit" *ngIf="!categoryId" nz-button nzType="primary" [disabled]="categoryForm.invalid">
+          Submit
+        </button>
+        <button type="Submit" *ngIf="categoryId" nz-button nzType="primary" [disabled]="categoryForm.invalid">
+          Update
+        </button>
+        &nbsp;
+        <button type="button" nz-button nzType="primary" [routerLink]="['/categories']">Back</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  

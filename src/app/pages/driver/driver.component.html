@@ -4,7 +4,19 @@
         <h4 class="head-line"><span>Driver</span></h4>
       </div>
       <div class="col-md-6 text-right">
-        <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
+        <nz-upload style="display: inline-block;"
+          [(nzFileList)]="fileList" 
+          [nzBeforeUpload]="beforeUpload" 
+          nzAccept=".xls, .xlsx"
+        >
+          <button type="button" class="btn-top1" [disabled]="fileList.length == 1" nz-button>
+            <i nz-icon nzType="upload"></i>Import
+          </button>
+        </nz-upload>
+        <button type="button" nz-button nzType="primary" (click)="importDriver()">
+          Submit
+        </button> 
+        <button style="margin-bottom: 10px; margin-left: 6px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
           *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
         </button>
       </div>
@@ -18,8 +30,8 @@
               <th nzColumnKey="name" [nzSortFn]="true">Name</th>
               <th nzColumnKey="phone" [nzSortFn]="true">Phone No</th>
               <th nzColumnKey="email" [nzSortFn]="true">Email</th>
+              <th nzColumnKey="zone" [nzSortFn]="true">Zone</th>
               <th nzColumnKey="address" [nzSortFn]="true">Address</th>
-              <th nzColumnKey="pincode" [nzSortFn]="true">Pincode</th>
               <th>Photo</th>
               <th nzColumnKey="isOnline" [nzSortFn]="true">Is Online</th>
               <th *ngIf="userRole[2]"></th>
@@ -31,15 +43,15 @@
                 <td>{{ driver.name }}</td>
                 <td>{{ driver.phone }}</td>
                 <td>{{ driver.email }}</td>
+                <td>{{ driver.zoneId.zoneName }}</td>
                 <td>{{ driver.address }}</td>
-                <td>{{ driver.pincode }}</td>
                 <td><img src="{{ driver.image }}" alt="{{driver.name}}"></td>
                 <td>
-                    <span *ngIf="driver.isOnline">
-                        <b class="text-green">online</b>
+                    <span *ngIf="driver.isOnline == '1'">
+                        <b class="text-green">Online</b>
                     </span>
-                    <span *ngIf="!driver.isOnline">
-                        <b class="text-danger">offline</b>
+                    <span *ngIf="driver.isOnline == '0'">
+                        <b class="text-danger">Offline</b>
                     </span>
                 </td>
                 <td *ngIf="userRole[2]">

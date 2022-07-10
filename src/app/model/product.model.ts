@@ -1,14 +1,10 @@
-export class IProduct {
-}
 
 export class Product {
     constructor(
-        public _id: string = "",
-        public categoryid: string = "",
         public name: string = "",
-        public Category: string = "",
+        public categoryid: string | {_id: "", categoryName: ""}  = "",
         public description: string = "",
-        public image: string = "",
+        public image: string | undefined = undefined,
         public video: string = "",
         public hsnCode: string = "",
         public gst: string = "",
@@ -16,13 +12,14 @@ export class Product {
         public priceOne: string = "",
         public priceTwo: string = "",
         public priceThree: string = "",
-        public commission: string = "",
+        public commission: number = 0,
         public marketedBY: string = "",
         public packedBY: string = "",
         public manufacturedBY: string = "",
-        public isShowOnHomePage: string = "",
-        public isBestSeller: string = "",
-        public isActive: string,
+        public isShowOnHomePage: string | Boolean = false,
+        public isBestSeller: string | Boolean = false,
+        public isActive?: string | Boolean,
+        public _id?: string,
         public createdDate?: Date,
     ){}
 }

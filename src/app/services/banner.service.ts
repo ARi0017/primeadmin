@@ -33,23 +33,20 @@ export class BannerService {
 
   //Get Banner details by its id
   getBannerById(id: string): Observable<{ data: Banner, message: string}> {
-    alert(id);
-    return this.http.get<{ data: Banner, message: string}>(`${this.baseUrl.serviceUrl}/Banners/${id}`);
+    //alert(id);
+    return this.http.get<{ data: Banner, message: string}>(
+      `${this.baseUrl.serviceUrl}/banners/${id}`
+      );
   }
 
   //Update Banner list
   updateBanner(id: string, bannerData : Banner): Observable<{message: string}> {
     return this.http.put<{message: string}>(
-      `${this.baseUrl.serviceUrl}/Banners/${id}`,
+      `${this.baseUrl.serviceUrl}/banners/${id}`,
       bannerData
     );
   }
 
 
-  uploadCsv(uploadedFile: FormData) {
-    return this.http.post<{ message: string }>(
-      `${this.baseUrl.serviceUrl}/players/uploadcsv`,
-      uploadedFile
-    );
-  }
+
 }

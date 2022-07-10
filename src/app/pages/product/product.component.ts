@@ -8,6 +8,7 @@ import { NzMessageService } from "ng-zorro-antd/message";
 
 import { ProductService } from "src/app/services/product.service";
 import { Product } from "src/app/model/product.model";
+import { NzUploadFile } from 'ng-zorro-antd';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ProductComponent extends CommonComponent implements OnInit {
   allProducts: Product[] = [];
   total: number = 0;
   loading: boolean = false;
+  fileList: any[] = [];
 
   constructor(
     private productService: ProductService,
@@ -45,5 +47,30 @@ export class ProductComponent extends CommonComponent implements OnInit {
         this.total = res.count;
         this.loading = false;
       });
+  }
+
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.fileList = this.fileList.concat(file);
+    return false;
+  };
+
+  importProduct(): void {
+    this.loading = true;
+
+    if(this.fileList.length == 1) {
+      let formData: FormData = new FormData();
+      formData.append("file", this.fileList[0]);
+
+      this.productService.importProduct(formData)
+        .subscribe((res) => {
+          this.message.success(res.message);
+          this.fileList = [];
+          this.loading = false;
+          this.getAllProducts();
+        });
+    } else {
+      this.message.error("Please select an excel file");
+      this.loading = false;
+    }
   }
 }

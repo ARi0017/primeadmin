@@ -5,10 +5,12 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductComponent } from './product.component';
 import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzModule } from 'src/app/nz.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -18,6 +20,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     ProductRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NzModule,
     TranslateModule.forRoot({
       loader: {

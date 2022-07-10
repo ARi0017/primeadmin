@@ -28,6 +28,7 @@ const routes: Routes = [
           import("./pages/welcome/welcome.module").then((m) => m.WelcomeModule),
         canActivate: [AuthenticationGuard],
       },
+      
       {
         path: "banners",
         loadChildren: () =>
@@ -41,15 +42,16 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard],
       },
       {
-        path: "pincodes",
-        loadChildren: () =>
-          import("./pages/pincode/pincode.module").then((m) => m.PincodeModule),
-        canActivate: [AuthenticationGuard],
-      },
-      {
         path: "products",
         loadChildren: () =>
           import("./pages/product/product.module").then((m) => m.ProductModule),
+        canActivate: [AuthenticationGuard],
+      },
+
+      {
+        path: "orders",
+        loadChildren: () =>
+          import("./pages/order/order.module").then((m) => m.OrderModule),
         canActivate: [AuthenticationGuard],
       },
       {
@@ -58,18 +60,26 @@ const routes: Routes = [
           import("./pages/customer/customer.module").then((m) => m.CustomerModule),
         canActivate: [AuthenticationGuard],
       },
-      {
-        path: "drivers",
-        loadChildren: () =>
-          import("./pages/driver/driver.module").then((m) => m.DriverModule),
-        canActivate: [AuthenticationGuard],
-      },
+
       {
         path: "zones",
         loadChildren: () =>
           import("./pages/zone/zone.module").then((m) => m.ZoneModule),
         canActivate: [AuthenticationGuard],
       },
+      {
+        path: "pincodes",
+        loadChildren: () =>
+          import("./pages/pincode/pincode.module").then((m) => m.PincodeModule),
+        canActivate: [AuthenticationGuard],
+      },
+      {
+        path: "drivers",
+        loadChildren: () =>
+          import("./pages/driver/driver.module").then((m) => m.DriverModule),
+        canActivate: [AuthenticationGuard],
+      },
+     
       {
         path: "users",
         loadChildren: () =>
@@ -88,6 +98,7 @@ const routes: Routes = [
           import("./pages/menu/menu.module").then((m) => m.MenuModule),
         canActivate: [AuthenticationGuard],
       },
+
       {
         path: "404",
         component: P404Component,

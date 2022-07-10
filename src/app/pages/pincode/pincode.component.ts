@@ -49,12 +49,7 @@ export class PincodeComponent extends CommonComponent implements OnInit {
       });
   }
 
-  // beforeUpload = (file: NzUploadFile): boolean => {
-  //   this.fileList = this.fileList.concat(file);
-  //   return false;
-  // };
-
-  beforeUpload = (file: NzUploadFile) => {
+  beforeUpload = (file: NzUploadFile): boolean => {
     this.fileList = this.fileList.concat(file);
     return false;
   };

@@ -1,12 +1,14 @@
 <!-- {{ driver | json }} -->
+<!-- {{ fileList.length | json }} -->
 
 <form #driverForm="ngForm" nzForm (ngSubmit)="!driverId ? addDriver() : editDriver()">
     <nz-form-item>
       <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="name" nzRequired>
-        Name
+        Driver Name
       </nz-form-label>
       <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
         <input type="text" nz-input id="name" name="name" autocomplete="off"
+          maxlength="50"
           placeholder="Enter driver name"
           [(ngModel)]="driver.name"
           required
@@ -20,6 +22,7 @@
       </nz-form-label>
       <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
         <input type="text" nz-input id="phone" name="phone" autocomplete="off"
+          maxlength="10"
           placeholder="Enter phone no"
           [(ngModel)]="driver.phone"
           required
@@ -33,6 +36,7 @@
         </nz-form-label>
         <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
           <input type="text" nz-input id="email" name="email" autocomplete="off"
+            maxlength="50"
             placeholder="Enter email"
             [(ngModel)]="driver.email"
             required
@@ -41,7 +45,24 @@
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="address" nzRequired>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="zone" nzRequired>
+        Zone
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <nz-select nzId="zone" name="zone"
+            nzAllowClear 
+            nzShowSearch 
+            nzPlaceHolder="Select zone"
+            [(ngModel)]="driver.zoneId"
+            required
+          >
+            <nz-option *ngFor="let z of zones" [nzValue]="z._id" [nzLabel]="z.zoneName"></nz-option>
+          </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="address" nzRequired>
             Address
         </nz-form-label>
         <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
@@ -67,21 +88,49 @@
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="pincode" nzRequired>
-          Pincode
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="panNo" nzRequired>
+          Pan No
         </nz-form-label>
         <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
-          <input type="text" nz-input id="pincode" name="pincode" autocomplete="off"
-            placeholder="Enter pincode"
-            [(ngModel)]="driver.pincode"
+          <input type="text" nz-input id="panNo" name="panNo" autocomplete="off"
+            maxlength="10"
+            placeholder="Enter pan no"
+            [(ngModel)]="driver.panNo"
             required
           />
         </nz-form-control>
-      </nz-form-item>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="adhaarNo" nzRequired>
+        Adhaar No
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="adhaarNo" name="adhaarNo" autocomplete="off"
+          maxlength="12"
+          placeholder="Enter adhaar no"
+          [(ngModel)]="driver.adhaarNo"
+          required
+        />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="licenseNo" nzRequired>
+      License No
+    </nz-form-label>
+    <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+      <input type="text" nz-input id="licenseNo" name="licenseNo" autocomplete="off"
+        placeholder="Enter license no"
+        [(ngModel)]="driver.licenseNo"
+        required
+      />
+    </nz-form-control>
+  </nz-form-item>
 
     <nz-form-item>
       <nz-form-control [nzSpan]="12" [nzOffset]="4">
-        <label nz-checkbox name="isOnline" [(ngModel)]="driver.isOnline">Is Online</label> 
+        <label nz-checkbox name="isOnline" [(ngModel)]="driver.isOnlineBoolean">Is Online</label> 
       </nz-form-control>
     </nz-form-item>
     

@@ -1,1 +1,247 @@
-<p style="color:blue;">Product Add Edit Under Development!</p>
+<!-- {{ product | json }} -->
+<!-- {{ fileList.length | json }} -->
+
+<form #productForm="ngForm" nzForm (ngSubmit)="!productId ? addProduct() : editProduct()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="name" nzRequired>
+        Product Name
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="name" name="name" autocomplete="off"
+          maxlength="50"
+          placeholder="Enter product name"
+          [(ngModel)]="product.name"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="description" nzRequired>
+        Description
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="description" name="description" autocomplete="off"
+          maxlength="100"
+          placeholder="Enter description"
+          [(ngModel)]="product.description"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="categoryid" nzRequired>
+            Category
+        </nz-form-label>
+        <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+            <nz-select nzId="categoryid" name="categoryid"
+              nzAllowClear 
+              nzShowSearch 
+              nzPlaceHolder="Select category"
+              [(ngModel)]="product.categoryid"
+              required
+            >
+              <nz-option *ngFor="let c of categories" [nzValue]="c._id" [nzLabel]="c.categoryName"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="hsnCode" nzRequired>
+        HSN Code
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="hsnCode" name="hsnCode" autocomplete="off"
+          maxlength="30"
+          placeholder="Enter hsn code"
+          [(ngModel)]="product.hsnCode"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="gst" nzRequired>
+        GST
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="gst" name="gst" autocomplete="off"
+          maxlength="10"
+          placeholder="Enter gst"
+          [(ngModel)]="product.gst"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="packetSize" nzRequired>
+            Packet Size
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+            <input type="text" nz-input id="packetSize" name="packetSize" autocomplete="off"
+            maxlength="10"
+            placeholder="Enter packet size"
+            [(ngModel)]="product.packetSize"
+            required
+        />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="priceOne" nzRequired>
+            Price One
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+            <input type="text" nz-input id="priceOne" name="priceOne" autocomplete="off"
+            maxlength="10"
+            placeholder="Enter price one"
+            [(ngModel)]="product.priceOne"
+            required
+        />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="priceTwo" nzRequired>
+            Price Two
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="priceTwo" name="priceTwo" autocomplete="off"
+            maxlength="10"
+            placeholder="Enter price two"
+            [(ngModel)]="product.priceTwo"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="priceThree" nzRequired>
+            Price Three
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="priceThree" name="priceThree" autocomplete="off"
+            maxlength="10"
+            placeholder="Enter price three"
+            [(ngModel)]="product.priceThree"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>  
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="commission" nzRequired>
+            Commission
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="commission" name="commission" autocomplete="off"
+            maxlength="10"
+            placeholder="Enter commission"
+            [(ngModel)]="product.commission"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="marketedBY" nzRequired>
+            Marketed By
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="marketedBY" name="marketedBY" autocomplete="off"
+            maxlength="50"
+            placeholder="Enter marketed by"
+            [(ngModel)]="product.marketedBY"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="packedBY" nzRequired>
+            Packed By
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="packedBY" name="packedBY" autocomplete="off"
+            maxlength="50"
+            placeholder="Enter packed by"
+            [(ngModel)]="product.packedBY"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="manufacturedBY" nzRequired>
+            Manufactured By
+        </nz-form-label>
+        <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+          <input type="text" nz-input id="manufacturedBY" name="manufacturedBY" autocomplete="off"
+            maxlength="50"
+            placeholder="Enter manufactured by"
+            [(ngModel)]="product.manufacturedBY"
+            required
+          />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="6" [nzOffset]="4">
+        <label nz-checkbox name="isShowOnHomePage" [(ngModel)]="product.isShowOnHomePage">
+            Is Show On HomePage
+        </label> 
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control [nzSpan]="6" [nzOffset]="4">
+          <label nz-checkbox name="isBestSeller" [(ngModel)]="product.isBestSeller">
+            Is Best Seller
+          </label> 
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  [nzSm]="4" [nzXs]="24" nzFor="video" nzRequired>
+        Video
+      </nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
+        <input type="text" nz-input id="video" name="video" autocomplete="off"
+          maxlength="80"
+          placeholder="Enter video link"
+          [(ngModel)]="product.video"
+          required
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+   
+    <nz-form-item>
+      <nz-form-label [nzSpan]="4" nzRequired>Select Image</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+          <button type="button" [disabled]="fileList.length == 1" nz-button>
+            <i nz-icon nzType="upload"></i>{{ 'Match.MatchAddForm.clicktoupload' | translate }}
+          </button>
+        </nz-upload>
+        <img *ngIf="product.image" class="img img-thumbnail" width="70" src="{{ product.image }}" alt="" />
+      </nz-form-control>
+    </nz-form-item>
+    
+    <br>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="3">
+        <button type="Submit" *ngIf="!productId" nz-button nzType="primary" [disabled]="productForm.invalid">
+          Submit
+        </button>
+        <button type="Submit" *ngIf="productId" nz-button nzType="primary" [disabled]="productForm.invalid">
+          Update
+        </button>
+        &nbsp;
+        <button nz-button nzType="primary" [routerLink]="['/products']">Back</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  
