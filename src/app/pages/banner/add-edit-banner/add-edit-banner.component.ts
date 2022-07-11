@@ -49,6 +49,9 @@ export class AddEditBannerComponent extends CommonComponent implements OnInit {
   
 
   async addBanner(): Promise<void> {
+    this.loading = true;
+    this.banner.image = undefined;
+
     if(this.fileList.length == 1) {
       this.banner.image =  await this.getBase64(this.fileList[0]);
       //console.log(this.banner);
@@ -59,6 +62,7 @@ export class AddEditBannerComponent extends CommonComponent implements OnInit {
         });
     } else {
       this.message.error("Please select banner image");
+      return;
     }
   }
 
@@ -73,21 +77,18 @@ export class AddEditBannerComponent extends CommonComponent implements OnInit {
   async editBanner(): Promise<void> {
     this.loading = true;
     this.banner.image = undefined;
-    if(this.fileList.length >= 0) {
-      if(this.fileList.length == 1) {
-        this.banner.image = await this.getBase64(this.fileList[0]);
-      }
-      
-      this.bannerService.updateBanner(this.bannerId, this.banner)
-        .subscribe((res) => {
-          this.message.success(res.message);
-          this.loading = false;
-          this.router.navigate(["banners"]);
-        });
-    } else {
-      this.message.error("Please select an image");
-      this.loading = false;
+
+    if(this.fileList.length == 1) {
+      this.banner.image = await this.getBase64(this.fileList[0]);
     }
+    
+    console.log(this.banner);
+    this.bannerService.updateBanner(this.bannerId, this.banner)
+      .subscribe((res) => {
+        this.message.success(res.message);
+        this.loading = false;
+        this.router.navigate(["banners"]);
+      });
   }
   
 

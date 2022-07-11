@@ -19,7 +19,7 @@ export class CategoryService {
         .append("sort", `${sort}`);
 
     return this.http.get<{ data: Category[], count: number}>(
-      `${this.baseUrl.serviceUrl}/categorys`,
+      `${this.baseUrl.serviceUrl}/categories`,
       {
         params: _param
       }
@@ -30,13 +30,13 @@ export class CategoryService {
   //Get Category details by its id
   getCategoryById(id: string): Observable<{ data: Category, message: string}> {
     return this.http.get<{ data: Category, message: string}>(
-      `${this.baseUrl.serviceUrl}/categorys/${id}`
+      `${this.baseUrl.serviceUrl}/categories/${id}`
       );
   }
     
   addCategory(CategoryData : Category): Observable<{message: string}> {
     return this.http.post<{message: string}>(
-        `${this.baseUrl.serviceUrl}/categorys`, 
+        `${this.baseUrl.serviceUrl}/categories`, 
         CategoryData
       );
   }
@@ -46,14 +46,14 @@ export class CategoryService {
   //Update Category list
   updateCategory(id: string, CategoryData : Category): Observable<{message: string}> {
     return this.http.put<{message: string}>(
-      `${this.baseUrl.serviceUrl}/categorys/${id}`,
+      `${this.baseUrl.serviceUrl}/categories/${id}`,
       CategoryData
     );
   }
 
   categoryListForDropdown() {
     return this.http.get<{ data: CategoryDropDown[] }>(
-      `${this.baseUrl.serviceUrl}/categorys/dropdown`
+      `${this.baseUrl.serviceUrl}/categories/dropdown`
     );
   }
   

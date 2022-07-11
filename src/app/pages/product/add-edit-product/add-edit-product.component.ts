@@ -61,20 +61,25 @@ export class AddEditProductComponent extends CommonComponent implements OnInit {
   }
 
   async addProduct(): Promise<void> {
+    this.loading = true;
+    this.product.image = undefined;
+
     if(this.fileList.length == 1) {
       this.product.image =  await this.getBase64(this.fileList[0]);
-
-      this.product.isShowOnHomePage = this.product.isShowOnHomePage ? "1" : "0";
-      this.product.isBestSeller = this.product.isBestSeller ? "1" : "0";
-      console.log(this.product);
-      this.productService.addProduct(this.product)
-        .subscribe((res) => {
-          this.message.success(res.message);
-          this.router.navigate(["products"]);
-        });
+      this.fileList = [];
     } else {
       this.message.error("Please select image");
+      return;
     }
+
+    this.product.isShowOnHomePage = this.product.isShowOnHomePage ? "1" : "0";
+    this.product.isBestSeller = this.product.isBestSeller ? "1" : "0";
+    //console.log(this.product);
+    this.productService.addProduct(this.product)
+      .subscribe((res) => {
+        this.message.success(res.message);
+        this.router.navigate(["products"]);
+      });
   }
 
   getProductById(): void {
@@ -89,12 +94,17 @@ export class AddEditProductComponent extends CommonComponent implements OnInit {
   }
 
   async editProduct(): Promise<void> {
+    this.loading = true;
+    this.product.image = undefined;
+    
     if(this.fileList.length == 1) {
       this.product.image =  await this.getBase64(this.fileList[0]);
       this.fileList = [];
     }
 
-    console.log(this.product);
+    this.product.isShowOnHomePage = this.product.isShowOnHomePage ? "1" : "0";
+    this.product.isBestSeller = this.product.isBestSeller ? "1" : "0";
+    //console.log(this.product);
     this.productService.updateProduct(this.productId, this.product)
       .subscribe((res) => {
         this.message.success(res.message);

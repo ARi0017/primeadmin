@@ -10,6 +10,7 @@ import { CommonComponent } from "../../common/common.component";
 import { TranslateService } from "@ngx-translate/core";
 
 import { NzUploadFile } from "ng-zorro-antd/upload";
+import { ThrowStmt } from "@angular/compiler";
 
 
 @Component({
@@ -48,8 +49,12 @@ export class AddEditCategoryComponent extends CommonComponent implements OnInit 
   
 
   async addCategory(): Promise<void> {
+    this.loading = true;
+    this.category.coverImage = undefined;
+
     if(this.fileList.length == 1) {
       this.category.coverImage =  await this.getBase64(this.fileList[0]);
+      this.fileList = [];
     } else {
       this.message.error("Please select cover image");
       return;
@@ -57,7 +62,7 @@ export class AddEditCategoryComponent extends CommonComponent implements OnInit 
 
     this.category.isFeatured = this.category.isFeatured ? "1" : "0";
     this.category.isTopMenu = this.category.isTopMenu ? "1" : "0";
-    console.log(this.category);
+    //console.log(this.category);
     this.categoryService.addCategory(this.category)
       .subscribe((res) => {
         this.message.success(res.message);
@@ -70,6 +75,8 @@ export class AddEditCategoryComponent extends CommonComponent implements OnInit 
     this.categoryService.getCategoryById(this.categoryId)
       .subscribe((res)=> {
         this.category = res.data;
+        this.category.isFeatured = Boolean(Number(this.category.isFeatured));
+        this.category.isTopMenu = Boolean(Number(this.category.isTopMenu));
       });
   }
 
@@ -77,21 +84,26 @@ export class AddEditCategoryComponent extends CommonComponent implements OnInit 
   async editCategory(): Promise<void> {
     this.loading = true;
     this.category.coverImage = undefined;
-    if(this.fileList.length >= 0) {
-      if(this.fileList.length == 1) {
-        this.category.coverImage = await this.getBase64(this.fileList[0]);
-      }
-      
-      this.categoryService.updateCategory(this.categoryId, this.category)
-        .subscribe((res) => {
-          this.message.success(res.message);
-          this.loading = false;
-          this.router.navigate(["categories"]);
-        });
-    } else {
-      this.message.error("Please select cover image");
-      this.loading = false;
+
+    if(this.fileList.length == 1) {
+      this.category.coverImage = await this.getBase64(this.fileList[0]);
+      this.fileList = [];
     }
+    
+    // this.category.softDelete = undefined;
+    // this.category.createdDate = undefined;
+    // this.category.createdBy = undefined;
+    // this.category.modifiedDate = undefined;
+    // this.category.modifiedBy = undefined;
+    this.category.isFeatured = this.category.isFeatured ? "1" : "0";
+    this.category.isTopMenu = this.category.isTopMenu ? "1" : "0";
+    //console.log(this.category);
+    this.categoryService.updateCategory(this.categoryId, this.category)
+      .subscribe((res) => {
+        this.message.success(res.message);
+        this.loading = false;
+        this.router.navigate(["categories"]);
+      });
   }
   
 

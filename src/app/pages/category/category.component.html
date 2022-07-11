@@ -33,27 +33,29 @@
                   {{ category.displayOrder }}
                 </td>
                 <td class="text-center">
-                  <span *ngIf="category.isFeatured" class="text-green">
+                  <span *ngIf="category.isFeatured == '1'" class="text-green">
                     <i nz-icon nzType="check" nzTheme="outline"></i>
                   </span>
-                  <span *ngIf="!category.isFeatured" class="text-red">
+                  <span *ngIf="category.isFeatured == '0'" class="text-red">
                     <i nz-icon nzType="close" nzTheme="outline"></i>
                   </span>
                 </td>
                 <td class="text-center">
-                  <span *ngIf="category.isTopMenu" class="text-green">
+                  <span *ngIf="category.isTopMenu == '1'" class="text-green">
                     <i nz-icon nzType="check" nzTheme="outline"></i>
                   </span>
-                  <span *ngIf="!category.isTopMenu" class="text-red">
+                  <span *ngIf="category.isTopMenu == '0'" class="text-red">
                     <i nz-icon nzType="close" nzTheme="outline"></i>
                   </span>
                 </td>
-                <td><img src="{{ category.coverImage }}" width="90"/> </td>
+                <td>
+                  <img src="{{ category.coverImage }}" width="90"/> 
+                </td>
                 <td class="text-center">
-                    <span *ngIf="category.isActive" class="text-green">
+                    <span *ngIf="category.isActive == '1'" class="text-green">
                       <i nz-icon nzType="check" nzTheme="outline"></i>
                     </span>
-                    <span *ngIf="!category.isActive" class="text-red">
+                    <span *ngIf="category.isActive == '0'" class="text-red">
                       <i nz-icon nzType="close" nzTheme="outline"></i>
                     </span>
                 </td>

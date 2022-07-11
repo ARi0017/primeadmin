@@ -8,9 +8,12 @@ export class Category {
         public isFeatured: string | Boolean = false,
         public isTopMenu: string | Boolean = false,
         public isActive?: string,
+        public softDelete?: string,
         public _id?: string,
         public createdDate?: Date,
-        public createdBy?: string
+        public createdBy?: string,
+        public modifiedDate?: Date,
+        public modifiedBy?: string
     ){}
 }
 
