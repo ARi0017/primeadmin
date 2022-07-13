@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Customer } from './../model/customer.model';
+import { Customer, CustomerAccount, CustomerAddress } from './../model/customer.model';
 import { Observable } from "rxjs";
 
 
@@ -46,6 +46,18 @@ export class CustomerService {
     return this.http.put<{message: string}>(
       `${this.baseUrl.serviceUrl}/customers/${id}`,
       editData
+    );
+  }
+
+  getCustomerAddressById(id: string): Observable<{ data: CustomerAddress[], count: number }> {
+    return this.http.get<{ data: CustomerAddress[], count: number }>(
+      `${this.baseUrl.serviceUrl}/customeraddresses/${id}`,
+    );
+  }
+
+  getCustomerAccountDetailById(id: string): Observable<{ data: CustomerAccount, count: number }> {
+    return this.http.get<{ data: CustomerAccount, count: number }>(
+      `${this.baseUrl.serviceUrl}/customeraccounts/${id}`,
     );
   }
 }

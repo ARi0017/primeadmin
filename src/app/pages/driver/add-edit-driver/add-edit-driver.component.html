@@ -130,11 +130,11 @@
 
     <nz-form-item>
       <nz-form-control [nzSpan]="12" [nzOffset]="4">
-        <label nz-checkbox name="isOnline" [(ngModel)]="driver.isOnlineBoolean">Is Online</label> 
+        <label nz-checkbox name="isOnline" [(ngModel)]="driver.isOnline">Is Online</label> 
       </nz-form-control>
     </nz-form-item>
     
-    <nz-form-item>
+    <!-- <nz-form-item>
       <nz-form-label [nzSpan]="4" nzRequired>Select Photo</nz-form-label>
       <nz-form-control [nzSpan]="14">
         <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
@@ -144,7 +144,7 @@
         </nz-upload>
         <img *ngIf="driver.image" class="img img-thumbnail" width="70" src="{{ driver.image }}" alt="" />
       </nz-form-control>
-    </nz-form-item>
+    </nz-form-item> -->
     
     <br>
     <nz-form-item nz-row class="register-area">

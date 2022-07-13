@@ -41,7 +41,7 @@ export class AddEditDriverComponent extends CommonComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateZone();
-    if(!!this.driverId) {
+    if(Boolean(this.driverId)) {
       this.getDriverById();
     }
   }
@@ -59,54 +59,36 @@ export class AddEditDriverComponent extends CommonComponent implements OnInit {
     this.driverService.getDriverById(this.driverId)
       .subscribe((res) => {
         this.driver = res.data;
-        this.driver.isOnlineBoolean = Boolean(Number(this.driver.isOnline));
+        this.driver.isOnline = Boolean(Number(this.driver.isOnline));
       });
   }
 
   async addDriver(): Promise<void> {
     this.loading = true;
     this.driver.image = undefined;
-    if(this.fileList.length >= 0) {
-      if(this.fileList.length == 1) {
-        this.driver.image = await this.getBase64(this.fileList[0]);
-      }
-      
-      this.driver.isOnline = this.driver.isOnlineBoolean ? "1" : "0";
-      this.driver.isOnlineBoolean = undefined;
-      //console.log(this.driver);
-      this.driverService.addDriver(this.driver)
-        .subscribe((res) => {
-          this.message.success(res.message);
-          this.loading = false;
-          this.router.navigate(["drivers"]);
-        });
-    } else {
-      this.message.error("Please select an image");
-      this.loading = false;
-    }
+
+    this.driver.isOnline = this.driver.isOnline ? "1" : "0";
+    console.log(this.driver);
+    this.driverService.addDriver(this.driver)
+      .subscribe((res) => {
+        this.message.success(res.message);
+        this.loading = false;
+        this.router.navigate(["drivers"]);
+      });
   }
 
   async editDriver(): Promise<void> {
     this.loading = true;
     this.driver.image = undefined;
-    if(this.fileList.length >= 0) {
-      if(this.fileList.length == 1) {
-        this.driver.image = await this.getBase64(this.fileList[0]);
-      }
-      
-      this.driver.isOnline = this.driver.isOnlineBoolean ? "1" : "0";
-      this.driver.isOnlineBoolean = undefined;
+
+    this.driver.isOnline = this.driver.isOnline ? "1" : "0";
       //console.log(this.driver);
-      this.driverService.updateDriver(this.driverId, this.driver)
-        .subscribe((res) => {
-          this.message.success(res.message);
-          this.loading = false;
-          this.router.navigate(["drivers"]);
-        });
-    } else {
-      this.message.error("Please select an image");
-      this.loading = false;
-    }
+    this.driverService.updateDriver(this.driverId, this.driver)
+      .subscribe((res) => {
+        this.message.success(res.message);
+        this.loading = false;
+        this.router.navigate(["drivers"]);
+      });
   }
   
 

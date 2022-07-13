@@ -22,11 +22,11 @@
           <tbody>
             <ng-container *ngFor="let customer of allCustomers">
               <tr>
-                <td>{{ customer.name }}</td>
+                <td>{{ customer.name ? customer.name : "Guest" }}</td>
                 <td>{{ customer.phone }}</td>
                 <td>{{ customer.email }}</td>
                 <td>{{ customer.referralCode }}</td>
-                <td *ngIf="userRole[2]"><a [routerLink]="['edit', customer._id]" *ngIf="userRole[2]">
+                <td *ngIf="userRole[2]"><a [routerLink]="['detail', customer._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="eye" nz-tooltip nzTooltipTitle="View Detail" nzTheme="twotone"
                       style="margin-right: 6px;"></i>
                   </a></td>

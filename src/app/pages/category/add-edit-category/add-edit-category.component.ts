@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Category } from 'src/app/model/category.model';
 
 
@@ -10,7 +10,6 @@ import { CommonComponent } from "../../common/common.component";
 import { TranslateService } from "@ngx-translate/core";
 
 import { NzUploadFile } from "ng-zorro-antd/upload";
-import { ThrowStmt } from "@angular/compiler";
 
 
 @Component({
@@ -57,6 +56,7 @@ export class AddEditCategoryComponent extends CommonComponent implements OnInit 
       this.fileList = [];
     } else {
       this.message.error("Please select cover image");
+      this.loading = false;
       return;
     }
 
@@ -66,6 +66,7 @@ export class AddEditCategoryComponent extends CommonComponent implements OnInit 
     this.categoryService.addCategory(this.category)
       .subscribe((res) => {
         this.message.success(res.message);
+        this.loading = false;
         this.router.navigate(["categories"]);
       });
     

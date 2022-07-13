@@ -1,0 +1,126 @@
+<!-- {{customerAddress|json}} -->
+
+
+<button nz-button nzType="primary" style="margin-bottom: 10px" routerLink="/customers">
+    Back
+</button>
+<br>
+<nz-tabset nzType="card">
+    <nz-tab nzTitle="Address" >
+        <div class="col-md-12">
+            <ng-container *ngFor="let address of customerAddress">
+                <nz-collapse>
+                    <nz-collapse-panel [nzHeader]="address.addressTitle">
+                        <div nz-row>
+                            <div nz-col nzSpan="12">
+                                <p style="margin:0;">Customer Name:
+                                    <b>{{address.name}}</b>
+                                </p>
+                            </div>
+                            <div nz-col nzSpan="12">
+                                <p style="margin:0;">Phone No:
+                                    <b>{{address.phone}}</b>
+                                </p>
+                            </div>
+                            <div nz-col nzSpan="24">
+                                <p style="margin:0;">Address:
+                                    <b>{{address.address}}</b>
+                                </p>
+                            </div>
+                            <div nz-col nzSpan="12">
+                                <p style="margin:0;">Location: 
+                                    <b>{{address.location}}</b>
+                                </p>
+                                <p style="margin:0;">Pincode:
+                                    <b>{{address.pincode}}</b>
+                                </p>
+                            </div>
+                            <div nz-col nzSpan="12">
+                                <p style="margin:0;">Landmark:
+                                    <b>{{address.landmark}}</b>
+                                </p>
+                                <p style="margin:0;">Longitude:
+                                    <b>{{address.longitude}}</b>
+                                </p>
+                            </div>
+                        </div>
+                    </nz-collapse-panel>
+                </nz-collapse>
+            </ng-container>
+            <ng-container *ngIf="customerAddress.length == 0">
+                <nz-empty nzNotFoundImage="simple" nzNotFoundContent="No Address Found">
+
+                </nz-empty>
+            </ng-container>
+        </div>
+    </nz-tab>
+    <nz-tab nzTitle="Account Detail">
+        <div class="col-md-12">
+            <nz-collapse>
+                <nz-collapse-panel nzHeader="Bank Detail" nzActive="false" nzDisabled="false">
+                    <div nz-row>
+                        <div nz-col nzSpan="16">
+                            <p style="margin:0;">Bank Name:
+                                <b>{{customerAccount.bankName}}</b>
+                            </p>
+                            <p style="margin:0;">Branch Name:
+                                <b>{{customerAccount.bankBranch}}</b>
+                            </p>
+                            <p style="margin:0;">IFSC Code:
+                                 <b>{{customerAccount.ifscCode}}</b>
+                            </p>
+                            <p style="margin:0;">Account Holder Name:
+                                <b>{{customerAccount.accountHolderName}}</b>
+                            </p>
+                            <p style="margin:0;">Account Number:
+                                <b>{{customerAccount.accountNumber}}</b>
+                            </p>
+                            <p style="margin:0;">Wallet Amount:
+                                <b>{{customerAccount.walletAmount}}</b>
+                            </p>
+                        </div>
+                        <div nz-col nzSpan="8">
+                            <p style="margin:0;">
+                                <img src="{{customerAccount.accountImage}}" alt="profile" style="width: 100px; height:110px; border-radius: 10%">
+                            </p>
+                        </div>
+                        
+                    </div>
+                </nz-collapse-panel>
+            </nz-collapse>
+            <nz-collapse>
+                <nz-collapse-panel nzHeader="KYC Detail" nzActive="false" nzDisabled="false">
+                    <div nz-row>
+                        <div nz-col nzSpan="12">
+                            <p style="margin:0;">PAN No:
+                                <b>{{customerAccount.panNumber}}</b>
+                            </p>
+                            <br>
+                            <nz-card nzHoverable style="width:300px" [nzCover]="coverTemplate">
+                                <nz-card-meta nzTitle="Pan Card"></nz-card-meta>
+                            </nz-card>
+                            <ng-template #coverTemplate>
+                                <img alt="example" src="{{customerAccount.panImage}}" />
+                            </ng-template>
+                        </div>
+                        <div nz-col nzSpan="12">
+                            <p style="margin:0;">Aadhar Number:
+                                <b>{{customerAccount.aadharNumber}}</b>
+                            </p>
+                            <br>
+                            <nz-card nzHoverable style="width:300px" [nzCover]="coverTemplate">
+                                <nz-card-meta nzTitle="Aadhar Card"></nz-card-meta>
+                            </nz-card>
+                            <ng-template #coverTemplate>
+                                <img alt="example" src="{{customerAccount.aadharImage}}" style="height: 200px!important;width: 300px;"/>
+                            </ng-template>
+                           
+                        </div>
+                    </div>
+                </nz-collapse-panel>
+            </nz-collapse>
+        </div>
+    </nz-tab>
+</nz-tabset>
+
+
