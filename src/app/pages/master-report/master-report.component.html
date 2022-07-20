@@ -5,14 +5,14 @@
       </div>
       <div class="col-md-6 text-right">
       </div>
-  
+
       <div class="col-md-12">
         <nz-table nzShowSizeChanger [nzData]="allBanners" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
         [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllBanners();">
           <thead>
             <tr>
               <th>Date</th>
-              <th nzColumnKey="name" [nzSortFn]="true">Bill Number</th>
+              <th nzColumnKey="name" [nzSortFn]="true">Order ID</th>
               <th nzColumnKey="remarks" [nzSortFn]="true">Net Sale</th>
               <th>CGST</th>
               <th>SGST</th>

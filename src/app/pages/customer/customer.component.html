@@ -4,7 +4,7 @@
         <h4 class="head-line"><span>Customers</span></h4>
       </div>
       <div class="col-md-6 text-right">
-       
+
       </div>
       <div class="col-md-12">
         <nz-table nzShowSizeChanger [nzData]="allCustomers" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
@@ -16,6 +16,7 @@
                 <th nzColumnKey="customerType" [nzSortFn]="true">Customer Type</th>
                 <th nzColumnKey="phone" [nzSortFn]="true">Phone No</th>
                 <th nzColumnKey="email" [nzSortFn]="true">Email</th>
+                <th nzColumnKey="date">Register Date</th>
                 <th class="text-center">Referral Code</th>
                 <th nzColumnKey="isVerified" [nzSortFn]="true" class="text-center">Is Verified</th>
                 <th class="text-center" *ngIf="userRole[2]">Action</th>
@@ -31,6 +32,7 @@
                 <td>{{ customer.customerType == "0" ? "Individual" : "Corporate" }}</td>
                 <td>{{ customer.phone }}</td>
                 <td>{{ customer.email }}</td>
+                <td>{{ customer.createdDate | date: "dd/MM/yyyy" }}</td>
                 <td class="text-center">{{ customer.referralCode }}</td>
                 <td class="text-center">
                   <span *ngIf="customer.isVerified" class="text-green">
