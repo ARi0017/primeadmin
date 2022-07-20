@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { OrderRoutingModule } from './order-routing.module';
-import { OrderComponent } from './order.component';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { MasterReportRoutingModule } from './master-report-routing.module';
+import { MasterReportComponent } from './master-report.component';
 
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -13,15 +12,14 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
-
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [OrderComponent, OrderDetailComponent],
+  declarations: [MasterReportComponent],
   imports: [
     CommonModule,
-    OrderRoutingModule,
+    MasterReportRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     NzModule,
@@ -35,4 +33,4 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule
   ]
 })
-export class OrderModule { }
+export class MasterReportModule { }

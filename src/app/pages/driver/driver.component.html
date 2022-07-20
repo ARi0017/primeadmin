@@ -1,10 +1,10 @@
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="head-line"><span>Driver</span></h4>
+        <h4 class="head-line"><span>Drivers</span></h4>
       </div>
       <div class="col-md-6 text-right">
-        <nz-upload style="display: inline-block;"
+        <nz-upload style="display: inline-flex;"
           [(nzFileList)]="fileList" 
           [nzBeforeUpload]="beforeUpload" 
           nzAccept=".xls, .xlsx"
@@ -34,7 +34,7 @@
               <th nzColumnKey="address" [nzSortFn]="true">Address</th>
               <th>Photo</th>
               <th nzColumnKey="isOnline" [nzSortFn]="true">Is Online</th>
-              <th *ngIf="userRole[2]"></th>
+              <th class="text-center" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -54,7 +54,7 @@
                         <b class="text-danger">Offline</b>
                     </span>
                 </td>
-                <td *ngIf="userRole[2]">
+                <td class="text-center" *ngIf="userRole[2]">
                     <a [routerLink]="['edit', driver._id]" *ngIf="userRole[2]">
                         <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
                         style="margin-right: 6px;"></i>

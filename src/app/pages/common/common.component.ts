@@ -9,6 +9,7 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./common.component.scss"],
 })
 export class CommonComponent implements OnInit {
+  allowedImages: string = ".jpg, .jpeg, .pjpeg, .png";
   pageSize = 10;
   pageIndex = 1;
   sort: string = "-_id";

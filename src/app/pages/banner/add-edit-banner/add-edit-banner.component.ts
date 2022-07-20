@@ -50,20 +50,21 @@ export class AddEditBannerComponent extends CommonComponent implements OnInit {
 
   async addBanner(): Promise<void> {
     this.loading = true;
-    this.banner.image = undefined;
 
     if(this.fileList.length == 1) {
-      this.banner.image =  await this.getBase64(this.fileList[0]);
+      this.banner.image = undefined;
+      this.banner.image = await this.getBase64(this.fileList[0]);
+      this.fileList = [];
+    }
+
+    if(this.formValidation()) {
       //console.log(this.banner);
       this.bannerService.addBanner(this.banner)
         .subscribe((res) => {
           this.message.success(res.message);
           this.router.navigate(["banners"]);
         });
-    } else {
-      this.message.error("Please select banner image");
-      return;
-    }
+    } 
   }
 
   getBannerById(): void {
@@ -80,17 +81,35 @@ export class AddEditBannerComponent extends CommonComponent implements OnInit {
 
     if(this.fileList.length == 1) {
       this.banner.image = await this.getBase64(this.fileList[0]);
+      this.fileList = [];
     }
     
-    console.log(this.banner);
-    this.bannerService.updateBanner(this.bannerId, this.banner)
-      .subscribe((res) => {
-        this.message.success(res.message);
-        this.loading = false;
-        this.router.navigate(["banners"]);
-      });
+    //console.log(this.banner);
+    if(this.formValidation()) {
+      this.bannerService.updateBanner(this.bannerId, this.banner)
+        .subscribe((res) => {
+          this.message.success(res.message);
+          this.loading = false;
+          this.router.navigate(["banners"]);
+        });
+    }
   }
   
+  formValidation(): Boolean {
+    if(this.banner.displayOrder == 0){
+      this.message.error("Display order should not be zero");
+      return false;
+    }
+
+    if(!this.bannerId) {
+      if(!this.banner.image) {
+        this.message.error("Please select banner image");
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   beforeUpload = (file: NzUploadFile): boolean => {
     this.fileList = this.fileList.concat(file);

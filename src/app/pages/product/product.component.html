@@ -1,10 +1,10 @@
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="head-line"><span>Product</span></h4>
+        <h4 class="head-line"><span>Products</span></h4>
       </div>
       <div class="col-md-6 text-right">
-        <nz-upload style="display: inline-block;"
+        <nz-upload style="display: inline-flex;"
           [(nzFileList)]="fileList" 
           [nzBeforeUpload]="beforeUpload" 
           nzAccept=".xls, .xlsx"
@@ -35,8 +35,8 @@
               <th nzColumnKey="priceThree" [nzSortFn]="true">Price Three</th>
               <th nzColumnKey="commission" [nzSortFn]="true">Commission</th>
               <th>Image</th>
-              <th nzColumnKey="isActive" [nzSortFn]="true">IsActive</th>
-              <th *ngIf="userRole[2]"></th>
+              <th nzColumnKey="isActive" [nzSortFn]="true">Is Active</th>
+              <th class="text-center" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -50,12 +50,23 @@
                 <td>{{ product.priceTwo }}</td>
                 <td>{{ product.priceThree }}</td>
                 <td>{{ product.commission }}%</td>
-                <td><img src="{{ product.image }}" width="90"/> </td>
-                <td>{{ product.isActive == "1" ? "true" : "false" }}</td>
-                <td *ngIf="userRole[2]"><a [routerLink]="['edit', product._id]" *ngIf="userRole[2]">
+                <td><img src="{{ product.image }}"/> </td>
+                <td class="text-center">
+                  <span [ngSwitch]="product.isActive">
+                    <span *ngSwitchCase="'1'" class="text-green">
+                      <i nz-icon nzType="check" nzTheme="outline"></i>
+                    </span>
+                    <span *ngSwitchCase="'0'" class="text-red">
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </span>
+                  </span>
+                </td>
+                <td class="text-center" *ngIf="userRole[2]">
+                  <a [routerLink]="['edit', product._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
                       style="margin-right: 6px;"></i>
-                  </a></td>
+                  </a>
+                </td>
               </tr>
             </ng-container>
           </tbody>

@@ -62,6 +62,14 @@ const routes: Routes = [
       },
 
       {
+        path: "master-report",
+        loadChildren: () =>
+          import("./pages/master-report/master-report.module").then((m) => m.MasterReportModule),
+        canActivate: [AuthenticationGuard],
+      },
+
+
+      {
         path: "zones",
         loadChildren: () =>
           import("./pages/zone/zone.module").then((m) => m.ZoneModule),

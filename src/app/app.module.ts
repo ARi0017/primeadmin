@@ -20,6 +20,7 @@ import { CommonComponent } from "./pages/common/common.component";
 import { NzModule } from "./nz.module";
 import { BnNgIdleService } from "bn-ng-idle";
 
+
 registerLocaleData(en);
 
 

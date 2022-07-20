@@ -221,7 +221,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="4" nzRequired>Select Image</nz-form-label>
       <nz-form-control [nzSpan]="14">
-        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload" [nzAccept]="allowedImages">
           <button type="button" [disabled]="fileList.length == 1" nz-button>
             <i nz-icon nzType="upload"></i>{{ 'Match.MatchAddForm.clicktoupload' | translate }}
           </button>

@@ -42,10 +42,21 @@
       </li>
     </ul>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu  nzTitle="Settings" nzIcon="setting">
+      <li nz-submenu  nzTitle="Report" nzIcon="file-text">
         <ul>
           <div *ngFor="let role of userRole.role">
             <li nz-menu-item nzMatchRouter *ngIf="role.category == '4'">
+              <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
+            </li>
+          </div>
+        </ul>
+      </li>
+    </ul>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu  nzTitle="Settings" nzIcon="setting">
+        <ul>
+          <div *ngFor="let role of userRole.role">
+            <li nz-menu-item nzMatchRouter *ngIf="role.category == '5'">
               <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
             </li>
           </div>
@@ -56,7 +67,7 @@
       <li nz-submenu  nzTitle="App Settings" nzIcon="setting">
         <ul>
           <div *ngFor="let role of userRole.role">
-            <li nz-menu-item nzMatchRouter *ngIf="role.category == '5'">
+            <li nz-menu-item nzMatchRouter *ngIf="role.category == '10'">
               <i [class]="role.icon"></i><a [routerLink]="role.url">{{ role.title }}</a>
             </li>
           </div>

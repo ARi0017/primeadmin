@@ -17,3 +17,11 @@ export class Driver {
         public createdDate?: Date,
     ){}
 }
+
+export class DriverDropdown {
+    constructor(
+        public _id: string, 
+        public name: string,
+        public phone: string
+    ){}
+}

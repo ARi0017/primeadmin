@@ -30,12 +30,15 @@
         Display Order
       </nz-form-label>
       <nz-form-control  [nzSm]="20" [nzXs]="24" nzErrorTip="The input is Required">
-        <input type="text" nz-input id="displayOrder" name="displayOrder" autocomplete="off"
+        <nz-input-number id="displayOrder" name="displayOrder" autocomplete="off"
+          [nzMin]="1" [nzMax]="30" [nzStep]="1" 
           placeholder="Enter display order"
           [(ngModel)]="banner.displayOrder"
           required
-        />
+        >
+        </nz-input-number>
       </nz-form-control>
+      
     </nz-form-item>
 
     <nz-form-item>
@@ -47,7 +50,7 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="4" nzRequired>Select Banner</nz-form-label>
       <nz-form-control [nzSpan]="14">
-        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload" [nzAccept]="allowedImages">
           <button type="button" [disabled]="fileList.length == 1" nz-button>
             <i nz-icon nzType="upload"></i>Click to Upload
           </button>
@@ -57,11 +60,15 @@
     </nz-form-item>
     
     <nz-form-item nz-row class="register-area">
-      <nz-form-control [nzSpan]="14" [nzOffset]="3">
-        <button type="Submit" *ngIf="!bannerId" nz-button nzType="primary" [disabled]="bannerForm.invalid">
+      <nz-form-control [nzSpan]="14" [nzOffset]="4">
+        <button type="Submit" *ngIf="!bannerId" nz-button nzType="primary" 
+          [disabled]="bannerForm.invalid"
+        >
           Submit
         </button>
-        <button type="Submit" *ngIf="bannerId" nz-button nzType="primary" [disabled]="bannerForm.invalid">
+        <button type="Submit" *ngIf="bannerId" nz-button nzType="primary" 
+          [disabled]="bannerForm.invalid"
+        >
           Update
         </button>
         &nbsp;

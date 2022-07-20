@@ -1,35 +1,51 @@
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="head-line"><span>Customer</span></h4>
+        <h4 class="head-line"><span>Customers</span></h4>
       </div>
       <div class="col-md-6 text-right">
        
       </div>
-     
       <div class="col-md-12">
         <nz-table nzShowSizeChanger [nzData]="allCustomers" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
           [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllCustomers();">
           <thead>
             <tr>
+                <th class="text-center">Photo</th>
                 <th nzColumnKey="name" [nzSortFn]="true">Name</th>
+                <th nzColumnKey="customerType" [nzSortFn]="true">Customer Type</th>
                 <th nzColumnKey="phone" [nzSortFn]="true">Phone No</th>
                 <th nzColumnKey="email" [nzSortFn]="true">Email</th>
-                <th nzColumnKey="referralCode" [nzSortFn]="true">Referral Code</th>
-                <th *ngIf="userRole[2]"></th>
+                <th class="text-center">Referral Code</th>
+                <th nzColumnKey="isVerified" [nzSortFn]="true" class="text-center">Is Verified</th>
+                <th class="text-center" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
           <tbody>
             <ng-container *ngFor="let customer of allCustomers">
               <tr>
+                <td class="text-center">
+                  <img src="{{customer.image}}" alt="no image" style="width: 40px; height: 40px; border-radius: 30%" />
+                </td>
                 <td>{{ customer.name ? customer.name : "Guest" }}</td>
+                <td>{{ customer.customerType == "0" ? "Individual" : "Corporate" }}</td>
                 <td>{{ customer.phone }}</td>
                 <td>{{ customer.email }}</td>
-                <td>{{ customer.referralCode }}</td>
-                <td *ngIf="userRole[2]"><a [routerLink]="['detail', customer._id]" *ngIf="userRole[2]">
+                <td class="text-center">{{ customer.referralCode }}</td>
+                <td class="text-center">
+                  <span *ngIf="customer.isVerified" class="text-green">
+                    Yes
+                  </span>
+                  <span *ngIf="!customer.isVerified" class="text-red">
+                    No
+                  </span>
+                </td>
+                <td class="text-center" *ngIf="userRole[2]">
+                  <a [routerLink]="['detail', customer._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="eye" nz-tooltip nzTooltipTitle="View Detail" nzTheme="twotone"
                       style="margin-right: 6px;"></i>
-                  </a></td>
+                  </a>
+                </td>
               </tr>
             </ng-container>
           </tbody>

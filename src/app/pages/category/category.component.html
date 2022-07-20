@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="head-line"><span>Category</span></h4>
+        <h4 class="head-line"><span>Categories</span></h4>
       </div>
       <div class="col-md-6 text-right">
         <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
@@ -21,7 +21,7 @@
               <th nzColumnKey="isTopMenu" [nzSortFn]="true" class="text-center">Is TopMenu</th>
               <th>Cover Image</th>
               <th nzColumnKey="isActive" [nzSortFn]="true" class="text-center">Is Active</th>
-              <th *ngIf="userRole[2]"></th>
+              <th class="text-center" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -49,7 +49,7 @@
                   </span>
                 </td>
                 <td>
-                  <img src="{{ category.coverImage }}" width="90"/> 
+                  <img src="{{ category.coverImage }}"/> 
                 </td>
                 <td class="text-center">
                     <span *ngIf="category.isActive == '1'" class="text-green">
@@ -59,10 +59,12 @@
                       <i nz-icon nzType="close" nzTheme="outline"></i>
                     </span>
                 </td>
-                <td *ngIf="userRole[2]"><a [routerLink]="['edit', category._id]" *ngIf="userRole[2]">
+                <td class="text-center" *ngIf="userRole[2]">
+                  <a [routerLink]="['edit', category._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
                       style="margin-right: 6px;"></i>
-                  </a></td>
+                  </a>
+                </td>
               </tr>
             </ng-container>
           </tbody>

@@ -1,10 +1,10 @@
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="head-line"><span>Pincode</span></h4>
+        <h4 class="head-line"><span>Pincodes</span></h4>
       </div>
       <div class="col-md-6 text-right">
-        <nz-upload style="display: inline-block;"
+        <nz-upload style="display: inline-flex;"
           [(nzFileList)]="fileList" 
           [nzBeforeUpload]="beforeUpload" 
           nzAccept=".xls, .xlsx"
@@ -34,7 +34,7 @@
               <th nzColumnKey="district" [nzSortFn]="true">District</th>
               <th nzColumnKey="latitude" [nzSortFn]="true">Latitude</th>
               <th nzColumnKey="longitude" [nzSortFn]="true">Longitude</th>
-              <th *ngIf="userRole[2]"></th>
+              <th class="text-center" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -46,10 +46,12 @@
                 <td>{{ pincode.district }}</td>
                 <td>{{ pincode.latitude }}</td>
                 <td>{{ pincode.longitude }}</td>
-                <td *ngIf="userRole[2]"><a [routerLink]="['edit', pincode._id]" *ngIf="userRole[2]">
+                <td class="text-center" *ngIf="userRole[2]">
+                  <a [routerLink]="['edit', pincode._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
                       style="margin-right: 6px;"></i>
-                  </a></td>
+                  </a>
+                </td>
               </tr>
             </ng-container>
           </tbody>

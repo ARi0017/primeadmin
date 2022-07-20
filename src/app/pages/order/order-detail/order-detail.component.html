@@ -1,0 +1,67 @@
+<button nz-button nzType="primary" style="margin-bottom: 10px" routerLink="/orders">
+    Back
+</button>
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="head-line"><span>Order Details</span></h4>
+      </div>
+      <div class="col-md-6 text-right">
+       
+      </div>
+  
+      <div class="col-md-12">
+        <nz-table nzShowSizeChanger [nzData]="orderDetails" [nzFrontPagination]="false" [nzLoading]="loading"
+           (nzQueryParams)="getOrderDetailsById();">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Product HSN</th>
+              <th>Category Name</th>
+              <th class="text-center">Order Price</th>
+              <th class="text-center">Order Qty</th>
+              <th class="text-center">Total Amt</th>
+              <th class="text-center">Is Supplied</th>
+              <th class="text-center">Is Refund</th>
+              <th class="text-center">Product Packed BY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let detail of orderDetails">
+              <tr>
+                <td>{{ detail.product_name }}</td>
+                <td>{{ detail.product_hsnCode }}</td>
+                <td>{{ detail.category }}</td>
+                <td class="text-center">{{ detail.orderPrice }}</td>
+                <td class="text-center">{{ detail.quantity }}</td>
+                <td class="text-center">{{ detail.totalAmt }}</td>
+                <td class="text-center">
+                  <span [ngSwitch]="detail.isSupplied">
+                    <span class="text-green" *ngSwitchCase="'1'">
+                      Yes
+                    </span>
+                    <span class="text-red" *ngSwitchCase="'0'">
+                      No
+                    </span>
+                  </span>
+                </td>
+                <td class="text-center">
+                    <span [ngSwitch]="detail.isRefund">
+                      <span class="text-green" *ngSwitchCase="'1'">
+                        <i nz-icon nzType="check" nzTheme="outline"></i>
+                      </span>
+                      <span class="text-red" *ngSwitchCase="'0'">
+                        <i nz-icon nzType="close" nzTheme="outline"></i>
+                      </span>
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    {{ detail.product_packedBY }}
+                  </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>

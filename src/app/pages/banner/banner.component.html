@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="head-line"><span>Banner</span></h4>
+        <h4 class="head-line"><span>Banners</span></h4>
       </div>
       <div class="col-md-6 text-right">
         <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
@@ -21,7 +21,7 @@
               <th nzColumnKey="isHead" [nzSortFn]="true" class="text-center">Is Head</th>
               <th nzColumnKey="isActive" [nzSortFn]="true" class="text-center">Is Active</th>
               <!-- <th>Created Date</th> -->
-              <th *ngIf="userRole[2]"></th>
+              <th class="text-center" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -50,10 +50,12 @@
                   </span>
                 </td>
                 <!-- <td>{{ banner.createdDate | date:"dd-MM-yyyy hh:mm aaaa" }}</td> -->
-                <td *ngIf="userRole[2]"><a [routerLink]="['edit', banner._id]" *ngIf="userRole[2]">
+                <td class="text-center" *ngIf="userRole[2]">
+                  <a [routerLink]="['edit', banner._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
                       style="margin-right: 6px;"></i>
-                  </a></td>
+                  </a>
+                </td>
               </tr>
             </ng-container>
           </tbody>

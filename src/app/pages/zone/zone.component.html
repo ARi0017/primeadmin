@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="head-line"><span>Zone</span></h4>
+        <h4 class="head-line"><span>Zones</span></h4>
       </div>
       <div class="col-md-6 text-right">
         <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
@@ -18,7 +18,7 @@
               <th nzColumnKey="area" [nzSortFn]="true">Area</th>
               <th nzColumnKey="district" [nzSortFn]="true">District</th>
               <th nzColumnKey="isActive" [nzSortFn]="true" class="text-center">Is Active</th>
-              <th *ngIf="userRole[2]" class="w-10"></th>
+              <th class="text-center w-10" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -35,9 +35,11 @@
                     <i nz-icon nzType="close" nzTheme="outline"></i>
                   </span>
                 </td>
-                <td *ngIf="userRole[2]" class="text-center"><a [routerLink]="['edit', zone._id]" *ngIf="userRole[2]">
+                <td class="text-center" *ngIf="userRole[2]">
+                  <a [routerLink]="['edit', zone._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"></i>
-                  </a></td>
+                  </a>
+                </td>
               </tr>
             </ng-container>
           </tbody>

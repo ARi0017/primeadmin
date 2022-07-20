@@ -1,1 +1,79 @@
-<p>order works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="head-line"><span>Orders</span></h4>
+      </div>
+      <div class="col-md-6 text-right">
+       
+      </div>
+  
+      <div class="col-md-12">
+        <nz-table nzShowSizeChanger [nzData]="allOrders" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllOrders();">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th nzColumnKey="orderNo" [nzSortFn]="true">Order No</th>
+              <th nzColumnKey="totalQty" [nzSortFn]="true">Total Qty</th>
+              <th nzColumnKey="orderTotal" [nzSortFn]="true">Order Total</th>
+              <th nzColumnKey="isCancelled" [nzSortFn]="true" class="text-center">Is Cancelled</th>
+              <th>Assign Driver</th>
+              <th>Status</th>
+              <th *ngIf="userRole[2]" class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let order of allOrders">
+              <tr>
+                <td>{{ order.createdDate | date: 'dd-MM-yyyy hh:mm a' }}</td>
+                <td>{{ order.orderNo }}</td>
+                <td>{{ order.totalQty }}</td>
+                <td>{{ order.orderTotal }}</td>
+                <td class="text-center">
+                  <span [ngSwitch]="order.isCancelled">
+                    <span class="text-green" *ngSwitchCase="'1'">
+                      <i nz-icon nzType="check" nzTheme="outline"></i>
+                    </span>
+                    <span class="text-red" *ngSwitchCase="'0'">
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <nz-select nzId="driverId" name="driverId"
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder = "Select driver"
+                    [(ngModel)]="order.driverId"
+                    (ngModelChange)="assignDriverToOrder(order._id, $event)"
+                    required
+                  >
+                    <nz-option *ngFor="let driver of order.driverList" [nzValue]="driver._id" [nzLabel]="driver.name">
+
+                    </nz-option>
+                  </nz-select>
+                </td>
+                <td>
+                  <nz-select nzId="orderStatusId" name="orderStatusId"
+                    [(ngModel)]="order.orderStatusId"
+                    (ngModelChange)="changeOrderStatus(order._id, $event)"
+                    required
+                  >
+                    <nz-option *ngFor="let status of orderStatuses" [nzValue]="status._id" [nzLabel]="status.statusTitle">
+
+                    </nz-option>
+                  </nz-select>
+                </td>
+                <td *ngIf="userRole[2]" class="text-center">
+                  <a [routerLink]="['detail', order._id]" *ngIf="userRole[2]">
+                    <i nz-icon nzType="eye" nz-tooltip nzTooltipTitle="View Detail" nzTheme="twotone"
+                      ></i>
+                  </a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
