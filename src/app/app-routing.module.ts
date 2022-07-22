@@ -28,7 +28,7 @@ const routes: Routes = [
           import("./pages/welcome/welcome.module").then((m) => m.WelcomeModule),
         canActivate: [AuthenticationGuard],
       },
-      
+
       {
         path: "banners",
         loadChildren: () =>
@@ -68,6 +68,12 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard],
       },
 
+      {
+        path: "commission-statement",
+        loadChildren: () =>
+          import("./pages/commission-statement/commission-statement.module").then((m) => m.CommissionStatementModule),
+        canActivate: [AuthenticationGuard],
+      },
 
       {
         path: "zones",
@@ -87,7 +93,7 @@ const routes: Routes = [
           import("./pages/driver/driver.module").then((m) => m.DriverModule),
         canActivate: [AuthenticationGuard],
       },
-     
+
       {
         path: "users",
         loadChildren: () =>

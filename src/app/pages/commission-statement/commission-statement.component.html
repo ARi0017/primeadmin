@@ -1,0 +1,81 @@
+<div class="animated fadeIn">
+  <div class="row">
+
+    <div class='col-md-12'>
+      <div class='card'>
+        <div class="card-header">
+         Commission Search
+          <div class="pull-right">
+              Total {{commissionLength}}
+          </div>
+        </div>
+        <div class="card-body">
+          <form #searchForm="ngForm" nzForm (ngSubmit)='searchDate()'>
+            <div class="row">
+              <div class="col-md-5">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]='6' nzRequired>Start</nz-form-label>
+                  <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-date-picker nzFormat="dd-MM-yyyy HH:mm:ss " required name='startDate'  [nzDisabledDate]="disabledDate" nzShowTime [(ngModel)]="date.startDate" ></nz-date-picker>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div class="col-md-5">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]='6' nzRequired>End</nz-form-label>
+                  <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-date-picker nzFormat="dd-MM-yyyy HH:mm:ss" required name='endDate'  [nzDisabledDate]="disabledDate" nzShowTime [(ngModel)]="date.endDate" ></nz-date-picker>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div class="col-md-2">
+                <nz-form-item>
+                  <nz-form-control  [nzSpan]="2"  [nzOffset]="1">
+                    <button nz-button nzType="primary" class="btn2 approve" [disabled]='searchForm.invalid' type="submit" >Search</button>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <h4 class="head-line"><span>Commission Statement</span></h4>
+    </div>
+    <div class="col-md-6 text-right">
+    </div>
+
+    <div class="col-md-12">
+      <nz-table nzShowSizeChanger [nzData]="allCommission" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+      [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllCommission();">
+        <thead>
+          <tr>
+            <th nzColumnKey="date" [nzSortFn]="true">Date</th>
+            <th nzColumnKey="agentcode" [nzSortFn]="true">Agent Code</th>
+            <th nzColumnKey="amount" [nzSortFn]="true">Amount</th>
+            <th nzColumnKey="ordernumber" [nzSortFn]="true">Order Number</th>
+            <th>TDS</th>
+            <th>Net Payable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let commission of allCommission">
+          <tr>
+            <td>{{ commission.createdDate | date: "dd/MM/yyyy" }}</td>
+            <td>{{ commission.customerId.referralCode }}</td>
+            <td>{{ commission.amount }}</td>
+            <td>{{ commission.orderId.orderNo }}</td>
+            <td>{{ commission.amount }}</td>
+            <td>{{ commission.amount }}</td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>
