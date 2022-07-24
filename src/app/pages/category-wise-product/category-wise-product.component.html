@@ -1,33 +1,37 @@
+<!-- {{ categoryId | json }} -->
+
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="head-line"><span>Products</span></h4>
+        <h4 class="head-line"><span>Category Wise Products</span></h4>
       </div>
       <div class="col-md-6 text-right">
-        <nz-upload style="display: inline-flex;"
-          [(nzFileList)]="fileList" 
-          [nzBeforeUpload]="beforeUpload" 
-          nzAccept=".xls, .xlsx"
-        >
-          <button type="button" class="btn-top1" [disabled]="fileList.length == 1" nz-button>
-            <i nz-icon nzType="upload"></i>Import
-          </button>
-        </nz-upload>
-        <button type="button" nz-button nzType="primary" (click)="importProduct()">
-          Upload
-        </button> 
-        <button style="margin-bottom: 10px; margin-left: 6px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
-          *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
-        </button>
+        
       </div>
-  
       <div class="col-md-12">
-        <nz-table nzShowSizeChanger [nzData]="allProducts" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
-          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllProducts();">
+        <nz-form-item>
+          <nz-form-label class="text-left" [nzSm]="2" [nzXs]="24" nzFor="categoryid" nzRequired>
+              Category
+          </nz-form-label>
+          <nz-form-control  [nzSm]="7" [nzXs]="24" nzErrorTip="The input is Required">
+              <nz-select nzId="categoryid" name="categoryid"
+                nzShowSearch 
+                nzPlaceHolder="Please select category"
+                [(ngModel)] = "categoryId"
+                (ngModelChange)="getProductsByCategory($event)"
+              >
+                <nz-option *ngFor="let c of categories" [nzValue]="c._id" [nzLabel]="c.categoryName"></nz-option>
+              </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="col-md-12" *ngIf="categoryId">
+        <nz-table nzShowSizeChanger [nzData]="products" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
+          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event);">
           <thead>
             <tr>
               <th nzColumnKey="name" [nzSortFn]="true">Product Name</th>
-              <th nzColumnKey="category" [nzSortFn]="true">Category</th>
+              <!-- <th nzColumnKey="category" [nzSortFn]="true">Category</th> -->
               <th nzColumnKey="description" [nzSortFn]="true">Description</th>
               <th nzColumnKey="packetSize" [nzSortFn]="true">Packet Size</th>
               <th nzColumnKey="priceOne" [nzSortFn]="true">Price One</th>
@@ -36,14 +40,13 @@
               <th nzColumnKey="commission" [nzSortFn]="true">Commission</th>
               <th>Image</th>
               <th nzColumnKey="isActive" [nzSortFn]="true">Is Active</th>
-              <th class="text-center" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let product of allProducts">
+            <ng-container *ngFor="let product of products">
               <tr>
                 <td>{{ product.name }}</td>
-                <td>{{ product.categoryid.categoryName }}</td>
+                <!-- <td>{{ product.categoryid.categoryName }}</td> -->
                 <td>{{ product.description }}</td>
                 <td>{{ product.packetSize }}</td>
                 <td>{{ product.priceOne }}</td>
@@ -61,16 +64,15 @@
                     </span>
                   </span>
                 </td>
-                <td class="text-center" *ngIf="userRole[2]">
-                  <a [routerLink]="['edit', product._id]" *ngIf="userRole[2]">
-                    <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
-                      style="margin-right: 6px;"></i>
-                  </a>
-                </td>
               </tr>
             </ng-container>
           </tbody>
         </nz-table>
+      </div>
+      <div class="col-md-12" *ngIf="!categoryId">
+        <div class="well">
+          <p class="text-center">Please select category</p>
+        </div>
       </div>
     </div>
   </div>

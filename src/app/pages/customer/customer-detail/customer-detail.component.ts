@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CustomerAccount, CustomerAddress } from "src/app/model/customer.model";
+import { CustomerAccount, CustomerAddress, CustomerIncentive } from "src/app/model/customer.model";
 
 
 import { CustomerService } from "src/app/services/customer.service";
@@ -19,6 +19,9 @@ export class CustomerDetailComponent extends CommonComponent implements OnInit {
   customerId: string = undefined;
   customerAddress: CustomerAddress[] = [];
   customerAccount: CustomerAccount = new CustomerAccount();
+  incentives: CustomerIncentive[] = [];
+  total: number = 0;
+  loading: Boolean = false;
 
   constructor(
     private customerService: CustomerService,
@@ -39,6 +42,7 @@ export class CustomerDetailComponent extends CommonComponent implements OnInit {
   ngOnInit(): void {
     this.populateCustomerAddress();
     this.populateCustomerAccount();
+
   }
 
   populateCustomerAddress(): void {
@@ -52,6 +56,16 @@ export class CustomerDetailComponent extends CommonComponent implements OnInit {
     this.customerService.getCustomerAccountDetailById(this.customerId)
       .subscribe((res) =>{
         this.customerAccount = res.data;
+      });
+  }
+
+  populateCustomerIncentives(): void {
+    this.loading = true;
+    this.customerService.getCustomerIncentivesById(this.customerId)
+      .subscribe((res) =>{
+        this.incentives = res.data;
+        this.total = res.count;
+        this.loading = false;
       });
   }
 }

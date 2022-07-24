@@ -21,7 +21,7 @@ export class CommissionStatementService {
       .append("startDate", `${startDate}`)
       .append("endDate", `${endDate}`);
     return this.http.get<{ commissionList: ICommission[]; count: number }>(
-      `${this.baseUrl.serviceUrl}/reports`,
+      `${this.baseUrl.serviceUrl}/reports/commission`,
       { params }
     );
   }

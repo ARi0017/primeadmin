@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Customer, CustomerAccount, CustomerAddress } from './../model/customer.model';
+import { Customer, CustomerAccount, CustomerAddress, CustomerIncentive } from './../model/customer.model';
 import { Observable } from "rxjs";
 
 
@@ -49,15 +49,21 @@ export class CustomerService {
     );
   }
 
-  getCustomerAddressById(id: string): Observable<{ data: CustomerAddress[], count: number }> {
+  getCustomerAddressById(customerId: string): Observable<{ data: CustomerAddress[], count: number }> {
     return this.http.get<{ data: CustomerAddress[], count: number }>(
-      `${this.baseUrl.serviceUrl}/customeraddresses/${id}`,
+      `${this.baseUrl.serviceUrl}/customeraddresses/${customerId}`,
     );
   }
 
-  getCustomerAccountDetailById(id: string): Observable<{ data: CustomerAccount, count: number }> {
+  getCustomerAccountDetailById(customerId: string): Observable<{ data: CustomerAccount, count: number }> {
     return this.http.get<{ data: CustomerAccount, count: number }>(
-      `${this.baseUrl.serviceUrl}/customeraccounts/${id}`,
+      `${this.baseUrl.serviceUrl}/customeraccounts/${customerId}`,
+    );
+  }
+
+  getCustomerIncentivesById(customerId: string): Observable<{ data: CustomerIncentive[], count: number }> {
+    return this.http.get<{ data: CustomerIncentive[], count: number }>(
+      `${this.baseUrl.serviceUrl}/customers/transaction/${customerId}`,
     );
   }
 }

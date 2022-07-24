@@ -131,6 +131,31 @@
             </div>
         </div>
     </nz-tab>
+    <nz-tab nzTitle="Incentive">
+        <div class="col-md-12">
+            <nz-table nzShowSizeChanger [nzData]="incentives" [nzFrontPagination]="false" [nzLoading]="loading"
+               (nzQueryParams)="populateCustomerIncentives();">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Order No</th>
+                  <th>Amount</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let incentive of incentives">
+                  <tr>
+                    <td>{{ incentive.createdDate | date: "dd/MM/yyyy hh:mm a" }}</td>
+                    <td>{{ incentive.orderId.orderNo }}</td>
+                    <td class="pl-2">₹{{ incentive.amount }}</td>
+                    <td>{{ incentive.remarks }}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </nz-table>
+          </div>
+    </nz-tab>
 </nz-tabset>
 
 

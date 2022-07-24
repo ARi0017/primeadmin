@@ -54,3 +54,16 @@ export class CustomerAccount {
         public modifiedBy?: string
     ){}
 }
+
+export class CustomerIncentive {
+    constructor(
+        public _id: string,
+        public orderId: {
+            _id: string,
+            orderNo: string
+        },
+        public amount: number,
+        public remarks: string,
+        public createdDate: Date
+    ) {}
+}

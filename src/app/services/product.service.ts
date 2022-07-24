@@ -55,4 +55,10 @@ export class ProductService {
       formData
     );
   }
+
+  getProductsByCategoryId(categoryId: string): Observable<{ data: Product[], count: number }> {
+    return this.http.get<{ data: Product[], count: number }>(
+      `${this.baseUrl.serviceUrl}/products/category/${categoryId}`
+    );
+  }
 }

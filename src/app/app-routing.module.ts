@@ -47,6 +47,12 @@ const routes: Routes = [
           import("./pages/product/product.module").then((m) => m.ProductModule),
         canActivate: [AuthenticationGuard],
       },
+      {
+        path: "category-wise-products",
+        loadChildren: () =>
+          import("./pages/category-wise-product/category-wise-product.module").then((m) => m.CategoryWiseProductModule),
+        canActivate: [AuthenticationGuard],
+      },
 
       {
         path: "orders",
