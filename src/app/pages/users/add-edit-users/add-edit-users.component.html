@@ -1,0 +1,80 @@
+
+  <div style="background: #ECECEC;padding:8px;">
+    <nz-card style="width:100%;" [nzBordered]="false" nzTitle="Registration" [nzExtra]="extraTemplate">
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+ 
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="isAgent">User Type</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your 10 digit Phone Number!" [nzSm]="12" [nzXs]="24" nzErrorTip="Please Select User Type!">
+        <nz-select  formControlName="isAgent" ngModel=false>
+          <nz-option nzValue=false nzLabel="User"></nz-option>
+          <nz-option nzValue=true nzLabel="Agent"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Full Name</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your name!" [nzSm]="12" [nzXs]="24" >
+          <input type="text" nz-input formControlName="name" placeholder="Full Name" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your valid email!" [nzSm]="12" [nzXs]="24">
+          <input type="email" nz-input formControlName="email" placeholder="Enter Your Email" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="phone">Phone Number</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your 10 digit Phone Number!" [nzSm]="12" [nzXs]="24">
+          <input type="text" nz-input formControlName="phone" placeholder="Phone Number" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="currencyType">Currency Type</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your currencyType" [nzSm]="12" [nzXs]="24">
+        <nz-select ngModel="INR" formControlName="currencyType" >
+          <nz-option nzValue="INR" nzLabel="INR"></nz-option> 
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="openingBalance">Opening Balance</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your opening balance!" [nzSm]="12" [nzXs]="24">
+          <input type="number" nz-input formControlName="openingBalance" placeholder="Opening Balance" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="creditLimit">Credit Limit</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your credit Limit!" [nzSm]="12" [nzXs]="24">
+          <input type="number" nz-input formControlName="creditLimit" placeholder="Credit Limit" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="exposure">Exposure Amount</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your Exposure amount!" [nzSm]="12" [nzXs]="24">
+          <input type="number" nz-input formControlName="exposure" placeholder="Exposure Amount" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="masterPassword">Master Password</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your Master Password!" [nzSm]="12" [nzXs]="24">
+          <input type="password" nz-input formControlName="masterPassword" placeholder="Master Password" />
+      </nz-form-control>
+    </nz-form-item>
+   
+    <button nz-button nzType="primary" type="submit">Submit</button>
+      <!-- <button  class="btn btn-outline-primary btn-sm" >Submit</button> -->
+   
+  </form>
+
+</nz-card>
+</div>
+<ng-template #extraTemplate>
+    <!-- <a>More</a> -->
+  </ng-template>    

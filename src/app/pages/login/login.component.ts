@@ -11,7 +11,7 @@ import { NzMessageService } from "ng-zorro-antd/message";
 export class LoginComponent implements OnInit {
 
   isSingIn:boolean=true;
-  email: string;
+  username: string;
   password: string;
   newPassword: string = "";
   confirmPassword: string = "";
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   //To login with email & password
   onSubmit() {
     // return (this.isPasswordReset = true);   
-    this.authService.Login(this.email, this.password).subscribe((resData) => {
+    this.authService.Login(this.username, this.password).subscribe((resData) => {
       //alert(JSON.stringify(resData.headers));
       //console.log(resData);
       const token = resData.headers.get("Authorization");

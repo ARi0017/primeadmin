@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
 .pointer {
     cursor: pointer;
 }
@@ -150,11 +152,12 @@ html {
 }
 
 nz-card>div:first-child {
-    background-color: rgb(215, 30, 46);
+    background-color: #5e00e0;
+    color: #ffff;
 }
 
 .ant-card-bordered {
-    border: 1px solid #d71e2e !important;
+    border: 1px solid #5e00e0 !important;
 }
 
 .text-red {
@@ -194,3 +197,6 @@ nz-card>div:first-child {
     -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
     box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
 }
+.text-denger{ color:#fd0419 !important; font-weight: 600; cursor: pointer;}
+.text-success{  font-weight: 600; cursor: not-allowed;}
+// .head-line{ border-bottom: 2px solid #5e00e0;}

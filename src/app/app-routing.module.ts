@@ -101,10 +101,20 @@ const routes: Routes = [
       },
 
       {
-        path: "users",
-        loadChildren: () =>
-          import("./pages/users/users.module").then((m) => m.UsersModule),
-        canActivate: [AuthenticationGuard],
+        path:'users',
+        loadChildren:()=>import('./pages/users/users.module').then((m)=>m.UsersModule)
+      },
+      {
+        path:'user-banking',
+        loadChildren:()=>import('./pages/user-banking/user-banking.module').then((m)=>m.UserBankingModule)
+      },
+      {
+        path:'myaccount',
+        loadChildren:()=>import('./pages/myaccount/myaccount.module').then((m)=>m.MyaccountModule)
+      },
+      {
+        path:'Gamecategory',
+        loadChildren:()=>import('./pages/gamecategory/gamecategory.module').then((m)=>m.GamecategoryModule)
       },
       {
         path: "roles",

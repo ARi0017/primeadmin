@@ -1,0 +1,48 @@
+<div style="background: #ECECEC;padding:8px;">
+    <nz-card style="width:100%;" [nzBordered]="false" nzTitle="Create Request" [nzExtra]="extraTemplate">
+
+
+        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+ 
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="">Transaction Type</nz-form-label>
+              <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Please select transaction Type!">
+                <nz-select  formControlName="transactionType" >
+                  <nz-option nzValue=0 nzLabel="Deposite"></nz-option>
+                  <nz-option nzValue=1 nzLabel="Withdraw"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+            
+    
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="">Opening Balance</nz-form-label>
+              <nz-form-control nzErrorTip="Please input your request amounts!" [nzSm]="12" [nzXs]="24">
+                  <input type="number" nz-input  formControlName="amount" placeholder="Enter Your Amount" />
+              </nz-form-control>
+            </nz-form-item>
+        
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="">Remark</nz-form-label>
+                <nz-form-control nzErrorTip="Enter Your Remark!" [nzSm]="12" [nzXs]="24">
+                    <textarea rows="4" nz-input  formControlName="remarks" placeholder="Enter Your Remark"></textarea>
+                </nz-form-control>
+              </nz-form-item>
+        
+           
+        
+            
+           
+             <button nz-button nzType="primary" type="submit">Submit</button>
+              <!-- <button type="submit"  class="btn btn-outline-primary btn-sm" >Submit</button>
+              <button type="button"  class="btn btn-outline-danger btn-sm" >Cancel</button> -->
+           
+           </form>
+
+
+        
+    </nz-card>
+</div>
+<ng-template #extraTemplate>
+    <!-- <a>More</a> -->
+  </ng-template>    

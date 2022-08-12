@@ -1,48 +1,30 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { UsersRoutingModule } from "./users-routing.module";
-import { UsersComponent } from "./users.component";
-import { AddEditUserComponent } from "./add-edit-user/add-edit-user.component";
-import { FormsModule } from "@angular/forms";
-import { NzModule } from "src/app/nz.module";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { QuillModule } from "ngx-quill";
-import {
-  NgPasswordValidatorModule,
-  NgPasswordValidatorOptions,
-} from "ng-password-validator";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
-
-export const MyDefaultOptions: NgPasswordValidatorOptions = {
-  placement: "bottom",
-  theme: "pro",
-};
+import { UsersRoutingModule } from './users-routing.module';
+import { NzModule } from 'src/app/nz.module';
+import { UsersComponent } from './users.component';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+// import { NzButtonModule } from 'ng-zorro-antd/button';
+// import { NzTableModule } from 'ng-zorro-antd/table';
+// import { NzTabsModule } from 'ng-zorro-antd/tabs';
+ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+// import { NzIconModule } from 'ng-zorro-antd/icon';
+// import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { AddEditUsersComponent } from './add-edit-users/add-edit-users.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 @NgModule({
-  declarations: [UsersComponent, AddEditUserComponent],
-
+  declarations: [UsersComponent, AddEditUsersComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
-    FormsModule,
     NzModule,
-    NgPasswordValidatorModule.forRoot(
-      MyDefaultOptions as NgPasswordValidatorOptions
-    ),
-    QuillModule.forRoot(),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
-    HttpClientModule,
-  ],
+    FormsModule,
+    NzPaginationModule,
+    ReactiveFormsModule,
+   NzFormModule 
+
+  ]
 })
-export class UsersModule {}
+export class UsersModule { }

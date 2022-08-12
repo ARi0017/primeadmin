@@ -1,28 +1,15 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { AddEditUserComponent } from "./add-edit-user/add-edit-user.component";
-import { UsersComponent } from "./users.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { UsersComponent } from './users.component';
+import { AddEditUsersComponent } from './add-edit-users/add-edit-users.component';
 
 const routes: Routes = [
-  {
-    path: "",
-    component: UsersComponent,
-    data: {
-      title: "Admin Users",
-    },
-  },
-  {
-    path: "add",
-    component: AddEditUserComponent,
-  },
-  {
-    path: "edit/:id",
-    component: AddEditUserComponent,
-  }
+  {path:'',component:UsersComponent},
+  {path:'add',component:AddEditUsersComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class UsersRoutingModule { }

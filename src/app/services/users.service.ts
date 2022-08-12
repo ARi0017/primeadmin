@@ -11,15 +11,23 @@ export class UsersService {
   baseUrl = environment;
   constructor(private http: HttpClient) {}
 
-  //Get all user list
-  userList(pageIndex: number, pageSize: number, sort: string) {
-    let params = new HttpParams()
-      .append("pageIndex", `${pageIndex}`)
-      .append("pageSize", `${pageSize}`)
-      .append("sort", `${sort}`);
-    return this.http.get<{ userList: User[]; count: number }>(
-      `${this.baseUrl.serviceUrl}/users`,
-      { params }
+  //Get user list
+  userList() {
+    return this.http.get<any>(
+      `${this.baseUrl.serviceUrl}/users/user-list`
+    );
+  }
+
+  //Get agent list
+  agentList() {
+    return this.http.get<any>(
+      `${this.baseUrl.serviceUrl}/users/agent-list`
+    );
+  }
+  //Get current Agent details
+  agentDetail(){
+    return this.http.get<any>(
+      `${this.baseUrl.serviceUrl}/users/details`
     );
   }
 
@@ -52,10 +60,11 @@ export class UsersService {
   }
 
   //Add a new user
-  addUser(user: User) {
-    return this.http.post<{ message: string }>(
+  addUser(user: any) {
+   console.log(user)
+    return this.http.post<any>(
       `${this.baseUrl.serviceUrl}/users/register`,
-      { user }
+       user 
     );
   }
 

@@ -1,0 +1,52 @@
+   <div class="row">
+    <div class="col-md-4">
+      <div style="background: #ECECEC;padding:8px;">
+      <nz-card style="width:100%;" [nzBordered]="false" nzTitle="Profile Details" [nzExtra]="extraTemplate">
+        <nz-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
+       <br>
+       <nz-mention [nzSuggestions]="" *ngFor="let c of agentDetailArr">
+        <p><strong>Name:</strong></p><input nz-input readOnly [(ngModel)]="c.name" nzMentionTrigger/> <br>
+        <p><strong>Email:</strong></p><input nz-input readOnly [(ngModel)]="c.email" nzMentionTrigger/> <br>
+        <p><strong>Phone Number:</strong></p><input nz-input readOnly [(ngModel)]="c.phone" nzMentionTrigger/> <br>
+        <p><strong>User Name:</strong></p><input nz-input readOnly [(ngModel)]="c.username" nzMentionTrigger/> <br>
+        <p><strong>Currency Type:</strong></p><input nz-input readOnly [(ngModel)]="c.currencyType" nzMentionTrigger/>
+       </nz-mention>
+      </nz-card>
+      <ng-template #extraTemplate>
+        <a>Edit</a>
+      </ng-template>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div style="background: #ECECEC;padding:8px;">
+      <nz-card style="width:100%; color: #ffff;" [nzBordered]="false" nzTitle="Activity Log" [nzExtra]="extraTemplate" class="profile-card">
+        <nz-table #agentDetailTable [nzData]="agentDetailArr" [nzFrontPagination]="false" [nzLoading]="agentDetailLoading">
+          <thead>
+            <tr>
+              <th>Name:</th>
+              <th>Email:</th>
+              <th>Phone Number:</th>
+              <th>Available Balance:</th>
+              <th>Exposure:</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let c of agentDetailTable.data">
+              <td>{{c.name}}</td>
+              <td >{{c.email}}</td>
+              <td>{{c.phone}}</td>
+              <td >{{c.availableBalance}}</td>
+              <td>{{c.exposure}}</td>
+              
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-card>
+      <ng-template #extraTemplate>
+        <a>View More</a>
+      </ng-template>
+      </div>
+    </div>
+   </div>

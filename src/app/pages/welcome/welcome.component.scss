@@ -31,16 +31,17 @@ nz-divider {
       min-height: 20px;
       padding: 19px;
       margin-bottom: 20px;
-      background-color: #fccf08;
-      border: 1px solid #fccf08;
+      background-color: #5e00e0;
+      border: 1px solid #5e00e0;
       border-radius: 4px;
       -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
       box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
   }
-  .well > p {
+ .dashboard-text p{
+  font-size: 2.5rem;
     margin-top: 20px;
-    color: green;
+    color: #fff;
     text-align: center;
     font-weight: 700;
-    font-family: cursive;
-}
+    line-height: 55px;
+ }

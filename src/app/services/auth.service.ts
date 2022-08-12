@@ -17,7 +17,7 @@ export class AuthService {
     return this.http.post<any>(
       `${this.url.serviceUrl}/users/auth`, 
       {
-        email: email,
+        username: email,
         password: password,
       },
       { 

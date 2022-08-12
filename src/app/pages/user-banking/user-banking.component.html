@@ -1,0 +1,111 @@
+<div style="background: #ECECEC;padding:8px;">
+  <nz-card style="width:100%;" [nzBordered]="false" nzTitle="User Banking" [nzExtra]="extraTemplate">
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-4">
+           
+          </div>
+          <div class="col-md-5">
+            <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+        </div>
+          <div class="col-md-3 text-right">
+      <button class="btn btn-outline-primary btn-sm" type="button" [routerLink]="['create']" nzTooltipTitle="Request for Withdraw or Deposite" nzTooltipPlacement="top" nz-button nz-tooltip>
+              <i class="fa fa-plus"></i>
+              Create Request</button>
+             
+              
+              
+          </div>
+          <div class="col-md-12">         
+            <nz-tabset>
+
+                <nz-tab nzTitle="All Transactions" >
+                    <nz-table  #allTransactionTable [nzData]="transactionlistArray"  [nzFrontPagination]="false" [nzLoading]="allTransactionLoading" >
+                        <thead>
+                          <tr>
+                            <th>User Name</th>
+                            <th>User Id</th>
+                            <th>Transaction Type</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th class="text-center">Approval Status</th>
+                            <th>Remarks</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           <tr *ngFor="let data of allTransactionTable.data">
+                            <td>{{data.userId.name}}</td>
+                            <td>{{data.userId.username}}</td>
+                            <td *ngIf="data.transactionType===1">Deposite</td>
+                             <td *ngIf="data.transactionType===0">Withdraw</td>
+                            <td>{{data.amount}}</td>
+                            <td class="text-info">{{data.createdDate | date: 'dd/MM/yyyy,h:mm a'}}</td>
+                            <td *ngIf="data.isApproved===1" class="text-success text-center" nzTooltipTitle="Approved" nzTooltipPlacement="top" nz-button nz-tooltip>Approved <i nz-icon nzType="check-circle" nzTheme="outline" style="color:#1eeb08; font-weight: 600;"></i></td>
+                            <td *ngIf="data.isApproved===0" class="text-denger text-center" nzTooltipTitle="Pending" nzTooltipPlacement="top" nz-button nz-tooltip>Pending <i nz-icon nzType="clock-circle" nzTheme="outline" style="color:#fd0419; font-weight: 600;"></i></td>
+                            <td *ngIf="data.isApproved===2" class="text-denger text-center">Not Approved</td>
+                            <td>{{data.remarks}}</td>
+                            </tr>
+                        </tbody>
+                      </nz-table>
+                      <nz-pagination [nzPageIndex]="1" [nzTotal]="allTransaction" nzShowSizeChanger [nzPageSize]="10"></nz-pagination>
+                    
+                </nz-tab>
+                <nz-tab nzTitle="Pending Transactions">
+                    <nz-table #pendingTable [nzData]="pendingTransactionList"  [nzFrontPagination]="false" [nzLoading]="pendingLoading" >
+                        <thead>
+                          <tr>
+                            <th>User Name</th>
+                            <th>User Id</th>
+                            <th>Transaction Type</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th class="text-center">Approval Status</th>
+                            <th>Remarks</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- <tr *ngFor="let data of getPendingTransactionlist ">
+                            <td>{{data.userId.name}}</td>
+                            <td>{{data.username}}</td>
+                            <td>{{data.availableBalance}}</td>
+                            <td>{{data.creditLimit}}</td>
+                            <td>{{data.exposure}}</td>
+                            <td>{{data.createdDate | date: 'dd/MM/yyyy,h:mm a'}}</td>
+                            <td>
+                                <i *ngIf="data.isActive===true" nz-icon nzType="check" nzTheme="outline" style="color:green ;"></i>
+                                <i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;"></i>
+                            </td>
+                            <td>
+                                <i nz-icon nzType="edit" nzTheme="outline"></i>
+                              <nz-divider nzType="vertical"></nz-divider>
+                              <i nz-icon nzType="delete" nzTheme="outline"></i>
+                            </td>
+                          </tr> -->
+                          <tr *ngFor="let data of pendingTable.data">
+                            <td scope="row">{{data.userId.name}}</td>
+                            <td scope="row">{{data.userId.username}}</td>
+                            <td *ngIf="data.transactionType===1">Deposite</td>
+                            <td *ngIf="data.transactionType===0">Withdraw</td>
+                            
+                            <td>{{data.amount}}</td>
+                            <td class="text-info">{{data.createdDate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+                            <td *ngIf="data.isApproved===1" class="text-success text-center" nzTooltipTitle="Approved" nzTooltipPlacement="top" nz-button nz-tooltip>Approved <i nz-icon nzType="check-circle" nzTheme="outline" style="color:#1eeb08; font-weight: 600;"></i></td>
+                            <td *ngIf="data.isApproved===0" class="text-denger text-center" (click)="updateTransactionStatus(data._id)" nzTooltipTitle="Pending" nzTooltipPlacement="top" nz-button nz-tooltip>Pending <i nz-icon nzType="clock-circle" nzTheme="outline" style="color:#fd0419; font-weight: 600;"></i></td>
+                            <td *ngIf="data.isApproved===2" class="text-denger text-center">Not Approved</td>
+                            <td>{{data.remarks}}</td>
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                      <nz-pagination [nzPageIndex]="1" [nzTotal]="allPending" nzShowSizeChanger [nzPageSize]="10"></nz-pagination>
+                </nz-tab>
+                
+              </nz-tabset>
+            
+          </div>
+    </div>
+</div>
+</nz-card>
+</div>
+<ng-template #extraTemplate>
+    <!-- <a>More</a> -->
+  </ng-template>  

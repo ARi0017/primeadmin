@@ -25,17 +25,15 @@ export class TokenInterceptorService implements HttpInterceptor {
     let message = this.injector.get(NzMessageService);
     let router = this.injector.get(Router);
     let tokenizedReq = req.clone({});
-    if (!req.url.match(/financialmodelingprep/g) && !req.url.match(/ipify/g)) {
+  
       let authService = this.injector.get(AuthService);
 
       tokenizedReq = req.clone({
         setHeaders: {
           Authorization: `Bearer ${authService.getToken()}`,
-          BSRF: this.encryptUsingAES256()
-          //ip: authService.getUserIp(),
         },
       });
-    }
+   
     return next.handle(tokenizedReq).pipe(
       catchError((err) => {
         if (err instanceof HttpErrorResponse) {

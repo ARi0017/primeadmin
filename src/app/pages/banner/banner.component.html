@@ -5,13 +5,15 @@
       </div>
       <div class="col-md-6 text-right">
         <button style="margin-bottom: 10px;" nz-button nzType="primary" type="button" [routerLink]="['add']"
-          *ngIf="userRole[1]"><i class="fa fa-plus"></i> Add 
+          ><i class="fa fa-plus"></i> Add 
         </button>
       </div>
   
       <div class="col-md-12">
         <nz-table nzShowSizeChanger [nzData]="allBanners" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
-          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getAllBanners();">
+          [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" 
+          
+          >
           <thead>
             <tr>
               <th nzColumnKey="name" [nzSortFn]="true">Name</th>
@@ -24,7 +26,7 @@
               <th class="text-center" *ngIf="userRole[2]">Action</th>
             </tr>
           </thead>
-          <tbody>
+          <!-- <tbody>
             <ng-container *ngFor="let banner of allBanners">
               <tr>
                 <td>{{ banner.name }}</td>
@@ -49,7 +51,7 @@
                     <i nz-icon nzType="close" nzTheme="outline"></i>
                   </span>
                 </td>
-                <!-- <td>{{ banner.createdDate | date:"dd-MM-yyyy hh:mm aaaa" }}</td> -->
+                
                 <td class="text-center" *ngIf="userRole[2]">
                   <a [routerLink]="['edit', banner._id]" *ngIf="userRole[2]">
                     <i nz-icon nzType="edit" nz-tooltip nzTooltipTitle="Edit" nzTheme="twotone"
@@ -58,7 +60,7 @@
                 </td>
               </tr>
             </ng-container>
-          </tbody>
+          </tbody> -->
         </nz-table>
       </div>
     </div>

@@ -1,55 +1,116 @@
-<div class="animated fadeIn">
-  <div class="row">
-    <div class="col-md-6">
-      <h4 class="head-line"><span>{{ 'Users.UsersListingHeader.UsersHeader' | translate }}</span></h4>
-    </div>
-    <div class="col-md-6 text-right">
-      <button style="margin-bottom: 10px" type="button" nz-button nzType="primary" [routerLink]="['add']"
-        *ngIf="userRole[1]">
-        <i class="fa fa-plus"></i>{{ 'Users.UsersListingHeader.addUsersButton' | translate }}
-      </button>
-    </div>
+<div style="background: #ECECEC;padding:8px;">
+  <nz-card style="width:100%;" [nzBordered]="false" nzTitle="Registration" [nzExtra]="extraTemplate">
+    <div class="card">
+      <div class="card-header"><h6> User Wallet <span class="float-end" nzTooltipTitle="Add New User or Agent" nzTooltipPlacement="left" nz-button nz-tooltip><button class="btn btn-outline-primary btn-sm" type="button" [routerLink]="['add']">
+        <i class="fa fa-plus"></i>
+        Add New</button></span></h6></div>
+            <nz-table #agentDetailTable [nzData]="agentDetailArr" [nzFrontPagination]="false" [nzLoading]="agentDetailLoading">
+                <thead>
+                  <tr>
+                    <th>Total Balance</th>
+                    <th>Total Exposure</th>
+                    <th>Avaialble Balance</th>
+                    <th>Balance</th>
+                    <th>Total Credit Limit</th>
+                    <th>Avaialble Credit Limit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of agentDetailTable.data">
+                    <td>{{c.openingBalance}}</td>
+                    <td >{{c.exposure}}</td>
+                    <td >{{c.availableBalance}}</td>
+                    <td>{{c.investedBalance}}</td>
+                    <td>{{c.totalCreditLimit}}</td>
+                    <td>{{c.availableCreditLimit}}</td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </div>
+            <nz-tabset>
+                
+                <nz-tab nzTitle="Users List" >
+                    <nz-table #userTable [nzData]="userList" [nzFrontPagination]="false" [nzLoading]="loading" >
+                        <thead>
+                          <tr>
+                            <th>User Name</th>
+                            <th>User Id</th>
+                            <th>Avaialble Balance</th>
+                            <th>Credit Limit</th>
+                            <th>Exposure</th>
+                            <th>Create Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of userTable.data ">
+                            <td>{{data.name}}</td>
+                            <td>{{data.username}}</td>
+                            <td>{{data.availableBalance}}</td>
+                            <td>{{data.creditLimit}}</td>
+                            <td>{{data.exposure}}</td>
+                            <td>{{data.createdDate | date: 'dd/MM/yyyy,h:mm a'}}</td>
+                            <td class="text-pointer">
+                                <i *ngIf="data.isActive===true" nz-icon nzType="check" nzTheme="outline" style="color:green ;" nzTooltipTitle="Active" nzTooltipPlacement="top" nz-button nz-tooltip></i></td>
+                                <td class="text-pointer"><i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;" nzTooltipTitle="Deactive" nzTooltipPlacement="top" nz-button nz-tooltip></i>
+                            </td>
+                            <td>
+                                <i nz-icon nzType="edit" nzTheme="outline" nzTooltipTitle="Edit" nzTooltipPlacement="top" nz-button nz-tooltip></i>
+                              <nz-divider nzType="vertical"></nz-divider>
+                              <div (click)="userDelete(data.id)"><i nz-icon nzType="delete" nzTheme="outline" nzTooltipTitle="Delete" nzTooltipPlacement="top" nz-button nz-tooltip></i></div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                      <nz-pagination [nzPageIndex]="1" [nzTotal]="totalUser" nzShowSizeChanger [nzPageSize]="10"></nz-pagination>
+                    
+                </nz-tab>
+                <nz-tab nzTitle="Agent List">
+                    <nz-table #agentTable [nzData]="agentList" [nzFrontPagination]="false" [nzLoading]="agentLoading" >
+                        <thead>
+                          <tr>
+                            <th>User Name</th>
+                            <th>User Id</th>
+                            <th>Avaialble Balance</th>
+                            <th>Credit Limit</th>
+                            <th>Exposure</th>
+                            <th>Create Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of agentTable.data ">
+                            <td>{{data.name}}</td>
+                            <td>{{data.username}}</td>
+                            <td>{{data.availableBalance}}</td>
+                            <td>{{data.creditLimit}}</td>
+                            <td>{{data.exposure}}</td>
+                            <td>{{data.createdDate | date: 'dd/MM/yyyy,h:mm a'}}</td>
+                            <td class="text-pointer">
+                                <i *ngIf="data.isActive===true" nz-icon nzType="check" nzTheme="outline" style="color:green ;" nzTooltipTitle="Active" nzTooltipPlacement="top" nz-button nz-tooltip></i>
+                               </td>
+                               <td class="text-pointer"> <i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;" nzTooltipTitle="Deactive" nzTooltipPlacement="top" nz-button nz-tooltip></i>
+                            </td>
+                            <td>
+                                <i nz-icon nzType="edit" nzTheme="outline" nzTooltipTitle="Edit" nzTooltipPlacement="top" nz-button nz-tooltip ></i>
+                              <nz-divider nzType="vertical"></nz-divider>
+                              <div (click)="userDelete(data.id)" class="text-denger"><i nz-icon nzType="delete" nzTheme="outline" nzTooltipTitle="Delete" nzTooltipPlacement="top" nz-button nz-tooltip></i></div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                      <nz-pagination [nzPageIndex]="1" [nzTotal]="totalAgent" nzShowSizeChanger [nzPageSize]="10"></nz-pagination>
+                </nz-tab>
+                
+              </nz-tabset>
+            
+      
+    
 
-  <div class="col-md-12">
-    <nz-table nzShowSizeChanger [nzData]="allUser" [nzFrontPagination]="false" [nzLoading]="loading" [nzTotal]="total"
-      [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event); getUserList()">
-      <thead>
-        <tr>
-          <th nzColumnKey="name" [nzSortFn]="true">{{ 'Users.UsersTable.name' | translate }}</th>
-          <th nzColumnKey="phone" [nzSortFn]="true">{{ 'Users.UsersTable.phone' | translate }}</th>
-          <th nzColumnKey="email" [nzSortFn]="true">{{ 'Users.UsersTable.email' | translate }}</th>
-          <th nzColumnKey="role" [nzSortFn]="true">{{ 'Users.UsersTable.role' | translate }}</th>
-          <th>{{ 'Users.UsersTable.status' | translate }}</th>
-          <th *ngIf="userRole[2] || userRole[3]">{{ 'Users.UsersTable.action' | translate }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let user of allUser">
-          <tr>
-            <td>{{ user.name }}</td>
-            <td>{{ user.phone }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role?.name }}</td>
-            <td>
-              <span class="text-success pointer" *ngIf="user.isActive == '1'; else elseSpan"
-                (click)="onStatus(user._id)"><i nz-icon nzType="check" nz-tooltip nzTooltipTitle="Active"
-                  nzTheme="outline"></i></span>
-              <ng-template #elseSpan>
-                <span class="text-danger pointer" (click)="onStatus(user._id)"><i nz-icon nzType="close" nz-tooltip
-                    nzTooltipTitle="Inactive" nzTheme="outline"></i></span>
-              </ng-template>
-            </td>
-            <td *ngIf="userRole[2] || userRole[3]">
-              <a [routerLink]="['edit', user._id]" *ngIf="userRole[2]"><i nz-icon nz-tooltip nzTooltipTitle="Edit"
-                  nzType="edit" nzTheme="twotone" style="margin-right: 10px"></i></a>
-              <i *ngIf="userRole[3]" class="pointer" nz-icon nzType="delete" nzTheme="twotone" nz-tooltip
-                nzTooltipTitle="Delete" nz-popconfirm nzPopconfirmTitle="Are you sure ?"
-                (nzOnConfirm)="onDelete(user._id)"></i>
-            </td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </nz-table>
-  </div>
+</nz-card>
 </div>
-</div>
+<ng-template #extraTemplate>
+    <!-- <a>More</a> -->
+  </ng-template>  
