@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders,HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 
@@ -14,19 +14,25 @@ export class UserBankingService {
   );
   constructor(private http: HttpClient) { }
 
-  AllUsertransactionlist(){
+  AllUsertransactionlist(startDate:string,endDate:string){
     let header = new HttpHeaders().set(
       "Authorization",
        `Bearer ${localStorage.getItem("token")}`
     );
-    return this.http.get<any>(`${environment.serviceUrl}/usertransactions?pageIndex=1&pageSize=10&sort=-_id&startDate=&endDate=`,{headers:header});
+    let params = new HttpParams()
+    .append("startDate", `${startDate}`)
+    .append("endDate", `${endDate}`);
+    return this.http.get<any>(`${environment.serviceUrl}/usertransactions`,{headers:header,params:params});
   }
-  UserPendingtransactionlist(){
+  UserPendingtransactionlist(startDate:string,endDate:string){
     let header = new HttpHeaders().set(
       "Authorization",
        `Bearer ${localStorage.getItem("token")}`
     );
-    return this.http.get<any>(`${environment.serviceUrl}/usertransactions/pending`,{headers:header});
+    let params = new HttpParams()
+    .append("startDate", `${startDate}`)
+    .append("endDate", `${endDate}`);
+    return this.http.get<any>(`${environment.serviceUrl}/usertransactions/pending`,{headers:header,params:params});
   }
 
   updateUserTransactionStatus(id:any){

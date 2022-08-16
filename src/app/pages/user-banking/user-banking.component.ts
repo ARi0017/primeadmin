@@ -6,7 +6,7 @@ import { UserBankingService } from 'src/app/services/user-banking.service';
   styleUrls: ['./user-banking.component.scss']
 })
 export class UserBankingComponent implements OnInit {
-  date = null;
+  
   transactionlistArray:any=[];
   pendingTransactionList:any=[];
   user={transactionType:null,amount:null,remarks:''}
@@ -14,6 +14,7 @@ export class UserBankingComponent implements OnInit {
   allTransactionLoading:boolean=false;
   allTransaction:number;
   allPending:number;
+  date = {startDate:'',endDate:''};
 
   constructor(private userBanking:UserBankingService) { }
 
@@ -24,7 +25,7 @@ export class UserBankingComponent implements OnInit {
 
   transactionlist(){
     this.allTransactionLoading=true;
-    this.userBanking.AllUsertransactionlist().subscribe((res)=>{
+    this.userBanking.AllUsertransactionlist(this.date.startDate,this.date.endDate).subscribe((res)=>{
       console.log('getlist',res.data);
       this.transactionlistArray=res.data;
       this.allTransaction=res.data.length;
@@ -34,7 +35,7 @@ export class UserBankingComponent implements OnInit {
 
   getPendingTransactionlist(){
     this.pendingLoading=true;
-    this.userBanking.UserPendingtransactionlist().subscribe((res)=>{
+    this.userBanking.UserPendingtransactionlist(this.date.startDate,this.date.endDate).subscribe((res)=>{
       console.log('pendingList',res.data);
       this.pendingTransactionList=res.data;
       this.allPending=res.data.length;
@@ -58,6 +59,10 @@ export class UserBankingComponent implements OnInit {
 
   onChange(result: Date[]): void {
     console.log('onChange: ', result);
+  }
+  searchDate(){
+   this.transactionlist();
+   this.getPendingTransactionlist();
   }
 
 }
