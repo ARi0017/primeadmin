@@ -67,10 +67,11 @@
           <input type="password" nz-input formControlName="masterPassword" placeholder="Master Password" />
       </nz-form-control>
     </nz-form-item>
-   
-    <button nz-button nzType="primary" type="submit">Submit</button>
+    <div class="d-flex justify-content-center submit-back">
+    <button nz-button nzType="primary" type="submit" class="btn-success su">Submit</button>
+    <button nz-button nzType="danger" type="button" routerLink="/users" class="btn-danger">Back</button>
       <!-- <button  class="btn btn-outline-primary btn-sm" >Submit</button> -->
-   
+   </div>
   </form>
 
 </nz-card>

@@ -1,3 +1,25 @@
 .login-page-card-group{ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
-.bg-primary-login{ background-color: #5e00e0;}
-.bg-light{ background: #37c1ff91 !important;}
+.bg-primary-login{ background-color: #43BFC7;}
+.btn{width: 100%; border: none; background:#0d5afd !important;}
+.login-submit-btn{background:#0d5afd !important; color: #fff; font-weight: 500; box-shadow: 0 4px 8px 0 rgba(41, 8, 160, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+.top-logo-card{width:130px; background: none; border: none; margin: auto; margin-top: -190px; padding-bottom: 15px;}
+.middle-form-card h2{ color: #ffff;}
+.bg-light{
+position: relative;
+width: 100%;
+min-height: 100vh;
+z-index: 10;
+overflow-y: auto;
+padding-top: 2rem;
+padding-bottom: 2rem;
+overflow-x: hidden;
+background: url('../../../assets/img/bg.png') no-repeat;
+background-size: cover;}
+.middle-form-card{ width:20rem;  z-index: 1;
+box-shadow: #0000001f 0 0 29px;
+border-radius: 10px;
+background: #fff;
+padding: 3rem 1rem;
+margin: auto;
+border: none;
+}

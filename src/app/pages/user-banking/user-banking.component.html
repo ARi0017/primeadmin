@@ -1,26 +1,33 @@
 <div style="background: #ECECEC;padding:8px;">
   <nz-card style="width:100%;" [nzBordered]="false" nzTitle="User Banking" [nzExtra]="extraTemplate">
 <div class="animated fadeIn">
-    <div class="row">
-        <div class="col-md-4">
-           
+    <div class="row ">
+    
+        <div class="col-md-3 searchpanel">
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nz-input placeholder="Search By Name" />
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+          </ng-template>
           </div>
-          <div class="col-md-5">
-            <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+          <div class="col-md-6 text-right searchpanel">
+            <!-- <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker> -->
+            <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" ></nz-date-picker> to
+            <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+            <button nz-button nzType="primary" type="submit" class="btn-success su">Search</button>
         </div>
-          <div class="col-md-3 text-right">
-      <button class="btn btn-outline-primary btn-sm" type="button" [routerLink]="['create']" nzTooltipTitle="Request for Withdraw or Deposite" nzTooltipPlacement="top" nz-button nz-tooltip>
-              <i class="fa fa-plus"></i>
-              Create Request</button>
-             
-              
-              
-          </div>
+          <div class="col-md-3 text-right searchpanel">
+      <button class="btn btn-primary btn-sm" type="button" [routerLink]="['create']" nzTooltipTitle="Request for Withdraw or Deposite" nzTooltipPlacement="left" nz-button nz-tooltip>
+              <!-- <i class="fa fa-plus"></i> -->
+                Create Request</button>
+             </div>
           <div class="col-md-12">         
             <nz-tabset>
 
                 <nz-tab nzTitle="All Transactions" >
-                    <nz-table  #allTransactionTable [nzData]="transactionlistArray"  [nzFrontPagination]="false" [nzLoading]="allTransactionLoading" >
+                  <div class="table-responsive">
+                    <nz-table  #allTransactionTable [nzData]="transactionlistArray"  [nzFrontPagination]="false" [nzLoading]="allTransactionLoading" class="table-bordered" >
                         <thead>
                           <tr>
                             <th>User Name</th>
@@ -36,7 +43,7 @@
                            <tr *ngFor="let data of allTransactionTable.data">
                             <td>{{data.userId.name}}</td>
                             <td>{{data.userId.username}}</td>
-                            <td *ngIf="data.transactionType===1">Deposite</td>
+                            <td *ngIf="data.transactionType===1">Deposit</td>
                              <td *ngIf="data.transactionType===0">Withdraw</td>
                             <td>{{data.amount}}</td>
                             <td class="text-info">{{data.createdDate | date: 'dd/MM/yyyy,h:mm a'}}</td>
@@ -47,11 +54,12 @@
                             </tr>
                         </tbody>
                       </nz-table>
+                      </div>
                       <nz-pagination [nzPageIndex]="1" [nzTotal]="allTransaction" nzShowSizeChanger [nzPageSize]="10"></nz-pagination>
                     
                 </nz-tab>
                 <nz-tab nzTitle="Pending Transactions">
-                    <nz-table #pendingTable [nzData]="pendingTransactionList"  [nzFrontPagination]="false" [nzLoading]="pendingLoading" >
+                    <nz-table #pendingTable [nzData]="pendingTransactionList"  [nzFrontPagination]="false" [nzLoading]="pendingLoading" class="table-bordered" >
                         <thead>
                           <tr>
                             <th>User Name</th>
@@ -64,27 +72,11 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <!-- <tr *ngFor="let data of getPendingTransactionlist ">
-                            <td>{{data.userId.name}}</td>
-                            <td>{{data.username}}</td>
-                            <td>{{data.availableBalance}}</td>
-                            <td>{{data.creditLimit}}</td>
-                            <td>{{data.exposure}}</td>
-                            <td>{{data.createdDate | date: 'dd/MM/yyyy,h:mm a'}}</td>
-                            <td>
-                                <i *ngIf="data.isActive===true" nz-icon nzType="check" nzTheme="outline" style="color:green ;"></i>
-                                <i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;"></i>
-                            </td>
-                            <td>
-                                <i nz-icon nzType="edit" nzTheme="outline"></i>
-                              <nz-divider nzType="vertical"></nz-divider>
-                              <i nz-icon nzType="delete" nzTheme="outline"></i>
-                            </td>
-                          </tr> -->
+                        
                           <tr *ngFor="let data of pendingTable.data">
                             <td scope="row">{{data.userId.name}}</td>
                             <td scope="row">{{data.userId.username}}</td>
-                            <td *ngIf="data.transactionType===1">Deposite</td>
+                            <td *ngIf="data.transactionType===1">Deposit</td>
                             <td *ngIf="data.transactionType===0">Withdraw</td>
                             
                             <td>{{data.amount}}</td>

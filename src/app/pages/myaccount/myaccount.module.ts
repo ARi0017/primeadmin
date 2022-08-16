@@ -11,6 +11,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMentionModule } from 'ng-zorro-antd/mention';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzListModule } from 'ng-zorro-antd/list';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
    NzIconModule,
    NzMentionModule,
    NzInputModule,
-   NzFormModule
+   NzFormModule,
+   NzListModule
     
 
   ]

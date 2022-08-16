@@ -8,7 +8,7 @@
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="">Transaction Type</nz-form-label>
               <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Please select transaction Type!">
                 <nz-select  formControlName="transactionType" >
-                  <nz-option nzValue=0 nzLabel="Deposite"></nz-option>
+                  <nz-option nzValue=0 nzLabel="Deposit"></nz-option>
                   <nz-option nzValue=1 nzLabel="Withdraw"></nz-option>
                 </nz-select>
               </nz-form-control>
@@ -32,11 +32,12 @@
            
         
             
-           
-             <button nz-button nzType="primary" type="submit">Submit</button>
+           <div class="d-flex justify-content-center submit-back">
+             <button nz-button nzType="primary" type="submit" class="btn-success su">Submit</button>
+             <button nz-button nzType="danger" type="submit" routerLink="/user-banking" class="btn-danger">Back</button>
               <!-- <button type="submit"  class="btn btn-outline-primary btn-sm" >Submit</button>
               <button type="button"  class="btn btn-outline-danger btn-sm" >Cancel</button> -->
-           
+            </div>
            </form>
 
 

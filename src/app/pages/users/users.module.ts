@@ -13,6 +13,10 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 // import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { AddEditUsersComponent } from './add-edit-users/add-edit-users.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+
 
 @NgModule({
   declarations: [UsersComponent, AddEditUsersComponent],
@@ -23,7 +27,10 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     FormsModule,
     NzPaginationModule,
     ReactiveFormsModule,
-   NzFormModule 
+   NzFormModule,
+   NzPageHeaderModule ,
+   NzDatePickerModule,
+   NzToolTipModule
 
   ]
 })

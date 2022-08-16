@@ -1,10 +1,9 @@
 <div style="background: #ECECEC;padding:8px;">
   <nz-card style="width:100%;" [nzBordered]="false" nzTitle="Registration" [nzExtra]="extraTemplate">
-    <div class="card">
-      <div class="card-header"><h6> User Wallet <span class="float-end" nzTooltipTitle="Add New User or Agent" nzTooltipPlacement="left" nz-button nz-tooltip><button class="btn btn-outline-primary btn-sm" type="button" [routerLink]="['add']">
-        <i class="fa fa-plus"></i>
-        Add New</button></span></h6></div>
-            <nz-table #agentDetailTable [nzData]="agentDetailArr" [nzFrontPagination]="false" [nzLoading]="agentDetailLoading">
+    <div class="card profile-card-user">
+      <div class="card-header"><span><i nz-icon nzType="wallet" nzTheme="outline"></i> User Wallet</span> </div>
+      
+            <nz-table #agentDetailTable [nzData]="agentDetailArr" [nzFrontPagination]="false" [nzLoading]="agentDetailLoading" class="table-bordered">
                 <thead>
                   <tr>
                     <th>Total Balance</th>
@@ -26,11 +25,33 @@
                   </tr>
                 </tbody>
               </nz-table>
-            </div>
+              </div>
+              <div class="row">
+              <div class="col-md-3 searchpanel">
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                  <input type="text" nz-input placeholder="Search By Name" />
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                  <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+                </ng-template>
+                </div>
+                <div class="col-md-6 text-right searchpanel">
+                  <!-- <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker> -->
+                  <nz-date-picker  (ngModelChange)="onChange($event)" ></nz-date-picker> to
+                  <nz-date-picker  (ngModelChange)="onChange($event)"></nz-date-picker>
+                  <button nz-button nzType="primary" type="submit" class="btn-success su">Search</button>
+              </div>
+                <div class="col-md-3 text-right searchpanel">
+            <button class="btn btn-primary btn-sm" type="button" [routerLink]="['add']" nzTooltipTitle="New Registration User or Agent" nzTooltipPlacement="left" nz-button nz-tooltip>
+                    <!-- <i class="fa fa-plus"></i> -->
+                      Add New Registration</button>
+                   </div>
+                  </div>
+            
             <nz-tabset>
                 
                 <nz-tab nzTitle="Users List" >
-                    <nz-table #userTable [nzData]="userList" [nzFrontPagination]="false" [nzLoading]="loading" >
+                    <nz-table #userTable [nzData]="userList" [nzFrontPagination]="false" [nzLoading]="loading" class="table-bordered">
                         <thead>
                           <tr>
                             <th>User Name</th>
@@ -52,14 +73,14 @@
                             <td>{{data.exposure}}</td>
                             <td>{{data.createdDate | date: 'dd/MM/yyyy,h:mm a'}}</td>
                             <td class="text-pointer">
-                                <i *ngIf="data.isActive===true" nz-icon nzType="check" nzTheme="outline" style="color:green ;" nzTooltipTitle="Active" nzTooltipPlacement="top" nz-button nz-tooltip></i></td>
-                                <td class="text-pointer"><i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;" nzTooltipTitle="Deactive" nzTooltipPlacement="top" nz-button nz-tooltip></i>
+                                <i *ngIf="data.isActive===true" nz-icon nzType="check" nzTheme="outline" style="color:green ;" nzTooltipTitle="Active" nzTooltipPlacement="top" nz-button nz-tooltip ></i>
+                                <i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;" nzTooltipTitle="Deactive" nzTooltipPlacement="top" nz-button nz-tooltip></i>
                             </td>
                             <td>
-                                <i nz-icon nzType="edit" nzTheme="outline" nzTooltipTitle="Edit" nzTooltipPlacement="top" nz-button nz-tooltip></i>
-                              <nz-divider nzType="vertical"></nz-divider>
-                              <div (click)="userDelete(data.id)"><i nz-icon nzType="delete" nzTheme="outline" nzTooltipTitle="Delete" nzTooltipPlacement="top" nz-button nz-tooltip></i></div>
-                            </td>
+                              <i nz-icon nzType="edit" nzTheme="outline" nzTooltipTitle="Edit" nzTooltipPlacement="top" nz-button nz-tooltip ></i>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <span (click)="userDelete(data.id)" class="text-denger"><i nz-icon nzType="delete" nzTheme="outline" nzTooltipTitle="Delete" nzTooltipPlacement="top" nz-button nz-tooltip></i></span>
+                          </td>
                           </tr>
                         </tbody>
                       </nz-table>
@@ -67,7 +88,7 @@
                     
                 </nz-tab>
                 <nz-tab nzTitle="Agent List">
-                    <nz-table #agentTable [nzData]="agentList" [nzFrontPagination]="false" [nzLoading]="agentLoading" >
+                    <nz-table #agentTable [nzData]="agentList" [nzFrontPagination]="false" [nzLoading]="agentLoading" class="table-bordered" >
                         <thead>
                           <tr>
                             <th>User Name</th>
@@ -90,13 +111,13 @@
                             <td>{{data.createdDate | date: 'dd/MM/yyyy,h:mm a'}}</td>
                             <td class="text-pointer">
                                 <i *ngIf="data.isActive===true" nz-icon nzType="check" nzTheme="outline" style="color:green ;" nzTooltipTitle="Active" nzTooltipPlacement="top" nz-button nz-tooltip></i>
-                               </td>
-                               <td class="text-pointer"> <i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;" nzTooltipTitle="Deactive" nzTooltipPlacement="top" nz-button nz-tooltip></i>
+                            
+                               <i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;" nzTooltipTitle="Deactive" nzTooltipPlacement="top" nz-button nz-tooltip></i>
                             </td>
                             <td>
                                 <i nz-icon nzType="edit" nzTheme="outline" nzTooltipTitle="Edit" nzTooltipPlacement="top" nz-button nz-tooltip ></i>
                               <nz-divider nzType="vertical"></nz-divider>
-                              <div (click)="userDelete(data.id)" class="text-denger"><i nz-icon nzType="delete" nzTheme="outline" nzTooltipTitle="Delete" nzTooltipPlacement="top" nz-button nz-tooltip></i></div>
+                              <span (click)="userDelete(data.id)" class="text-denger"><i nz-icon nzType="delete" nzTheme="outline" nzTooltipTitle="Delete" nzTooltipPlacement="top" nz-button nz-tooltip></i></span>
                             </td>
                           </tr>
                         </tbody>
@@ -108,9 +129,10 @@
             
       
     
-
-</nz-card>
-</div>
-<ng-template #extraTemplate>
-    <!-- <a>More</a> -->
-  </ng-template>  
+            </nz-card>
+          </div>
+          <ng-template #extraTemplate>
+              <!-- <a>More</a> -->
+            </ng-template>    
+          
+           

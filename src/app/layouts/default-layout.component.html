@@ -22,44 +22,54 @@
       </li>
     </ul>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzTitle="My Account" nzIcon="solution">
+      <li nz-submenu nzTitle="My Profile" nzIcon="solution">
         <ul>
           <div >
             <li nz-menu-item nzMatchRouter >
-              <i nz-icon nzType="team" nzTheme="outline"></i><a routerLink="/myaccount">Profile</a>
+              <i nz-icon nzType="user" nzTheme="outline"></i><a routerLink="/myaccount">Profile Details</a>
+            </li>
+          </div>
+          <div >
+            <li nz-menu-item nzMatchRouter >
+              <i nz-icon nzType="bank" nzTheme="outline"></i><a routerLink="/user-banking">User Banking</a>
             </li>
           </div>
         </ul>
       </li>
     </ul>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzTitle="Registration" nzIcon="solution">
+      <li nz-submenu nzTitle="Registration" nzIcon="highlight">
         <ul>
           <div >
             <li nz-menu-item nzMatchRouter >
-              <i nz-icon nzType="user" nzTheme="outline"></i><a routerLink="/users">Users</a>
+              <i nz-icon nzType="team" nzTheme="outline"></i><a routerLink="/users">Users</a>
             </li>
           </div>
         </ul>
       </li>
     </ul>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <!-- <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzTitle="User Banking" nzIcon="bank" routerLink="/user-banking">
-        <!-- <ul>
+        <ul>
           <div *ngFor="let role of userRole.role">
             <li nz-menu-item nzMatchRouter>
               <i [class]="role.icon"></i><a>Dashboard</a>
             </li>
           </div>
-        </ul> -->
+        </ul>
       </li>
-    </ul>
+    </ul> -->
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzTitle="All Games" nzIcon="reddit">
+      <li nz-submenu nzTitle="Games Settings" nzIcon="reddit">
         <ul>
           <div >
             <li nz-menu-item nzMatchRouter >
-              <i nz-icon nzType="dribbble" nzTheme="outline"></i><a routerLink="/Gamecategory">Game Category</a>
+              <i nz-icon nzType="dribbble" nzTheme="outline"></i><a routerLink="/Gamecategory">Game</a>
+            </li>
+          </div>
+          <div >
+            <li nz-menu-item nzMatchRouter >
+              <i nz-icon nzType="apartment" nzTheme="outline"></i><a routerLink="/Gamecategory">Game Category</a>
             </li>
           </div>
         </ul>

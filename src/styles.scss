@@ -13,11 +13,19 @@
 .ant-table-tbody>tr>td {
     padding: 3px;
     font-size: .8rem;
+    
 }
 
+
 .ant-table-thead>tr>th {
-    padding: 5px;
+    padding: 3px 5px;
+    font-size: 0.8rem;
+    background: #2ab6f43d;
 }
+
+.table-bordered { border: 0 !important; }
+
+.btn-primary{ background: #5e00e0 !important;}
 
 .ant-table-column-sorters {
     padding: 5px;
@@ -123,10 +131,7 @@ html {
 }
 
 .ant-tabs-content {
-    border-bottom: 1px solid #f0f0f0;
-    border-left: 1px solid #f0f0f0;
-    border-right: 1px solid #f0f0f0;
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 .ant-tabs-bar {
@@ -197,6 +202,15 @@ nz-card>div:first-child {
     -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
     box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
 }
+.card-header span{ font-size: 15px; font-weight: 700;}
+.ant-card-head-title{ padding: 10px 0px;}
+.profile-card-user{ border: 0 !important;}
+.profile-card-user .card-header {padding: 6px 9px; background: #2ab6f4;}
 .text-denger{ color:#fd0419 !important; font-weight: 600; cursor: pointer;}
 .text-success{  font-weight: 600; cursor: not-allowed;}
 // .head-line{ border-bottom: 2px solid #5e00e0;}
+.ant-tabs-nav .ant-tabs-tab-active{ background: #2ab6f4; color: #fff; padding:6px 20px; border-radius: 7px 7px 0px 0px; border: 0;}
+.ant-tabs-nav .ant-tabs-tab:hover{ color: #202020;}
+.su{margin-right: 10px; margin-left: 10px;}
+.pro-men{ margin-bottom: 10px;}
+.searchpanel{ margin-bottom: 15px;}
