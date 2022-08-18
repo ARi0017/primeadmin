@@ -39,25 +39,25 @@ export class UsersService {
     );
   }
 
-  //validate email
-  checkEmail(email: string) {
-    let params = new HttpParams().append("email", email);
+  // //validate email
+  // checkEmail(email: string) {
+  //   let params = new HttpParams().append("email", email);
 
-    return this.http.get<{ message: string }>(
-      `${this.baseUrl.serviceUrl}/users/check-email`,
-      { params }
-    );
-  }
+  //   return this.http.get<{ message: string }>(
+  //     `${this.baseUrl.serviceUrl}/users/check-email`,
+  //     { params }
+  //   );
+  // }
 
-  //Validate Phone Number
-  checkPhone(phone: string) {
-    let params = new HttpParams().append("phone", phone);
+  // //Validate Phone Number
+  // checkPhone(phone: string) {
+  //   let params = new HttpParams().append("phone", phone);
 
-    return this.http.get<{ message: string }>(
-      `${this.baseUrl.serviceUrl}/users/check-phone`,
-      { params }
-    );
-  }
+  //   return this.http.get<{ message: string }>(
+  //     `${this.baseUrl.serviceUrl}/users/check-phone`,
+  //     { params }
+  //   );
+  // }
 
   //Add a new user
   addUser(user: any) {
@@ -76,7 +76,7 @@ export class UsersService {
   //Update user
   updateUser(id: string, user: User) {
     return this.http.put<{ message: string }>(
-      `${this.baseUrl.serviceUrl}/users/${id}`,
+      `${this.baseUrl.serviceUrl}/users/update-status/${id}`,
       { user }
     );
   }

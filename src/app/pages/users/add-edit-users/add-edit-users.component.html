@@ -6,9 +6,9 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="isAgent">User Type</nz-form-label>
       <nz-form-control nzErrorTip="Please input your 10 digit Phone Number!" [nzSm]="12" [nzXs]="24" nzErrorTip="Please Select User Type!">
-        <nz-select  formControlName="isAgent" ngModel=false>
-          <nz-option nzValue=false nzLabel="User"></nz-option>
-          <nz-option nzValue=true nzLabel="Agent"></nz-option>
+        <nz-select  formControlName="isAgent" nzPlaceHolder="Select User Type " id="isAgent"  [(ngModel)]="isAgentVal">
+          <nz-option nzValue='user' nzLabel="User"></nz-option>
+          <nz-option nzValue='agent' nzLabel="Agent"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>

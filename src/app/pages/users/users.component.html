@@ -84,7 +84,9 @@
                                 <i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;" nzTooltipTitle="Deactive" nzTooltipPlacement="top" nz-button nz-tooltip></i>
                             </td>
                             <td>
-                              <i nz-icon nzType="edit" nzTheme="outline" nzTooltipTitle="Edit" nzTooltipPlacement="top" nz-button nz-tooltip ></i>
+                              <a [routerLink]="['edit', data.id]">
+                                <i nz-icon nzType="edit" nzTheme="outline" nzTooltipTitle="Edit" nzTooltipPlacement="top" nz-button nz-tooltip ></i>
+                              </a>
                             <nz-divider nzType="vertical"></nz-divider>
                             <span (click)="userDelete(data.id)" class="text-denger"><i nz-icon nzType="delete" nzTheme="outline" nzTooltipTitle="Delete" nzTooltipPlacement="top" nz-button nz-tooltip></i></span>
                           </td>
@@ -122,7 +124,9 @@
                                <i *ngIf="data.isActive===false"nz-icon nzType="close" nzTheme="outline" style="color:red ;" nzTooltipTitle="Deactive" nzTooltipPlacement="top" nz-button nz-tooltip></i>
                             </td>
                             <td>
+                              <a [routerLink]="['edit', data.id]">
                                 <i nz-icon nzType="edit" nzTheme="outline" nzTooltipTitle="Edit" nzTooltipPlacement="top" nz-button nz-tooltip ></i>
+                              </a>
                               <nz-divider nzType="vertical"></nz-divider>
                               <span (click)="userDelete(data.id)" class="text-denger"><i nz-icon nzType="delete" nzTheme="outline" nzTooltipTitle="Delete" nzTooltipPlacement="top" nz-button nz-tooltip></i></span>
                             </td>
