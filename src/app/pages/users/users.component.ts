@@ -29,6 +29,7 @@ export class UsersComponent implements OnInit {
   totalAgent:number;
   agentDetailLoading:boolean=false;
   agentDetailArr:any=[];
+  date = {startDate:'',endDate:''};
 
   constructor(private user:UsersService) { }
 
@@ -81,5 +82,9 @@ export class UsersComponent implements OnInit {
     console.log('onChange: ', result);
   }
 
+  searchDate(){
+    this.getUserList();
+    this.getAgentList();
+   }
 
 }

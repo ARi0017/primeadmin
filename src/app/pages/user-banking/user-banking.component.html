@@ -8,14 +8,12 @@
             <input type="text" nz-input placeholder="Search By Name" />
           </nz-input-group>
           <ng-template #suffixIconButton>
-            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+            <button class="btn-primary" nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
           </ng-template>
           </div>
-          <form #searchForm="ngForm" nzForm (ngSubmit)='searchDate()'>
-          <!-- <div class="col-md-6 text-right searchpanel"> -->
-            <!-- <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker> -->
+          <!-- <form #searchForm="ngForm" nzForm (ngSubmit)='searchDate()'>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-3">
                 <nz-form-item>
                   <nz-form-label [nzSpan]='6' nzRequired>Start</nz-form-label>
                   <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -23,7 +21,7 @@
                   </nz-form-control>
                 </nz-form-item>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-3">
                 <nz-form-item>
                   <nz-form-label [nzSpan]='6' nzRequired>End</nz-form-label>
                   <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -39,8 +37,22 @@
                 </nz-form-item>
               </div>
             </div>
+          </form> -->
+          <div class="col-md-7 text-right searchpanel">
+            <form #searchForm="ngForm" nzForm (ngSubmit)='searchDate()'>
+            
+            <nz-form-item>
+            <nz-form-label nzRequired>Start Date</nz-form-label>
+            <nz-date-picker required name='startDate' nzShowTime [(ngModel)]="date.startDate" ></nz-date-picker>
+            &nbsp;<nz-form-label nzRequired>End Date</nz-form-label>
+            <nz-date-picker required name='endDate' nzShowTime [(ngModel)]="date.endDate"></nz-date-picker>
+            <button nz-button nzType="primary" type="submit" class="btn-primary su" [disabled]='searchForm.invalid' type="submit">Search</button>
+          </nz-form-item>
+          
           </form>
-          <div class="col-md-3 text-right searchpanel">
+        </div>
+
+          <div class="col-md-2 text-right searchpanel">
       <button class="btn btn-primary btn-sm" type="button" [routerLink]="['create']" nzTooltipTitle="Request for Withdraw or Deposite" nzTooltipPlacement="left" nz-button nz-tooltip>
               <!-- <i class="fa fa-plus"></i> -->
                 Create Request</button>
